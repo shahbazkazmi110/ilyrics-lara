@@ -14,11 +14,10 @@ class Playlist extends Model
 
     public static function getFeaturedPlaylist()
     {
-        $playlist = DB::table('playlist')
-        ->selectRaw('playlist.id, playlist.title, playlist.user_id, playlist.resolution, saved_playlist.id AS saved, playlist.image_name')
-        ->join('saved_playlist', 'saved_playlist.playlist_id', '=', 'playlist.id')
-        //->orderBy('playlist.display_order')
-        ->orderBy('playlist.created', 'DESC')
+        $playlist = Playlist::selectRaw('id, title, user_id, resolution, image_name')
+        ->where('playlist.featured', 1)
+        ->where('status', 1)
+        ->orderBy('playlist.display_order', 'ASC')
         ->limit(6)
         ->get();
  

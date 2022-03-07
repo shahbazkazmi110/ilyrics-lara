@@ -93,7 +93,6 @@
 	  </div>
 	  
 	  <div class="row mb-5 pb-5">
-
 	  	@foreach($popular_playlists as $playlist)
 		  	<div class="col-xl-2 col-lg-3 col-md-4 col-6">
 				<div class="card card--playlist">
@@ -433,9 +432,11 @@
 	<div class="container">
 		<h4 class="mb-4" tabindex="0">Tags</h4>
 		<div class="row font-size__medium mb-5">
-			
+			@foreach ($tags as $tag)
 			<div class="col-6 col-lg-3 col-md-4 pb-2">
-				<a data-page="tag" data-title="Ahle Bait s.a.w.w" class="text-decoration-none color-black" href="tag.php?id=122">Ahle Bait s.a.w.w</a>
+				<a data-page="tag" data-title="Ahle Bait s.a.w.w" 
+				class="text-decoration-none color-black" 
+				href="tag.php?id=122">{{$tag->title}}</a>
 			</div>
 
 
@@ -546,7 +547,7 @@
 			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Zindan" class="text-decoration-none color-black" href="tag.php?id=110" style="display: inline-block;">Zindan</a></div>
 			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Zuljana" class="text-decoration-none color-black" href="tag.php?id=87" style="display: inline-block;">Zuljana</a></div> -->
 
-			
+			@endforeach
 		</div>
 	</div>
 </div>
