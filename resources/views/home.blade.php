@@ -87,138 +87,36 @@
 		  	<p style="max-width:400px;">In publishing and graphic design, Lorem ipsum is a placeholder text commonly.</p>
 		  </div>
 		  <div class="col-md-auto col-12 pt-md-5 pt-2">
-		  		<button type="button" class="btn btn--ordinary btn--small">vi ew all Playlists</button>
+		  		<button type="button" class="btn btn--ordinary btn--small">View All Playlists</button>
 		  </div>
 		  
 	  </div>
 	  
 	  <div class="row mb-5 pb-5">
-		  <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-			  <div class="card card--playlist">
-			  <div class="card--playlist__image" style="background-image: url('https://iLyrics.org/uploads/download_(32).jpg');">
-				  <div class="dropdown float-end">
-					  <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
-					   	<img src="{{ asset('media/dote_dote_dote.svg')}}">
-					  </a>
-					  <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownMenuButton1">
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-plus.svg')}}"> Add to your Playlist</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/collection-play.svg')}}"> Play All</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-arrow-down.svg')}}"> Download</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/share-fill.svg')}}"> Share</a></li>
-					  </ul>
-				  </div>
-			  </div>
-			  <div class="card--playlist__content">
-				  Wiladat e Imam Ali a.s
-			  </div>
-			  <div class="card--playlist__tracks">21 Tracks</div>
-		  </div>
-		  </div>
-		  <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-		  		<div class="card card--playlist">
-			  <div class="card--playlist__image" style="background-image: url('https://iLyrics.org/uploads/download_(33).jpg');">
-				  <div class="dropdown float-end">
-					  <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
-					   	<img src="{{ asset('media/dote_dote_dote.svg')}}">
-					  </a>
-					  <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownMenuButton1">
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-plus.svg')}}"> Add to your Playlist</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/collection-play.svg')}}"> Play All</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-arrow-down.svg')}}"> Download</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/share-fill.svg')}}"> Share</a></li>
-					  </ul>
-				  </div>
-			  </div>
-			  <div class="card--playlist__content card-deck ">
-				  Eid e Ghadeer
-			  </div>
-			  <div class="card--playlist__tracks">52 Tracks</div>
-		  </div>
-		  </div>
-		  <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-		  		<div class="card card--playlist">
-			  <div class="card--playlist__image" style="background-image: url('https://iLyrics.org/uploads/download_(28).jpg');">
-				  <div class="dropdown float-end">
-					  <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
-					   	<img src="{{ asset('media/dote_dote_dote.svg')}}">
-					  </a>
-					  <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownMenuButton1">
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-plus.svg')}}"> Add to your Playlist</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/collection-play.svg')}}"> Play All</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-arrow-down.svg')}}"> Download</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/share-fill.svg')}}"> Share</a></li>
-					  </ul>
-				  </div>
-			  </div>
-			  <div class="card--playlist__content">
-				  Muharram 2021
-			  </div>
-			  <div class="card--playlist__tracks">01 Tracks</div>
-		  </div>
-		  </div>
-		  <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-		  		<div class="card card--playlist">
-			  <div class="card--playlist__image" style="background-image: url('https://iLyrics.org/uploads/download_(18).jpg');">
-				  <div class="dropdown float-end">
-					  <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
-					   	<img src="{{ asset('media/dote_dote_dote.svg')}}">
-					  </a>
-					  <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownMenuButton1">
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-plus.svg')}}"> Add to your Playlist</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/collection-play.svg')}}"> Play All</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-arrow-down.svg')}}"> Download</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/share-fill.svg')}}"> Share</a></li>
-					  </ul>
-				  </div>
-			  </div>
-			  <div class="card--playlist__content">
-				  Wiladaat e Imam e Hassan Askari as
-			  </div>
-			  <div class="card--playlist__tracks">11 Tracks</div>
-		  </div>
-		  </div>
-		  <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-		  		<div class="card card--playlist">
-			  <div class="card--playlist__image" style="background-image: url('https://iLyrics.org/uploads/images_(7).jpg');">
-				  <div class="dropdown float-end">
-					  <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
-					   	<img src="{{ asset('media/dote_dote_dote.svg')}}">
-					  </a>
-					  <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownMenuButton1">
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-plus.svg')}}"> Add to your Playlist</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/collection-play.svg')}}"> Play All</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-arrow-down.svg')}}"> Download</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/share-fill.svg')}}"> Share</a></li>
-					  </ul>
-				  </div>
-			  </div>
-			  <div class="card--playlist__content">
-				  Wiladat e Rasool Khuda saww and Imam
-			  </div>
-			  <div class="card--playlist__tracks">21 Tracks</div>
-		  </div>
-		  </div>
-		  <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-		  		<div class="card card--playlist">
-			  <div class="card--playlist__image" style="background-image: url('https://iLyrics.org/uploads/aq6vni5gug8o44wc.jpg');">
-				  <div class="dropdown float-end">
-					  <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
-					   	<img src="{{ asset('media/dote_dote_dote.svg')}}">
-					  </a>
-					  <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownMenuButton1">
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-plus.svg')}}"> Add to your Playlist</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/collection-play.svg')}}"> Play All</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-arrow-down.svg')}}"> Download</a></li>
-					    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/share-fill.svg')}}"> Share</a></li>
-					  </ul>
-				  </div>
-			  </div>
-			  <div class="card--playlist__content">
-				  Wiladat e Rasool Khuda saww and Imam
-			  </div>
-			  <div class="card--playlist__tracks">21 Tracks</div>
-		  </div>
-		  </div>
+
+	  	@foreach($popular_playlists as $playlist)
+		  	<div class="col-xl-2 col-lg-3 col-md-4 col-6">
+				<div class="card card--playlist">
+					<div class="card--playlist__image" style="background-image: url('https://iLyrics.org/uploads/download_(32).jpg');">
+						<div class="dropdown float-end">
+							<a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
+								<img src="{{ asset('media/dote_dote_dote.svg')}}">
+							</a>
+							<ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownMenuButton1">
+								<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-plus.svg')}}"> Add to your Playlist</a></li>
+								<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/collection-play.svg')}}"> Play All</a></li>
+								<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-arrow-down.svg')}}"> Download</a></li>
+								<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/share-fill.svg')}}"> Share</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="card--playlist__content">
+						{{$playlist->title}}
+					</div>
+					<div class="card--playlist__tracks">21 Tracks</div>
+				</div>
+		  	</div>
+		@endforeach
 	  </div>
 	  <!-- Recommended Playlists ended -->
 	  
@@ -229,7 +127,7 @@
 		  	<p style="max-width:400px;">In publishing and graphic design, Lorem ipsum is a placeholder text commonly.</p>
 		  </div>
 		  <div class="col-md-auto col-12 pt-md-5 pt-2">
-		  		<button type="button" class="btn btn--ordinary btn--small">view all Layrix</button>
+		  		<button type="button" class="btn btn--ordinary btn--small">view all Lyric</button>
 		  </div>
 		  
 	  </div>
@@ -483,6 +381,49 @@
 		  
 	  </div>
 	  <!-- New Collection eded -->
+
+
+
+	<!-- Popular Reciters starts-->
+	<div class="row pb-5">
+		<div class="col-12 col-md">
+			<h2 class="h2__underline" tabindex="0">Popular Reciters</h2>
+			<!-- <p style="max-width:400px;">In publishing and graphic design, Lorem ipsum is a placeholder text commonly.</p> -->
+		</div>
+		<div class="col-md-auto col-12 pt-md-5 pt-2">
+			<button type="button" class="btn btn--ordinary btn--small">view all Reciters</button>
+		</div>
+		  
+	</div>
+	  
+	  <div class="row mb-5 pb-5">
+	  	@foreach ($popular_artists as $artist)
+		
+			<div class="col-xl-2 col-lg-3 col-md-4 col-6">
+				<div class="card card--playlist">
+					<div class="card--playlist__image" style="background-image: url('https://iLyrics.org/uploads/download_(32).jpg');">
+						<div class="dropdown float-end">
+							<a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
+								<img src="{{ asset('media/dote_dote_dote.svg')}}">
+							</a>
+							<ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownMenuButton1">
+								<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-plus.svg')}}"> Add to your Playlist</a></li>
+								<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/collection-play.svg')}}"> Play All</a></li>
+								<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-arrow-down.svg')}}"> Download</a></li>
+								<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/share-fill.svg')}}"> Share</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="card--playlist__content">
+						{{$artist->name}}
+					</div>
+					<div class="card--playlist__tracks">{{$artist->track_count}}</div>
+				</div>
+			</div>
+		@endforeach	
+	  </div>
+	<!-- Popular Reciters end -->
+
 	  
   </div>
 </main>
@@ -492,7 +433,13 @@
 	<div class="container">
 		<h4 class="mb-4" tabindex="0">Tags</h4>
 		<div class="row font-size__medium mb-5">
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Ahle Bait s.a.w.w" class="text-decoration-none color-black" href="tag.php?id=122">Ahle Bait s.a.w.w</a></div>
+			
+			<div class="col-6 col-lg-3 col-md-4 pb-2">
+				<a data-page="tag" data-title="Ahle Bait s.a.w.w" class="text-decoration-none color-black" href="tag.php?id=122">Ahle Bait s.a.w.w</a>
+			</div>
+
+
+<!-- 
 			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Al Qudus" class="text-decoration-none color-black" href="tag.php?id=177">Al Qudus</a></div>
 			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Alam" class="text-decoration-none color-black" href="tag.php?id=124">Alam</a></div>
 			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Alwidaii" class="text-decoration-none color-black" href="tag.php?id=27">Alwidaii</a></div>
@@ -597,7 +544,9 @@
 			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Zafar e Jinn" class="text-decoration-none color-black" href="tag.php?id=107" style="display: inline-block;">Zafar e Jinn</a></div>
 			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Zawar e Hussain a.s" class="text-decoration-none color-black" href="tag.php?id=143" style="display: inline-block;">Zawar e Hussain a.s</a></div>
 			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Zindan" class="text-decoration-none color-black" href="tag.php?id=110" style="display: inline-block;">Zindan</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Zuljana" class="text-decoration-none color-black" href="tag.php?id=87" style="display: inline-block;">Zuljana</a></div>
+			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Zuljana" class="text-decoration-none color-black" href="tag.php?id=87" style="display: inline-block;">Zuljana</a></div> -->
+
+			
 		</div>
 	</div>
 </div>
