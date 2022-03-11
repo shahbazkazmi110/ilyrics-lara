@@ -12,19 +12,15 @@ class TracksController extends Controller
 {
     public function index(){
 
-
-        // Popular Artist Query Added
-        $data =  DB::table("artist")
-        ->selectRaw('artist.id,artist.name,artist.resolution,artist.image_name,COUNT(track.artists) as count_art')
-        // ->selectRaw('artist.id,artist.name,artist.resolution,artist.image_name,track.artists,COUNT(track.artists) as count_art')
-        ->where('artist.status',1)
-        ->join('track', 'track.artists', '=', 'artist.id')
-        // ->join('track',DB::raw("FIND_IN_SET(artist.id,track.artists)"),'>',DB::raw("'0'"))
-        ->where('track.status',1)
-        ->orderBy('artist.listening_count','DESC')
-        ->groupBy("track.artists")
-        ->limit(6)
+        $data = DB::table('track')
+        ->select('track.id', 'track.audio_type', 'track.title', 'track.artists', 'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name')//, 'favourite.user_id') 
+        //->join('favourite', 'track.id', '=', 'favourite.track_id')
+        ->join('artist', 'track.artists', '=', 'artist.id')
+        ->whereNotNull('track.album_year')
+        ->orderBy('track.created', 'DESC')
         ->get();
+
         return $data;
+
     }
 }

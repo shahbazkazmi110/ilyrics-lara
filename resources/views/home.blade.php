@@ -436,7 +436,7 @@
 			<div class="col-6 col-lg-3 col-md-4 pb-2">
 				<a data-page="tag" data-title="Ahle Bait s.a.w.w" 
 				class="text-decoration-none color-black" 
-				href="tag.php?id=122">{{$tag->title}}</a>
+				href="#">{{$tag->title}}</a>
 			</div>
 
 
