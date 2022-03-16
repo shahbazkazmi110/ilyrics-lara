@@ -9,6 +9,16 @@
     <title>Get lyrics for Nohay, Naat, Mungabat,  Marsiya & Salam</title>
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{ asset('css/base.css')}}">
+
+	<style>
+        /* Initially, hide the extra text that
+            can be revealed with the button */
+        #moreText {
+  
+            /* Display nothing for the element */
+            display: none;
+        }
+    </style>
   </head>
 <body>
 <header>
@@ -119,6 +129,9 @@
 	  </div>
 	  <!-- Recommended Playlists ended -->
 	  
+
+
+	  
 	  <!-- New Collection -->
 	  <div class="row pb-5">
 		  <div class="col-12 col-md">
@@ -156,6 +169,7 @@
 			  </div>
 		  </div>
 		  
+		<!--
 		  <div class="col-md-6 col-12">
 			  <div class="card card--layrics">
 				  <div class="card--layrics__image" style="background-image: url('https://ilyrics.org/admin/uploads/zill.jpg');"></div>
@@ -376,7 +390,7 @@
 				  </div>
 			  </div>
 		  </div>
-		  
+		-->
 		  
 	  </div>
 	  <!-- New Collection eded -->
@@ -427,130 +441,54 @@
   </div>
 </main>
 
-
+<!-- Tags start -->
 <div class="quicklinks">
 	<div class="container">
 		<h4 class="mb-4" tabindex="0">Tags</h4>
 		<div class="row font-size__medium mb-5">
 			@foreach ($tags as $tag)
-			<div class="col-6 col-lg-3 col-md-4 pb-2">
-				<a data-page="tag" data-title="Ahle Bait s.a.w.w" 
-				class="text-decoration-none color-black" 
-				href="#">{{$tag->title}}</a>
-			</div>
-
-
-<!-- 
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Al Qudus" class="text-decoration-none color-black" href="tag.php?id=177">Al Qudus</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Alam" class="text-decoration-none color-black" href="tag.php?id=124">Alam</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Alwidaii" class="text-decoration-none color-black" href="tag.php?id=27">Alwidaii</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Amma Fizza" class="text-decoration-none color-black" href="tag.php?id=119">Amma Fizza</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Arabic" class="text-decoration-none color-black" href="tag.php?id=134">Arabic</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Arbaeen" class="text-decoration-none color-black" href="tag.php?id=28">Arbaeen</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Aseeri" class="text-decoration-none color-black" href="tag.php?id=118">Aseeri</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Ashaab e Hussain a.s" class="text-decoration-none color-black" href="tag.php?id=146">Ashaab e Hussain a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Ashura" class="text-decoration-none color-black" href="tag.php?id=61">Ashura</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Asr e Ashur" class="text-decoration-none color-black" href="tag.php?id=108">Asr e Ashur</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Aun-o-Muhammad a.s" class="text-decoration-none color-black" href="tag.php?id=25">Aun-o-Muhammad a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Ayyam e Fatmiya s.a" class="text-decoration-none color-black" href="tag.php?id=147">Ayyam e Fatmiya s.a</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Azadari" class="text-decoration-none color-black" href="tag.php?id=57">Azadari</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Bagh e Fidak" class="text-decoration-none color-black" href="tag.php?id=161">Bagh e Fidak</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Balti" class="text-decoration-none color-black" href="tag.php?id=172" style="display: inline-block;">Balti</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Bangali" class="text-decoration-none color-black" href="tag.php?id=173" style="display: inline-block;">Bangali</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Bazaar" class="text-decoration-none color-black" href="tag.php?id=125" style="display: inline-block;">Bazaar</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Bibi Fatima s.a" class="text-decoration-none color-black" href="tag.php?id=30" style="display: inline-block;">Bibi Fatima s.a</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Bibi Kulsoom s.a" class="text-decoration-none color-black" href="tag.php?id=151" style="display: inline-block;">Bibi Kulsoom s.a</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Bibi Sakina s.a" class="text-decoration-none color-black" href="tag.php?id=31" style="display: inline-block;">Bibi Sakina s.a</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Bibi Sughra s.a" class="text-decoration-none color-black" href="tag.php?id=32" style="display: inline-block;">Bibi Sughra s.a</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Bibi Zainab s.a" class="text-decoration-none color-black" href="tag.php?id=33" style="display: inline-block;">Bibi Zainab s.a</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Chaand Raat Moharram" class="text-decoration-none color-black" href="tag.php?id=98" style="display: inline-block;">Chaand Raat Moharram</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Chand raat" class="text-decoration-none color-black" href="tag.php?id=130" style="display: inline-block;">Chand raat</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Darbar e Kufa" class="text-decoration-none color-black" href="tag.php?id=109" style="display: inline-block;">Darbar e Kufa</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Darbar-e-Sham" class="text-decoration-none color-black" href="tag.php?id=34" style="display: inline-block;">Darbar-e-Sham</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Dua" class="text-decoration-none color-black" href="tag.php?id=157" style="display: inline-block;">Dua</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Dua e Kumail" class="text-decoration-none color-black" href="tag.php?id=117" style="display: inline-block;">Dua e Kumail</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Eid e Ghadeer" class="text-decoration-none color-black" href="tag.php?id=155" style="display: inline-block;">Eid e Ghadeer</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Eid e Mubahila" class="text-decoration-none color-black" href="tag.php?id=154" style="display: inline-block;">Eid e Mubahila</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Eid e Zahra" class="text-decoration-none color-black" href="tag.php?id=179" style="display: inline-block;">Eid e Zahra</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="English" class="text-decoration-none color-black" href="tag.php?id=12" style="display: inline-block;">English</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Farsi" class="text-decoration-none color-black" href="tag.php?id=132" style="display: inline-block;">Farsi</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Farzand e Muslim Bin Aqeel" class="text-decoration-none color-black" href="tag.php?id=99" style="display: inline-block;">Farzand e Muslim Bin Aqeel</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Farzandane Muslim" class="text-decoration-none color-black" href="tag.php?id=35" style="display: inline-block;">Farzandane Muslim</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Gujrati" class="text-decoration-none color-black" href="tag.php?id=175" style="display: inline-block;">Gujrati</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Hamd" class="text-decoration-none color-black" href="tag.php?id=162" style="display: inline-block;">Hamd</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Hazrat Muslim bin Aqeel" class="text-decoration-none color-black" href="tag.php?id=91" style="display: inline-block;">Hazrat Muslim bin Aqeel</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Hazrath Abbas a.s" class="text-decoration-none color-black" href="tag.php?id=36" style="display: inline-block;">Hazrath Abbas a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Hazrath Abu Talib a.s" class="text-decoration-none color-black" href="tag.php?id=127" style="display: inline-block;">Hazrath Abu Talib a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Hazrath Ali Akbar a.s" class="text-decoration-none color-black" href="tag.php?id=38" style="display: inline-block;">Hazrath Ali Akbar a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Hazrath Ali Asghar a.s" class="text-decoration-none color-black" href="tag.php?id=39" style="display: inline-block;">Hazrath Ali Asghar a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Hazrath Qasim a.s" class="text-decoration-none color-black" href="tag.php?id=37" style="display: inline-block;">Hazrath Qasim a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Imam Ali a.s" class="text-decoration-none color-black" href="tag.php?id=40" style="display: inline-block;">Imam Ali a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Imam Ali Raza a.s" class="text-decoration-none color-black" href="tag.php?id=41" style="display: inline-block;">Imam Ali Raza a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Imam Baqir a.s" class="text-decoration-none color-black" href="tag.php?id=148" style="display: inline-block;">Imam Baqir a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Imam e Jaffar Sadiq a.s" class="text-decoration-none color-black" href="tag.php?id=152" style="display: inline-block;">Imam e Jaffar Sadiq a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Imam Hassan a.s" class="text-decoration-none color-black" href="tag.php?id=42" style="display: inline-block;">Imam Hassan a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Imam Hassan Askari a.s" class="text-decoration-none color-black" href="tag.php?id=48" style="display: inline-block;">Imam Hassan Askari a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Imam Hussain a.s" class="text-decoration-none color-black" href="tag.php?id=45" style="display: inline-block;">Imam Hussain a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Imam Musa-e-Kazim a.s" class="text-decoration-none color-black" href="tag.php?id=47" style="display: inline-block;">Imam Musa-e-Kazim a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Imam Musa-e-Kazim a.s" class="text-decoration-none color-black" href="tag.php?id=74" style="display: inline-block;">Imam Musa-e-Kazim a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Imam Zainul Abideen a.s" class="text-decoration-none color-black" href="tag.php?id=46" style="display: inline-block;">Imam Zainul Abideen a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Imam-e-Zamana a.s" class="text-decoration-none color-black" href="tag.php?id=49" style="display: inline-block;">Imam-e-Zamana a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Inqalaab" class="text-decoration-none color-black" href="tag.php?id=160" style="display: inline-block;">Inqalaab</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Janab Abu Talib" class="text-decoration-none color-black" href="tag.php?id=50" style="display: inline-block;">Janab Abu Talib</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Janab e Jabir" class="text-decoration-none color-black" href="tag.php?id=121" style="display: inline-block;">Janab e Jabir</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Janab e Mukhtar" class="text-decoration-none color-black" href="tag.php?id=171" style="display: inline-block;">Janab e Mukhtar</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Janab e Muslim Bin Aqeel" class="text-decoration-none color-black" href="tag.php?id=144" style="display: inline-block;">Janab e Muslim Bin Aqeel</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Janab e Qambar" class="text-decoration-none color-black" href="tag.php?id=170" style="display: inline-block;">Janab e Qambar</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Janab-e-Hur" class="text-decoration-none color-black" href="tag.php?id=51" style="display: inline-block;">Janab-e-Hur</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Janabe Habib" class="text-decoration-none color-black" href="tag.php?id=96" style="display: inline-block;">Janabe Habib</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Janabe Qasim" class="text-decoration-none color-black" href="tag.php?id=114" style="display: inline-block;">Janabe Qasim</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Jannat Tul Baqee" class="text-decoration-none color-black" href="tag.php?id=156" style="display: inline-block;">Jannat Tul Baqee</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Jibrael a.s" class="text-decoration-none color-black" href="tag.php?id=138" style="display: inline-block;">Jibrael a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Kabba" class="text-decoration-none color-black" href="tag.php?id=93" style="display: inline-block;">Kabba</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Kalam" class="text-decoration-none color-black" href="tag.php?id=166" style="display: inline-block;">Kalam</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Kalam e Iqbal" class="text-decoration-none color-black" href="tag.php?id=164" style="display: inline-block;">Kalam e Iqbal</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Karbala" class="text-decoration-none color-black" href="tag.php?id=53" style="display: inline-block;">Karbala</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Khaymee" class="text-decoration-none color-black" href="tag.php?id=131" style="display: inline-block;">Khaymee</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Kufa" class="text-decoration-none color-black" href="tag.php?id=90" style="display: inline-block;">Kufa</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Laal Shehbaz Qalandar" class="text-decoration-none color-black" href="tag.php?id=153" style="display: inline-block;">Laal Shehbaz Qalandar</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Maa" class="text-decoration-none color-black" href="tag.php?id=159" style="display: inline-block;">Maa</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Masooma e Qum Fatima s.a" class="text-decoration-none color-black" href="tag.php?id=139" style="display: inline-block;">Masooma e Qum Fatima s.a</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Matam" class="text-decoration-none color-black" href="tag.php?id=102" style="display: inline-block;">Matam</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Medina" class="text-decoration-none color-black" href="tag.php?id=54" style="display: inline-block;">Medina</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Moharram" class="text-decoration-none color-black" href="tag.php?id=24" style="display: inline-block;">Moharram</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Muhammad Ibn e Abbas" class="text-decoration-none color-black" href="tag.php?id=149" style="display: inline-block;">Muhammad Ibn e Abbas</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Muhammad Mustafa s.a.w.w" class="text-decoration-none color-black" href="tag.php?id=52" style="display: inline-block;">Muhammad Mustafa s.a.w.w</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Nehar e Furat" class="text-decoration-none color-black" href="tag.php?id=167" style="display: inline-block;">Nehar e Furat</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Pashto" class="text-decoration-none color-black" href="tag.php?id=141" style="display: inline-block;">Pashto</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Punjabi" class="text-decoration-none color-black" href="tag.php?id=133" style="display: inline-block;">Punjabi</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Pursa" class="text-decoration-none color-black" href="tag.php?id=113" style="display: inline-block;">Pursa</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Pyaas" class="text-decoration-none color-black" href="tag.php?id=58" style="display: inline-block;">Pyaas</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Qaidkhaana" class="text-decoration-none color-black" href="tag.php?id=105" style="display: inline-block;">Qaidkhaana</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Rahib" class="text-decoration-none color-black" href="tag.php?id=120" style="display: inline-block;">Rahib</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Rajab" class="text-decoration-none color-black" href="tag.php?id=128" style="display: inline-block;">Rajab</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Ramzan" class="text-decoration-none color-black" href="tag.php?id=111" style="display: inline-block;">Ramzan</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Rehaai" class="text-decoration-none color-black" href="tag.php?id=60" style="display: inline-block;">Rehaai</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Roza e Imam Hussain a.s" class="text-decoration-none color-black" href="tag.php?id=137" style="display: inline-block;">Roza e Imam Hussain a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Sabeel" class="text-decoration-none color-black" href="tag.php?id=142" style="display: inline-block;">Sabeel</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Safar e Karbala" class="text-decoration-none color-black" href="tag.php?id=178" style="display: inline-block;">Safar e Karbala</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Saqqai" class="text-decoration-none color-black" href="tag.php?id=100" style="display: inline-block;">Saqqai</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Saraiki" class="text-decoration-none color-black" href="tag.php?id=169" style="display: inline-block;">Saraiki</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Shaam" class="text-decoration-none color-black" href="tag.php?id=55" style="display: inline-block;">Shaam</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Shaam-e-Ghariban" class="text-decoration-none color-black" href="tag.php?id=56" style="display: inline-block;">Shaam-e-Ghariban</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Shaban" class="text-decoration-none color-black" href="tag.php?id=158" style="display: inline-block;">Shaban</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Sindhi" class="text-decoration-none color-black" href="tag.php?id=129" style="display: inline-block;">Sindhi</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Ummul Baneen" class="text-decoration-none color-black" href="tag.php?id=176" style="display: inline-block;">Ummul Baneen</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Waseela" class="text-decoration-none color-black" href="tag.php?id=123" style="display: inline-block;">Waseela</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Wehab e Kalbi" class="text-decoration-none color-black" href="tag.php?id=126" style="display: inline-block;">Wehab e Kalbi</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Zafar e Jinn" class="text-decoration-none color-black" href="tag.php?id=107" style="display: inline-block;">Zafar e Jinn</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Zawar e Hussain a.s" class="text-decoration-none color-black" href="tag.php?id=143" style="display: inline-block;">Zawar e Hussain a.s</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Zindan" class="text-decoration-none color-black" href="tag.php?id=110" style="display: inline-block;">Zindan</a></div>
-			<div class="col-6 col-lg-3 col-md-4 pb-2"><a data-page="tag" data-title="Zuljana" class="text-decoration-none color-black" href="tag.php?id=87" style="display: inline-block;">Zuljana</a></div> -->
-
+				@if ($loop->index <= 16)
+					<div class="col-6 col-lg-3 col-md-4 pb-2">
+						<span id="points">
+							<a data-page="tag" data-title="Ahle Bait s.a.w.w" class="text-decoration-none color-black" href="#">{{$tag->title}}</a>
+						</span>
+					</div>
+				@endif
+				@if ($loop->index > 16)
+					<div class="col-6 col-lg-3 col-md-4 pb-2">
+						<span id="moreText">
+							<a data-page="tag" data-title="Ahle Bait s.a.w.w" class="text-decoration-none color-black" href="#">{{$tag->title}}</a>
+						</span>
+					</div>
+				@endif				
 			@endforeach
+			<div class="col-md-auto col-12 pt-md-5 pt-2">
+				<button type="button" class="btn btn--ordinary btn--small" onclick="toggleText()" id="textButton" data-toggle="collapse" data-target="#boom">Show More</button>
+			</div>
 		</div>
 	</div>
 </div>
+<!-- Tags end -->
+
+
+
+<!-- Genres start -->
+<div class="quicklinks">
+	<div class="container">
+		<h4 class="mb-4" tabindex="0">Genres</h4>
+		<div class="row font-size__medium mb-5">
+			@foreach ($genres as $genre)
+			<div class="col-6 col-lg-3 col-md-4 pb-2">
+				<a data-page="tag" data-title="Ahle Bait s.a.w.w" 
+				class="text-decoration-none color-black" 
+				href="#">{{$genre->title}}</a>
+			</div>
+			@endforeach
+		</div>
+	</div>
+</div>		
+<!-- Genres End -->
+
 
 
 
@@ -602,6 +540,46 @@
 <script src="{{ asset('js/bootstrap.bundle.js')}}"></script>
 <script src="{{ asset('js/main.js')}}"></script>
 <script>
+
+	function toggleText()
+	{
+		
+            // Get all the elements from the page
+            var points = 
+                document.getElementById("points");
+  
+            var showMoreText =
+                document.getElementById("moreText");
+  
+            var buttonText =
+                document.getElementById("textButton");
+  
+            // If the display property of the dots to be displayed is already set to 'none' (that is hidden) then this section of code triggers
+            if (points.style.display === "none") {
+  
+                // Hide the text between the span elements
+                showMoreText.style.display = "none";
+  
+                // Show the dots after the text
+                points.style.display = "inline";
+  
+                // Change the text on button to 'Show More'
+                buttonText.innerHTML = "Show More";
+            }
+  
+            // If the hidden portion is revealed, we will change it back to be hidden
+            else {
+  
+                // Show the text between the span elements
+                showMoreText.style.display = "inline";
+  
+                // Hide the dots after the text
+                points.style.display = "none";
+  
+                // Change the text on button to 'Show Less'
+                buttonText.innerHTML = "Show Less";
+            }
+	}
 
 </script>
 </body>
