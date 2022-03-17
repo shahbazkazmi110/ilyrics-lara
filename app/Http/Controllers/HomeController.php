@@ -17,16 +17,10 @@ class HomeController extends Controller
 
         
         $data["popular_artists"] = Artist::getPopularArtist();
-
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
-
         $data["genres"] = Genre::getGenre();
-
-        //return $data;
-
         $data["popular_playlists"] = Playlist::getFeaturedPlaylist();
 
-        //return $data;
         return view('home', $data);
 
         //return view("home", compact("data"));

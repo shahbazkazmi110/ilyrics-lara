@@ -18,6 +18,10 @@
             /* Display nothing for the element */
             display: none;
         }
+
+		#tags .less {
+			display:  none;
+		}
     </style>
   </head>
 <body>
@@ -445,26 +449,16 @@
 <div class="quicklinks">
 	<div class="container">
 		<h4 class="mb-4" tabindex="0">Tags</h4>
-		<div class="row font-size__medium mb-5">
+		<div id ="tags" class="row font-size__medium mb-2">
 			@foreach ($tags as $tag)
-				@if ($loop->index <= 16)
-					<div class="col-6 col-lg-3 col-md-4 pb-2">
-						<span id="points">
-							<a data-page="tag" data-title="Ahle Bait s.a.w.w" class="text-decoration-none color-black" href="#">{{$tag->title}}</a>
-						</span>
-					</div>
-				@endif
-				@if ($loop->index > 16)
-					<div class="col-6 col-lg-3 col-md-4 pb-2">
-						<span id="moreText">
-							<a data-page="tag" data-title="Ahle Bait s.a.w.w" class="text-decoration-none color-black" href="#">{{$tag->title}}</a>
-						</span>
-					</div>
-				@endif				
+				@php  $classname = ($loop->index < 16) ? 'more' : 'less'; @endphp			
+				<div class="col-6 col-lg-3 col-md-4 pb-2 {{ $classname }}">
+						<a data-page="tag"  data-title="Ahle Bait s.a.w.w" class="text-decoration-none color-black" href="{{ route('tag', ['id' => $tag->id]) }}">{{$tag->title}}</a>
+				</div>				
 			@endforeach
-			<div class="col-md-auto col-12 pt-md-5 pt-2">
-				<button type="button" class="btn btn--ordinary btn--small" onclick="toggleText()" id="textButton" data-toggle="collapse" data-target="#boom">Show More</button>
-			</div>
+		</div>
+		<div class="col-md-auto col-12 pt-md-2 pt-2 mb-5">
+			<button type="button" class="btn btn--ordinary btn--small viewmore_link"  data-toggle="collapse" data-target="#boom">Show More</button>
 		</div>
 	</div>
 </div>
@@ -488,11 +482,6 @@
 	</div>
 </div>		
 <!-- Genres End -->
-
-
-
-
-
 <footer>
 	<div class="container">
 		<div class="row">
@@ -540,47 +529,10 @@
 <script src="{{ asset('js/bootstrap.bundle.js')}}"></script>
 <script src="{{ asset('js/main.js')}}"></script>
 <script>
-
-	function toggleText()
-	{
-		
-            // Get all the elements from the page
-            var points = 
-                document.getElementById("points");
-  
-            var showMoreText =
-                document.getElementById("moreText");
-  
-            var buttonText =
-                document.getElementById("textButton");
-  
-            // If the display property of the dots to be displayed is already set to 'none' (that is hidden) then this section of code triggers
-            if (points.style.display === "none") {
-  
-                // Hide the text between the span elements
-                showMoreText.style.display = "none";
-  
-                // Show the dots after the text
-                points.style.display = "inline";
-  
-                // Change the text on button to 'Show More'
-                buttonText.innerHTML = "Show More";
-            }
-  
-            // If the hidden portion is revealed, we will change it back to be hidden
-            else {
-  
-                // Show the text between the span elements
-                showMoreText.style.display = "inline";
-  
-                // Hide the dots after the text
-                points.style.display = "none";
-  
-                // Change the text on button to 'Show Less'
-                buttonText.innerHTML = "Show Less";
-            }
-	}
-
+	$('.viewmore_link').click(function(){
+		$('#tags .less').fadeToggle();
+		$(this).text($(this).text() == 'Show More' ? 'Show Less' : 'Show More');
+	});
 </script>
 </body>
 </html>

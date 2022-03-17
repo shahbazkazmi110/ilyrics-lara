@@ -13,4 +13,8 @@ class TagController extends Controller
         $tags = DB::table('tag')->get();
         return $tags;
     }
+    public function getTracksByTag($id)
+    {
+        dd($id);
+    }
 }
