@@ -30,26 +30,26 @@ class ArtistController extends Controller
         
         
 
-        $multiplied = $data->map(function ($item, $key)
-        {
-            if (!empty($item->image_name))      // if not empty, then if condition works
-            {
-                //Helper::format_image($item->image_name);
-                $item = json_decode(json_encode($item), true);
-                array_merge($item, Helper::format_image($item));
+        // $multiplied = $data->map(function ($item, $key)
+        // {
+        //     if (!empty($item->image_name))      // if not empty, then if condition works
+        //     {
+        //         //Helper::format_image($item->image_name);
+        //         $item = json_decode(json_encode($item), true);
+        //         array_merge($item, Helper::format_image($item));
 
 
-                // dd(json_decode(json_encode($item), true));
-                //dd(array_merge($item, Helper::format_image($item)));
-                //collect($item)->merge(Helper::format_image($item));
+        //         // dd(json_decode(json_encode($item), true));
+        //         //dd(array_merge($item, Helper::format_image($item)));
+        //         //collect($item)->merge(Helper::format_image($item));
 
-                //dd($item);
-            }
-            return $item;
+        //         //dd($item);
+        //     }
+        //     return $item;
             
-        });
+        // });
 
-        dd($multiplied);
+        // dd($multiplied);
         //dd($data);
         //Helper::format_image();
 
