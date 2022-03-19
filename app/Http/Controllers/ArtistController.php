@@ -27,8 +27,8 @@ class ArtistController extends Controller
         ->limit(6)
         ->get();
 
-        // return $data;
-       return ArtistResource::collection($data);
+        return $data;
+    //    return ArtistResource::collection($data);
         
         
 

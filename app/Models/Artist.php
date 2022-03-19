@@ -38,6 +38,7 @@ class Artist extends Model
         ->groupBy("track.artists")
         ->limit(6)
         ->get();
-        return ArtistResource::collection($data);
+        // return ArtistResource::collection($data);
+        return $data;
     }
 }
