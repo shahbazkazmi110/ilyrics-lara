@@ -32,14 +32,16 @@ Route::get('/', [HomeController::class, 'index']);
 
 
 Route::get('/track', [TracksController::class, 'index']);
+Route::get('/tag/{id}', [TracksController::class, 'getTracksByTag'])->name('tracks-by-tag');
+Route::get('/artist/{id}', [TracksController::class, 'getTracksByArtist'])->name('tracks-by-artist');
+Route::get('/playlist/{id}', [TracksController::class, 'getTracksByPlaylist'])->name('tracks-by-playlist');
+
 //require __DIR__.'/auth.php';
 
 
 Route::get('/genre', [GenreController::class, 'index']);
 Route::get('/tags', [TagController::class, 'index']);
-Route::get('/tag/{id}', [TagController::class, 'getTracksByTag'])->name('tag');
 
-Route::get('/artist', [ArtistController::class, 'index']);
 Route::get('/playlist', [PlaylistController::class, 'index']);
 Route::get('/language', [LanguageController::class, 'index']);
 Route::get('/album', [AlbumController::class, 'index']);

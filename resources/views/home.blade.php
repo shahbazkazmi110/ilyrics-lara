@@ -109,25 +109,27 @@
 	  <div class="row mb-5 pb-5">
 	  	@foreach($popular_playlists as $playlist)
 		  	<div class="col-xl-2 col-lg-3 col-md-4 col-6">
-				<div class="card card--playlist">
-					<div class="card--playlist__image" style="background-image: url('https://iLyrics.org/uploads/download_(32).jpg');">
-						<div class="dropdown float-end">
-							<a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
-								<img src="{{ asset('media/dote_dote_dote.svg')}}">
-							</a>
-							<ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownMenuButton1">
-								<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-plus.svg')}}"> Add to your Playlist</a></li>
-								<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/collection-play.svg')}}"> Play All</a></li>
-								<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-arrow-down.svg')}}"> Download</a></li>
-								<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/share-fill.svg')}}"> Share</a></li>
-							</ul>
+				<a href="{{ route('tracks-by-playlist', ['id' => $playlist->id]) }}">				
+					<div class="card card--playlist">
+						<div class="card--playlist__image" style="background-image: url('https://iLyrics.org/uploads/download_(32).jpg');">
+							{{-- <div class="dropdown float-end">
+								<a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
+									<img src="{{ asset('media/dote_dote_dote.svg')}}">
+								</a>
+								<ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownMenuButton1">
+									<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-plus.svg')}}"> Add to your Playlist</a></li>
+									<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/collection-play.svg')}}"> Play All</a></li>
+									<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-arrow-down.svg')}}"> Download</a></li>
+									<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/share-fill.svg')}}"> Share</a></li>
+								</ul>
+							</div> --}}
 						</div>
+						<div class="card--playlist__content">
+							{{$playlist->title}}
+						</div>
+						<div class="card--playlist__tracks">21 Tracks</div>
 					</div>
-					<div class="card--playlist__content">
-						{{$playlist->title}}
-					</div>
-					<div class="card--playlist__tracks">21 Tracks</div>
-				</div>
+				</a>
 		  	</div>
 		@endforeach
 	  </div>
@@ -417,25 +419,27 @@
 	  	@foreach ($popular_artists as $artist)
 		
 			<div class="col-xl-2 col-lg-3 col-md-4 col-6">
-				<div class="card card--playlist">
-					<div class="card--playlist__image" style="background-image: url('{{ \App\Helpers\Helper::format_image($artist->image_name) }}');">
-						<div class="dropdown float-end">
-							<a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
-								<img src="{{ asset('media/dote_dote_dote.svg')}}">
-							</a>
-							<ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownMenuButton1">
-								<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-plus.svg')}}"> Add to your Playlist</a></li>
-								<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/collection-play.svg')}}"> Play All</a></li>
-								<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-arrow-down.svg')}}"> Download</a></li>
-								<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/share-fill.svg')}}"> Share</a></li>
-							</ul>
+				<a href="{{ route('tracks-by-artist', ['id' => $artist->id]) }}">
+					<div class="card card--playlist">
+						<div class="card--playlist__image" style="background-image: url('{{ \App\Helpers\Helper::format_image($artist->image_name) }}');">
+							{{-- <div class="dropdown float-end">
+								<a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
+									<img src="{{ asset('media/dote_dote_dote.svg')}}">
+								</a>
+								<ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownMenuButton1">
+									<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-plus.svg')}}"> Add to your Playlist</a></li>
+									<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/collection-play.svg')}}"> Play All</a></li>
+									<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-arrow-down.svg')}}"> Download</a></li>
+									<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/share-fill.svg')}}"> Share</a></li>
+								</ul>
+							</div> --}}
 						</div>
+						<div class="card--playlist__content">
+							{{$artist->name}}
+						</div>
+						<div class="card--playlist__tracks">{{$artist->track_count}}</div>
 					</div>
-					<div class="card--playlist__content">
-						{{$artist->name}}
-					</div>
-					<div class="card--playlist__tracks">{{$artist->track_count}}</div>
-				</div>
+				</a>
 			</div>
 		@endforeach	
 	  </div>
@@ -453,7 +457,7 @@
 			@foreach ($tags as $tag)
 				@php  $classname = ($loop->index < 16) ? 'more' : 'less'; @endphp			
 				<div class="col-6 col-lg-3 col-md-4 pb-2 {{ $classname }}">
-						<a data-page="tag"  data-title="{{$tag->title}}" class="text-decoration-none color-black" href="{{ route('tag', ['id' => $tag->id]) }}">{{$tag->title}}</a>
+						<a data-page="tag"  data-title="{{$tag->title}}" class="text-decoration-none color-black" href="{{ route('tracks-by-tag', ['id' => $tag->id]) }}">{{$tag->title}}</a>
 				</div>				
 			@endforeach
 		</div>
