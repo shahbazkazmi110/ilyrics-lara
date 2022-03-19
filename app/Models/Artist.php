@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\ArtistResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -27,8 +28,7 @@ class Artist extends Model
     public static function getPopularArtist()
     {
         // Popular Artist Query Added
-        $data =  DB::table("artist")
-        ->selectRaw('artist.id,artist.name,artist.resolution,artist.image_name,COUNT(track.artists) as track_count')
+        $data =  Artist::selectRaw('artist.id,artist.name,artist.resolution,artist.image_name,COUNT(track.artists) as track_count')
         // ->selectRaw('artist.id,artist.name,artist.resolution,artist.image_name,track.artists,COUNT(track.artists) as count_art')
         ->where('artist.status',1)
         ->join('track', 'track.artists', '=', 'artist.id')
@@ -38,6 +38,6 @@ class Artist extends Model
         ->groupBy("track.artists")
         ->limit(6)
         ->get();
-        return $data;
+        return ArtistResource::collection($data);
     }
 }
