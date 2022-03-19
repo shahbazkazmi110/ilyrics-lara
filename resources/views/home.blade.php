@@ -453,7 +453,7 @@
 			@foreach ($tags as $tag)
 				@php  $classname = ($loop->index < 16) ? 'more' : 'less'; @endphp			
 				<div class="col-6 col-lg-3 col-md-4 pb-2 {{ $classname }}">
-						<a data-page="tag"  data-title="Ahle Bait s.a.w.w" class="text-decoration-none color-black" href="{{ route('tag', ['id' => $tag->id]) }}">{{$tag->title}}</a>
+						<a data-page="tag"  data-title="{{$tag->title}}" class="text-decoration-none color-black" href="{{ route('tag', ['id' => $tag->id]) }}">{{$tag->title}}</a>
 				</div>				
 			@endforeach
 		</div>
@@ -473,7 +473,7 @@
 		<div class="row font-size__medium mb-5">
 			@foreach ($genres as $genre)
 			<div class="col-6 col-lg-3 col-md-4 pb-2">
-				<a data-page="tag" data-title="Ahle Bait s.a.w.w" 
+				<a data-page="tag" data-title="{{$genre->title}}" 
 				class="text-decoration-none color-black" 
 				href="#">{{$genre->title}}</a>
 			</div>

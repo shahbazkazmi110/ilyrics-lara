@@ -39,6 +39,7 @@ class ArtistController extends Controller
         //         //Helper::format_image($item->image_name);
         //         $item = json_decode(json_encode($item), true);
         //         array_merge($item, Helper::format_image($item));
+
         //     }
         //     return $item;
             
