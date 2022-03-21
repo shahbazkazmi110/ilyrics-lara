@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Http\Resources\ArtistResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Artist;
@@ -15,8 +16,7 @@ class ArtistController extends Controller
     {
 
         // Popular Artist Query Added
-        $data =  DB::table("artist")
-        ->selectRaw('artist.id,artist.name,artist.resolution,artist.image_name,COUNT(track.artists) as count_art')
+        $data =  Artist::selectRaw('artist.id,artist.name,artist.resolution,artist.image_name,COUNT(track.artists) as track_count')
         // ->selectRaw('artist.id,artist.name,artist.resolution,artist.image_name,track.artists,COUNT(track.artists) as count_art')
         ->where('artist.status',1)
         ->join('track', 'track.artists', '=', 'artist.id')
@@ -27,6 +27,8 @@ class ArtistController extends Controller
         ->limit(6)
         ->get();
 
+        return $data;
+    //    return ArtistResource::collection($data);
         
         
 
@@ -38,12 +40,6 @@ class ArtistController extends Controller
         //         $item = json_decode(json_encode($item), true);
         //         array_merge($item, Helper::format_image($item));
 
-
-        //         // dd(json_decode(json_encode($item), true));
-        //         //dd(array_merge($item, Helper::format_image($item)));
-        //         //collect($item)->merge(Helper::format_image($item));
-
-        //         //dd($item);
         //     }
         //     return $item;
             
