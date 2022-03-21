@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Genre;
 use App\Models\Track;
+use Symfony\Component\Console\Input\Input;
 
 class GenreController extends Controller
 {
@@ -13,14 +14,59 @@ class GenreController extends Controller
     {
         $data =  DB::table("genre")
         ->selectRaw('genre.*, COUNT(track.genres) as track_count')
-        // ->selectRaw('artist.id,artist.name,artist.resolution,artist.image_name,track.artists,COUNT(track.artists) as count_art')
-        //->join('track', 'track.genres', '=', 'genre.id')
         ->join('track',DB::raw("FIND_IN_SET(genre.id,track.genres)"),'>',DB::raw("'0'"))
         ->where('track.status',1)
         ->orderBy('genre.title','ASC')
         ->groupBy("track.genres")
         ->limit(6)
         ->get();
+        return $data;
+    }
+
+    public function getTracksByGenre($id)
+    {
+        // Tracks
+        $data["tracks"] = DB::table('track')
+        ->select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name')
+        ->join('artist', 'track.artists', '=', 'artist.id')
+        ->where('track.status',1)
+        ->whereNotNull('track.album_year')
+        ->orderBy('track.created', 'DESC')
+        ->limit(6)
+        ->get();
+
+        // Tags
+        // Genres
+
+        $data["tags"] = '';
+        $data["genres"] = '';
+
+
+        // Genre_tracks
+        $data["genre_tracks"] = DB::table('track')
+        ->select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 'artist.name AS artist', 'artist.image_name')
+        ->join('artist', 'track.artists', '=', 'artist.id')
+        ->where('track.status',1)
+        ->where('track.genres', 'like', '%'.$id.'%')
+        ->orderBy('track.tags', 'ASC')
+        ->get();
+
+        // Genre_detail
+        $data["genre_detail"] = DB::table('genre')
+        ->select('*')
+        ->where('id', '=', $id)
+        ->get();
+
+        //tags_related
+
+
+        $data["tags_related"][] = DB::table('track')
+        ->select('track.title', 'tag.id', 'tag.title', 'tag.admin_id', 'tag.created')
+        ->join('tag', 'track.tags', '=', 'tag.id')
+        ->orderBy('track.tags', 'ASC')
+        ->get();
+        
+
         return $data;
     }
 }

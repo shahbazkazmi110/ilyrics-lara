@@ -16,8 +16,9 @@ class TagController extends Controller
     public function getTracksByTag($id)
     {
 
+        // First 6 tracks
         $data["tracks"] = DB::table('track')
-        ->select('track.id', 'track.audio_type', 'track.title', 'track.artists', 'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name')
+        ->select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name')
         ->join('artist', 'track.artists', '=', 'artist.id')
         ->where('track.status',1)
         ->whereNotNull('track.album_year')
@@ -29,18 +30,28 @@ class TagController extends Controller
         $data["genres"] = '';
 
 
+        // All track matching with TAG_ID
         $data["tag_tracks"] = DB::table('track')
-        ->select('track.id', 'track.audio_type', 'track.title', 'track.artists', 'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name')
+        ->select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name')
         ->join('artist', 'track.artists', '=', 'artist.id')
         ->where('track.tags', 'like', '%'.$id.'%')
         ->orderBy('track.created', 'DESC')
         ->get();
 
 
+        // Tag Details
         $data["tag_detail"] = DB::table('tag')
         ->select('*')
         ->where('id', '=', $id)
         ->get();
+
+        // Track count
+        $tag_count = DB::table('tag')
+        ->select('*')
+        ->where('id', '=', $id)
+        ->count();
+
+        $data["tag_detail"]["count"] = $tag_count;
 
         return $data;
     }

@@ -475,7 +475,7 @@
 			<div class="col-6 col-lg-3 col-md-4 pb-2">
 				<a data-page="tag" data-title="{{$genre->title}}" 
 				class="text-decoration-none color-black" 
-				href="#">{{$genre->title}}</a>
+				href="{{ route('genre', ['id' => $genre->id]) }}">{{$genre->title}}</a>
 			</div>
 			@endforeach
 		</div>

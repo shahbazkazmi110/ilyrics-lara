@@ -36,6 +36,8 @@ Route::get('/track', [TracksController::class, 'index']);
 
 
 Route::get('/genre', [GenreController::class, 'index']);
+Route::get('/genre/{id}', [GenreController::class, 'getTracksByGenre'])->name('genre');
+
 Route::get('/tags', [TagController::class, 'index']);
 Route::get('/tag/{id}', [TagController::class, 'getTracksByTag'])->name('tag');
 
