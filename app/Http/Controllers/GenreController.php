@@ -35,12 +35,10 @@ class GenreController extends Controller
         ->limit(6)
         ->get();
 
-        // Tags
         // Genres
 
         $data["tags"] = '';
         $data["genres"] = '';
-
 
         // Genre_tracks
         $data["genre_tracks"] = DB::table('track')
@@ -64,7 +62,6 @@ class GenreController extends Controller
         ->orderBy('tag.title', 'ASC')
         ->groupBy('tag.id')
         ->get();
-
 
         return $data;
     }
