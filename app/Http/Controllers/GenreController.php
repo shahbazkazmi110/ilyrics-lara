@@ -46,16 +46,21 @@ class GenreController extends Controller
         ->join('artist', 'track.artists', '=', 'artist.id')
         ->where('track.status',1)
         ->where('track.genres', 'like', '%'.$id.'%')
-        ->orderBy('track.tags', 'ASC')
+        ->orderBy('track.created', 'DESC')
         ->get();
 
         // Genre_detail
-        $data["genre_detail"] = DB::table('genre')
-        ->select('*')
-        ->where('id', '=', $id)
+        $data["genre_detail"] = DB::table('track')
+        ->selectRaw('genre.id, genre.title, COUNT(track.genres) as count')
+        // ('genre.id, genre.title, COUNT(track.genres) as track_count')
+        ->join('genre', DB::raw("FIND_IN_SET(genre.id,track.genres)"),'>',DB::raw("'0'"))
+        ->where('track.status', 1)
+        ->where('genre.id', 'LIKE', '%'.$id.'%')
         ->first();
 
-        $data["tag_related"] = Track::select('tag.id','tag.title')
+
+        // Tag Related (but no limit() or pagination used)
+        $data["tag_related"] = Track::select('tag.id','tag.title', 'tag.admin_id', 'tag.created')
         ->join('tag',DB::raw("FIND_IN_SET(tag.id,track.tags)"),'>',DB::raw("'0'"))
         ->where('genres', 'like', '%'.$id.'%')
         ->where('status',1)

@@ -111,7 +111,7 @@
 		  	<div class="col-xl-2 col-lg-3 col-md-4 col-6">
 				<a href="{{ route('tracks-by-playlist', ['id' => $playlist->id]) }}">				
 					<div class="card card--playlist">
-						<div class="card--playlist__image" style="background-image: url('https://iLyrics.org/uploads/download_(32).jpg');">
+						<div class="card--playlist__image" style="background-image: url('{{ \App\Helpers\Helper::format_image($playlist->image_name) }}');">
 							{{-- <div class="dropdown float-end">
 								<a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
 									<img src="{{ asset('media/dote_dote_dote.svg')}}">
