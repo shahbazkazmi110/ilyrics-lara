@@ -66,4 +66,14 @@ class TracksController extends Controller
         dd($id);
         
     }
+
+    public function getTrackByID($id)
+    {
+        $data["tag_tracks"] = Track::
+        select('track.id', 'track.audio_type', 'track.title', 'track.artists', 'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name')
+        ->join('artist', 'track.artists', '=', 'artist.id')
+        ->where('track.id', '=', $id)
+        ->orderBy('track.created', 'DESC')
+        ->get();
+    }
 }

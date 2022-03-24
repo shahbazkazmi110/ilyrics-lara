@@ -32,22 +32,23 @@ Route::get('/', [HomeController::class, 'index']);
 
 
 Route::get('/track', [TracksController::class, 'index']);
-Route::get('/tag/{id}', [TracksController::class, 'getTracksByTag'])->name('tracks-by-tag');
-//Route::get('/artist/{id}', [TracksController::class, 'getTracksByArtist'])->name('tracks-by-artist');
+Route::get('/track/{id}', [TracksController::class, 'getTrack'])->name('track-by-id');
 
-Route::get('/playlist/{id}', [TracksController::class, 'getTracksByPlaylist'])->name('tracks-by-playlist');
 
-//require __DIR__.'/auth.php';
-
+Route::get('/artist', [ArtistController::class, 'index']);
+Route::get('/artist/{id}', [TracksController::class, 'getTracksByArtist'])->name('tracks-by-artist');
 
 Route::get('/genre', [GenreController::class, 'index']);
 Route::get('/genre/{id}', [GenreController::class, 'getTracksByGenre'])->name('genre');
 
 Route::get('/tags', [TagController::class, 'index']);
+Route::get('/tag/{id}', [TracksController::class, 'getTracksByTag'])->name('tracks-by-tag');
 
 Route::get('/playlist', [PlaylistController::class, 'index']);
+Route::get('/playlist/{id}', [TracksController::class, 'getTracksByPlaylist'])->name('tracks-by-playlist');
+
+//require __DIR__.'/auth.php';
+
 Route::get('/language', [LanguageController::class, 'index']);
 Route::get('/album', [AlbumController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index']);
-
-Route::get('/artist', [ArtistController::class, 'index']);

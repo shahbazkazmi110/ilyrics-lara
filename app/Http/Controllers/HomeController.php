@@ -16,6 +16,7 @@ class HomeController extends Controller
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::all();
         $data["popular_playlists"] = Playlist::getFeaturedPlaylist();
+        $data["popular_tracks"] = Track::getPopularTracks();
 
         return view('home', $data);
 

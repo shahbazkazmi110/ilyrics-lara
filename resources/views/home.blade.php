@@ -98,7 +98,7 @@
 	  <div class="row pb-5">
 		  <div class="col-12 col-md">
 		  	<h2 class="h2__underline" tabindex="0">Recommended Playlists</h2>
-		  	<p style="max-width:400px;">In publishing and graphic design, Lorem ipsum is a placeholder text commonly.</p>
+		  	<p style="max-width:700px;">In publishing and graphic design, Lorem ipsum is a placeholder text commonly.</p>
 		  </div>
 		  <div class="col-md-auto col-12 pt-md-5 pt-2">
 		  		<button type="button" class="btn btn--ordinary btn--small">View All Playlists</button>
@@ -127,7 +127,7 @@
 						<div class="card--playlist__content">
 							{{$playlist->title}}
 						</div>
-						<div class="card--playlist__tracks">21 Tracks</div>
+						<div class="card--playlist__tracks">Total Tracks : {{$playlist->track_count}}</div>
 					</div>
 				</a>
 		  	</div>
@@ -139,41 +139,46 @@
 
 	  
 	  <!-- New Collection -->
-	  <div class="row pb-5">
-		  <div class="col-12 col-md">
-		  	<h2 class="h2__underline" tabindex="0">New Collection</h2>
-		  	<p style="max-width:400px;">In publishing and graphic design, Lorem ipsum is a placeholder text commonly.</p>
-		  </div>
-		  <div class="col-md-auto col-12 pt-md-5 pt-2">
-		  		<button type="button" class="btn btn--ordinary btn--small">view all Lyric</button>
-		  </div>
-		  
-	  </div>
+	<div class="row pb-5">
+		<div class="col-12 col-md">
+			<h2 class="h2__underline" tabindex="0">New Collection</h2>
+			<p style="max-width:700px;">In publishing and graphic design, Lorem ipsum is a placeholder text commonly.</p>
+		</div>
+		<div class="col-md-auto col-12 pt-md-5 pt-2">
+			<button type="button" class="btn btn--ordinary btn--small">View All Lyrics</button>
+		</div>
+		
+	</div>
 	  
-	  <div class="row mb-5 pb-5">
-		  <div class="col-md-6 col-12">
-			  <div class="card card--layrics">
-				  <div class="card--layrics__image" style="background-image: url('https://ilyrics.org/admin/uploads/500x500.jpg');"></div>
-				  <div class="card--layrics__content">
-					  <h5 class="mb-0 card--layrics__content__title" tabindex="0">Jang e Khandaq</h5>
-					  <a data-page="artist" href="artist.php?id=6" class="card--layrics__content__subtitle">Mir Hassan Mir</a>
-				  </div>
-				  <div class="card--layrics__tracks">04:20</div>
-				  <div class="card--layrics__options">
-					  <div class="dropdown float-end">
-						  <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
-						   	<img src="{{ asset('media/dote_dote_dote_2.svg')}}">
-						  </a>
-						  <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownMenuButton1">
-						    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-plus.svg')}}"> Add to your Playlist</a></li>
-						    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/collection-play.svg')}}"> Play All</a></li>
-						    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-arrow-down.svg')}}"> Download</a></li>
-						    <li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/share-fill.svg')}}"> Share</a></li>
-						  </ul>
-					  </div>
-				  </div>
-			  </div>
-		  </div>
+	<div class="row mb-5 pb-5">
+		@foreach ($popular_tracks as $track)
+
+		  	<div class="col-md-6 col-12">
+				{{-- <a href = "{{ route('new-collection', ['id' => $track->id] ) }}"> --}}
+
+					<div class="card card--layrics">
+						<div class="card--layrics__image" style="background-image: url('{{ \App\Helpers\Helper::format_image($track->image_name) }}');"></div>
+							<div class="card--layrics__content">
+								<h5 class="mb-0 card--layrics__content__title" tabindex="0">{{$track->title}}</h5>
+								<a data-page="artist" href="artist.php?id=6" class="card--layrics__content__subtitle">{{$track->artists}}</a>
+							</div>
+						<div class="card--layrics__tracks">{{$track->track_duration}}</div>
+						<div class="card--layrics__options">
+							<div class="dropdown float-end">
+								<a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
+									<img src="{{ asset('media/dote_dote_dote_2.svg')}}">
+								</a>
+								<ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownMenuButton1">
+									<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-plus.svg')}}"> Add to your Playlist</a></li>
+									<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/collection-play.svg')}}"> Play All</a></li>
+									<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/file-earmark-arrow-down.svg')}}"> Download</a></li>
+									<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/share-fill.svg')}}"> Share</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				{{-- </a> --}}
+		  	</div>
 		  
 		<!--
 		  <div class="col-md-6 col-12">
@@ -397,8 +402,8 @@
 			  </div>
 		  </div>
 		-->
-		  
-	  </div>
+		@endforeach()
+	</div>
 	  <!-- New Collection eded -->
 
 
