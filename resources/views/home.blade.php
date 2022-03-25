@@ -157,7 +157,7 @@
 				{{-- <a href = "{{ route('new-collection', ['id' => $track->id] ) }}"> --}}
 
 					<div class="card card--layrics">
-						<div class="card--layrics__image" style="background-image: url('{{ \App\Helpers\Helper::format_image($track->image_name) }}');"></div>
+						<div class="card--layrics__image" style="background-image: url('{{ \App\Helpers\Helper::format_image($track->image_name,1) }}');"></div>
 							<div class="card--layrics__content">
 								<h5 class="mb-0 card--layrics__content__title" tabindex="0">{{$track->title}}</h5>
 								<a data-page="artist" href="artist.php?id=6" class="card--layrics__content__subtitle">{{$track->artists}}</a>
