@@ -220,3 +220,9 @@ footer { background-color:#f1f8f7;padding:60px 0px 0px 0px;border-top:1px solid 
 	.card--layrics__tracks {padding-left:0px;}
 	.card--layrics__content {margin-right:10px;}
 }
+
+.viewmore_link { display: flex; flex-direction: row;border:none !important;padding:0px !important;margin-top:20px !important; } 
+.viewmore_link:before, 
+.viewmore_link:after { content: ""; flex: 1 1; border-bottom:1px solid #e5e5e5; margin: 10px 0px 10px 10px; }
+.viewmore_link:before { margin: 10px 10px 10px 0px; } 
+

@@ -467,7 +467,8 @@
 			@endforeach
 		</div>
 		<div class="col-md-auto col-12 pt-md-2 pt-2 mb-5">
-			<button type="button" class="btn btn--ordinary btn--small viewmore_link"  data-toggle="collapse" data-target="#boom">Show More</button>
+			<a class="viewmore_link mb-5" href="javascript:void(0);">Show More</a>
+			{{-- <button type="button" class="btn btn--ordinary btn--small viewmore_link"  data-toggle="collapse" data-target="#boom">Show More</button> --}}
 		</div>
 	</div>
 </div>
