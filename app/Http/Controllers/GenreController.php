@@ -42,7 +42,9 @@ class GenreController extends Controller
 
         // Genre_tracks
         $data["genre_tracks"] = DB::table('track')
-        ->select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 'artist.name AS artist', 'artist.image_name')
+        ->select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 
+            'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 
+            'artist.id AS artist_id', 'artist.name AS artist', 'artist.image_name')
         ->join('artist', 'track.artists', '=', 'artist.id')
         ->where('track.status',1)
         ->where('track.genres', 'like', '%'.$id.'%')

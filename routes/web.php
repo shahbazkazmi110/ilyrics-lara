@@ -32,7 +32,7 @@ Route::get('/', [HomeController::class, 'index']);
 
 
 Route::get('/track', [TracksController::class, 'index']);
-Route::get('/track/{id}', [TracksController::class, 'getTrack'])->name('track-by-id');
+Route::get('/track/{id}', [TracksController::class, 'getTracks'])->name('tracks-by-id');
 
 
 Route::get('/artist', [ArtistController::class, 'index']);
