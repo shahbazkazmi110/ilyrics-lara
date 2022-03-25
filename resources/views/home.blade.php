@@ -453,45 +453,8 @@
 	  
   </div>
 </main>
-
-<!-- Tags start -->
-<div class="quicklinks">
-	<div class="container">
-		<h4 class="mb-4" tabindex="0">Tags</h4>
-		<div id ="tags" class="row font-size__medium mb-2">
-			@foreach ($tags as $tag)
-				@php  $classname = ($loop->index < 16) ? 'more' : 'less'; @endphp			
-				<div class="col-6 col-lg-3 col-md-4 pb-2 {{ $classname }}">
-						<a data-page="tag"  data-title="{{$tag->title}}" class="text-decoration-none color-black" href="{{ route('tracks-by-tag', ['id' => $tag->id]) }}">{{$tag->title}}</a>
-				</div>				
-			@endforeach
-		</div>
-		<div class="col-md-auto col-12 pt-md-2 pt-2 mb-5">
-			<a class="viewmore_link mb-5" href="javascript:void(0);">Show More</a>
-			{{-- <button type="button" class="btn btn--ordinary btn--small viewmore_link"  data-toggle="collapse" data-target="#boom">Show More</button> --}}
-		</div>
-	</div>
-</div>
-<!-- Tags end -->
-
-
-
-<!-- Genres start -->
-<div class="quicklinks">
-	<div class="container">
-		<h4 class="mb-4" tabindex="0">Genres</h4>
-		<div class="row font-size__medium mb-5">
-			@foreach ($genres as $genre)
-			<div class="col-6 col-lg-3 col-md-4 pb-2">
-				<a data-page="tag" data-title="{{$genre->title}}" 
-				class="text-decoration-none color-black" 
-				href="{{ route('genre', ['id' => $genre->id]) }}">{{$genre->title}}</a>
-			</div>
-			@endforeach
-		</div>
-	</div>
-</div>		
-<!-- Genres End -->
+<x-tags :tags="$tags"/>
+<x-genres :genres="$genres"/>
 <footer>
 	<div class="container">
 		<div class="row">
