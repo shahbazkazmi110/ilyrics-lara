@@ -72,8 +72,8 @@ class TracksController extends Controller
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::all();
         $data['playlist_tracks'] = Track::
-        //selectRaw('track.id,track.audio_type, track.title,  GROUP_CONCAT(artist.name) as artists,track.view_count, track.resolution, track.contributor_id, track.modified, track.album_year, track.track_duration, track.image_name, track.track_name' )
-        selectRaw('track.*,GROUP_CONCAT(artist.name) as artists')
+        selectRaw('track.id,track.audio_type, track.title,  GROUP_CONCAT(artist.name) as artists,track.view_count, track.resolution, track.contributor_id, track.modified, track.album_year, track.track_duration,track.remote_duration, artist.image_name, track.track_name,track.audio_type,track.audio_link' )
+        // selectRaw('track.*,GROUP_CONCAT(artist.name) as artists')
         ->join('artist', DB::raw("FIND_IN_SET(artist.id,track.artists)"),'>',DB::raw("'0'"))
         ->join('playlist_track', 'track.id', '=', 'playlist_track.track_id')
         ->where('playlist_track.playlist_id', '=', $id)
