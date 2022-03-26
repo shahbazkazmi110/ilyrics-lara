@@ -1,5 +1,23 @@
 @extends('layout.base')
+@section('banner')
+<div class="container">
+	<div class="banner">
+		<div class="row pt-5">
+			<div class="col-12 col-md-6 align-self-center">
+				<div>
+					<h1 tabindex="0">Recite lyrics that makes a difference in peoples lives</h1>					
+					<div class="input-group mb-3 mt-5" style="max-width:500px;">
+					  <input type="text" class="form-control form-control--large" placeholder="Type a few words you like to find" aria-label="Recipient's username" aria-describedby="button-addon2">
+					  <button class="btn btn--large" type="button" id="button-addon2" style="min-width:80px;"><img src="{{ asset('media/search_white.svg')}}"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+@endsection
 @section('content')
+
 <main>
 	<div class="container pt-5 mt-5">
 		<!-- Recommended Playlists -->
