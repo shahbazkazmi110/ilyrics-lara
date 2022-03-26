@@ -39,7 +39,7 @@
                >
                <!-- options for playlist in data-options -->
                <div class="items">
-                  <div class="audioplayer-tobe skin-wave button-aspect-noir" data-thumb="{{ \App\Helpers\Helper::format_image($track->image_name) }}"
+                  <div class="audioplayer-tobe skin-wave button-aspect-noir" data-thumb="'{{ \App\Helpers\Helper::format_image($track->image_name) }}'"
                      data-type="audio"
                      data-source="{{ \App\Helpers\Helper::format_track($track->audio_type == 1 ? $track->track_name : $track->audio_link,$track->audio_type) }}"
                      data-options='{
