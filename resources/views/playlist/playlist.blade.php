@@ -77,11 +77,11 @@
 <x-genres :genres="$genres"/>
 @endsection
 @push('audio-styles')
-<link rel="stylesheet" href="{{ asset('audioplayer/audioplayer.css')}}">
+<link rel="stylesheet" href="{{ asset('audio_player/audioplayer.css')}}">
 	
 @endpush
 @push('audio-scripts')
-<script src="{{ asset('audioplayer/audioplayer.js')}}"></script>
+<script src="{{ asset('audio_player/audioplayer.js')}}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
