@@ -71,16 +71,17 @@ class TracksController extends Controller
         // $data["tracks"] = "";
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::all();
-       $data['playlist_tracks'] = Track::select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 
-        'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 
-        'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name', 'track.track_duration')
-        ->join('artist', 'track.artists', '=', 'artist.id')
+        $data['playlist_tracks'] = Track::
+        //selectRaw('track.id,track.audio_type, track.title,  GROUP_CONCAT(artist.name) as artists,track.view_count, track.resolution, track.contributor_id, track.modified, track.album_year, track.track_duration, track.image_name, track.track_name' )
+        selectRaw('track.*,GROUP_CONCAT(artist.name) as artists')
+        ->join('artist', DB::raw("FIND_IN_SET(artist.id,track.artists)"),'>',DB::raw("'0'"))
         ->join('playlist_track', 'track.id', '=', 'playlist_track.track_id')
         ->where('playlist_track.playlist_id', '=', $id)
         ->where('track.status',1)
         ->orderBy('playlist_track.created', 'DESC')
         // ->paginate(100);
         ->limit(60)
+        ->groupBy("track.id")
         ->get();
 
 

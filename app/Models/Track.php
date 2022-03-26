@@ -31,5 +31,9 @@ class Track extends Model
 
         return $data;
     }
+
+    // public function artist(){
+    //     return $this->hasOne(Artist::class, 'id', 'artists');
+    // }
     
 }
