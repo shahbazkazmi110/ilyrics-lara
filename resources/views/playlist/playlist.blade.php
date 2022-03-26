@@ -69,6 +69,10 @@
             </div>
             <!-- / player starts here -->
           @endforeach
+          <div class="mt-2">
+            {!! $playlist_tracks->links() !!}
+          </div>
+
 
 	  <!-- New Collection eded -->	  
   </div>
