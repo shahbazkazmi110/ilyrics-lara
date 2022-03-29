@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Genre;
+use App\Models\Tag;
 use App\Models\Track;
 use Symfony\Component\Console\Input\Input;
 
@@ -27,7 +28,9 @@ class GenreController extends Controller
     {
         // Tracks
         $data["tracks"] = DB::table('track')
-        ->select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name')
+        ->select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution',
+                 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 
+                 'artist.name AS artist_name', 'artist.image_name')
         ->join('artist', 'track.artists', '=', 'artist.id')
         ->where('track.status',1)
         ->whereNotNull('track.album_year')
@@ -37,8 +40,8 @@ class GenreController extends Controller
 
         // Genres
 
-        $data["tags"] = '';
-        $data["genres"] = '';
+        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+        $data["genres"] = Genre::all();
 
         // Genre_tracks
         $data["genre_tracks"] = DB::table('track')

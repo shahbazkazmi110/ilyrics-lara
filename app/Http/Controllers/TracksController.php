@@ -16,7 +16,9 @@ class TracksController extends Controller
     public function index(){
 
         $data = DB::table('track')
-        ->select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name')//, 'favourite.user_id') 
+        ->select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution',
+                 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id',
+                  'artist.name AS artist_name', 'artist.image_name')//, 'favourite.user_id') 
         //->join('favourite', 'track.id', '=', 'favourite.track_id')
         ->join('artist', 'track.artists', '=', 'artist.id')
         ->whereNotNull('track.album_year')
@@ -32,7 +34,9 @@ class TracksController extends Controller
     {
 
         $data["tracks"] = DB::table('track')
-        ->select('track.id', 'track.audio_type', 'track.title', 'track.artists', 'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name')
+        ->select('track.id', 'track.audio_type', 'track.title', 'track.artists', 'track.view_count', 'track.resolution',
+                'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id',
+                'artist.name AS artist_name', 'artist.image_name')
         ->join('artist', 'track.artists', '=', 'artist.id')
         ->where('track.status',1)
         ->whereNotNull('track.album_year')
@@ -40,11 +44,13 @@ class TracksController extends Controller
         ->limit(6)
         ->get();
 
-        $data["tags"] = '';
-        $data["genres"] = '';
+        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+        $data["genres"] = Genre::all();
 
         $data["tag_tracks"] = DB::table('track')
-        ->select('track.id', 'track.audio_type', 'track.title', 'track.artists', 'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name')
+        ->select('track.id', 'track.audio_type', 'track.title', 'track.artists', 'track.view_count', 'track.resolution', 
+                'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 
+                'artist.name AS artist_name', 'artist.image_name')
         ->join('artist', 'track.artists', '=', 'artist.id')
         ->where('track.tags', 'like', '%'.$id.'%')
         ->orderBy('track.created', 'DESC')
@@ -60,7 +66,31 @@ class TracksController extends Controller
 
     public function getTracksByArtist($id)
     {
-        dd($id);
+        //dd($id);
+        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+        $data["genres"] = Genre::all();
+
+        $data["artist_tracks"] = Track::
+        selectRaw('track.id, track.audio_type, track.title, artist.name as track_artists, track.view_count, track.resolution, track.contributor_id, 
+                    track.modified, track.album_year, track.track_duration as audio_duration, track.remote_duration, track.audio_link,
+                    artist.id AS artist_id, artist.name as artist_name, artist.image_name')
+        ->join('artist', DB::raw("FIND_IN_SET(artist.id,track.artists)"),'>',DB::raw("'0'"))
+        ->where('track.status', 1)
+        ->where('track.artists', 'like', '%_'.$id.'%')
+        ->orderBy('track.title', 'ASC')
+        ->limit(10)
+        ->get();
+
+        $data["artist_detail"] = Artist::
+        selectRaw('artist.name, artist.resolution, artist.description, artist.image_name, COUNT(track.artists) as track_count')
+        // ->where('artist.status',1)
+        ->join('track', 'artist.id', '=', 'track.artists')
+        ->where('track.status', 1)
+        ->where('artist.id', 'LIKE', '%'.$id.'%')
+        ->first();
+
+        return view('artist.artist', $data);
+        //dd($data);
 
     }
 
@@ -71,21 +101,26 @@ class TracksController extends Controller
         // $data["tracks"] = "";
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::all();
+
         $data['playlist_tracks'] = Track::
-        selectRaw('track.id,track.audio_type, track.title,  GROUP_CONCAT(artist.name) as artists, artist.id as artist_id ,track.view_count, track.resolution, track.contributor_id, track.modified, track.album_year, track.track_duration,track.remote_duration, artist.image_name, track.track_name,track.audio_link' )
+        selectRaw('track.id,track.audio_type, track.title,  GROUP_CONCAT(artist.name) as artists, artist.id as artist_id, 
+                track.view_count, track.resolution, track.contributor_id, track.modified, track.album_year, track.track_duration,
+                track.remote_duration, artist.image_name, track.track_name,track.audio_link' )
         // selectRaw('track.*,GROUP_CONCAT(artist.name) as artists')
         ->join('artist', DB::raw("FIND_IN_SET(artist.id,track.artists)"),'>',DB::raw("'0'"))
         ->join('playlist_track', 'track.id', '=', 'playlist_track.track_id')
         ->where('playlist_track.playlist_id', '=', $id)
         ->where('track.status',1)
         ->orderBy('playlist_track.created', 'DESC')
-        ->groupBy("track.id")
-         ->paginate(10);
+        ->groupBy('track.id')
+        ->paginate(10);
 
         $data["playlist_detail"] = Playlist::selectRaw('playlist.id, title, resolution, image_name, COUNT(playlist_track.track_id) as count')
         ->join('playlist_track', 'playlist.id', '=', 'playlist_track.playlist_id')
         ->where('playlist.id', '=', $id)
         ->first();
+
+
         return view('playlist.playlist',$data);
 
     }
@@ -104,8 +139,8 @@ class TracksController extends Controller
         ->limit(6)
         ->get();
 
-        $data["tags"] = '';
-        $data["genres"] = '';
+        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+        $data["genres"] = Genre::all();
 
 
         //relations created with Favourite, Artist, Genre
@@ -120,17 +155,6 @@ class TracksController extends Controller
         ->join('genre', DB::raw("FIND_IN_SET(genre.id,track.genres)"),'>',DB::raw("'0'"))
         ->where('track.id', '=', $id)
         ->where('track.status', 1)
-        // ->selectSub(function($q)
-        //     {
-        //       $q = Track::select('id')
-        //         ->where('artists', 'LIKE', '%7813%')
-        //         ->count();
-        //     }, 'a')
-
-        // ->addSelect(['artist_track_count' => Track::select('track.id')
-        //         ->where('track.artists', 'LIKE', '%'.$id.'%')
-        //         ->count()
-        //         ])
         ->get();
 
         $artist_id = DB::table('track')->select('artists')->where('id', '=', $id)->get();

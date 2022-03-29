@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Genre;
 use App\Models\Tag;
 
 class TagController extends Controller
@@ -18,7 +19,9 @@ class TagController extends Controller
 
         // First 6 tracks
         $data["tracks"] = DB::table('track')
-        ->select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name')
+        ->select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution',
+                 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id',
+                  'artist.name AS artist_name', 'artist.image_name')
         ->join('artist', 'track.artists', '=', 'artist.id')
         ->where('track.status',1)
         ->whereNotNull('track.album_year')
@@ -26,13 +29,15 @@ class TagController extends Controller
         ->limit(6)
         ->get();
 
-        $data["tags"] = '';
-        $data["genres"] = '';
+        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+        $data["genres"] = Genre::all();
 
 
         // All track matching with TAG_ID
         $data["tag_tracks"] = DB::table('track')
-        ->select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name')
+        ->select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution',
+             'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 
+             'artist.name AS artist_name', 'artist.image_name')
         ->join('artist', 'track.artists', '=', 'artist.id')
         ->where('track.tags', 'like', '%'.$id.'%')
         ->orderBy('track.created', 'DESC')
