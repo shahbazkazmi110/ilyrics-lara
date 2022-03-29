@@ -56,7 +56,7 @@
                      }'
                      >
                      <!-- options for player in data-options -->
-                     <div class="feed-dzsap feed-artist"><a href="https://ilyrics.org/artist.php?id=16">{{$track->artists}}</a></div>
+                     <div class="feed-dzsap feed-artist"><a href="/artist/{{ $track->artist_id }}">{{$track->artists}}</a></div>
                      <div class="feed-dzsap feed-songname">{{$track->title}}</div>
                   </div>
                </div>
