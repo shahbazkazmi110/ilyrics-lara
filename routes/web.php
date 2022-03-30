@@ -2,13 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\TracksController;
+// use App\Http\Controllers\TracksController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\{TracksController, HomeController};
  
 
 
@@ -23,9 +24,7 @@ use App\Http\Controllers\AlbumController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -33,12 +32,23 @@ Route::get('/', function () {
 
 
 Route::get('/track', [TracksController::class, 'index']);
-// require __DIR__.'/auth.php';
+Route::get('/track/{id}', [TracksController::class, 'getTracks'])->name('tracks-by-id');
 
+
+Route::get('/artist', [ArtistController::class, 'index']);
+Route::get('/artist/{id}', [TracksController::class, 'getTracksByArtist'])->name('tracks-by-artist');
 
 Route::get('/genre', [GenreController::class, 'index']);
-Route::get('/tag', [TagController::class, 'index']);
-Route::get('/artist', [ArtistController::class, 'index']);
+Route::get('/genre/{id}', [GenreController::class, 'getTracksByGenre'])->name('genre');
+
+Route::get('/tags', [TagController::class, 'index']);
+Route::get('/tag/{id}', [TracksController::class, 'getTracksByTag'])->name('tracks-by-tag');
+
 Route::get('/playlist', [PlaylistController::class, 'index']);
+Route::get('/playlist/{id}', [TracksController::class, 'getTracksByPlaylist'])->name('tracks-by-playlist');
+
+//require __DIR__.'/auth.php';
+
 Route::get('/language', [LanguageController::class, 'index']);
 Route::get('/album', [AlbumController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index']);

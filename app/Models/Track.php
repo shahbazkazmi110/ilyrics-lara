@@ -16,5 +16,24 @@ class Track extends Model
     {
         return $this->belongsTo(Artist::class);
     }
+
+    
+    public static function getPopularTracks()
+    {   
+        $data = Track::select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name', 'artist.resolution as artist_resolution')//, 'favourite.user_id') 
+        //->join('favourite', 'track.id', '=', 'favourite.track_id')
+        ->join('artist', 'track.artists', '=', 'artist.id')
+        ->whereNotNull('track.album_year')
+        ->where('track.status', 1)
+        ->orderBy('track.created', 'DESC')
+        ->limit(8)
+        ->get();
+
+        return $data;
+    }
+
+    // public function artist(){
+    //     return $this->hasOne(Artist::class, 'id', 'artists');
+    // }
     
 }
