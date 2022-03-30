@@ -76,7 +76,7 @@ class TracksController extends Controller
                     artist.id AS artist_id, artist.name as artist_name, artist.image_name')
         ->join('artist', DB::raw("FIND_IN_SET(artist.id,track.artists)"),'>',DB::raw("'0'"))
         ->where('track.status', 1)
-        ->where('track.artists', 'like', '%_'.$id.'%')
+        ->whereRaw("find_in_set('".$id."',track.artists)")
         ->orderBy('track.title', 'ASC')
         ->limit(10)
         ->get();
