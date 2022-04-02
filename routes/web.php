@@ -60,3 +60,7 @@ Route::get('/about', function() {return view('about');});
 Route::get('/accessibitiy', function() {return view('accessibitiy');});
 
 Route::get('/terms', function() {return view('terms');});
+
+Route::get('/privacy-policy', function() {
+    return view('privacy-policy');
+});
