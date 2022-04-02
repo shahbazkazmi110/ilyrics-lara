@@ -102,7 +102,7 @@
 					{{-- </a> --}}
 				</div>
 			
-			<!--
+		<!--
 			<div class="col-md-6 col-12">
 				<div class="card card--layrics">
 					<div class="card--layrics__image" style="background-image: url('https://ilyrics.org/admin/uploads/zill.jpg');"></div>

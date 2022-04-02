@@ -52,3 +52,11 @@ Route::get('/playlist/{id}', [TracksController::class, 'getTracksByPlaylist'])->
 Route::get('/language', [LanguageController::class, 'index']);
 Route::get('/album', [AlbumController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index']);
+
+//Route::view('/about', 'views/about.php', 'about');
+
+Route::get('/about', function() {return view('about');});
+
+Route::get('/accessibitiy', function() {return view('accessibitiy');});
+
+Route::get('/terms', function() {return view('terms');});

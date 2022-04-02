@@ -48,7 +48,7 @@
 	        <div class="collapse navbar-collapse" id="navbarsExample09">
 	          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	            <li class="nav-item">
-	              <a class="nav-link active" aria-current="page" href="#">Home</a>
+	              <a class="nav-link active" aria-current="page" href="/home">Home</a>
 	            </li>
 	            <li class="nav-item">
 	              <a class="nav-link" href="#">Search</a>
@@ -100,12 +100,12 @@
 				<div class="row">
 					<div class="col-12 col-md-6">
 						<h5 class="pb-4" tabindex="0">Useful links</h5>
-						<a class="pb-3 color-black d-block text-decoration-none" href="about-us.php">About Us</a></li>
+						<a class="pb-3 color-black d-block text-decoration-none" href="<?= url('about'); ?>">About Us</a></li>
 		                <a class="pb-3 color-black d-block text-decoration-none" href="https://docs.google.com/forms/d/e/1FAIpQLSfYmKg_CrqJE-Vq4Is5Nid2Qat-FAVCqHc689NA1o1MsvPBKA/viewform?vc=0&amp;c=0&amp;w=1&amp;flr=0&amp;usp=mail_form_link" target="_blank">Request to add a reciter</a>
 		                <a class="pb-3 color-black d-block text-decoration-none" href="https://docs.google.com/forms/d/e/1FAIpQLSfIKPgKC2vxscmJ0nvPCyJKrb1E-GttOPMNRB4C1p6HUZ3ODw/viewform?usp=sf_link" target="_blank">Request to add a collection</a>
 		                <a class="pb-3 color-black d-block text-decoration-none" href="privacy-policy.php">Privacy Policy</a>
-		                <a class="pb-3 color-black d-block text-decoration-none" href="accessibility-policy.php">Accessibility Policy</a>
-		                <a class="pb-3 color-black d-block text-decoration-none" href="terms-conditions.php">Terms &amp; Conditions</a>
+		                <a class="pb-3 color-black d-block text-decoration-none" href="<?= url('accessibitiy'); ?>">Accessibility Policy</a>
+		                <a class="pb-3 color-black d-block text-decoration-none" href="<?= url('terms'); ?>">Terms &amp; Conditions</a>
 					</div>
 					<div class="col-12 col-md-6">
 						<h5 class="pb-4" tabindex="0">Contact Us</h5>

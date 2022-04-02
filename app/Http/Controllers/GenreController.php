@@ -27,19 +27,7 @@ class GenreController extends Controller
     public function getTracksByGenre($id)
     {
         // Tracks
-        $data["tracks"] = DB::table('track')
-        ->select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution',
-                 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id', 
-                 'artist.name AS artist_name', 'artist.image_name')
-        ->join('artist', 'track.artists', '=', 'artist.id')
-        ->where('track.status',1)
-        ->whereNotNull('track.album_year')
-        ->orderBy('track.created', 'DESC')
-        ->limit(6)
-        ->get();
-
-        // Genres
-
+        $data["tracks"] = Track::getAllTracks();
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::all();
 

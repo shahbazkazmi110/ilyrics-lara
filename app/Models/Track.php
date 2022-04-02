@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Artist;
+use Illuminate\Support\Facades\DB;
 
 
 class Track extends Model
@@ -30,6 +31,21 @@ class Track extends Model
         ->get();
 
         return $data;
+    }
+
+    public static function getAllTracks()
+    {
+        $data["tracks"] =  DB::table('track')->select('track.id', 'track.audio_type', 'track.title', 'track.artists', 'track.view_count', 'track.resolution',
+                'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id',
+                'artist.name AS artist_name', 'artist.image_name')
+        ->join('artist', 'track.artists', '=', 'artist.id')
+        ->where('track.status',1)
+        ->orderBy('track.created', 'DESC')
+        ->limit(6)
+        ->get();
+        
+        return $data["tracks"];
+
     }
 
     // public function artist(){

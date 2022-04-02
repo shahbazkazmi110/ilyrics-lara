@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Genre;
+use App\Models\Track;
 use App\Models\Tag;
 
 class TagController extends Controller
@@ -18,17 +19,7 @@ class TagController extends Controller
     {
 
         // First 6 tracks
-        $data["tracks"] = DB::table('track')
-        ->select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution',
-                 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id',
-                  'artist.name AS artist_name', 'artist.image_name')
-        ->join('artist', 'track.artists', '=', 'artist.id')
-        ->where('track.status',1)
-        ->whereNotNull('track.album_year')
-        ->orderBy('track.created', 'DESC')
-        ->limit(6)
-        ->get();
-
+        $data["tracks"] = Track::getAllTracks();
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::all();
 
