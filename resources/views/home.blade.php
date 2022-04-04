@@ -362,7 +362,7 @@
 							<div class="card--playlist__content">
 								{{$artist->name}}
 							</div>
-							<div class="card--playlist__tracks">{{$artist->track_count}}</div>
+							<div class="card--playlist__tracks">{{$artist->track_count}} Collections</div>
 						</div>
 					</a>
 				</div>
