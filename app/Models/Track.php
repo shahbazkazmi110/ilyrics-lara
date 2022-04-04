@@ -35,10 +35,11 @@ class Track extends Model
 
     public static function getAllTracks()
     {
-        $data["tracks"] =  DB::table('track')->select('track.id', 'track.audio_type', 'track.title', 'track.artists', 'track.view_count', 'track.resolution',
-                'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id',
-                'artist.name AS artist_name', 'artist.image_name')
-        ->join('artist', 'track.artists', '=', 'artist.id')
+        $data["tracks"] =  DB::table('track')->select('track.id', 'track.audio_type', 'track.title', 
+                                    'track.artists', 'track.view_count', 'track.resolution',
+                                    'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id',
+                                    'artist.name AS artist_name', 'artist.image_name')
+        ->join('artist', DB::raw("FIND_IN_SET(artist.id,track.artists)"),'>',DB::raw("'0'"))
         ->where('track.status',1)
         ->orderBy('track.created', 'DESC')
         ->limit(6)

@@ -35,7 +35,7 @@ Route::get('/track', [TracksController::class, 'index']);
 Route::get('/track/{id}', [TracksController::class, 'getTracks'])->name('tracks-by-id');
 
 
-Route::get('/artist', [ArtistController::class, 'index']);
+//Route::get('/artist', [ArtistController::class, 'index']);
 Route::get('/artist/{id}', [TracksController::class, 'getTracksByArtist'])->name('tracks-by-artist');
 
 Route::get('/genre', [GenreController::class, 'index']);
@@ -52,6 +52,10 @@ Route::get('/playlist/{id}', [TracksController::class, 'getTracksByPlaylist'])->
 Route::get('/language', [LanguageController::class, 'index']);
 Route::get('/album', [AlbumController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index']);
+
+
+Route::get('/artist', [ArtistController::class, 'getAllArtists']);
+
 
 //Route::view('/about', 'views/about.php', 'about');
 

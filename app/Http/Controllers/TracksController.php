@@ -63,7 +63,7 @@ class TracksController extends Controller
         $data["artist_tracks"] = Track::
         selectRaw('track.id, track.audio_type, track.title, artist.name as track_artists, track.view_count, track.resolution, track.contributor_id, 
                     track.modified, track.album_year, track.track_duration as audio_duration, track.remote_duration, track.audio_link,
-                    artist.id AS artist_id, artist.name as artist_name, artist.image_name')
+                    artist.id AS artist_id, artist.name as artist_name, artist.image_name, track.track_name')
         ->join('artist', DB::raw("FIND_IN_SET(artist.id,track.artists)"),'>',DB::raw("'0'"))
         ->where('track.status', 1)
         ->whereRaw("find_in_set('".$id."',track.artists)")
@@ -79,8 +79,8 @@ class TracksController extends Controller
         ->where('artist.id', 'LIKE', '%'.$id.'%')
         ->first();
 
-        return view('artist.artist', $data);
-        //dd($data);
+        //return view('artist.artist', $data);
+        return $data["artist_tracks"];
 
     }
 
