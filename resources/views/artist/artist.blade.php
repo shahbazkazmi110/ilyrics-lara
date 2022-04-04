@@ -11,7 +11,7 @@
 		  </div>		  
 		  <div class="col">
 		  	<h2 class="h2__underline" tabindex="0">{{ $artist_detail->name }}</h2>
-		  	<p>Number of tracks : {{ $artist_detail->track_count }}</p>
+		  	<p>Number of Collections : {{ $artist_detail->track_count }}</p>
 		  </div>		  
 	  </div>
 

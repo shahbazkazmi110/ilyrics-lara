@@ -47,7 +47,7 @@ class TracksController extends Controller
 
         $data["tag_detail"] = DB::table('tag')
         ->select('*')
-        ->where('id', '=', $id)
+        ->where('id', $id)
         ->get();
 
         return $data;
@@ -72,7 +72,7 @@ class TracksController extends Controller
         selectRaw('artist.name, artist.resolution, artist.description, artist.image_name, COUNT(track.artists) as track_count')
         ->join('track', 'artist.id', '=', 'track.artists')
         ->where('track.status', 1)
-        ->where('artist.id', 'LIKE', '%'.$id.'%')
+        ->where('artist.id', $id)
         ->first();
 
         return view('artist.artist', $data);
@@ -102,9 +102,8 @@ class TracksController extends Controller
 
         $data["playlist_detail"] = Playlist::selectRaw('playlist.id, title, resolution, image_name, COUNT(playlist_track.track_id) as count')
         ->join('playlist_track', 'playlist.id', '=', 'playlist_track.playlist_id')
-        ->where('playlist.id', '=', $id)
+        ->where('playlist.id', $id)
         ->first();
-
 
         return view('playlist.playlist',$data);
 
@@ -133,12 +132,10 @@ class TracksController extends Controller
         ->get();
 
         $artist_id = DB::table('track')->select('artists')->where('id', '=', $id)->get();
-        //dd($artist_id);
         $data["track_list"]["artist_track_counter"] = Track::selectRaw('COUNT(id) as track_counts')
-                                                            ->where('artists', 'LIKE', '%'.$artist_id.'%')
-                                                            ->first();
+                                                    ->where('artists', 'LIKE', '%'.$artist_id.'%')
+                                                    ->first();
 
-        // dd($artist_id, $data["track_list"]["artist_track_counter"]);
         return $data;
     }
 }
