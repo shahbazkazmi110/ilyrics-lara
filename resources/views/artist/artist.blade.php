@@ -69,9 +69,9 @@
             </div>
             <!-- / player starts here -->
           @endforeach
-          {{-- <div class="mt-2">
+          <div class="mt-2">
             {!! $artist_tracks->links() !!}
-          </div> --}}
+          </div>
 
 
 	  <!-- New Collection eded -->	  

@@ -55,11 +55,9 @@ class TracksController extends Controller
 
     public function getTracksByArtist($id)
     {
-        //dd($id);
         $data["tracks"] = Track::getAllTracks();
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::all();
-
         $data["artist_tracks"] = Track::
         selectRaw('track.id, track.audio_type, track.title, artist.name as track_artists, track.view_count, track.resolution, track.contributor_id, 
                     track.modified, track.album_year, track.track_duration as audio_duration, track.remote_duration, track.audio_link,
@@ -68,19 +66,16 @@ class TracksController extends Controller
         ->where('track.status', 1)
         ->whereRaw("find_in_set('".$id."',track.artists)")
         ->orderBy('track.title', 'ASC')
-        ->limit(10)
-        ->get();
+        ->paginate(10);
 
         $data["artist_detail"] = Artist::
         selectRaw('artist.name, artist.resolution, artist.description, artist.image_name, COUNT(track.artists) as track_count')
-        // ->where('artist.status',1)
         ->join('track', 'artist.id', '=', 'track.artists')
         ->where('track.status', 1)
         ->where('artist.id', 'LIKE', '%'.$id.'%')
         ->first();
 
-        //return view('artist.artist', $data);
-        return $data["artist_tracks"];
+        return view('artist.artist', $data);
 
     }
 
@@ -143,7 +138,7 @@ class TracksController extends Controller
                                                             ->where('artists', 'LIKE', '%'.$artist_id.'%')
                                                             ->first();
 
-        dd($artist_id, $data["track_list"]["artist_track_counter"]);
+        // dd($artist_id, $data["track_list"]["artist_track_counter"]);
         return $data;
     }
 }
