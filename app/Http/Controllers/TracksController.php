@@ -32,7 +32,7 @@ class TracksController extends Controller
 
     public function getTracksByTag($id)
     {
-        $data["tracks"] = Track::getAllTracks();
+        // $data["tracks"] = Track::getAllTracks();
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::all();
 
@@ -55,7 +55,7 @@ class TracksController extends Controller
 
     public function getTracksByArtist($id)
     {
-        $data["tracks"] = Track::getAllTracks();
+        // $data["tracks"] = Track::getAllTracks();
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::all();
         $data["artist_tracks"] = Track::
@@ -83,7 +83,7 @@ class TracksController extends Controller
     public function getTracksByPlaylist($id)
     {
 
-        $data["tracks"] = Track::getAllTracks();
+        // $data["tracks"] = Track::getAllTracks();
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::all();
 
