@@ -128,6 +128,7 @@
 <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
 <script src="{{ asset('js/bootstrap.bundle.js')}}"></script>
 <script src="{{ asset('js/main.js')}}"></script>
+@stack('pagination')
 <script>
 	$('.viewmore_link').click(function(){
 		$('#tags .less').fadeToggle();

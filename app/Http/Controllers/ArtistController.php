@@ -50,11 +50,12 @@ class ArtistController extends Controller
 
     }
 
-    public function getAllArtists(){
+    public function getAllArtists(Request $request){
 
-        // $data["tracks"] = Track::getAllTracks();
-        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
-        $data["genres"] = Genre::all();
+
+        
+
+
         $data["artists"] = Artist::
         selectRaw('artist.id, artist.name, artist.genres, artist.resolution, artist.created, artist.listening_count, artist.image_name, COUNT(track.id) as track_count')
         ->join('track', DB::raw("FIND_IN_SET(artist.id, track.artists)"),'>',DB::raw("'0'"))
@@ -62,7 +63,15 @@ class ArtistController extends Controller
         ->where('track.status', 1)
         ->groupBy('artist.id')
         ->orderBy('artist.name', 'ASC')
-        ->paginate(50);
+        ->paginate(30);
+
+        if ($request->ajax()) {
+            $view = view('artist.artists-pagination',$data)->render();
+            return response()->json(['html'=>$view]);
+        //   return  $data["artists"];
+        }
+        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+        $data["genres"] = Genre::all();
 
         return view('artist.artists', $data);
     }
