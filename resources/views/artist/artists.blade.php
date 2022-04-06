@@ -4,7 +4,7 @@
 <div class="pagetitle">
 	<div class="container">
 		<h2 class="h2__underline" tabindex="0">All Reciters</h2>
-		<p style="max-width:400px;">In publishing and graphic design, Lorem ipsum is a placeholder text commonly.</p>	  
+		{{-- <p style="max-width:400px;">In publishing and graphic design, Lorem ipsum is a placeholder text commonly.</p>	   --}}
 	</div>
 </div>
 @endsection
