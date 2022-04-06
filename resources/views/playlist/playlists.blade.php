@@ -24,12 +24,12 @@
             </div>
         @endforeach    
     </div>
-    <div class="mt-2">
+    {{-- <div class="mt-2">
         <div class="ajax-load">
             Loading
         </div>
-    {{-- {!! $artists->links() !!} --}}
-    </div>
+        {{-- {!! $artists->links() !!} --}}
+        </div>
     <!-- New Collection eded --> 
     {{-- <a href="https://docs.google.com/forms/d/e/1FAIpQLSfYmKg_CrqJE-Vq4Is5Nid2Qat-FAVCqHc689NA1o1MsvPBKA/viewform?vc=0&amp;c=0&amp;w=1&amp;flr=0&amp;usp=mail_form_link">              
         <button type="button" class="btn btn--ordinary btn--small">Request to Add reciter</button>  
@@ -43,7 +43,8 @@
 <x-genres :genres="$genres"/>
 @endsection
 @push('pagination')
-<script type="text/javascript">
+
+{{-- <script type="text/javascript">
 	var page = 1;
     var lastpage = false;
     var Loading = false;
@@ -92,6 +93,7 @@
 	              alert('server not responding...');
 	        });
 	}
-</script>
+</script> --}}
+
 @endpush
 
