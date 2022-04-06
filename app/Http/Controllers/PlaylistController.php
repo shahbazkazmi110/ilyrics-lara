@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Playlist;
+use App\Models\Tag;
+use App\Models\Genre;
 
 class PlaylistController extends Controller
 {
@@ -21,6 +23,21 @@ class PlaylistController extends Controller
         ->get();
  
         return $playlist;
+    }
+
+    public function getAllPlaylists(){
+
+        $data["playlists"] = Playlist::select('id', 'title', 'user_id', 'image_name', 'resolution')
+        ->where('featured', 1)
+        ->where('status', 1)
+        ->orderBy('display_order', 'ASC')
+        ->limit(20)
+        ->get();
+
+        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+        $data["genres"] = Genre::all();
+
+        return view('playlist.playlists',$data);
     }
 
 }

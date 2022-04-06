@@ -44,7 +44,7 @@ Route::get('/genre/{id}', [GenreController::class, 'getTracksByGenre'])->name('g
 Route::get('/tags', [TagController::class, 'index']);
 Route::get('/tag/{id}', [TracksController::class, 'getTracksByTag'])->name('tracks-by-tag');
 
-Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists');
+// Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists');
 Route::get('/playlist/{id}', [TracksController::class, 'getTracksByPlaylist'])->name('tracks-by-playlist');
 
 
@@ -55,15 +55,17 @@ Route::get('/home', [HomeController::class, 'index']);
 
 Route::get('/reciters', [ArtistController::class, 'getAllArtists'])->name('reciters');
 
+Route::get('/playlists', [PlaylistController::class, 'getAllPlaylists'])->name('playlists');
+
 
 //Route::view('/about', 'views/about.php', 'about');
 
-Route::get('/about', function() {return view('about');});
+Route::get('/about', function() {return view('links.about');});
 
-Route::get('/accessibitiy', function() {return view('accessibitiy');});
+Route::get('/accessibitiy', function() {return view('links.accessibitiy');});
 
-Route::get('/terms', function() {return view('terms');});
+Route::get('/terms', function() {return view('links.terms');});
 
 Route::get('/privacy-policy', function() {
-    return view('privacy-policy');
+    return view('links.privacy-policy');
 });

@@ -85,8 +85,9 @@
 								<div class="card--layrics__content">
 									<h5 class="mb-0 card--layrics__content__title" tabindex="0">{{$track->title}}</h5>
 									<a data-page="artist" href="{{ route('tracks-by-artist', ['id' => $track->artist_id]) }}" class="card--layrics__content__subtitle">{{$track->artists}}</a>
-								</div>
-							<div class="card--layrics__tracks">{{$track->track_duration}}</div>
+									<div style="text-align: left">{{gmdate('i:s', $track->track_duration)}}</div>
+								</div>							
+							
 							<div class="card--layrics__options">
 								<div class="dropdown float-end">
 									<a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
@@ -99,7 +100,7 @@
 										<li><a class="dropdown-item" href="#"><img class="mr-2" src="{{ asset('media/share-fill.svg')}}"> Share</a></li>
 									</ul>
 								</div>
-							</div>
+							</div>							
 						</div>
 					{{-- </a> --}}
 				</div>

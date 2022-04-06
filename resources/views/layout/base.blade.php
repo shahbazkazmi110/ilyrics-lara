@@ -48,13 +48,13 @@
 	        <div class="collapse navbar-collapse" id="navbarsExample09">
 	          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	            <li class="nav-item">
-	              <a class="nav-link active" aria-current="page" href="{{ url('') }}">Home</a>
+	              <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Home</a>
 	            </li>
 	            <li class="nav-item">
 	              <a class="nav-link" href="#">Search</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Reciters</a>
+	              <a class="nav-link" href="<?= url('reciters'); ?>" tabindex="-1" aria-disabled="true">Reciters</a>
 	            </li>
 	            <li class="nav-item dropdown">
 	              <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-bs-toggle="dropdown" aria-expanded="false">My Account</a>
