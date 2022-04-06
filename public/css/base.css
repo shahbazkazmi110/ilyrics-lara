@@ -196,6 +196,13 @@ footer { background-color:#f1f8f7;padding:60px 0px 0px 0px;border-top:1px solid 
 .viewmore_link:before { margin: 10px 10px 10px 0px; } 
 .btn-sharing {border: 1px solid #e5e5e5;border-radius: 3px;background-color: #fff;cursor: pointer;color: #333;font-size:12px;padding:8px;font-weight: 500;height:auto;box-shadow: 0px 0px 0px 0px rgb(0 0 0 / 0%);}
 
+.card--reciter {min-width: 150px; overflow: hidden; width: 100%;}
+.card--reciter__image { background-repeat: no-repeat; background-position:center center; background-size:cover;height:180px;}
+.card--reciter__content {font-size:14px;color:#797b7b;min-height:42px;padding:15px;}
+.card--reciter__content__title { font-size: 18px !important; font-weight:500 !important;}
+.card--reciter__tracks {font-size: 12px;color:#2c2c2c; text-align: right; padding:0px 10px 10px 10px; color:#000000;font-size:14px;}
+.card--reciter:hover .card--reciter__image {transform: scale(1.02);transition: all .5s;}
+
 @media screen and (max-width: 991px) {
 	.il_navbar .collapse.navbar-collapse{margin-left:0px;}
 	.il_logo_container {display: none;}
@@ -231,4 +238,5 @@ footer { background-color:#f1f8f7;padding:60px 0px 0px 0px;border-top:1px solid 
 	.pagetitle {padding:25px 0px;}
 	.pagetitle .collaction_img { width:90px; height:90px;}
 	.pagetitle h2 {font-size: 28px;line-height:1.1;}
+	.card--reciter__image {height:150px;}
 }
