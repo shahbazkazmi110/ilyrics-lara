@@ -55,22 +55,15 @@ class ArtistController extends Controller
         // $data["tracks"] = Track::getAllTracks();
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::all();
-
-
         $data["artists"] = Artist::
         selectRaw('artist.id, artist.name, artist.genres, artist.resolution, artist.created, artist.listening_count, artist.image_name, COUNT(track.id) as track_count')
-        //->join('track', 'artist.id', '=', 'track.artists')
-        //COUNT(track.artists) as track_count,
-        //->join('artist', DB::raw("FIND_IN_SET(artist.id,track.artists)"),'>',DB::raw("'0'"))
         ->join('track', DB::raw("FIND_IN_SET(artist.id, track.artists)"),'>',DB::raw("'0'"))
         ->where('artist.status', 1)
         ->where('track.status', 1)
         ->groupBy('artist.id')
         ->orderBy('artist.name', 'ASC')
-        ->paginate(100);
+        ->paginate(50);
 
         return view('artist.artists', $data);
-
-        // return $data;
     }
 }
