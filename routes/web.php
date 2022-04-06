@@ -36,7 +36,7 @@ Route::get('/track/{id}', [TracksController::class, 'getTracks'])->name('tracks-
 
 
 //Route::get('/artist', [ArtistController::class, 'index']);
-Route::get('/artist/{id}', [TracksController::class, 'getTracksByArtist'])->name('tracks-by-artist');
+Route::get('/reciter/{id}', [TracksController::class, 'getTracksByArtist'])->name('tracks-by-artist');
 
 Route::get('/genre', [GenreController::class, 'index']);
 Route::get('/genre/{id}', [GenreController::class, 'getTracksByGenre'])->name('genre');

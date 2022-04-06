@@ -337,7 +337,9 @@
 				<!-- <p style="max-width:400px;">In publishing and graphic design, Lorem ipsum is a placeholder text commonly.</p> -->
 			</div>
 			<div class="col-md-auto col-12 pt-md-5 pt-2">
-				<button type="button" class="btn btn--ordinary btn--small">view all Reciters</button>
+				<a href="{{ route('reciters') }}">
+					<button type="button" class="btn btn--ordinary btn--small">View all Reciters</button>
+				</a>
 			</div>
 			
 		</div>
