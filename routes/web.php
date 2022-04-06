@@ -44,17 +44,16 @@ Route::get('/genre/{id}', [GenreController::class, 'getTracksByGenre'])->name('g
 Route::get('/tags', [TagController::class, 'index']);
 Route::get('/tag/{id}', [TracksController::class, 'getTracksByTag'])->name('tracks-by-tag');
 
-Route::get('/playlist', [PlaylistController::class, 'index']);
+Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists');
 Route::get('/playlist/{id}', [TracksController::class, 'getTracksByPlaylist'])->name('tracks-by-playlist');
 
-//require __DIR__.'/auth.php';
 
 Route::get('/language', [LanguageController::class, 'index']);
 Route::get('/album', [AlbumController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index']);
 
 
-Route::get('/artist', [ArtistController::class, 'getAllArtists']);
+Route::get('/reciters', [ArtistController::class, 'getAllArtists'])->name('reciters');
 
 
 //Route::view('/about', 'views/about.php', 'about');

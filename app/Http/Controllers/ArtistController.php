@@ -52,7 +52,7 @@ class ArtistController extends Controller
 
     public function getAllArtists(){
 
-        $data["tracks"] = Track::getAllTracks();
+        // $data["tracks"] = Track::getAllTracks();
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::all();
 
@@ -67,8 +67,10 @@ class ArtistController extends Controller
         ->where('track.status', 1)
         ->groupBy('artist.id')
         ->orderBy('artist.name', 'ASC')
-        ->paginate(10);
+        ->paginate(100);
 
-        return $data;
+        return view('artist.artists', $data);
+
+        // return $data;
     }
 }

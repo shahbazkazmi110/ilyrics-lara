@@ -27,7 +27,9 @@
 				<p style="max-width:700px;">In publishing and graphic design, Lorem ipsum is a placeholder text commonly.</p>
 			</div>
 			<div class="col-md-auto col-12 pt-md-5 pt-2">
+				<a href="{{ route('playlists') }}">
 					<button type="button" class="btn btn--ordinary btn--small">View All Playlists</button>
+				</a>
 			</div>
 			
 		</div>
@@ -74,7 +76,7 @@
 		
 		<div class="row mb-5 pb-5">
 			@foreach ($popular_tracks as $track)
-
+			
 				<div class="col-md-6 col-12">
 					{{-- <a href = "{{ route('new-collection', ['id' => $track->id] ) }}"> --}}
 
@@ -82,7 +84,7 @@
 							<div class="card--layrics__image" style="background-image: url('{{ \App\Helpers\Helper::format_image($track->image_name) }}');"></div>
 								<div class="card--layrics__content">
 									<h5 class="mb-0 card--layrics__content__title" tabindex="0">{{$track->title}}</h5>
-									<a data-page="artist" href="artist.php?id=6" class="card--layrics__content__subtitle">{{$track->artists}}</a>
+									<a data-page="artist" href="{{ route('tracks-by-artist', ['id' => $track->artist_id]) }}" class="card--layrics__content__subtitle">{{$track->artists}}</a>
 								</div>
 							<div class="card--layrics__tracks">{{$track->track_duration}}</div>
 							<div class="card--layrics__options">
