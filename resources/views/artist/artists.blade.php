@@ -13,7 +13,7 @@
 <main>
 <div class="container pt-md-5 mb-5 pb-5">
        
-    <div class="row" id="artists-data">
+    <div class="row" id="pagination-data">
 
         @foreach ($artists as $artist) 
             <div class="col-xl-2 col-lg-3 col-md-4 col-6 d-flex align-items-stretch mb-mb-5 mb-4">
@@ -82,7 +82,7 @@
 	                return;
 	            }
 	            $('.ajax-load').hide();
-	            $("#artists-data").append(data.html);
+	            $("#pagination-data").append(data.html);
                 Loading = false;
 
 	        })
