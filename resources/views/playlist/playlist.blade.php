@@ -23,7 +23,7 @@
 
 <main>
   <div class="container pt-md-5 mb-5 pb-5">
-                        
+    <div class="row" id="pagination-data">
           @foreach ($playlist_tracks as $track) 
             <!-- player starts here -->
             <div id="ag2" class="audiogallery skin-wave auto-init" style="opacity:0; margin-top:30px;"
@@ -69,12 +69,13 @@
             </div>
             <!-- / player starts here -->
           @endforeach
-          <div class="mt-2">
-            <div class="ajax-load">
-              Loading...
-            </div>
-            {{-- {!! $playlist_tracks->links() !!} --}}
-          </div>
+    </div>
+    <div class="mt-2">
+      <div class="ajax-load">
+        Loading...
+      </div>
+      {{-- {!! $playlist_tracks->links() !!} --}}
+    </div>
 
 
 	  <!-- New Collection eded -->	  
@@ -96,3 +97,61 @@
   gtag('config', 'UA-176923350-1');
  </script>
 @endpush
+
+
+@push('pagination')
+
+<script type="text/javascript">
+	var page = 1;
+    var lastpage = false;
+    var Loading = false;
+
+    $(window).scroll(function() {
+        var hT = $('.ajax-load').offset().top,
+            hH = $('.ajax-load').outerHeight(),
+            wH = $(window).height(),
+            wS = $(this).scrollTop();
+        if (wS > (hT+hH-wH)){
+            if(!lastpage && !Loading){
+                page++;
+	            loadMoreData(page);
+            }
+
+        }
+    });
+
+
+	function loadMoreData(page){
+	  $.ajax(
+	        {
+	            url: '?page=' + page,
+                type: "get",
+	            beforeSend: function()
+	            {
+	                $('.ajax-load').show();
+                    Loading = true;
+	            }
+	        })
+	        .done(function(data)
+	        {
+	            if(data.html == '' ){
+                    lastpage = true;
+	                $('.ajax-load').html("No more records found");
+	                return;
+	            }
+	            $('.ajax-load').hide();
+	            $("#pagination-data").append(data.html);
+                Loading = false;
+
+	        })
+
+	        .fail(function(jqXHR, ajaxOptions, thrownError)
+	        {
+	              alert('server not responding...');
+	        });
+	}
+</script>
+
+@endpush
+
+
