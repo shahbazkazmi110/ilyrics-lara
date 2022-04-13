@@ -70,7 +70,10 @@
             <!-- / player starts here -->
           @endforeach
           <div class="mt-2">
-            {!! $playlist_tracks->links() !!}
+            <div class="ajax-load">
+              Loading...
+            </div>
+            {{-- {!! $playlist_tracks->links() !!} --}}
           </div>
 
 
