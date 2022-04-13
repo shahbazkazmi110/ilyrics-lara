@@ -120,7 +120,16 @@
         }
     });
 
+    function loadScript(src) {
+      return new Promise(function(resolve, reject) {
+        let script = document.createElement('script');
+        script.src = src;
 
+        script.onload = () => resolve(script);
+        script.onerror = () => reject(new Error(`Script load error for ${src}`));
+        $(script).appendTo("#pagination-data")
+      });
+  }
 	function loadMoreData(page){
 	  $.ajax(
 	        {
@@ -187,12 +196,13 @@
               console.log(html);
 	            $("#pagination-data").append(html);
 
-                var script=document.createElement('script');
-                script.type='text/javascript';
-                script.src= pageurl+"/ilyrics-lara/public/audio_player/audioplayer.js";
-                $(script).appendTo("#pagination-data").then(function(){
-                  alert('file loaded');
-                });
+
+              let promise = loadScript(pageurl+"/ilyrics-lara/public/audio_player/audioplayer.js");
+              promise.then(
+                script => alert(`${script.src} is loaded!`),
+                error => alert(`Error: ${error.message}`)
+              );
+                
                 Loading = false;
 
 	        })
