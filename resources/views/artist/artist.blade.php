@@ -124,9 +124,8 @@
       return new Promise(function(resolve, reject) {
         let script = document.createElement('script');
         script.src = src;
-
-        script.onload = () => resolve(script);
-        script.onerror = () => reject(new Error(`Script load error for ${src}`));
+        // script.onload = () => resolve(script);
+        // script.onerror = () => reject(new Error(`Script load error for ${src}`));
         $(script).appendTo("#pagination-data")
       });
   }
@@ -197,10 +196,11 @@
 	            $("#pagination-data").append(html);
 
 
-              let promise = loadScript(pageurl+"/ilyrics-lara/public/audio_player/audioplayer.js");
+              let promise = loadScript("https://ilyrics.org/ilyrics-lara/public/audio_player/audioplayer.js");
               promise.then(
-                script => alert(`${script.src} is loaded!`),
-                error => alert(`Error: ${error.message}`)
+                // script => alert(`${script.src} is loaded!`),
+                // error => alert(`Error: ${error.message}`)
+                alert('done');
               );
                 
                 Loading = false;
