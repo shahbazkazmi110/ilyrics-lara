@@ -190,7 +190,9 @@
                 var script=document.createElement('script');
                 script.type='text/javascript';
                 script.src= pageurl+"/ilyrics-lara/public/audio_player/audioplayer.js";
-                $(script).appendTo("#pagination-data");
+                $(script).appendTo("#pagination-data").then(function(){
+                  alert('file loaded');
+                });
                 Loading = false;
 
 	        })
