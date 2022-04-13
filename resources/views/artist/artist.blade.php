@@ -120,15 +120,36 @@
         }
     });
 
-    function loadScript(src) {
-      return new Promise(function(resolve, reject) {
-        let script = document.createElement('script');
-        script.src = src;
-        // script.onload = () => resolve(script);
-        // script.onerror = () => reject(new Error(`Script load error for ${src}`));
-        $(script).appendTo("#pagination-data")
-      });
-  }
+  //   function loadScript(src) {
+  //     return new Promise(function(resolve, reject) {
+  //       let script = document.createElement('script');
+  //       script.src = src;
+  //       // script.onload = () => resolve(script);
+  //       // script.onerror = () => reject(new Error(`Script load error for ${src}`));
+  //       $(script).appendTo("#pagination-data")
+  //     });
+  // }
+
+  function loadScript(url, callback) {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    // IE
+    if (script.readyState) {
+        script.onreadystatechange = function () {
+            if (script.readyState == "loaded" || script.readyState == "complete") {
+                script.onreadystatechange = null;
+                callback();
+            }
+        };
+    } else { // others
+        script.onload = function () {
+            callback();
+        };
+    }
+    script.src = url;
+    // document.body.appendChild(script);
+    $(script).appendTo("#pagination-data")
+}
 	function loadMoreData(page){
 	  $.ajax(
 	        {
@@ -196,12 +217,12 @@
 	            $("#pagination-data").append(html);
 
 
-              let promise = loadScript("https://ilyrics.org/ilyrics-lara/public/audio_player/audioplayer.js");
+              loadScript("https://ilyrics.org/ilyrics-lara/public/audio_player/audioplayer.js",alert('test'));
               // promise.then(
               //   script => alert(`${script.src} is loaded!`),
               //   error => alert(`Error: ${error.message}`)
               // );
-              promise.then(script => alert('Another handler...'));
+              // promise.then(script => alert('Another handler...'));
                 Loading = false;
 
 	        })
