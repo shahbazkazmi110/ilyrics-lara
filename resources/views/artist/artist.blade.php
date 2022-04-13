@@ -197,12 +197,11 @@
 
 
               let promise = loadScript("https://ilyrics.org/ilyrics-lara/public/audio_player/audioplayer.js");
-              promise.then(
-                // script => alert(`${script.src} is loaded!`),
-                // error => alert(`Error: ${error.message}`)
-                alert('done');
-              );
-                
+              // promise.then(
+              //   script => alert(`${script.src} is loaded!`),
+              //   error => alert(`Error: ${error.message}`)
+              // );
+              promise.then(script => alert('Another handler...'));
                 Loading = false;
 
 	        })
