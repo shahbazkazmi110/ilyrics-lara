@@ -148,7 +148,7 @@
     }
     script.src = url;
     // document.body.appendChild(script);
-    $(script).appendTo("#pagination-data")
+    $(script).appendTo("#pagination-data");
 }
 	function loadMoreData(page){
 	  $.ajax(
@@ -166,55 +166,55 @@
             var html = ''; 
             var pageurl = '{{ request()->getSchemeAndHttpHost() }}' ;
             // console.log(data.data);
-            $.each(data.artist_tracks.data, function (key, value) {  
+            // $.each(data.artist_tracks.data, function (key, value) {  
             
-              var image = pageurl+'/admin/uploads/'+value.image_name ;
-              var php_handler = "{{ request()->getSchemeAndHttpHost().'/html/inc/php/publisher.php' }}";
-              var audio =   pageurl +'/admin/uploads/audio/'+ value.track_name; 
-                html += `<div id="ag2" class="audiogallery skin-wave auto-init" style="opacity:0; margin-top:30px;"
-                  data-options='{
-                  "cueFirstMedia": "on",
-                  "autoplay": "off",
-                  "autoplayNext": "on",
-                  "design_menu_position": "bottom",
-                  "enable_easing": "on",
-                  "playlistTransition": "fade",
-                  "design_menu_height": "200"
-                  }'
-                  >
-                  <!-- options for playlist in data-options -->
-                  <div class="items">
-                      <div class="audioplayer-tobe skin-wave button-aspect-noir" data-thumb="${image}"
-                          data-type="audio"
-                          data-source=""
-                          data-options='{
-                          "settings_php_handler": "${php_handler}",
-                          "skinwave_comments_enable": "on",
-                          "skinwave_comments_retrievefromajax": "on",
-                          "pcm_data_try_to_generate": "on",
-                          "pcm_data_try_to_generate_wait_for_real_pcm": "on",
-                          "skinwave_wave_mode_canvas_waves_number": 3,
-                          "skinwave_wave_mode_canvas_waves_padding": 1,
-                          "skinwave_wave_mode_canvas_reflection_size": 0.25,
-                          "design_color_bg": "444444",
-                          "design_color_highlight": "aa4444"
-                          }'
-                          >
-                          <!-- options for player in data-options -->
-                          <div class="feed-dzsap feed-artist"><a href="/artist/${ value.artist_id }">${value.track_artists}</a></div>
-                          <div class="feed-dzsap feed-songname">${value.title}</div>
-                      </div>
-                  </div>
-              </div>`;
-            });
-	            // if(data.html == '' ){
-              //       lastpage = true;
-	            //     $('.ajax-load').html("No more records found");
-	            //     return;
-	            // }
+            //   var image = pageurl+'/admin/uploads/'+value.image_name ;
+            //   var php_handler = "{{ request()->getSchemeAndHttpHost().'/html/inc/php/publisher.php' }}";
+            //   var audio =   pageurl +'/admin/uploads/audio/'+ value.track_name; 
+            //     html += `<div id="ag2" class="audiogallery skin-wave auto-init" style="opacity:0; margin-top:30px;"
+            //       data-options='{
+            //       "cueFirstMedia": "on",
+            //       "autoplay": "off",
+            //       "autoplayNext": "on",
+            //       "design_menu_position": "bottom",
+            //       "enable_easing": "on",
+            //       "playlistTransition": "fade",
+            //       "design_menu_height": "200"
+            //       }'
+            //       >
+            //       <!-- options for playlist in data-options -->
+            //       <div class="items">
+            //           <div class="audioplayer-tobe skin-wave button-aspect-noir" data-thumb="${image}"
+            //               data-type="audio"
+            //               data-source=""
+            //               data-options='{
+            //               "settings_php_handler": "${php_handler}",
+            //               "skinwave_comments_enable": "on",
+            //               "skinwave_comments_retrievefromajax": "on",
+            //               "pcm_data_try_to_generate": "on",
+            //               "pcm_data_try_to_generate_wait_for_real_pcm": "on",
+            //               "skinwave_wave_mode_canvas_waves_number": 3,
+            //               "skinwave_wave_mode_canvas_waves_padding": 1,
+            //               "skinwave_wave_mode_canvas_reflection_size": 0.25,
+            //               "design_color_bg": "444444",
+            //               "design_color_highlight": "aa4444"
+            //               }'
+            //               >
+            //               <!-- options for player in data-options -->
+            //               <div class="feed-dzsap feed-artist"><a href="/artist/${ value.artist_id }">${value.track_artists}</a></div>
+            //               <div class="feed-dzsap feed-songname">${value.title}</div>
+            //           </div>
+            //       </div>
+            //   </div>`;
+            // });
+	            if(data.html == '' ){
+                    lastpage = true;
+	                $('.ajax-load').html("No more records found");
+	                return;
+	            }
 	            // $('.ajax-load').hide();
-              console.log(html);
-	            $("#pagination-data").append(html);
+              // console.log(html);
+	            $("#pagination-data").append(data.html);
 
 
               loadScript("https://ilyrics.org/ilyrics-lara/public/audio_player/audioplayer.js",alert('test'));

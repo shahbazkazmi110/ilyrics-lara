@@ -69,9 +69,9 @@ class TracksController extends Controller
 
         if ($request->ajax()) {
 
-            return $data;
-            // $view = view('artist.artist-track-pagination',$data)->render();
-            // return response()->json(['html'=>$view]);
+            // return $data;
+            $view = view('artist.artist-track-pagination',$data)->render();
+            return response()->json(['html'=>$view]);
         //   return  $data["artists"];
         }
 
