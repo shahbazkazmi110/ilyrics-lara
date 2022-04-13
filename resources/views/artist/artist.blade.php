@@ -84,7 +84,7 @@
 <x-genres :genres="$genres"/>
 @endsection
 
-{{-- @push('audio-styles')
+@push('audio-styles')
 <link rel="stylesheet" href="{{ asset('audio_player/audioplayer.css')}}">
 	
 @endpush
@@ -96,7 +96,7 @@
   gtag('js', new Date());
   gtag('config', 'UA-176923350-1');
  </script>
-@endpush --}}
+@endpush
 
 
 
