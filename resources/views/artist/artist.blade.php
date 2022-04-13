@@ -189,11 +189,13 @@
 
                 var script=document.createElement('script');
                 script.type='text/javascript';
-                script.src= pageurl+"/ilyrics-lara/public/audioplayer/audioplayer.js";
+                script.src= pageurl+"/ilyrics-lara/public/audio_player/audioplayer.js";
                 $(script).appendTo("#pagination-data");
                 Loading = false;
 
 	        })
+
+
 
 	        .fail(function(jqXHR, ajaxOptions, thrownError)
 	        {
