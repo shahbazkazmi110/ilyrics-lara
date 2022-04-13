@@ -43,3 +43,17 @@
     </div>
     <!-- / player starts here -->
 @endforeach
+
+@push('audio-styles')
+<link rel="stylesheet" href="{{ asset('audio_player/audioplayer.css')}}">
+	
+@endpush
+@push('audio-scripts')
+<script src="{{ asset('audio_player/audioplayer.js')}}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-176923350-1');
+ </script>
+@endpush
