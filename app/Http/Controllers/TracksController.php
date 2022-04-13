@@ -68,8 +68,10 @@ class TracksController extends Controller
         ->paginate(10);
 
         if ($request->ajax()) {
-            $view = view('artist.artist-track-pagination',$data)->render();
-            return response()->json(['html'=>$view]);
+
+            return $data;
+            // $view = view('artist.artist-track-pagination',$data)->render();
+            // return response()->json(['html'=>$view]);
         //   return  $data["artists"];
         }
 
