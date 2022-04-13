@@ -53,11 +53,10 @@ class TracksController extends Controller
         return $data;
     }
 
-    public function getTracksByArtist($id)
+    public function getTracksByArtist($id, Request $request)
     {
         // $data["tracks"] = Track::getAllTracks();
-        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
-        $data["genres"] = Genre::all();
+
         $data["artist_tracks"] = Track::
         selectRaw('track.id, track.audio_type, track.title, artist.name as track_artists, track.view_count, track.resolution, track.contributor_id, 
                     track.modified, track.album_year, track.track_duration as audio_duration, track.remote_duration, track.audio_link,
@@ -68,6 +67,15 @@ class TracksController extends Controller
         ->orderBy('track.title', 'ASC')
         ->paginate(10);
 
+        if ($request->ajax()) {
+            $view = view('artist.artist-track-pagination',$data)->render();
+            return response()->json(['html'=>$view]);
+        //   return  $data["artists"];
+        }
+
+        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+        $data["genres"] = Genre::all();
+        
         $data["artist_detail"] = Artist::
         selectRaw('artist.name, artist.resolution, artist.description, artist.image_name, COUNT(track.artists) as track_count')
         ->join('track', 'artist.id', '=', 'track.artists')

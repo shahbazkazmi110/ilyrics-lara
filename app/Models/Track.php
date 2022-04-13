@@ -29,8 +29,7 @@ class Track extends Model
         ->whereNotNull('track.album_year')
         ->where('track.status', 1)
         ->orderBy('track.created', 'DESC')
-        ->limit(8)
-        ->get();
+        ->paginate(6);
 
         return $data;
     }

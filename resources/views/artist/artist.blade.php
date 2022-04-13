@@ -70,7 +70,10 @@
             <!-- / player starts here -->
           @endforeach
           <div class="mt-2">
-            {!! $artist_tracks->links() !!}
+            <div class="ajax-load">
+              Loading
+            </div>
+            {{-- {!! $artist_tracks->links() !!} --}}
           </div>
 
 
@@ -80,7 +83,8 @@
 <x-tags :tags="$tags"/>
 <x-genres :genres="$genres"/>
 @endsection
-@push('audio-styles')
+
+{{-- @push('audio-styles')
 <link rel="stylesheet" href="{{ asset('audio_player/audioplayer.css')}}">
 	
 @endpush
@@ -92,4 +96,60 @@
   gtag('js', new Date());
   gtag('config', 'UA-176923350-1');
  </script>
+@endpush --}}
+
+
+
+@push('pagination')
+<script type="text/javascript">
+	var page = 1;
+    var lastpage = false;
+    var Loading = false;
+
+    $(window).scroll(function() {
+        var hT = $('.ajax-load').offset().top,
+            hH = $('.ajax-load').outerHeight(),
+            wH = $(window).height(),
+            wS = $(this).scrollTop();
+        if (wS > (hT+hH-wH)){
+            if(!lastpage && !Loading){
+                page++;
+	            loadMoreData(page);
+            }
+
+        }
+    });
+
+
+	function loadMoreData(page){
+	  $.ajax(
+	        {
+	            url: '?page=' + page,
+                type: "get",
+	            beforeSend: function()
+	            {
+	                $('.ajax-load').show();
+                    Loading = true;
+	            }
+	        })
+	        .done(function(data)
+	        {
+	            if(data.html == '' ){
+                    lastpage = true;
+	                $('.ajax-load').html("No more records found");
+	                return;
+	            }
+	            $('.ajax-load').hide();
+	            $("#pagination-data").append(data.html);
+                Loading = false;
+
+	        })
+
+	        .fail(function(jqXHR, ajaxOptions, thrownError)
+	        {
+	              alert('server not responding...');
+	        });
+	}
+</script>
 @endpush
+

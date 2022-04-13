@@ -51,7 +51,7 @@
 	              <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Home</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="#">Search</a>
+	              <a class="nav-link" href="{{ url('/search') }}">Search</a>
 	            </li>
 	            <li class="nav-item">
 	              <a class="nav-link" href="<?= url('reciters'); ?>" tabindex="-1" aria-disabled="true">Reciters</a>
