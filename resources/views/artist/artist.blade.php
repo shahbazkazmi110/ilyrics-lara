@@ -22,7 +22,7 @@
 @section('content')
 
 <main>
-  <div class="container pt-md-5 mb-5 pb-5">
+  <div id="pagination-data" class="container pt-md-5 mb-5 pb-5">
                         
           @foreach ($artist_tracks as $track) 
             <!-- player starts here -->
@@ -69,15 +69,16 @@
             </div>
             <!-- / player starts here -->
           @endforeach
-          <div class="mt-2">
-            <div class="ajax-load">
-              Loading
-            </div>
-            {{-- {!! $artist_tracks->links() !!} --}}
-          </div>
+          
 
 
 	  <!-- New Collection eded -->	  
+  </div>
+  <div class="mt-2">
+    <div class="ajax-load">
+      Loading
+    </div>
+    {{-- {!! $artist_tracks->links() !!} --}}
   </div>
 </main>
 <x-tags :tags="$tags"/>
