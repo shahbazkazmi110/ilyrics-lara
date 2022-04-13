@@ -135,9 +135,10 @@
 	        .done(function(data)
 	        {
             var html = ''; 
+            var pageurl = '{{ request()->getSchemeAndHttpHost() }}' ;
             // console.log(data.data);
             $.each(data.artist_tracks.data, function (key, value) {  
-              var pageurl = '{{ request()->getSchemeAndHttpHost() }}' ;
+            
               var image = pageurl+'/admin/uploads/'+value.image_name ;
               var php_handler = "{{ request()->getSchemeAndHttpHost().'/html/inc/php/publisher.php' }}";
               var audio =   pageurl +'/admin/uploads/audio/'+ value.track_name; 
@@ -185,6 +186,11 @@
 	            // $('.ajax-load').hide();
               console.log(html);
 	            $("#pagination-data").append(html);
+
+                var script=document.createElement('script');
+                script.type='text/javascript';
+                script.src= pageurl+"/ilyrics-lara/public/audioplayer/audioplayer.js";
+                $(script).appendTo("#pagination-data");
                 Loading = false;
 
 	        })
