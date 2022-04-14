@@ -43,7 +43,7 @@
                     data-type="audio"
                     data-source="{{ \App\Helpers\Helper::format_track($track->audio_type == 1 ? $track->track_name : $track->audio_link, $track->audio_type) }}"
                     data-options='{
-                    "settings_php_handler": "/inc/php/publisher.php",
+                    "settings_php_handler": "ilyrics-lara/public/inc/php/publisher.php",
                     "skinwave_comments_enable": "on",
                     "skinwave_comments_retrievefromajax": "on",
                     "pcm_data_try_to_generate": "on",
