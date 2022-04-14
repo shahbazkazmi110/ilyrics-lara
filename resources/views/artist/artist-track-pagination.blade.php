@@ -17,7 +17,7 @@
                 data-type="audio"
                 data-source="{{ \App\Helpers\Helper::format_track($track->audio_type == 1 ? $track->track_name : $track->audio_link, $track->audio_type) }}"
                 data-options='{
-                "settings_php_handler": "{{ request()->getSchemeAndHttpHost().'/html/inc/php/publisher.php' }}",
+                "settings_php_handler": "inc/php/publisher.php",
                 "skinwave_comments_enable": "on",
                 "skinwave_comments_retrievefromajax": "on",
                 "pcm_data_try_to_generate": "on",
@@ -50,10 +50,10 @@
 @endpush
 @push('audio-scripts')
 <script src="{{ asset('audio_player/audioplayer.js')}}"></script>
-<script>
+{{-- <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'UA-176923350-1');
- </script>
+ </script> --}}
 @endpush
