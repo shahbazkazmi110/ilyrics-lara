@@ -34,7 +34,7 @@
     data-type="audio"
     data-source="{{ asset('upload/steph1.mp3')}}"
     data-options='{
-    "settings_php_handler": "ilyrics-lara/public/audioplayer/inc/php/publisher.php",
+    "settings_php_handler": "/ilyrics-lara/public/audioplayer/inc/php/publisher.php",
     "skinwave_comments_enable": "on",
     "skinwave_comments_retrievefromajax": "on",
     "pcm_data_try_to_generate": "on",
