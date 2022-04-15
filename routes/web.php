@@ -26,7 +26,6 @@ use App\Http\Controllers\{TracksController, HomeController, SearchController};
 
 Route::get('/test-player', function() {return view('player');} );
 
-
 Route::get('/', [HomeController::class, 'index']);
 
 // Route::get('/dashboard', function () {
