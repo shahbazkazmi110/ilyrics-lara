@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-COMPATIBLE" content="IE=EDGE">
+  <title>ZoomSounds Audio Player Preview</title>
+  <script src="./libs/jquery/jquery.js"></script>
+  <link href="./libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link rel='stylesheet' type="text/css" href="style/style.css"/>
+
+
+  <script>
+    window.dzsvg_settings = {
+      merge_share_and_embed_into_one: "on"
+    }
+  </script>
+
+  <!-- scripts needed for audioplayer -->
+
+  <link rel='stylesheet' type="text/css" href="audioplayer/audioplayer.css"/>
+  <script src="audioplayer/audioplayer.js" type="text/javascript"></script>
+
+  <!-- scripts needed for audioplayer END -->
+
+</head>
+<body>
+<div class="content-wrapper">
+
+
+  <section class="mcon-mainmenu" style="position: absolute; z-index: 5; width:100%;">
+
+    <!--
+    -->
+    <div class="container">
+      <div class="row">
+        <div class="logo-con col-md-3">
+          <img src="img/dzsplugins.png" alt="wordpress video gallery" style="margin:0 auto"/>
+        </div>
+        <div class="main-menu-con col-md-9">
+          <ul id="menu-main-menu" class="menu sf-menu" style="top: 9px;">
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    body .zoomsounds-nav.skin-default .menu-item {
+      background-color: #fff;
+      color: #444;
+    }
+
+    body .zoomsounds-nav.skin-default .menu-item:nth-child(odd) {
+      background-color: #efefef;
+    }
+
+    body .zoomsounds-nav.skin-default .menu-item.active, body .zoomsounds-nav.skin-default .menu-item:hover {
+      background-color: #accfe0;
+    }
+  </style>
+
+
+  <div class="con-maindemo" id="a-demo" style="background-color: #ffffff;">
+    <div class="ap-wrapper center-ap" style="width:100%;">
+
+      <div id="ag1" class="audiogallery skin-wave auto-init" style="opacity:0; margin-top: 70px;"
+           data-options='{
+  "cueFirstMedia": "on",
+  "autoplay": "off",
+  "autoplayNext": "on",
+  "design_menu_position": "bottom",
+  "enable_easing": "on",
+  "playlistTransition": "fade",
+  "mode_normal_video_mode": "one",
+  "design_menu_height": "200"
+}'
+      ><!-- options for playlist in data-options
+
+               data-source="./sounds/steph1.mp3"
+      -->
+        <div class="items">
+          <div class="audioplayer-tobe  skin-wave button-aspect-noir" data-thumb="img/e3.jpg"
+               data-type="audio"
+               data-source="sounds/adg3.mp3"
+               data-options=''><!-- options for player in data-options -->
+            <div class="feed-dzsap feed-artist">Artist 1</div>
+            <div class="feed-dzsap feed-songname">Song 1</div>
+          </div>
+          <div class="audioplayer-tobe  skin-wave" data-thumb="img/e2.jpg"
+               data-type="audio"
+               data-source="./sounds/adg3.mp3"  >
+            <div class="feed-dzsap feed-artist">Artist 2</div>
+            <div class="feed-dzsap feed-songname">Song 2</div>
+          </div>
+          <div class="audioplayer-tobe  skin-wave" data-thumb="img/e2.jpg"
+               data-type="audio"
+               data-source="./sounds/adg3.mp3"  >
+            <div class="feed-dzsap feed-artist">Artist 3</div>
+            <div class="feed-dzsap feed-songname">Song 3</div>
+          </div>
+          <div class="audioplayer-tobe  skin-wave" data-thumb="img/e2.jpg"
+               data-type="audio"
+               data-source="./sounds/adg3.mp3"  >
+            <div class="feed-dzsap feed-artist">Artist 4</div>
+            <div class="feed-dzsap feed-songname">Song 4</div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <div class="con-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          &copy; copyright <a href="http://bit.ly/nM4R6u">ZoomIt</a> 2013
+
+        </div>
+        <div class="col-md-6" style="text-align: right">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</body>
+</html>
