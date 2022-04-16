@@ -7,11 +7,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    
-    <link rel='stylesheet' type="text/css" href="{{ asset('audio/audioplayer.css')}}"/>
-    <script src="{{ asset('audio/audioplayer.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('audioplayer/libs/jquery/jquery.js')}}" type="text/javascript"></script>
+    <link rel='stylesheet' type="text/css" href="{{ asset('audioplayer/audioplayer/audioplayer.css')}}"/>
+    <script src="{{ asset('audioplayer/audioplayer/audioplayer.js')}}" type="text/javascript"></script>
 
     <title>Hello, world!</title>
   </head>
@@ -32,11 +30,11 @@
   
   ><!-- options for playlist in data-options -->
   <div class="items">
-    <div class="audioplayer-tobe  skin-wave button-aspect-noir" data-thumb="img/3.jpg"
+    <div class="audioplayer-tobe  skin-wave button-aspect-noir" data-thumb="{{ asset('audioplayer/img/e1.jpg')}}"
     data-type="audio"
-    data-source="./sounds/steph1.mp3"
+    data-source="{{ asset('upload/steph1.mp3')}}"
     data-options='{
-    "settings_php_handler": "inc/php/publisher.php",
+    "settings_php_handler": "/ilyrics-lara/public/audioplayer/inc/php/publisher.php",
     "skinwave_comments_enable": "on",
     "skinwave_comments_retrievefromajax": "on",
     "pcm_data_try_to_generate": "on",
@@ -51,21 +49,21 @@
       <div class="feed-dzsap feed-artist">Artist 1</div>
       <div class="feed-dzsap feed-songname">Song 1</div>
     </div>
-  <div class="audioplayer-tobe  skin-wave" data-thumb="img/2.jpg"
+  <div class="audioplayer-tobe  skin-wave" data-thumb="{{ asset('audioplayer/img/e1.jpg')}}"
     data-type="audio"
-    data-source="./sounds/steph1.mp3"  >
+    data-source="{{ asset('upload/steph1.mp3')}}"  >
       <div class="feed-dzsap feed-artist">Artist 2</div>
       <div class="feed-dzsap feed-songname">Song 2</div>
     </div>
-  <div class="audioplayer-tobe  skin-wave" data-thumb="img/1.jpg"
+  <div class="audioplayer-tobe  skin-wave" data-thumb="{{ asset('audioplayer/img/e2.jpg')}}"
     data-type="audio"
-    data-source="./sounds/steph1.mp3"  >
+    data-source="{{ asset('upload/steph1.mp3')}}"  >
       <div class="feed-dzsap feed-artist">Artist 3</div>
       <div class="feed-dzsap feed-songname">Song 3</div>
     </div>
-  <div class="audioplayer-tobe  skin-wave" data-thumb="img/3.jpg"
+  <div class="audioplayer-tobe  skin-wave" data-thumb="{{ asset('audioplayer/img/e3.jpg')}}"
     data-type="audio"
-    data-source="./sounds/steph1.mp3"  >
+    data-source="{{ asset('upload/steph1.mp3')}}"  >
       <div class="feed-dzsap feed-artist">Artist 4</div>
       <div class="feed-dzsap feed-songname">Song 4</div>
     </div>
