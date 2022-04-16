@@ -9,6 +9,7 @@
     <title>Get lyrics for Nohay, Naat, Mungabat,  Marsiya & Salam</title>
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{ asset('css/base.css')}}">
+	<script src="{{ asset('audioplayer/libs/jquery/jquery.js')}}" type="text/javascript"></script>
 	@stack('audio-styles')
 	@stack('audio-scripts')
 
@@ -125,7 +126,7 @@
 	</div>
 </footer>
 <div class="menuoverlay"></div>
-<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+{{-- <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script> --}}
 <script src="{{ asset('js/bootstrap.bundle.js')}}"></script>
 <script src="{{ asset('js/main.js')}}"></script>
 @stack('pagination')
