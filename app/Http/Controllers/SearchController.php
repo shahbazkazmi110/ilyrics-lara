@@ -15,7 +15,7 @@ class SearchController extends Controller
         $data["tracks"] = Track::getAllTracks();
 
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
-        $data["genres"] = Genre::all();
+        $data["genres"] = Genre::getGenre();
 
         $data["track_list"] = Track::select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count',
         'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'track.track_duration',

@@ -43,7 +43,7 @@ class Track extends Model
         ->join('artist', DB::raw("FIND_IN_SET(artist.id,track.artists)"),'>',DB::raw("'0'"))
         ->where('track.status',1)
         ->orderBy('track.created', 'DESC')
-        ->limit(6)
+        ->limit(8)
         ->get();
         
         return $data["tracks"];

@@ -71,7 +71,7 @@ class ArtistController extends Controller
         //   return  $data["artists"];
         }
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
-        $data["genres"] = Genre::all();
+        $data["genres"] = Genre::getGenre();
 
         return view('artist.artists', $data);
     }

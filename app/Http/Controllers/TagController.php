@@ -21,7 +21,7 @@ class TagController extends Controller
         // First 6 tracks
         $data["tracks"] = Track::getAllTracks();
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
-        $data["genres"] = Genre::all();
+        $data["genres"] = Genre::getGenre();
 
 
         // All track matching with TAG_ID

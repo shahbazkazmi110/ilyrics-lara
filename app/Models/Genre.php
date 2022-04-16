@@ -21,7 +21,7 @@ class Genre extends Model
         ->where('track.status',1)
         ->orderBy('genre.title','ASC')
         ->groupBy("track.genres")
-        ->limit(11)
+        ->limit(10)
         ->get();
         return $data;
     }

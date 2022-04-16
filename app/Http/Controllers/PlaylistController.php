@@ -40,7 +40,7 @@ class PlaylistController extends Controller
         }
 
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
-        $data["genres"] = Genre::all();
+        $data["genres"] = Genre::getGenre();
 
         return view('playlist.playlists',$data);
     }
