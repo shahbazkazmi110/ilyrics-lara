@@ -24,8 +24,6 @@ use App\Http\Controllers\{TracksController, HomeController, SearchController};
 |
 */
 
-Route::get('/test-player', function() {return view('player');} );
-
 Route::get('/', [HomeController::class, 'index']);
 
 // Route::get('/dashboard', function () {
@@ -39,7 +37,6 @@ Route::get('/track/{id}', [TracksController::class, 'getTracks'])->name('tracks-
 // Artists
 //Route::get('/artist', [ArtistController::class, 'index']);
 Route::get('/reciter/{id}', [TracksController::class, 'getTracksByArtist'])->name('tracks-by-artist');
-
 Route::get('/reciters', [ArtistController::class, 'getAllArtists'])->name('reciters');
 
 
@@ -55,19 +52,12 @@ Route::get('/tag/{id}', [TracksController::class, 'getTracksByTag'])->name('trac
 // Playlist
 // Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists');
 Route::get('/playlist/{id}', [TracksController::class, 'getTracksByPlaylist'])->name('tracks-by-playlist');
-
 Route::get('/playlists', [PlaylistController::class, 'getAllPlaylists'])->name('playlists');
-
-
 
 Route::get('/language', [LanguageController::class, 'index']);
 Route::get('/album', [AlbumController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index']);
-
 Route::get('/search', [SearchController::class, 'search_action']);
-
-
-
 
 //Route::view('/about', 'views/about.php', 'about');
 
