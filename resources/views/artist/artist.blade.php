@@ -148,7 +148,7 @@
     $("#pagination-data").append(html);
     var script=document.createElement('script');
     script.type='text/javascript';
-    script.src="/audioplayer/audioplayer/audioplayer.js";
+    script.src="ilyrics-lara/public/audioplayer/audioplayer/audioplayer.js";
     $(script).appendTo('#pagination-data');
   }
 
