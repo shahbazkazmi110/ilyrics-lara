@@ -128,7 +128,7 @@ class TracksController extends Controller
 
         
         if ($request->ajax()) {
-            $view = view('tag.tags',$data)->render();
+            $view = view('playlist.playlist-track-pagination',$data)->render();
             return response()->json(['html'=>$view]);
         //   return  $data["artists"];
         }
