@@ -139,7 +139,7 @@
       </div>`;
 
       var payPauseBtn = $('<span>', { class: 'play-pause-btn paused', style: 'cursor:pointer' });
-      playPauseBtnClickEvent(payPauseBtn, payPauseBtn, value);
+      // playPauseBtnClickEvent(payPauseBtn, payPauseBtn, value);
 
     });
 
