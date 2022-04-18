@@ -59,9 +59,7 @@
       @endforeach  
     </div>  
     <div class="mt-2">
-      <div class="ajax-load">
-        Loading
-      </div>
+      <div class="ajax-load">Loading..</div>
       {{-- {!! $artist_tracks->links() !!} --}}
     </div>               
   </div>
@@ -143,7 +141,6 @@
 
     });
 
-
     $("#pagination-data").append(html);
     var script=document.createElement('script');
     script.type='text/javascript';
@@ -218,7 +215,13 @@
 	        })
 	        .done(function(data)
 	        {
-            renderTracks(data.artist_tracks.data);
+            if (data.artist_tracks.data === undefined || data.artist_tracks.data.length == 0) {
+              $('.ajax-load').html('No Records found');
+            }
+            else{
+              renderTracks(data.artist_tracks.data);
+            }
+
             Loading = false;
 	        })
           .fail(function(jqXHR, ajaxOptions, thrownError)
