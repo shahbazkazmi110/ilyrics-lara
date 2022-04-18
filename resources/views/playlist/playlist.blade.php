@@ -59,10 +59,10 @@
           @endforeach
     </div>
     <div class="mt-2">
-      <div class="ajax-load">
+      {{-- <div class="ajax-load">
         Loading...
-      </div>
-      {{-- {!! $playlist_tracks->links() !!} --}}
+      </div> --}}
+      {!! $playlist_tracks->links() !!}
     </div>
 
 
@@ -87,7 +87,7 @@
 @endpush
 
 
-@push('pagination')
+{{-- @push('pagination')
 
 <script type="text/javascript">
 	var page = 1;
@@ -140,6 +140,6 @@
 	}
 </script>
 
-@endpush
+@endpush --}}
 
 
