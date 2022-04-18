@@ -7,7 +7,7 @@
 	  <!-- Header  -->
 	  <div class="row">
 		  <div class="col-auto pb-4 pb-md-0">
-		  		<div class="collaction_img" style="background-image: url('{{ \App\Helpers\Helper::format_image($artist_detail->image_name, 1) }}');"></div>
+		  		<div class="collaction_img" style="background-image: url('{{ \App\Helpers\Helper::format_image($artist_detail->image_name, 0) }}');"></div>
 		  </div>		  
 		  <div class="col">
 		  	<h2 class="h2__underline" tabindex="0">{{ $artist_detail->name }}</h2>
