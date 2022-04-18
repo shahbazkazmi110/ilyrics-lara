@@ -100,7 +100,6 @@
     });
 
   function renderTracks(track_data){
-    console.log(track_data);
     var html = ''; 
     var pageurl = '{{ request()->getSchemeAndHttpHost() }}' ;
     $.each(track_data, function (key, value) {  
@@ -220,10 +219,12 @@ function songPlaying(playingStatus, trackId, userId=0) {
 	        .done(function(data)
 	        {
             renderTracks(data.artist_tracks.data);
+            Loading = false;
 	        })
           .fail(function(jqXHR, ajaxOptions, thrownError)
 	        {
 	          alert('server not responding...');
+            Loading = false;
 	        });
 	}
 </script>
