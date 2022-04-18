@@ -153,57 +153,57 @@
 
   var songPlayed = [];
 
-function songPlaying(playingStatus, trackId, userId=0) {
-    var playingInterval = setInterval(function () {
+  // function songPlaying(playingStatus, trackId, userId=0) {
+  //     var playingInterval = setInterval(function () {
 
-        if (playingStatus) {
+  //         if (playingStatus) {
 
 
-            if (currentPlaying.id == trackId) {
-                if ($.inArray(trackId, songPlayed) == -1) {
+  //             if (currentPlaying.id == trackId) {
+  //                 if ($.inArray(trackId, songPlayed) == -1) {
 
-                    increaseListeningCount(trackId, userId);
-                    songPlayed.push(trackId);
+  //                     increaseListeningCount(trackId, userId);
+  //                     songPlayed.push(trackId);
 
-                    clearInterval(playingInterval);
+  //                     clearInterval(playingInterval);
 
-                } else clearInterval(playingInterval);
-            } else clearInterval(playingInterval);
-        } else clearInterval(playingInterval);
-    }, 5000);
-}
-  function playPauseBtnClickEvent(payPauseBtn, playPauseBtnLink, value) {
-    $(playPauseBtnLink).on('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+  //                 } else clearInterval(playingInterval);
+  //             } else clearInterval(playingInterval);
+  //         } else clearInterval(playingInterval);
+  //     }, 5000);
+  // }
+  //   function playPauseBtnClickEvent(payPauseBtn, playPauseBtnLink, value) {
+  //     $(playPauseBtnLink).on('click', function (e) {
+  //         e.preventDefault();
+  //         e.stopPropagation();
 
-        $('.audio-playing').removeClass('audio-playing').addClass('audio-paused');
+  //         $('.audio-playing').removeClass('audio-playing').addClass('audio-paused');
 
-        if (payPauseBtn.hasClass('paused')) {
+  //         if (payPauseBtn.hasClass('paused')) {
 
-            songPlaying(true, value.id, loggedInUserID);
+  //             songPlaying(true, value.id, loggedInUserID);
 
-            //NEW SONG
+  //             //NEW SONG
 
-            if (currentPlaying.id != value.id) trackDetails.currentPlayingTime = 0;
+  //             if (currentPlaying.id != value.id) trackDetails.currentPlayingTime = 0;
 
-            currentPlaying = value;
-            trackDetails.isPlaying = true;
-            console.log(trackDetails.isPlaying + "---");
-            $('.user-player-sm').find('.play-pause-btn').addClass('paused').removeClass('playing');
-            $(payPauseBtn).addClass('playing').removeClass('paused');
+  //             currentPlaying = value;
+  //             trackDetails.isPlaying = true;
+  //             console.log(trackDetails.isPlaying + "---");
+  //             $('.user-player-sm').find('.play-pause-btn').addClass('paused').removeClass('playing');
+  //             $(payPauseBtn).addClass('playing').removeClass('paused');
 
-            $(payPauseBtn).closest('.user-player-sm').addClass('audio-playing').removeClass('audio-paused');
+  //             $(payPauseBtn).closest('.user-player-sm').addClass('audio-playing').removeClass('audio-paused');
 
-        } else {
+  //         } else {
 
-            songPlaying(false, value.id, loggedInUserID);
-            trackDetails.isPlaying = false;
-            $(payPauseBtn).addClass('paused').removeClass('playing');
-        }
-        setTrack(currentPlaying, trackDetails.isPlaying, trackDetails.currentPlayingTime);
-    });
-}
+  //             songPlaying(false, value.id, loggedInUserID);
+  //             trackDetails.isPlaying = false;
+  //             $(payPauseBtn).addClass('paused').removeClass('playing');
+  //         }
+  //         setTrack(currentPlaying, trackDetails.isPlaying, trackDetails.currentPlayingTime);
+  //     });
+  // }
 
  
 	function loadMoreData(page){
