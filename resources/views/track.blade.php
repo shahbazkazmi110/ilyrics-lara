@@ -144,8 +144,13 @@
             </div>
         </div>
     </div>
-    
-            
 </main>
 
 @endsection
+
+@push('audio-styles')
+<link rel="stylesheet" href="{{ asset('audioplayer/audioplayer/audioplayer.css')}}">
+@endpush
+@push('audio-scripts')
+<script type="text/javascript" src="{{ asset('audioplayer/audioplayer/audioplayer.js')}}"></script>
+@endpush
