@@ -6,7 +6,9 @@
 			@foreach ($tags as $tag)
 				@php  $classname = ($loop->index < 16) ? 'more' : 'less'; @endphp			
 				<div class="col-6 col-lg-3 col-md-4 pb-2 {{ $classname }}">
-						<a data-page="tag"  data-title="{{$tag->title}}" class="text-decoration-none color-black" href="{{ route('tracks-by-tag', ['id' => $tag->id]) }}">{{$tag->title}}</a>
+						<a data-page="tag"  data-title="{{$tag->title}}" 
+							class="text-decoration-none color-black" 
+							href="{{ route('tracks-by-tag', ['id' => $tag->id]) }}">{{$tag->title}}</a>
 				</div>				
 			@endforeach
 		</div>

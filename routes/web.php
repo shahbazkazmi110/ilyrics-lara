@@ -67,3 +67,7 @@ Route::get('/terms', function() {return view('links.terms');});
 Route::get('/privacy-policy', function() {
     return view('links.privacy-policy');
 });
+
+Route::get('/track_page', function(){
+    return view('track');
+});
