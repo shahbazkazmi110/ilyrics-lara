@@ -76,7 +76,7 @@ class TracksController extends Controller
     {
         // $data["tracks"] = Track::getAllTracks();
 
-        $data["artist_tracks"] = Track::
+        $data["tracks"] = Track::
         selectRaw('track.id, track.audio_type, track.title, artist.name as track_artists, track.view_count, track.resolution, track.contributor_id, 
                     track.modified, track.album_year, track.track_duration as audio_duration, track.remote_duration, track.audio_link,
                     artist.id AS artist_id, artist.name as artist_name, artist.image_name, track.track_name')
@@ -89,9 +89,9 @@ class TracksController extends Controller
         if ($request->ajax()) {
 
             return $data;
-            $view = view('artist.artist-track-pagination',$data)->render();
-            return response()->json(['html'=>$view]);
-        //   return  $data["artists"];
+            // $view = view('artist.artist-track-pagination',$data)->render();
+            // return response()->json(['html'=>$view]);
+            //   return  $data["artists"];
         }
 
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
