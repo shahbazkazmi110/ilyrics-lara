@@ -74,9 +74,7 @@ class TracksController extends Controller
 
     public function getTracksByArtist($id, Request $request)
     {
-        // $data["tracks"] = Track::getAllTracks();
-
-        $data["artist_tracks"] = Track::
+        $data["tracks"] = Track::
         selectRaw('track.id, track.audio_type, track.title, artist.name as track_artists, track.view_count, track.resolution, track.contributor_id, 
                     track.modified, track.album_year, track.track_duration as audio_duration, track.remote_duration, track.audio_link,
                     artist.id AS artist_id, artist.name as artist_name, artist.image_name, track.track_name')
@@ -89,32 +87,28 @@ class TracksController extends Controller
         if ($request->ajax()) {
 
             return $data;
-            $view = view('artist.artist-track-pagination',$data)->render();
-            return response()->json(['html'=>$view]);
-        //   return  $data["artists"];
+            // $view = view('artist.artist-track-pagination',$data)->render();
+            // return response()->json(['html'=>$view]);
+            //   return  $data["artists"];
         }
 
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::getGenre();
-        
         $data["artist_detail"] = Artist::
         selectRaw('artist.name, artist.resolution, artist.description, artist.image_name, COUNT(track.artists) as track_count')
         ->join('track', 'artist.id', '=', 'track.artists')
         ->where('track.status', 1)
         ->where('artist.id', $id)
         ->first();
-
         return view('artist.artist', $data);
-
-        //return $data;
     }
 
 
     public function getTracksByPlaylist($id, Request $request)
     {
 
-        $data['playlist_tracks'] = Track::
-        selectRaw('track.id,track.audio_type, track.title,  GROUP_CONCAT(artist.name) as artists, artist.id as artist_id, 
+        $data['tracks'] = Track::
+        selectRaw('track.id,track.audio_type, track.title,  GROUP_CONCAT(artist.name) as track_artists, artist.id as artist_id, 
                 track.view_count, track.resolution, track.contributor_id, track.modified, track.album_year, track.track_duration,
                 track.remote_duration, artist.image_name, track.track_name,track.audio_link' )
         // selectRaw('track.*,GROUP_CONCAT(artist.name) as artists')
@@ -125,20 +119,15 @@ class TracksController extends Controller
         ->orderBy('playlist_track.created', 'DESC')
         ->groupBy('track.id')
         ->paginate(10);
-
         
         if ($request->ajax()) {
-            $view = view('playlist.playlist-track-pagination',$data)->render();
-            return response()->json(['html'=>$view]);
-        //   return  $data["artists"];
+            return $data;
+            // $view = view('playlist.playlist-track-pagination',$data)->render();
+            // return response()->json(['html'=>$view]);
         }
 
-
-        
-        // $data["tracks"] = Track::getAllTracks();
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::getGenre();
-
         $data["playlist_detail"] = Playlist::selectRaw('playlist.id, title, resolution, image_name, COUNT(playlist_track.track_id) as count')
         ->join('playlist_track', 'playlist.id', '=', 'playlist_track.playlist_id')
         ->where('playlist.id', $id)
