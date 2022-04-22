@@ -119,7 +119,11 @@
 
     $("#pagination-data").append(html);
     // $('.audiogallery').audioplayer();
-    window.dzsap_init_allPlayers($)
+    // window.dzsap_init_allPlayers($)
+
+    dzsag_init('.audiogallery.auto-init', {
+      init_each: true
+    });
     // var script=document.createElement('script');
     // script.type='text/javascript';
     // script.src="/ilyrics-lara/public/audioplayer/audioplayer/audioplayer.js";
