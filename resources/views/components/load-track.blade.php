@@ -108,7 +108,8 @@
     });
 
     $("#pagination-data").append(html);
-    $('.audiogallery').audioplayer();
+    // $('.audiogallery').audioplayer();
+    window.dzsap_init_allPlayers($)
     // var script=document.createElement('script');
     // script.type='text/javascript';
     // script.src="/ilyrics-lara/public/audioplayer/audioplayer/audioplayer.js";
