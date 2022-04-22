@@ -35,10 +35,9 @@
             No More Records Found
         </div>
       </div>
-      {{-- {!! $artist_tracks->links() !!} --}}
+      {{-- {!! $tracks->links() !!} --}}
     </div>               
   </div>
-
 </main>
 <x-tags :tags="$tags"/>
 <x-genres :genres="$genres"/>
