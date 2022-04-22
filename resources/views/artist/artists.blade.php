@@ -26,8 +26,15 @@
     </div>
     <div class="mt-2">
         <div class="ajax-load">
-            Loading
+            <div class="loader spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="no-record">
+                No More Records Found
+            </div>
         </div>
+
+        
     {{-- {!! $artists->links() !!} --}}
     </div>
     <!-- New Collection eded --> 

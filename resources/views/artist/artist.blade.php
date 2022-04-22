@@ -59,7 +59,15 @@
       @endforeach  
     </div>  
     <div class="mt-2">
-      <div class="ajax-load">Loading..</div>
+      <div class="ajax-load">
+        <div class="loader spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="no-record d-none">
+            No More Records Found
+        </div>
+      </div>
+
       {{-- {!! $artist_tracks->links() !!} --}}
     </div>               
   </div>
@@ -96,6 +104,9 @@
 
         }
     });
+
+    $('.loader').hide();
+    $('.no-record').hide();
 
   function renderTracks(track_data){
     var html = ''; 
@@ -149,77 +160,24 @@
   }
 
   var songPlayed = [];
-
-  // function songPlaying(playingStatus, trackId, userId=0) {
-  //     var playingInterval = setInterval(function () {
-
-  //         if (playingStatus) {
-
-
-  //             if (currentPlaying.id == trackId) {
-  //                 if ($.inArray(trackId, songPlayed) == -1) {
-
-  //                     increaseListeningCount(trackId, userId);
-  //                     songPlayed.push(trackId);
-
-  //                     clearInterval(playingInterval);
-
-  //                 } else clearInterval(playingInterval);
-  //             } else clearInterval(playingInterval);
-  //         } else clearInterval(playingInterval);
-  //     }, 5000);
-  // }
-  //   function playPauseBtnClickEvent(payPauseBtn, playPauseBtnLink, value) {
-  //     $(playPauseBtnLink).on('click', function (e) {
-  //         e.preventDefault();
-  //         e.stopPropagation();
-
-  //         $('.audio-playing').removeClass('audio-playing').addClass('audio-paused');
-
-  //         if (payPauseBtn.hasClass('paused')) {
-
-  //             songPlaying(true, value.id, loggedInUserID);
-
-  //             //NEW SONG
-
-  //             if (currentPlaying.id != value.id) trackDetails.currentPlayingTime = 0;
-
-  //             currentPlaying = value;
-  //             trackDetails.isPlaying = true;
-  //             console.log(trackDetails.isPlaying + "---");
-  //             $('.user-player-sm').find('.play-pause-btn').addClass('paused').removeClass('playing');
-  //             $(payPauseBtn).addClass('playing').removeClass('paused');
-
-  //             $(payPauseBtn).closest('.user-player-sm').addClass('audio-playing').removeClass('audio-paused');
-
-  //         } else {
-
-  //             songPlaying(false, value.id, loggedInUserID);
-  //             trackDetails.isPlaying = false;
-  //             $(payPauseBtn).addClass('paused').removeClass('playing');
-  //         }
-  //         setTrack(currentPlaying, trackDetails.isPlaying, trackDetails.currentPlayingTime);
-  //     });
-  // }
-
- 
 	function loadMoreData(page){
 	  $.ajax({
             url: '?page=' + page,
             type: "get",
             beforeSend: function()
             {
-              $('.ajax-load').show();
+              $('.loader').show();
               Loading = true;
             }
 	        })
 	        .done(function(data)
 	        {
             if (data.artist_tracks.data === undefined || data.artist_tracks.data.length == 0) {
-              $('.ajax-load').html('No Records found');
+              $('.no-records').show();
             }
             else{
               renderTracks(data.artist_tracks.data);
+              $('.loader').hide();
             }
 
             Loading = false;
