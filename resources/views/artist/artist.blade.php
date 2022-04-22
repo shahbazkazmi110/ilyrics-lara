@@ -63,7 +63,7 @@
         <div class="loader spinner-border text-success" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
-        <div class="no-record d-none">
+        <div class="no-record">
             No More Records Found
         </div>
       </div>
@@ -172,14 +172,16 @@
 	        })
 	        .done(function(data)
 	        {
+            console.log(data.artist_tracks.data.length);
             if (data.artist_tracks.data === undefined || data.artist_tracks.data.length == 0) {
-              $('.no-records').show();
+              lastpage = true;
+              $('.no-record').show();
+              $('.loader').hide();
             }
             else{
               renderTracks(data.artist_tracks.data);
               $('.loader').hide();
             }
-
             Loading = false;
 	        })
           .fail(function(jqXHR, ajaxOptions, thrownError)
