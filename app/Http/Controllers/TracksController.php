@@ -108,7 +108,7 @@ class TracksController extends Controller
     {
 
         $data['tracks'] = Track::
-        selectRaw('track.id,track.audio_type, track.title,  GROUP_CONCAT(artist.name) as artists, artist.id as artist_id, 
+        selectRaw('track.id,track.audio_type, track.title,  GROUP_CONCAT(artist.name) as track_artists, artist.id as artist_id, 
                 track.view_count, track.resolution, track.contributor_id, track.modified, track.album_year, track.track_duration,
                 track.remote_duration, artist.image_name, track.track_name,track.audio_link' )
         // selectRaw('track.*,GROUP_CONCAT(artist.name) as artists')
