@@ -148,7 +148,7 @@ class TracksController extends Controller
 
     }
 
-    public function getTracks($id)
+    public function getTracks($id, Request $request)
     {
         
         $data["tracks"] = Track::getAllTracks();
@@ -168,6 +168,12 @@ class TracksController extends Controller
         ->where('track.id', '=', $id)
         ->where('track.status', 1)
         ->first();
+
+        if ($request->ajax()) {
+            $view = view('track.track_page',$data)->render();
+            return response()->json(['html'=>$view]);
+        //   return  $data["artists"];
+        }
 
         // $data["track_list"]["artist_track_counter"] = Track::selectRaw('COUNT(id) as track_counts')
         //                                             ->where('artists', 'LIKE', '%'.$artist_id.'%')

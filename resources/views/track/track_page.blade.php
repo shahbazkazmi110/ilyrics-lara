@@ -108,86 +108,87 @@
 
 <main>
     <div class="container">
-        <div class="mb-50 text-end pb-5">
-            @foreach($track_list->genres_title as $genre)
-                <button type="button" class="btn btn--ordinary btn--small"> {{ $genre->title }} </button>
-            @endforeach
-        </div>
-        
-        <div class="border-bottom pb-5 mb-5 pt-4" style="position:relative;">
-            <h3 id="idHeadLyrics">Lyrics</h3>
-            
-            <div class="mb-4 pt-4" style="width:50%"><span style="width:50%" class="controlFont"> <a data-control="min" class="FontControl" style="font-size:12px !important;text-align:center;color:#fff;">A</a> <a class="resultControl" style=" width: 65%; display: inline-block; text-align: center;color:#fff; "><span id="fontChangePercentage">110</span>%</a> <a data-control="max" class="FontControl" style="font-size:16px !important;color:#fff;">A</a></span>
+        <div id="pagination-data">
+            <div class="mb-50 text-end pb-5">
+                @foreach($track_list->genres_title as $genre)
+                    <button type="button" class="btn btn--ordinary btn--small"> {{ $genre->title }} </button>
+                @endforeach
             </div>
-            <div class="left-area" id="LyrArea" style="max-width:600px;">
-                <div class="effectFont row">
-                    
-                    <div class="col-12 col-md-6"> {!! html_entity_decode($track_list->lyrics) !!} </div>
-
-
-                    <div class="col-12 col-md-6"> {!! html_entity_decode($track_list->transliteration) !!} </div>
-
-                    {{-- 
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Noha tha sheh ka ye zer e khanjar</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Noha tha sheh ka noke sina par</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Zainab ki chadar..</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Sham e ghariban roti hai jisko</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Khaake pareshan roti hai jisko</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Chahme bayaban roti hai jisko</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Khud zaat e yazdan roti hai jisko</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Rote hai jisko har waqt hyder</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Roti hai zehra jisko khule sar</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Allahu akbar zainab ki chadar...</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Aaye hai adam aaye hai khaatam</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Teri rida ka barpa hai matam</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Taari hai sab par giriye ka aalam</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Seeno may jaari hai ek khoon e payham</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Karte hai matam dekho payambar</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Noha yehi hai sab ke labon par</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Allahu akbar zainab ki chadar...</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehte hai kat-kar ghazi ke baazu</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehte hai kat-kar qasim ke abroo</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehte hai behkar abid ke aansu</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehte hai khoon may akbar ke gaysun</font></p></div>
+            
+            <div class="border-bottom pb-5 mb-5 pt-4" style="position:relative;">
+                <h3 id="idHeadLyrics">Lyrics</h3>
+                
+                <div class="mb-4 pt-4" style="width:70%"><span style="width:50%" class="controlFont"> <a data-control="min" class="FontControl" style="font-size:12px !important;text-align:center;color:#fff;">A</a> <a class="resultControl" style=" width: 65%; display: inline-block; text-align: center;color:#fff; "><span id="fontChangePercentage">110</span>%</a> <a data-control="max" class="FontControl" style="font-size:16px !important;color:#fff;">A</a></span>
+                </div>
+                <div class="left-area" id="LyrArea" style="max-width:600px;">
+                    <div class="effectFont row">
                         
+                        {{-- <div id="ajax-load"> --}}
+                            <div class="col-12 col-md-6"> {!! html_entity_decode($track_list->lyrics) !!} </div>
+                            <div class="col-12 col-md-6"> {!! html_entity_decode($track_list->transliteration) !!} </div>
+                        {{-- </div> --}}
+
+                        {{-- 
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Noha tha sheh ka ye zer e khanjar</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Noha tha sheh ka noke sina par</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Zainab ki chadar..</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Sham e ghariban roti hai jisko</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Khaake pareshan roti hai jisko</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Chahme bayaban roti hai jisko</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Khud zaat e yazdan roti hai jisko</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Rote hai jisko har waqt hyder</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Roti hai zehra jisko khule sar</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Allahu akbar zainab ki chadar...</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Aaye hai adam aaye hai khaatam</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Teri rida ka barpa hai matam</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Taari hai sab par giriye ka aalam</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Seeno may jaari hai ek khoon e payham</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Karte hai matam dekho payambar</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Noha yehi hai sab ke labon par</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Allahu akbar zainab ki chadar...</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehte hai kat-kar ghazi ke baazu</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehte hai kat-kar qasim ke abroo</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehte hai behkar abid ke aansu</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehte hai khoon may akbar ke gaysun</font></p></div>
+                            
+                            
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehta hai behkar phir khoon e asghar</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehta hai reti pe ye khoon e akbar</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Allahu akbar zainab ki chadar...</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Qaime jalane aate hai aada</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kaabe ko dhaane aate hai aada</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Qaidi banane aate hai aada</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Dar dar phirane aate hai aada</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehta hai haye daaman ye jal kar</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehte hai haye chinkar ye gohar</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Allahu akbar zainab ki chadar...</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Aate hai abid sar ko jhukaye</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Apne lahoo may khud hi nahaye</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Saaye se apne khud ko chupaye</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Zakhmo ko apne dil se lagaye</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Raahon may jis dam aate hai pathar</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehte hai haye abid ke zewar</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Allahu akbar zainab ki chadar...</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Jis dam naved ek aandhi uthi thi</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Sheh ke galay par jis dam churi thi</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Maqtal may har soo khoon ki jhadi thi</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Qaime ke dar par zainab khadi thi</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Likhun to kaise haye ye manzar</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Us dam yehi tha sheh ke labon par</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Allahu akbar zainab ki chadar..</font></p></div>
+                            <div class="col-12 col-md-6"><p style="font-size: 16px;"> 
+                        --}}
                         
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehta hai behkar phir khoon e asghar</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehta hai reti pe ye khoon e akbar</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Allahu akbar zainab ki chadar...</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Qaime jalane aate hai aada</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kaabe ko dhaane aate hai aada</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Qaidi banane aate hai aada</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Dar dar phirane aate hai aada</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehta hai haye daaman ye jal kar</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehte hai haye chinkar ye gohar</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Allahu akbar zainab ki chadar...</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Aate hai abid sar ko jhukaye</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Apne lahoo may khud hi nahaye</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Saaye se apne khud ko chupaye</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Zakhmo ko apne dil se lagaye</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Raahon may jis dam aate hai pathar</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Kehte hai haye abid ke zewar</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Allahu akbar zainab ki chadar...</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Jis dam naved ek aandhi uthi thi</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Sheh ke galay par jis dam churi thi</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Maqtal may har soo khoon ki jhadi thi</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Qaime ke dar par zainab khadi thi</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Likhun to kaise haye ye manzar</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Us dam yehi tha sheh ke labon par</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"><font color="#222222">Allahu akbar zainab ki chadar..</font></p></div>
-                        <div class="col-12 col-md-6"><p style="font-size: 16px;"> 
-                    --}}
-                    
-                    <br>
-                    </p>
+                        <br>
+                        </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="left-area" id="TransArea" style="clear:both;  display:none;position:relative">
-                <p class="effectFont"></p>
+                <div class="left-area" id="TransArea" style="clear:both;  display:none;position:relative">
+                    <p class="effectFont"></p>
+                </div>
             </div>
         </div>
-
     </div>
     
             
@@ -203,4 +204,56 @@
 @endpush
 @push('audio-scripts')
 <script type="text/javascript" src="{{ asset('audioplayer/audioplayer/audioplayer.js')}}"></script>
+@endpush
+
+
+
+@push('pagination')
+<script type="text/javascript">
+    var page=1;
+    var lastpage = false;
+    var Loading = false;
+
+    $(window).scroll(function(){
+        var hT = $('.ajax-load').offset().top,
+            hH = $('.ajax-load').outerHeight(),
+            wH = $(window).height(),
+            wS = $(this).scrollTop();
+        
+        if (wS > (hT+hH-wH)){
+            if(!lastpage && !Loading){
+                page++;
+            loadMoreData(page);
+            }
+        }
+    });
+
+    function loadMoreData(page){
+	  $.ajax({
+            url: '?page=' + page,
+            type: "get",
+            beforeSend: function()
+            {
+              $('.ajax-load').show();
+              Loading = true;
+            }
+	        })
+	        .done(function(data)
+	        {
+            if (data.artist_tracks.data === undefined || data.artist_tracks.data.length == 0) {
+              $('.ajax-load').html('No Records found');
+            }
+            else{
+              renderTracks(data.artist_tracks.data);
+            }
+
+            Loading = false;
+	        })
+          .fail(function(jqXHR, ajaxOptions, thrownError)
+	        {
+	          alert('server not responding...');
+            Loading = false;
+	        });
+	}
+</script>
 @endpush
