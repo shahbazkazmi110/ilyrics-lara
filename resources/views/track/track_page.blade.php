@@ -22,17 +22,23 @@
                 <div class="col-6">
                     <h3 id="idHeadLyrics">Lyrics</h3>
                 </div>
-                <div class="col-6"> <button id="translation-button" data-language="eng" class="btn btn--ordinary btn--small">See in English</button></div>
+                <div class="col-6"> 
+                    @if(!empty($track->transliteration))
+                    <button id="translation-button" data-language="eng" class="btn btn--ordinary btn--small">See in English</button></div>
+                    @endif
+                    
+                    {{-- <button id="translation-button" data-language="eng" class="btn btn--ordinary btn--small">See in English</button></div> --}}
+                </div>
             </div>
             <div class="mb-4 pt-4" style="width:50%"><span style="width:50%" class="controlFont"> <a data-control="min" class="FontControl" style="font-size:12px !important;text-align:center;color:#fff;">A</a> <a class="resultControl" style=" width: 65%; display: inline-block; text-align: center;color:#fff; "><span id="fontChangePercentage">110</span>%</a> <a data-control="max" class="FontControl" style="font-size:16px !important;color:#fff;">A</a></span>
             </div>
             <div class="left-area" id="LyrArea" style="max-width:600px;">
                 <div class="effectFont row">
-                    
                     <div id="lyrics-div" class="col-12 col-md-6"> {!! html_entity_decode($track->lyrics) !!} </div>
+                    @if(!empty($track->transliteration))
                     <div id="translation-div" class="col-12 col-md-6"> {!! html_entity_decode($track->transliteration) !!} </div>
-                     
-                    </div>
+                     @endif
+                </div>
                 </div>
             </div>
             <div class="left-area" id="TransArea" style="clear:both;  display:none;position:relative">
@@ -44,6 +50,7 @@
 <x-tags :tags="$tags"/>
 <x-genres :genres="$genres"/>
 @endsection
+@if(!empty($track->transliteration))
 @push('extrascripts')
 <script>
 $("#translation-div").hide();
@@ -63,3 +70,4 @@ $('#translation-button').on('click',function(){
 });
 </script>
 @endpush
+@endif
