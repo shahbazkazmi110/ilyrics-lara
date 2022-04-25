@@ -147,7 +147,7 @@ class TracksController extends Controller
 
         // relations created with Favourite, Artist, Genre
         // Track List
-        $data["track_list"] = Track::
+        $data["track"] = Track::
         select('track.id', 'track.title', 'track.lyrics','track.artists', 'track.genres', 'track.tags', 'track.view_count',
                  'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'track.track_name', 'track.transliteration',
                  'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name',  'artist.resolution as artist_resolution', 
@@ -158,17 +158,17 @@ class TracksController extends Controller
         ->where('track.status', 1)
         ->first();
 
-        // $data["track_list"]["artist_track_counter"] = Track::selectRaw('COUNT(id) as track_counts')
+        // $data["track"]["artist_track_counter"] = Track::selectRaw('COUNT(id) as track_counts')
         //                                             ->where('artists', 'LIKE', '%'.$artist_id.'%')
         //                                             ->get();
 
         $artist_id = DB::table('track')->select('artists')->where('id', '=', $id)->first();
-        $data["track_list"]["artist_track_counter"] = Track::selectRaw('COUNT(id) as track_counts')
+        $data["track"]["artist_track_counter"] = Track::selectRaw('COUNT(id) as track_counts')
                                                     ->where('artists', 'LIKE', '%'.$artist_id->artists.'%')
                                                     ->first();
 
         
-        $data["track_list"]["genres_title"] = Track::select('genre.title')
+        $data["track"]["genres_title"] = Track::select('genre.title')
         ->join('genre', DB::raw("FIND_IN_SET(genre.id,track.genres)"),'>',DB::raw("'0'"))
         ->where('track.id', '=', $id)
         ->get();

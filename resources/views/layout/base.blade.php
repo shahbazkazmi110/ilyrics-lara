@@ -136,5 +136,6 @@
 		$(this).text($(this).text() == 'Show More' ? 'Show Less' : 'Show More');
 	});
 </script>
+@stack('extrascripts')
 </body>
 </html>
