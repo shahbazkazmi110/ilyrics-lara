@@ -31,7 +31,7 @@ Route::get('/', [HomeController::class, 'index']);
 // })->middleware(['auth'])->name('dashboard');
 
 // Tracks
-Route::get('/track', [TracksController::class, 'index']);
+Route::get('/track', [TracksController::class, 'index'])->name('tracks');
 Route::get('/track/{id}', [TracksController::class, 'getTracks'])->name('tracks-by-id');
 
 // Artists
@@ -68,6 +68,5 @@ Route::get('/privacy-policy', function() {
     return view('links.privacy-policy');
 });
 
-Route::get('/track_page', function(){
-    return view('track');
-});
+
+

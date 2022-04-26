@@ -54,7 +54,7 @@
                       >
                       <!-- options for player in data-options -->
                       <div class="feed-dzsap feed-artist"><a href="/artist/{{ $track->artist_id }}">{{$track->track_artists}}</a></div>
-                      <div class="feed-dzsap feed-songname">{{$track->title}}</div>
+                      <div class="feed-dzsap feed-songname"><a  href="{{ route('tracks-by-id', ['id' => $track->id]) }}" >{{$track->title}}</a></div>
                   </div>
               </div>
           </div>
@@ -68,15 +68,36 @@
         @endforeach
       <!-- New Collection eded -->	  
       </div>  
+
+
+      
+      {{-- <div class="container pt-md-5 mb-5 pb-5">
+        <x-load-tracks :tracks="$tag_tracks"/>    
+        <div class="mt-2">
+          <div class="ajax-load">
+            <div class="loader spinner-border text-success" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="no-record">
+              No More Records Found
+            </div>
+          </div>
+          {{-- {!! $tracks->links() !!} 
+        </div> 
+      </div> 
+       --}}
+
       <div class="mt-2">
         <div class="ajax-load">
-          Loading
+          Loading ???
         </div>
-        {!! $tag_tracks->links() !!}
+        {{-- {!! $tag_tracks->links() !!} --}}
       </div>               
+
+
     </div>
   
-  </main>
+</main>
 <x-tags :tags="$tags"/>
 <x-genres :genres="$genres"/>
 @endsection
@@ -95,9 +116,6 @@
   gtag('config', 'UA-176923350-1');
  </script>
 @endpush
-
-
-
 
 
 @push('pagination')
@@ -154,4 +172,3 @@
 </script>
 
 @endpush
-

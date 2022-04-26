@@ -69,7 +69,9 @@
 				<p style="max-width:700px;">In publishing and graphic design, Lorem ipsum is a placeholder text commonly.</p>
 			</div>
 			<div class="col-md-auto col-12 pt-md-5 pt-2">
-				<button type="button" class="btn btn--ordinary btn--small">View All Lyrics</button>
+				<a  href="{{ route('tracks') }}" >
+					<button type="button" class="btn btn--ordinary btn--small">View All Tracks</button>
+				</a>
 			</div>
 			
 		</div>
@@ -83,7 +85,8 @@
 						<div class="card card--layrics">
 							<div class="card--layrics__image" style="background-image: url('{{ \App\Helpers\Helper::format_image($track->image_name) }}');"></div>
 								<div class="card--layrics__content">
-									<h5 class="mb-0 card--layrics__content__title" tabindex="0">{{$track->title}}</h5>
+									<h5 class="mb-0 card--layrics__content__title" tabindex="0" href="{{ route('tracks-by-id', ['id' => $track->id]) }}">
+											{{$track->title}}</h5>
 									<a data-page="artist" href="{{ route('tracks-by-artist', ['id' => $track->artist_id]) }}" class="card--layrics__content__subtitle">{{$track->artists}}</a>
 									<div style="text-align: left">{{gmdate('i:s', $track->track_duration)}}</div>
 								</div>							
@@ -119,6 +122,7 @@
 					<button type="button" class="btn btn--ordinary btn--small">View all Reciters</button>
 				</a>
 			</div>
+			
 			
 		</div>
 		
