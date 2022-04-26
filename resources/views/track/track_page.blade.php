@@ -32,7 +32,7 @@
             </div>
             <div class="mb-4 pt-4" style="width:50%"><span style="width:50%" class="controlFont"> <a data-control="min" class="FontControl" style="font-size:12px !important;text-align:center;color:#fff;">A</a> <a class="resultControl" style=" width: 65%; display: inline-block; text-align: center;color:#fff; "><span id="fontChangePercentage">110</span>%</a> <a data-control="max" class="FontControl" style="font-size:16px !important;color:#fff;">A</a></span>
             </div>
-            <div class="left-area" id="LyrArea" style="max-width:600px;">
+            <div class="left-area mb-4" id="LyrArea" style="max-width:600px;">
                 <div class="effectFont row">
                     <div id="lyrics-div" class="col-12 col-md-6"> {!! html_entity_decode($track->lyrics) !!} </div>
                     @if(!empty($track->transliteration))
