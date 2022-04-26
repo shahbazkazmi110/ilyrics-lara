@@ -31,7 +31,7 @@
                 >
                 <!-- options for player in data-options -->
                 <div class="feed-dzsap feed-artist"><a href="/artist/{{ $track->artist_id }}">{{$track->track_artists}}</a></div>
-                <div class="feed-dzsap feed-songname">{{$track->title}}</div>
+                <div class="feed-dzsap feed-songname"><a  href="{{ route('tracks-by-id', ['id' => $track->id]) }}" >{{$track->title}}</a></div>
             </div>
         </div>
     </div>
