@@ -138,7 +138,7 @@ class TracksController extends Controller
 
     }
 
-    public function getTracks($id, Request $request)
+    public function getTracks($id)
     {
         
         $data["tracks"] = Track::getAllTracks();

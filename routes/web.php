@@ -72,4 +72,3 @@ Route::get('/track_page', function(){
     return view('track');
 });
 
-Route::get('track/{id}', [TracksController::class, 'getTracks']);
