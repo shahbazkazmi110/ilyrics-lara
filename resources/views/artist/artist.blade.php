@@ -21,11 +21,7 @@
 @section('content')
 <main>
   <div  class="container pt-md-5 mb-5 pb-5"> 
-    <div id="pagination-data">
-      @foreach ($tracks as $track)
-        <x-load-track :track="$track"/>
-      @endforeach  
-    </div>  
+        <x-load-tracks :tracks="$tracks"/>
     <div class="mt-2">
       <div class="ajax-load">
         <div class="loader spinner-border text-success" role="status">
@@ -42,4 +38,3 @@
 <x-tags :tags="$tags"/>
 <x-genres :genres="$genres"/>
 @endsection
-

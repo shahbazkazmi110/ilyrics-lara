@@ -4,10 +4,9 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class loadTrack extends Component
+class loadTracks extends Component
 {
-    public $track;
-    public $type;
+    public $tracks;
     /**
      * Create a new component instance.
      *
@@ -15,10 +14,9 @@ class loadTrack extends Component
      */
 
 
-    public function __construct($track,$type='list')
+    public function __construct($tracks)
     {
-        $this->track = $track;
-        $this->type = $type;
+        $this->tracks = $tracks;
     }
 
     /**
@@ -28,6 +26,6 @@ class loadTrack extends Component
      */
     public function render()
     {
-        return view('components.load-track');
+        return view('components.load-tracks');
     }
 }
