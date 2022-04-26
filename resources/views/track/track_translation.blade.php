@@ -108,59 +108,38 @@
 
 <main>
     <div class="container">
-        <div id="box">
-            <div class="mb-50 text-end pb-5">
-                @foreach($track_list->genres_title as $genre)
-                    <button type="button" class="btn btn--ordinary btn--small"> {{ $genre->title }} </button>
-                @endforeach
-            </div>
-            
-            <div class="border-bottom pb-5 mb-5 pt-4" style="position:relative;">
-                <h3 id="idHeadLyrics">Lyrics</h3>
-{{-- 
-                <div id="box">
-                    <p>View Translation</p>
-                    <button type="button" class="btn btn--ordinary btn--small">See in urdu</button>
-                </div> --}}
-                
-                
-                <div class="mb-4 pt-4" style="width:50%"><span style="width:50%" class="controlFont"> <a data-control="min" class="FontControl" style="font-size:12px !important;text-align:center;color:#fff;">A</a> <a class="resultControl" style=" width: 65%; display: inline-block; text-align: center;color:#fff; "><span id="fontChangePercentage">110</span>%</a> <a data-control="max" class="FontControl" style="font-size:16px !important;color:#fff;">A</a></span>
-                    <button type="button" class="btn btn--ordinary btn--small">See in urdu</button>
-                </div>
-                <div class="left-area" id="LyrArea" style="max-width:900px;">
-                    <div class="effectFont row">
-                        
-                        <div class="col-12 col-md-6"> {!! html_entity_decode($track_list->lyrics) !!} </div>
-
-                        {{-- <div id="trans" class="col-12 col-md-6"> {!! html_entity_decode($track_list->transliteration) !!} </div> --}}
-                    
-                        {{-- <div class="ajax-load">
-                            <div class="loader spinner-border text-success" role="status">
-                                <span class="visually-hidden">
-                                    <div id="pagination-data" class="col-12 col-md-6"> 
-                                        {!! html_entity_decode($track_list->transliteration) !!} 
-                                    </div></span>
-                            </div>
-                        </div> --}}
-
-                        <div id="ajax-load">
-                            <div id="pagination-data" class="col-12 col-md-6"> 
-                                {!! html_entity_decode($track_list->transliteration) !!} 
-                            </div>
-
-                        </div>
-
-                        <br>
-                        </p>
-                        
-                    </div>
-                </div>
-                <div class="left-area" id="TransArea" style="clear:both;  display:none;position:relative">
-                    <p class="effectFont"></p>
-                </div>
-            </div>
-
+        <div class="mb-50 text-end pb-5">
+            @foreach($track_list->genres_title as $genre)
+                <button type="button" class="btn btn--ordinary btn--small"> {{ $genre->title }} </button>
+            @endforeach
         </div>
+        
+        <div class="border-bottom pb-5 mb-5 pt-4" style="position:relative;">
+            <h3 id="idHeadLyrics">Lyrics</h3>
+            
+            <div class="mb-4 pt-4" style="width:50%"><span style="width:50%" class="controlFont"> <a data-control="min" class="FontControl" style="font-size:12px !important;text-align:center;color:#fff;">A</a> <a class="resultControl" style=" width: 65%; display: inline-block; text-align: center;color:#fff; "><span id="fontChangePercentage">110</span>%</a> <a data-control="max" class="FontControl" style="font-size:16px !important;color:#fff;">A</a></span>
+            </div>
+            <div class="left-area" id="LyrArea" style="max-width:600px;">
+                <div class="effectFont row">
+                    
+                    <div class="col-12 col-md-6"> {!! html_entity_decode($track_list->transliteration) !!} </div>
+
+                    <div id="box">
+                        <h2>View Translation</h2>
+                    </div>
+                    <button type="button">Load Content</button>
+               
+                  
+                    <br>
+                    </p>
+                    
+                </div>
+            </div>
+            <div class="left-area" id="TransArea" style="clear:both;  display:none;position:relative">
+                <p class="effectFont"></p>
+            </div>
+        </div>
+
     </div>
     
             
@@ -176,68 +155,5 @@
 @endpush
 @push('audio-scripts')
 <script type="text/javascript" src="{{ asset('audioplayer/audioplayer/audioplayer.js')}}"></script>
-@endpush
-
-
-{{-- <script>
-    $(document).ready(function(){
-        $("button").click(function(){
-            $("#ajax-load").load("track.track_page");
-        });
-    });
-</script> --}}
-
-
-@push('pagination')
-<script type="text/javascript">
-	var page = 1;
-    var lastpage = false;
-    var Loading = false;
-
-    $(window).scroll(function() {
-        var hT = $('.ajax-load').offset().top,
-            hH = $('.ajax-load').outerHeight(),
-            wH = $(window).height(),
-            wS = $(this).scrollTop();
-        if (wS > (hT+hH-wH)){
-            if(!lastpage && !Loading){
-                page++;
-	            loadMoreData(page);
-            }
-
-        }
-    });
-
-
-	function loadMoreData(page){
-	  $.ajax(
-	        {
-	            url: '?page=' + page,
-                type: "get",
-	            beforeSend: function()
-	            {
-	                $('.ajax-load').show();
-                    Loading = true;
-	            }
-	        })
-	        .done(function(data)
-	        {
-	            if(data.html == '' ){
-                    lastpage = true;
-	                $('.ajax-load').html("No more records found");
-	                return;
-	            }
-	            $('.ajax-load').hide();
-	            $("#pagination-data").append(data.html);
-                Loading = false;
-
-	        })
-
-	        .fail(function(jqXHR, ajaxOptions, thrownError)
-	        {
-	              alert('server not responding...');
-	        });
-	}
-</script>
 @endpush
 

@@ -10,6 +10,7 @@ use App\Models\Test;
 use Illuminate\Http\Request;
 use App\Models\Track;
 use Illuminate\Support\Facades\DB;
+use PDO;
 
 class TracksController extends Controller
 {
@@ -159,7 +160,7 @@ class TracksController extends Controller
         ->first();
 
         if ($request->ajax()) {
-            $view = view('track.track_page',$data)->render();
+            $view = view('track.track_translation',$data)->render();
             return response()->json(['html'=>$view]);
         //   return  $data["artists"];
         }
@@ -178,6 +179,8 @@ class TracksController extends Controller
         ->join('genre', DB::raw("FIND_IN_SET(genre.id,track.genres)"),'>',DB::raw("'0'"))
         ->where('track.id', '=', $id)
         ->get();
+
+    
 
         
    
