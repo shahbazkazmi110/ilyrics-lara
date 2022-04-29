@@ -150,9 +150,9 @@ class TracksController extends Controller
         // Track List
         $data["track"] = Track::
         select('track.id', 'track.title', 'track.lyrics','track.artists', 'track.genres', 'track.tags', 'track.view_count',
-                 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'track.track_name', 'track.transliteration',
-                 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name',  'artist.resolution as artist_resolution', 
-                 'track.track_duration as audio_duration', 'track.audio_type', 'track.remote_duration', 'track.audio_link'
+                 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'track.track_name', 'track.transliteration', 
+                 'track.track_duration as audio_duration', 'track.audio_type', 'track.remote_duration', 'track.audio_link',
+                 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name',  'artist.resolution as artist_resolution'
                 )
         ->join('artist', 'track.artists', '=', 'artist.id')
         ->where('track.id', '=', $id)
