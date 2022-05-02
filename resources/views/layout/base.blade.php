@@ -7,6 +7,8 @@
     <meta name="author" content="Get thousand+ lyrics for Nohay, Naat, Mungabat,  Marsiya & Salam from renowned reciters.">
     <meta name="generator" content="Hugo 0.84.0">
     <title>Get lyrics for Nohay, Naat, Mungabat,  Marsiya & Salam</title>
+	<link rel="icon" href="{{ asset('media/favicon.jpg')}}">
+
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{ asset('css/base.css')}}">
 	<script src="{{ asset('audioplayer/libs/jquery/jquery.js')}}" type="text/javascript"></script>
@@ -35,11 +37,11 @@
 	      <div class="container-fluid">
 	        <div class="il_logo_container">
 				<a class="navbar-brand" href="{{ url('') }}">
-					<img src="{{ asset('media/ilyrics_logo.svg')}}" alt="">
+					<img src="{{ asset('media/ilyrics_logo.svg')}}" alt="logo">
 				</a>
 			</div>
 	        <a class="navbar-brand navbar-brand--resp" href="/">
-				<img style="width:80px;" src="{{ asset('media/ilyrics_logo.svg')}}" alt="">
+				<img style="width:80px;" src="{{ asset('media/ilyrics_logo.svg')}}" alt="nav-logo">
 			</a>
 				
 	        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,12 +60,23 @@
 	              <a class="nav-link" href="{{ url('reciters') }}" tabindex="-1" aria-disabled="true">Reciters</a>
 	            </li>
 	            <li class="nav-item dropdown">
-	              <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-bs-toggle="dropdown" aria-expanded="false">My Account</a>
-	              <ul class="dropdown-menu" aria-labelledby="dropdown09">
-	                <li><a class="dropdown-item" href="#">Action</a></li>
-	                <li><a class="dropdown-item" href="#">Another action</a></li>
-	                <li><a class="dropdown-item" href="#">Something else here</a></li>
-	              </ul>
+				@if(Auth::user())
+					<a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-bs-toggle="dropdown" aria-expanded="false"> {{ Auth::user()->username }}</a>
+					<ul class="dropdown-menu" aria-labelledby="dropdown09">
+						<li><a class="dropdown-item" href="#">Profile</a></li>
+						<li>
+							<form method="POST" action="{{ route('logout') }}">
+								@csrf
+								<a class="dropdown-item" href=" {{ route('logout')}}"
+										onclick="event.preventDefault();
+													this.closest('form').submit();">
+									{{ __('Log Out') }}
+								</a>
+							</form>
+						</li>
+					</ul>
+				@endif
+					<a class="nav-link" href="{{ url('login')}}" >My Account</a>
 	            </li>
 	            <li class="nav-item">
 	              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><img src="{{ asset('media/search.svg')}}"></a>
@@ -115,6 +128,64 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+			  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<x-auth-validation-errors class="mb-4" :errors="$errors" />
+
+				<form method="POST" action="{{ route('login') }}">
+					@csrf
+		
+					<!-- Email Address -->
+					<div>
+						<x-label for="email" :value="__('Email')" />
+		
+						<x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+					</div>
+		
+					<!-- Password -->
+					<div class="mt-4">
+						<x-label for="password" :value="__('Password')" />
+		
+						<x-input id="password" class="block mt-1 w-full"
+										type="password"
+										name="password"
+										required autocomplete="current-password" />
+					</div>
+		
+					<!-- Remember Me -->
+					<div class="block mt-4">
+						<label for="remember_me" class="inline-flex items-center">
+							<input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
+							<span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+						</label>
+					</div>
+		
+					<div class="flex items-center justify-end mt-4">
+						@if (Route::has('password.request'))
+							<a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+								{{ __('Forgot your password?') }}
+							</a>
+						@endif
+		
+						<x-button class="ml-3">
+							{{ __('Log in') }}
+						</x-button>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			  <button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
 	<div class="copyright">
 		<div class="container text-center font-size__small">
 			<p>Copyright © 2022 Collective Rise LLC. Designed by <a style="text-decoration: underline" href="https://qubitse.com">Qubitse</a>.</p>
