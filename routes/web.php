@@ -58,8 +58,7 @@ Route::get('/playlists', [PlaylistController::class, 'getAllPlaylists'])->name('
 
 Route::get('/language', [LanguageController::class, 'index']);
 Route::get('/album', [AlbumController::class, 'index']);
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/search', [SearchController::class, 'search_action']);
+
 
 //Route::view('/about', 'views/about.php', 'about');
 

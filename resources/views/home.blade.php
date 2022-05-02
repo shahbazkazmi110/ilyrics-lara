@@ -24,7 +24,7 @@
 		<div class="row pb-5">
 			<div class="col-12 col-md">
 				<h2 class="h2__underline" tabindex="0">Recommended Playlists</h2>
-				<p style="max-width:700px;">In publishing and graphic design, Lorem ipsum is a placeholder text commonly.</p>
+				{{-- <p style="max-width:700px;">In publishing and graphic design, Lorem ipsum is a placeholder text commonly.</p> --}}
 			</div>
 			<div class="col-md-auto col-12 pt-md-5 pt-2">
 				<a href="{{ route('playlists') }}">
@@ -66,7 +66,7 @@
 		<div class="row pb-5">
 			<div class="col-12 col-md">
 				<h2 class="h2__underline" tabindex="0">New Collection</h2>
-				<p style="max-width:700px;">In publishing and graphic design, Lorem ipsum is a placeholder text commonly.</p>
+				{{-- <p style="max-width:700px;">In publishing and graphic design, Lorem ipsum is a placeholder text commonly.</p> --}}
 			</div>
 			<div class="col-md-auto col-12 pt-md-5 pt-2">
 				<a  href="{{ route('tracks') }}" >
