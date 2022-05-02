@@ -75,15 +75,16 @@
 							</form>
 						</li>
 					</ul>
-				@endif
+				@else
 					<a class="nav-link" href="{{ url('login')}}" >My Account</a>
+				@endif
 	            </li>
 	            <li class="nav-item">
 	              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><img src="{{ asset('media/search.svg')}}"></a>
 	            </li>
 	          </ul>
 	          <div class="mr-0">
-		          <button type="button" class="btn btn--primary">Create an Account</button>
+		          <a  href="{{ url('/register') }}" class="btn btn--primary pt-3">Create an Account</a>
 	          </div>
 	        </div>
 	      </div>
