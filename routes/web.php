@@ -10,6 +10,8 @@ use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\{TracksController, HomeController, SearchController};
+use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\GoogleController;
  
 
 
@@ -26,9 +28,9 @@ use App\Http\Controllers\{TracksController, HomeController, SearchController};
 
 Route::get('/', [HomeController::class, 'index']);
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 // Tracks
 Route::get('/track', [TracksController::class, 'index'])->name('tracks');
@@ -56,10 +58,21 @@ Route::get('/playlists', [PlaylistController::class, 'getAllPlaylists'])->name('
 
 Route::get('/language', [LanguageController::class, 'index']);
 Route::get('/album', [AlbumController::class, 'index']);
-Route::get('/home', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/search', [SearchController::class, 'search_action']);
 
 //Route::view('/about', 'views/about.php', 'about');
+
+
+ 
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('github')->redirect();
+});
+
+
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
 
 Route::get('/about', function() {return view('links.about');});
 Route::get('/accessibitiy', function() {return view('links.accessibitiy');});
