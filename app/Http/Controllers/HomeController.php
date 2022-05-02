@@ -14,7 +14,7 @@ class HomeController extends Controller
         // ArtistResource::collection(Artist::getPopularArtist());
         $data["popular_artists"] = Artist::getPopularArtist();
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
-        $data["genres"] = Genre::all();
+        $data["genres"] = Genre::getGenre();
         $data["popular_playlists"] = Playlist::getFeaturedPlaylist();
         $data["popular_tracks"] = Track::getPopularTracks();
 
