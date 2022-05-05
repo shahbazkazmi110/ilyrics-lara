@@ -15,10 +15,10 @@ class Helper
     public static function format_image($image_name,$public=0){
         if(!empty($image_name))
         {
-            $response_item = request()->getSchemeAndHttpHost().'/admin/uploads/'.$image_name;
+            $response_item = env('BASE_URL').'/admin/uploads/'.$image_name;
             if($public==1)
             {
-                $response_item = request()->getSchemeAndHttpHost().'/uploads/'.$image_name;
+                $response_item = env('BASE_URL').'/uploads/'.$image_name;
             }
         }
         else{
@@ -30,7 +30,7 @@ class Helper
 
     public static function format_track($track_name,$audio_type){
         if($audio_type == 1) {
-            $audio_link = request()->getSchemeAndHttpHost().'/admin/uploads/audio/'. $track_name;
+            $audio_link = env('BASE_URL').'/admin/uploads/audio/'. $track_name;
          } else if($audio_type == 2){
             $audio_link = $track_name;
         }

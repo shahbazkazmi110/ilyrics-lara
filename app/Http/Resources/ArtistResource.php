@@ -20,8 +20,8 @@ class ArtistResource extends JsonResource
             'name'          => $this->name,
             'track_count'   => $this->track_count,
             'resolution'    => $this->resolution,
-            'thumb_link'    => request()->getSchemeAndHttpHost().'/admin/uploads/thumb/'.$this->image_name ?? '',
-            'image_link'    => request()->getSchemeAndHttpHost().'/admin/uploads/'.$this->image_name ?? '',
+            'thumb_link'    => env('BASE_URL').'/admin/uploads/thumb/'.$this->image_name ?? '',
+            'image_link'    => env('BASE_URL').'/admin/uploads/'.$this->image_name ?? '',
          ];
     }
 }
