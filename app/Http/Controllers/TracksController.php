@@ -148,7 +148,6 @@ class TracksController extends Controller
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::getGenre();
 
-
         // relations created with Favourite, Artist, Genre
         // Track List
         $data["track"] = Track::
@@ -170,7 +169,6 @@ class TracksController extends Controller
         $data["track"]["artist_track_counter"] = Track::selectRaw('COUNT(id) as track_counts')
                                                     ->where('artists', 'LIKE', '%'.$artist_id->artists.'%')
                                                     ->first();
-
         
         $data["track"]["genres_title"] = Track::select('genre.title')
         ->join('genre', DB::raw("FIND_IN_SET(genre.id,track.genres)"),'>',DB::raw("'0'"))

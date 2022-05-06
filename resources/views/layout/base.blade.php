@@ -137,14 +137,19 @@
 		</div>
 	</div>
 
-	<div class="toast bg-primary text-white fade show">
-		<div class="toast-header bg-primary text-white">
-			<strong class="me-auto"><i class="bi-gift-fill"></i> We miss you!</strong>
-			<small>10 mins ago</small>
-			<button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
-		</div>
-		<div class="toast-body">
-			It's been a long time since you visited us. We've something special for you. <a href="#" class="text-white">Click here!</a>
+	<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+		<div class="toast" style="position: absolute; top: 0; right: 0;">
+			<div class="toast-header">
+			<img src="..." class="rounded mr-2" alt="...">
+			<strong class="mr-auto">Bootstrap</strong>
+			<small>11 mins ago</small>
+			<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			</div>
+			<div class="toast-body">
+			Hello, world! This is a toast message.
+			</div>
 		</div>
 	</div>
 
@@ -180,7 +185,10 @@
 </div>
 </footer>
 <div class="menuoverlay"></div>
-<script src="{{ asset('js/bootstrap.bundle.js')}}"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{{-- <script src="{{ asset('js/bootstrap.bundle.js')}}"></script> --}}
 <script src="{{ asset('js/main.js')}}"></script>
 @stack('pagination')
 <script>
@@ -190,6 +198,9 @@
 	});
 
 	@if(AUth::user())
+	$('.toast').toast({
+        delay:2000,
+    });
 	const csrf = $('meta[name="csrf-token"]').attr('content');
 	$('.add-playlist').click(function(){
 		const image_name = $(this).attr("data-image-name");
@@ -231,6 +242,7 @@
 				element.removeClass('add-favourite');
 				element.addClass('remove-favourite');
 				element.attr("data-is-fav",1);
+				$('.toast').toast('show');
 			},
 			error: function (xhr) {
 			

@@ -24,12 +24,12 @@
             </div>
         </div>
     </div>
+    @php
+        $favourite = \App\Helpers\Helper::isFavourite($track->id, Auth::user()->id ?? null);
+    @endphp
     @if($type=='list')
     <div class="border-bottom mb-2 pb-2 text-md-end text-center pt-2 pt-md-0">
-        @php
-            $favourite = \App\Helpers\Helper::isFavourite($track->id, Auth::user()->id ?? null);
-        @endphp
-        @if(AUth::user())
+        @if(Auth::user())
             <a href="#" class="btn btn-sharing toggle-favourite" type="button" data-track-id="{{ $track->id }}" data-is-fav="{{$favourite}}" >{{ $favourite == 2 ? 'Add Favourite' : 'Remove Favourite'}}</a>
             <a href="#" class="btn btn-sharing add-playlist" type="button" data-image-name="{{ $track->image_name }}" data-track-id="{{ $track->id}}" data-bs-toggle="modal" data-bs-target="#addPlaylistModal" >Add to Playlist</a>
             <a href="#" class="btn btn-sharing" type="button">Download</a>
@@ -47,7 +47,7 @@
         <button class="btn btn--ordinary btn--small__extra dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="min-width:230px;">
             Add / Share / Download
         </button>
-        @if(AUth::user())
+        @if(Auth::user())
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item toggle-favourite" href="#" data-track-id="{{ $track->id }}" data-is-fav="{{$favourite}}" >{{ $favourite == 2 ? 'Add Favourite' : 'Remove Favourite'}}</a></li>
                 <li><a class="dropdown-item add-playlist" href="#" data-image-name="{{ $track->image_name }}" data-track-id="{{ $track->id}}" data-bs-toggle="modal" data-bs-target="#addPlaylistModal" >Add to Playlist</a></li>
