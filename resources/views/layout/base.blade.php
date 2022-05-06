@@ -137,10 +137,9 @@
 		</div>
 	</div>
 
-	<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
 		<div class="toast" style="position: absolute; top: 0; right: 0;">
 			<div class="toast-header">
-			<img src="..." class="rounded mr-2" alt="...">
+			<img src="" class="rounded mr-2" alt="...">
 			<strong class="mr-auto">Bootstrap</strong>
 			<small>11 mins ago</small>
 			<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -151,7 +150,6 @@
 			Hello, world! This is a toast message.
 			</div>
 		</div>
-	</div>
 
 <div class="modal fade" id="addPlaylistModal" tabindex="-1" aria-labelledby="addPlaylistModalLabel" aria-hidden="true">
 	<div class="modal-dialog">

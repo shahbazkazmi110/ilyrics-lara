@@ -65,10 +65,17 @@
         </div>
     </div>
     <div class="text-end pt-2 pt-md-0 player_btns d-none d-md-block">
-        <button class="btn btn--ordinary btn--small__extra" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Favorites</button>
-        <button class="btn btn--ordinary btn--small__extra" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add to Playlist</button>
-        <button class="btn btn--ordinary btn--small__extra" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Download</button>
-        <button class="btn btn--ordinary btn--small__extra" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Share</button>
+        @if(Auth::user())
+            <a href="#" class="btn btn--ordinary btn--small__extra pt-2 toggle-favourite" data-track-id="{{ $track->id }}" data-is-fav="{{$favourite}}" >{{ $favourite == 2 ? 'Add Favourite' : 'Remove Favourite'}}</a>
+            <a href="#" class="btn btn--ordinary btn--small__extra pt-2 add-playlist" type="button" data-image-name="{{ $track->image_name }}" data-track-id="{{ $track->id}}" data-bs-toggle="modal" data-bs-target="#addPlaylistModal" >Add to Playlist</a>
+            <a href="#" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Download</a>
+            <a href="#" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Share</a>
+        @else
+            <a {{ route('login') }} class="btn btn--ordinary btn--small__extra pt-2" type="button" >Add Favorites</button>
+            <a {{ route('login') }} class="btn btn--ordinary btn--small__extra pt-2" type="button" >Add to Playlist</button>
+            <a {{ route('login') }} class="btn btn--ordinary btn--small__extra pt-2" type="button" >Download</button>
+            <a {{ route('login') }} class="btn btn--ordinary btn--small__extra pt-2" type="button" >Share</button>
+        @endif
     </div>
     @else 
     @endif
