@@ -197,7 +197,7 @@
 
 	@if(AUth::user())
 	$('.toast').toast({
-        delay:2000,
+        // delay:2000,
     });
 	const csrf = $('meta[name="csrf-token"]').attr('content');
 	$('.add-playlist').click(function(){
