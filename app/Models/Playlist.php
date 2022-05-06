@@ -10,7 +10,11 @@ use App\Models\User;
 class Playlist extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = 'playlist';
+    protected $fillable = [
+        'title','user_id','admin_id','created','saving_count','image_name','resolution','status','featured','image_uploaded_by_admin','display_order'
+    ];
 
     public static function getFeaturedPlaylist()
     {

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="Get thousand+ lyrics for Nohay, Naat, Mungabat,  Marsiya & Salam from renowned reciters.">
     <meta name="generator" content="Hugo 0.84.0">
     <title>Get lyrics for Nohay, Naat, Mungabat,  Marsiya & Salam</title>
@@ -12,8 +13,9 @@
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{ asset('css/base.css')}}">
 	<script src="{{ asset('audioplayer/libs/jquery/jquery.js')}}" type="text/javascript"></script>
-	@stack('audio-styles')
-	@stack('audio-scripts')
+	<link rel="stylesheet" href="{{ asset('audioplayer/audioplayer/audioplayer.css')}}">
+	<script type="text/javascript" src="{{ asset('audioplayer/audioplayer/audioplayer.js')}}"></script>
+
 
 	<style>
         /* Initially, hide the extra text that
@@ -129,69 +131,53 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-			  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-				<form method="POST" action="{{ route('login') }}">
-					@csrf
-		
-					<!-- Email Address -->
-					<div>
-						<x-label for="email" :value="__('Email')" />
-		
-						<x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-					</div>
-		
-					<!-- Password -->
-					<div class="mt-4">
-						<x-label for="password" :value="__('Password')" />
-		
-						<x-input id="password" class="block mt-1 w-full"
-										type="password"
-										name="password"
-										required autocomplete="current-password" />
-					</div>
-		
-					<!-- Remember Me -->
-					<div class="block mt-4">
-						<label for="remember_me" class="inline-flex items-center">
-							<input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-							<span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-						</label>
-					</div>
-		
-					<div class="flex items-center justify-end mt-4">
-						@if (Route::has('password.request'))
-							<a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-								{{ __('Forgot your password?') }}
-							</a>
-						@endif
-		
-						<x-button class="ml-3">
-							{{ __('Log in') }}
-						</x-button>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-			  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-			  <button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		  </div>
-		</div>
-	  </div>
 	<div class="copyright">
 		<div class="container text-center font-size__small">
 			<p>Copyright © 2022 Collective Rise LLC. Designed by <a style="text-decoration: underline" href="https://qubitse.com">Qubitse</a>.</p>
 		</div>
 	</div>
+
+	<div class="toast bg-primary text-white fade show">
+		<div class="toast-header bg-primary text-white">
+			<strong class="me-auto"><i class="bi-gift-fill"></i> We miss you!</strong>
+			<small>10 mins ago</small>
+			<button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+		</div>
+		<div class="toast-body">
+			It's been a long time since you visited us. We've something special for you. <a href="#" class="text-white">Click here!</a>
+		</div>
+	</div>
+
+<div class="modal fade" id="addPlaylistModal" tabindex="-1" aria-labelledby="addPlaylistModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="addPlaylistModalLabel">Playlists</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<div class="playlists">
+
+			</div>
+			<div class="d-none">
+				<form action="" id="addPlaylistForm">
+					<div class="form-group" style="height:150px">
+						<label for="form-title">Title</label>
+						<input id="form-title" type="text" class="form-control" name="title" required placeholder="Title">
+						<div id="msg-title" class="invalid-feedback show"></div>
+					</div>
+					<input id="form-image-name" type="hidden" name="image_name" value="">
+					<input id="form-track-id" type="hidden" name="track_id" value="">
+				</form>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary create-playlist">Create New</button>
+		</div>
+		</div>
+	</div>
+</div>
 </footer>
 <div class="menuoverlay"></div>
 <script src="{{ asset('js/bootstrap.bundle.js')}}"></script>
@@ -202,6 +188,123 @@
 		$('#tags .less').fadeToggle();
 		$(this).text($(this).text() == 'Show More' ? 'Show Less' : 'Show More');
 	});
+
+	@if(AUth::user())
+	const csrf = $('meta[name="csrf-token"]').attr('content');
+	$('.add-playlist').click(function(){
+		const image_name = $(this).attr("data-image-name");
+		const track_id = $(this).attr("data-track-id");
+		$('#form-image-name').val(image_name);
+		$('#form-track-id').val(track_id);
+		loadPlaylists();
+	});
+
+	$('.create-playlist').on('click',function(e){
+		e.preventDefault();
+		var data = $('#addPlaylistForm').serializeArray();
+		sendPostRequest('{{ route("addPlaylist")}}',data);
+	});
+
+	$('.toggle-favourite').on('click',function(e){
+		e.preventDefault();
+		const track_id = $(this).attr("data-track-id");
+		const is_fav = $(this).attr("data-is-fav");
+		if(is_fav == 2){
+			addFavourite(track_id,$(this));
+		}else{
+			removeFavourite(track_id,$(this));
+		}
+	});
+
+
+	function addFavourite(track_id,element){
+		const url = "{{ route('favorite','')}}"+"/"+track_id;
+		$.ajax({
+			type:'post',
+			headers: {
+				'X-CSRF-TOKEN': csrf,
+			},
+			url:url,
+			success:function(data){
+				console.log(data.message);
+				element.html('Remove From Favourite');
+				element.removeClass('add-favourite');
+				element.addClass('remove-favourite');
+				element.attr("data-is-fav",1);
+			},
+			error: function (xhr) {
+			
+			}
+		});
+	}
+
+	function removeFavourite(track_id,element){
+		const url = "{{ route('remove-favorite','')}}"+"/"+track_id;
+		$.ajax({
+			type:'post',
+			headers: {
+				'X-CSRF-TOKEN': csrf,
+			},
+			url:url,
+			success:function(data){
+				console.log(data.message);
+				element.html('Add Favourite');
+				element.addClass('add-favourite');
+				element.removeClass('remove-favourite');
+				element.attr("data-is-fav",2);				
+			},
+			error: function (xhr) {
+			
+			}
+		});
+	}
+
+	function sendPostRequest(url,post_data){
+		$.ajax({
+			type:'POST',
+			url:url,
+			headers: {
+				'X-CSRF-TOKEN': csrf,
+			},
+			data:post_data,
+			success:function(data){
+				console.log(data);
+			},
+			error: function (xhr) {
+				if(xhr.responseJSON.errors.title[0] !== ''){
+					$('#msg-title').html(xhr.responseJSON.errors.title[0]);
+					$('#msg-title').show();
+					$('#msg-title').fadeOut(3000);
+				}
+			}
+
+		});
+	}
+
+	function loadPlaylists(){
+		const url = "{{ route('user-playlists')}}";
+		$.ajax({
+			type:'get',
+			url:url,
+			success:function(data){
+				let html = '';
+				data.forEach(element => {
+					html+='<div class="d-flex">'+element.title+'<i onclick="editPlaylist('+element.id+')">Edit</i><i onclick="deletePlaylist('+element.id+')">Delete</i></div>';
+				});
+				$('.playlists').html(html);
+			},
+			error: function (xhr) {
+			
+			}
+		});
+	}
+	function editPlaylist(id){
+		alert(id);
+	}
+	function deletePlaylist(id){
+		alert(id);
+	}
+@endif
 </script>
 @stack('extrascripts')
 </body>

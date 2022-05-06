@@ -80,12 +80,12 @@
 			@foreach ($popular_tracks as $track)
 			
 				<div class="col-md-6 col-12">
-					<a href = "{{ route('tracks-by-id', ['id' => $track->id] ) }}">
+					<a href = "{{ route('tracks-by-id', ['track_id' => $track->id] ) }}">
 
 						<div class="card card--layrics">
 							<div class="card--layrics__image" style="background-image: url('{{ \App\Helpers\Helper::format_image($track->image_name) }}');"></div>
 								<div class="card--layrics__content">
-									<h5 class="mb-0 card--layrics__content__title" tabindex="0" href="{{ route('tracks-by-id', ['id' => $track->id]) }}">
+									<h5 class="mb-0 card--layrics__content__title" tabindex="0" href="{{ route('tracks-by-id', ['track_id' => $track->id]) }}">
 											{{$track->title}}</h5>
 									<a data-page="artist" href="{{ route('tracks-by-artist', ['id' => $track->artist_id]) }}" class="card--layrics__content__subtitle">{{$track->artists}}</a>
 									<div style="text-align: left">{{gmdate('i:s', $track->track_duration)}}</div>
@@ -128,7 +128,6 @@
 		
 		<div class="row mb-5 pb-5">
 			@foreach ($popular_artists as $artist)
-			
 				<div class="col-xl-2 col-lg-3 col-md-4 col-6">
 					<a href="{{ route('tracks-by-artist', ['id' => $artist->id]) }}">
 						<div class="card card--playlist">
