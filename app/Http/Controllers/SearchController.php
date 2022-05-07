@@ -10,7 +10,7 @@ class SearchController extends Controller
 {
     //
 
-    public function search_action(){
+    public function search_action(Request $request){
 
         $id = null;
         $data["tracks"] = Track::getAllTracks();
@@ -18,12 +18,14 @@ class SearchController extends Controller
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::getGenre();
 
-        if($id){
-            $data["track_list"] = SearchController::getTrackByID($id);
-        }
-        else {
-            $data["track_list"] = SearchController::getTracks();
-        }
+        // if($id){
+        //     $data["track_list"] = SearchController::getTrackByID($id);
+        // }
+        // else {
+        //     $data["track_list"] = SearchController::getTracks();
+        // }
+
+        $data["track_list"] = SearchController::getTracks($request);
 
        return view('search.search', $data);
 
@@ -31,20 +33,32 @@ class SearchController extends Controller
 
     }
 
-    public function getTracks()
+    public function getTracks(Request $request)
     {
         $track_list = Track::        
-        select('track.id', 'track.audio_type', 'track.transliteration', 'track.transliteration_type', 'track.title', 'track.artists', 
-        'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'track.track_name',
-        'track.track_duration as audio_duration',  'track.remote_duration', 'track.audio_link',
-        'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name',  'artist.resolution as artist_resolution')//, 'favourite.user_id') 
+        // select('track.id', 'track.audio_type', 'track.transliteration', 'track.transliteration_type', 'track.title', 'track.artists', 
+        // 'track.view_count', 'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'track.track_name',
+        // 'track.track_duration as audio_duration',  'track.remote_duration', 'track.audio_link',
+        // 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name',  'artist.resolution as artist_resolution')//, 'favourite.user_id') 
+        selectRaw('track.id, track.audio_type, track.title, artist.name as track_artists, track.view_count, track.resolution, track.contributor_id, 
+                    track.modified, track.album_year, track.track_duration as audio_duration, track.remote_duration, track.audio_link,
+                    artist.id AS artist_id, artist.name as artist_name, artist.image_name, track.track_name')
         ->join('artist', DB::raw("FIND_IN_SET(artist.id,track.artists)"),'>',DB::raw("'0'"))
        //->join('artist', 'track.artists', '=', 'artist.id')
        //->whereNotNull('track.album_year')
        ->where('track.status', 1)
        ->orderBy('track.title', 'ASC')
-       ->limit(50)
-       ->get();
+       ->paginate(10);
+       
+       
+       if ($request->ajax()) {
+
+        return $track_list;
+        // $view = view('artist.artist-track-pagination',$data)->render();
+        // return response()->json(['html'=>$view]);
+        //   return  $data["artists"];
+    }
+
 
        return $track_list;
     }

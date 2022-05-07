@@ -149,7 +149,7 @@ class TracksController extends Controller
         // relations created with Favourite, Artist, Genre
         // Track List
         $data["track"] = Track::
-        select('track.id', 'track.title', 'track.lyrics','track.artists', 'track.genres', 'track.tags', 'track.view_count',
+        select('track.id', 'track.title', 'track.lyrics','track.artists', 'track.genres', 'track.tags', 'track.view_count', 'track.track_name',
                  'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'track.track_name', 'track.transliteration', 
                  'track.track_duration as audio_duration', 'track.audio_type', 'track.remote_duration', 'track.audio_link',
                  'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name',  'artist.resolution as artist_resolution'
