@@ -19,17 +19,27 @@
                 >
                 <div class="meta-artist">
                 <a href="{{ route('tracks-by-artist', ['id' => $track->artist_id]) }}"><span class="the-artist">{{$track->track_artists}}</span></a>
-                <a href="{{ route('tracks-by-id', ['id' => $track->id]) }}"><span class="the-name">{{$track->title}}</span></a>
+                <a href="{{ route('tracks-by-id', ['track_id' => $track->id]) }}"><span class="the-name">{{$track->title}}</span></a>
             </div>
             </div>
         </div>
     </div>
+    @php
+        $favourite = \App\Helpers\Helper::isFavourite($track->id, Auth::user()->id ?? null);
+    @endphp
     @if($type=='list')
     <div class="border-bottom mb-2 pb-2 text-md-end text-center pt-2 pt-md-0">
-        <button class="btn btn-sharing" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Favorites</button>
-        <button class="btn btn-sharing" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add to Playlist</button>
-        <button class="btn btn-sharing" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Download</button>
-        <button class="btn btn-sharing" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Share</button>
+        @if(Auth::user())
+            <a href="#" class="btn btn-sharing toggle-favourite" type="button" data-track-id="{{ $track->id }}" data-is-fav="{{$favourite}}" >{{ $favourite == 2 ? 'Add Favourite' : 'Remove Favourite'}}</a>
+            <a href="#" class="btn btn-sharing add-playlist" type="button" data-image-name="{{ $track->image_name }}" data-track-id="{{ $track->id}}" data-bs-toggle="modal" data-bs-target="#addPlaylistModal" >Add to Playlist</a>
+            <a href="#" class="btn btn-sharing" type="button">Download</a>
+            <a href="#" class="btn btn-sharing" type="button">Share</a>
+        @else
+            <a href="{{ route('login') }}" class="btn btn-sharing" type="button">Add Favourite</a>
+            <a href="{{ route('login') }}" class="btn btn-sharing" type="button">Add to Playlist</a>
+            <a href="{{ route('login') }}" class="btn btn-sharing" type="button">Download</a>
+            <a href="{{ route('login') }}" class="btn btn-sharing" type="button">Share</a>
+        @endif
     </div>
     @elseif($type=='single')
     <div class="d-block d-md-none pt-3">
@@ -37,26 +47,36 @@
         <button class="btn btn--ordinary btn--small__extra dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="min-width:230px;">
             Add / Share / Download
         </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="https://ilyrics.org/html/v2/track_page.html#">Add Favorites</a></li>
-            <li><a class="dropdown-item" href="https://ilyrics.org/html/v2/track_page.html#">Add to Playlist</a></li>
-            <li><a class="dropdown-item" href="https://ilyrics.org/html/v2/track_page.html#">Download</a></li>
-            <li><a class="dropdown-item" href="https://ilyrics.org/html/v2/track_page.html#">Share</a></li>
-        </ul>
+        @if(Auth::user())
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item toggle-favourite" href="#" data-track-id="{{ $track->id }}" data-is-fav="{{$favourite}}" >{{ $favourite == 2 ? 'Add Favourite' : 'Remove Favourite'}}</a></li>
+                <li><a class="dropdown-item add-playlist" href="#" data-image-name="{{ $track->image_name }}" data-track-id="{{ $track->id}}" data-bs-toggle="modal" data-bs-target="#addPlaylistModal" >Add to Playlist</a></li>
+                <li><a class="dropdown-item" href="#">Download</a></li>
+                <li><a class="dropdown-item" href="#">Share</a></li>
+            </ul>
+        @else
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="{{ route('login') }}">Add Favorites</a></li>
+                <li><a class="dropdown-item" href="{{ route('login') }}">Add to Playlist</a></li>
+                <li><a class="dropdown-item" href="{{ route('login') }}">Download</a></li>
+                <li><a class="dropdown-item" href="{{ route('login') }}">Share</a></li>
+            </ul>
+        @endif
         </div>
     </div>
     <div class="text-end pt-2 pt-md-0 player_btns d-none d-md-block">
-        <button class="btn btn--ordinary btn--small__extra" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Favorites</button>
-        <button class="btn btn--ordinary btn--small__extra" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add to Playlist</button>
-        <button class="btn btn--ordinary btn--small__extra" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Download</button>
-        <button class="btn btn--ordinary btn--small__extra" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Share</button>
+        @if(Auth::user())
+            <a href="#" class="btn btn--ordinary btn--small__extra pt-2 toggle-favourite" data-track-id="{{ $track->id }}" data-is-fav="{{$favourite}}" >{{ $favourite == 2 ? 'Add Favourite' : 'Remove Favourite'}}</a>
+            <a href="#" class="btn btn--ordinary btn--small__extra pt-2 add-playlist" type="button" data-image-name="{{ $track->image_name }}" data-track-id="{{ $track->id}}" data-bs-toggle="modal" data-bs-target="#addPlaylistModal" >Add to Playlist</a>
+            <a href="#" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Download</a>
+            <a href="#" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Share</a>
+        @else
+            <a {{ route('login') }} class="btn btn--ordinary btn--small__extra pt-2" type="button" >Add Favorites</button>
+            <a {{ route('login') }} class="btn btn--ordinary btn--small__extra pt-2" type="button" >Add to Playlist</button>
+            <a {{ route('login') }} class="btn btn--ordinary btn--small__extra pt-2" type="button" >Download</button>
+            <a {{ route('login') }} class="btn btn--ordinary btn--small__extra pt-2" type="button" >Share</button>
+        @endif
     </div>
     @else 
     @endif
 </div>
-@push('audio-styles')
-<link rel="stylesheet" href="{{ asset('audioplayer/audioplayer/audioplayer.css')}}">
-@endpush
-@push('audio-scripts')
-<script type="text/javascript" src="{{ asset('audioplayer/audioplayer/audioplayer.js')}}"></script>
-@endpush

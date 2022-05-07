@@ -28,10 +28,10 @@
 
   function renderTracks(track_data){
     var html = ''; 
-    var pageurl = '{{ request()->getSchemeAndHttpHost() }}' ;
+    var pageurl = '{{ env('BASE_URL') }}' ;
     $.each(track_data, function (key, value) {  
       var image = pageurl+'/admin/uploads/'+value.image_name ;
-      var php_handler = "{{ request()->getSchemeAndHttpHost().'/html/inc/php/publisher.php' }}";
+      var php_handler = "{{ env('BASE_URL').'/html/inc/php/publisher.php' }}";
       var audio =   pageurl +'/admin/uploads/audio/'+ value.track_name; 
       html += `<div id="ag2" class="audiogallery skin-wave auto-init" style="opacity:0; margin-top:30px;" data-options='{"cueFirstMedia": "on","autoplay": "off","autoplayNext": "on","design_menu_position": "bottom","enable_easing": "on","playlistTransition": "fade","design_menu_height": "200"}'>
         <div class="items">

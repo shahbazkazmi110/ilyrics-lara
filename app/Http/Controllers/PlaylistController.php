@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Playlist;
 use App\Models\Tag;
 use App\Models\Genre;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PlaylistController extends Controller
 {
@@ -45,4 +47,36 @@ class PlaylistController extends Controller
         return view('playlist.playlists',$data);
     }
 
+    public function addPlaylist(Request $request){
+        $request->validate([
+            'title' => 'required|min:3|max:255',
+            'image_name' => 'required',
+        ]);
+        
+        Playlist::create([
+            'title' =>  $request->title, 
+            'user_id' => Auth::user()->id, 
+            'admin_id' => 1, 
+            'created' => Carbon::now(), 
+            'saving_count' => 0,
+            'image_name' => $request->image_name,
+            'resolution' => '300:270',
+            'status' => 2,
+            'featured' => 2,
+            'image_uploaded_by_admin' => 2,
+            'display_order' => null,
+        ]);
+        return response()->json([
+            'status' => 200,
+            'message' => 'Playlist Created',
+        ]);
+    }
+
+    public function getUserPlaylists(){
+
+        return Playlist::select('id', 'title', 'user_id', 'image_name', 'resolution')
+        ->where('user_id', Auth::user()->id)
+        ->where('status', 1)
+        ->orderBy('display_order', 'ASC')->get();
+    }
 }

@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artist;
+use App\Models\Favourite;
 use App\Models\Genre;
 use App\Models\Playlist;
 use App\Models\Tag;
 use App\Models\Test;
 use Illuminate\Http\Request;
 use App\Models\Track;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PDO;
 
@@ -138,13 +141,12 @@ class TracksController extends Controller
 
     }
 
-    public function getTracks($id)
+    public function getTracks($track_id)
     {
         
         $data["tracks"] = Track::getAllTracks();
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::getGenre();
-
 
         // relations created with Favourite, Artist, Genre
         // Track List
@@ -155,7 +157,7 @@ class TracksController extends Controller
                  'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name',  'artist.resolution as artist_resolution'
                 )
         ->join('artist', 'track.artists', '=', 'artist.id')
-        ->where('track.id', '=', $id)
+        ->where('track.id', '=', $track_id)
         ->where('track.status', 1)
         ->first();
 
@@ -163,23 +165,59 @@ class TracksController extends Controller
         //                                             ->where('artists', 'LIKE', '%'.$artist_id.'%')
         //                                             ->get();
 
-        $artist_id = DB::table('track')->select('artists')->where('id', '=', $id)->first();
+        $artist_id = DB::table('track')->select('artists')->where('id', '=', $track_id)->first();
         $data["track"]["artist_track_counter"] = Track::selectRaw('COUNT(id) as track_counts')
                                                     ->where('artists', 'LIKE', '%'.$artist_id->artists.'%')
                                                     ->first();
-
         
         $data["track"]["genres_title"] = Track::select('genre.title')
         ->join('genre', DB::raw("FIND_IN_SET(genre.id,track.genres)"),'>',DB::raw("'0'"))
-        ->where('track.id', '=', $id)
+        ->where('track.id', '=', $track_id)
         ->get();
-
-    
-
-        
    
         return view('track.track_page', $data);
         //return $data;
+    }
+
+    public function addFavorite($track_id)
+    {
+        $favourite = Favourite::firstOrCreate(
+            [
+                'user_id' => Auth::user()->id,
+                'track_id' => $track_id,
+            ],
+            ['created' => Carbon::now()]
+        );
+
+        if ($favourite->wasRecentlyCreated) {
+            return response()->json([
+                    'status' => 200,
+                    'message' => 'Added to Favourites',
+                ]);
+        } else {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Already Added to Favourites',
+            ]);
+        }
+    }
+
+    public function removeFavorite($track_id)
+    {
+        $favourite = Favourite::where('user_id',Auth::user()->id)->where('track_id',$track_id);
+        if($favourite->count()){
+            $favourite->delete();
+            return response()->json([
+                'status' => 200,
+                'message' => 'Remove from Favourites',
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => 200,
+                'message' => 'No Record found in Favourite',
+            ]);
+        }
     }
 
 }
