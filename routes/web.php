@@ -54,6 +54,11 @@ Route::get('/playlist/{id}', [TracksController::class, 'getTracksByPlaylist'])->
 Route::get('/playlists', [PlaylistController::class, 'getAllPlaylists'])->name('playlists');
 
 
+
+//Search
+Route::get('/search', [SearchController::class, 'search_action'])->name('search');
+
+
 Route::get('/language', [LanguageController::class, 'index']);
 Route::get('/album', [AlbumController::class, 'index']);
 

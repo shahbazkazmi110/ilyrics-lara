@@ -8,6 +8,15 @@
 		  <div class="col">
 		  	<h2 class="h2__underline" tabindex="0">Search</h2>
 		  	{{-- <p>Number of Collections : {{ $artist_detail->track_count }}</p> --}}
+        <div class="row">
+          <div class="input-group mb-3 mt-5" style="">
+            <input type="text" class="form-control form-control--large" placeholder="Search by Reciter..." aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input type="text" class="form-control form-control--large" placeholder="Search by Genre..." aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input type="text" class="form-control form-control--large" placeholder="Search by Tag..." aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn btn--large" type="button" id="button-addon2" style="min-width:80px;"><img src="{{ asset('media/search_white.svg')}}"></button>
+          </div>
+        </div>
+
 		  </div>		  
 	  </div>
 
@@ -18,7 +27,6 @@
 @section('content')
 <main>
 <div class="container pt-md-5 mb-5 pb-5">
-       
     <div class="row" id="pagination-data">
 
         @foreach ($track_list as $track) 

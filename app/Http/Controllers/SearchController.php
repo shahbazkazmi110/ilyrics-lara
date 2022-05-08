@@ -22,10 +22,23 @@ class SearchController extends Controller
         //     $data["track_list"] = SearchController::getTrackByID($id);
         // }
         // else {
-        //     $data["track_list"] = SearchController::getTracks();
+        //     $data["track_list"] = SearchController::getTracks($request);
         // }
 
-        $data["track_list"] = SearchController::getTracks($request);
+        $data["track_list"] = Track::selectRaw('track.id, track.audio_type, track.title, artist.name as track_artists, track.view_count, track.resolution, track.contributor_id, 
+                    track.modified, track.album_year, track.track_duration as audio_duration, track.remote_duration, track.audio_link,
+                    artist.id AS artist_id, artist.name as artist_name, artist.image_name, track.track_name')
+        ->join('artist', DB::raw("FIND_IN_SET(artist.id,track.artists)"),'>',DB::raw("'0'"))
+       ->where('track.status', 1)
+       ->orderBy('track.title', 'ASC')
+       ->limit(10)
+       ->get();
+
+       if ($request->ajax()) {
+            return $data["track_list"];
+        }
+
+
 
        return view('search.search', $data);
 
@@ -57,9 +70,7 @@ class SearchController extends Controller
         // $view = view('artist.artist-track-pagination',$data)->render();
         // return response()->json(['html'=>$view]);
         //   return  $data["artists"];
-    }
-
-
+        }
        return $track_list;
     }
 
@@ -76,4 +87,11 @@ class SearchController extends Controller
         ->where('track.status', 1)
         ->first();
     }
+
+// Search By Artist
+// Search By Reciters
+// Search By Genre
+
+
+
 }
