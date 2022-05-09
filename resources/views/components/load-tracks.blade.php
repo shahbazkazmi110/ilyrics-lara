@@ -65,7 +65,7 @@
       if(auth_user == '1'){
         html +=  `<a href="#" class="btn btn-sharing toggle-favourite" type="button" data-track-id="${value.id}" data-is-fav="${value.favourite}" >${ value.favourite == 2 ? 'Add Favourite' : 'Remove Favourite'}</a>
           <a href="#" class="btn btn-sharing add-playlist" type="button" data-image-name="${value.image_name }" data-track-id="${value.id}" data-bs-toggle="modal" data-bs-target="#addPlaylistModal" >Add to Playlist</a>
-          <a href="#" class="btn btn-sharing" type="button">Download</a>
+          <a href="${audio}" class="btn btn-sharing" target="_blank" type="button">Download</a>
           <a href="#" class="btn btn-sharing" type="button">Share</a>`;
       }else{
         html +=  `<a href="${login_route}" class="btn btn-sharing" type="button">Add Favourite</a>

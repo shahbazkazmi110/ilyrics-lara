@@ -1,13 +1,14 @@
 <div>
     @php
         if(!$track['favourite']) {$track['favourite'] = \App\Helpers\Helper::isFavourite($track['id'],Auth::user()->id ?? null);}
+        $file_url = \App\Helpers\Helper::format_track($track['audio_type'] == 1 ? $track['track_name'] : $track['audio_link'],$track['audio_type']);
     @endphp
     {{-- @if($track['fav']) --}}
     <div id="ag2" class="audiogallery skin-wave auto-init" style="opacity:0; margin-top:30px;" data-options='{"cueFirstMedia": "on","autoplay": "off","autoplayNext": "on","design_menu_position": "bottom","enable_easing": "on","playlistTransition": "fade","design_menu_height": "200"}'>
         <div class="items">
             <div class="audioplayer-tobe skin-wave button-aspect-noir" data-thumb="'{{ \App\Helpers\Helper::format_image($track['image_name'])}}'"
                 data-type="audio"
-                data-source="{{ \App\Helpers\Helper::format_track($track['audio_type'] == 1 ? $track['track_name'] : $track['audio_link'],$track['audio_type']) }}"
+                data-source="{{ $file_url }}"
                 data-options='{
                 "settings_php_handler": "/ilyrics-lara/public/audioplayer/inc/php/publisher.php",
                 "skinwave_comments_enable": "on",
@@ -33,7 +34,7 @@
         @if(Auth::user())
             <a href="#" class="btn btn-sharing toggle-favourite" type="button" data-track-id="{{ $track['id'] }}" data-is-fav="{{ $track['favourite']}}" >{{ $track['favourite'] == 2 ? 'Add Favourite' : 'Remove Favourite'}}</a>
             <a href="#" class="btn btn-sharing add-playlist" type="button" data-image-name="{{ $track['image_name'] }}" data-track-id="{{ $track['id']}}" data-bs-toggle="modal" data-bs-target="#addPlaylistModal" >Add to Playlist</a>
-            <a href="#" class="btn btn-sharing" type="button">Download</a>
+            <a href="{{$file_url}}" target="_blank" class="btn btn-sharing file-download" data-track-id="{{ $track['id']}}" type="button">Download</a>
             <a href="#" class="btn btn-sharing" type="button">Share</a>
         @else
             <a href="{{ route('login') }}" class="btn btn-sharing" type="button">Add Favourite</a>
@@ -52,7 +53,7 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item toggle-favourite" href="#" data-track-id="{{ $track['id'] }}" data-is-fav="{{$track['favourite']}}" >{{ $track['favourite'] == 2 ? 'Add Favourite' : 'Remove Favourite'}}</a></li>
                 <li><a class="dropdown-item add-playlist" href="#" data-image-name="{{ $track['image_name'] }}" data-track-id="{{ $track['id']}}" data-bs-toggle="modal" data-bs-target="#addPlaylistModal" >Add to Playlist</a></li>
-                <li><a class="dropdown-item" href="#">Download</a></li>
+                <li><a class="dropdown-item file-download" data-track-id="{{ $track['id']}}"  target="_blank" href="{{$file_url}}">Download</a></li>
                 <li><a class="dropdown-item" href="#">Share</a></li>
             </ul>
         @else
@@ -69,7 +70,7 @@
         @if(Auth::user())
             <a href="#" class="btn btn--ordinary btn--small__extra pt-2 toggle-favourite" data-track-id="{{ $track['id'] }}" data-is-fav="{{ $track['favourite']}}" >{{ $track['favourite'] == 2 ? 'Add Favourite' : 'Remove Favourite'}}</a>
             <a href="#" class="btn btn--ordinary btn--small__extra pt-2 add-playlist" type="button" data-image-name="{{ $track['image_name'] }}" data-track-id="{{ $track['id']}}" data-bs-toggle="modal" data-bs-target="#addPlaylistModal" >Add to Playlist</a>
-            <a href="#" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Download</a>
+            <a href="{{$file_url}}"  target="_blank" class="btn btn--ordinary btn--small__extra pt-2 file-download" data-track-id="{{ $track['id']}}" type="button" >Download</a>
             <a href="#" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Share</a>
         @else
             <a href="{{ route('login') }}" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Add Favorites</a>

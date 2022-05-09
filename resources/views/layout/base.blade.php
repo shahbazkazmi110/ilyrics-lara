@@ -229,6 +229,27 @@
 		}
 	});
 
+	$('.container').on('click','.file-download',function(e){
+		e.preventDefault();
+		const track_id = $(this).attr("data-track-id");
+		generateDownLink(track_id);
+	});
+
+	function generateDownLink(track_id){
+		// $.ajax({
+		// 	type:'post',
+		// 	headers: {
+		// 		'X-CSRF-TOKEN': csrf,
+		// 	},
+		// 	url:url,
+		// 	success:function(data){
+				
+		// 	},
+		// 	error: function (xhr) {
+			
+		// 	}
+		// });
+	}
 
 	function addFavourite(track_id,element){
 		const url = "{{ route('favorite','')}}"+"/"+track_id;
