@@ -208,7 +208,7 @@
 		loadPlaylists();
 	});
 
-	$('.create-playlist').on('click',function(e){
+	$('.container').on('click','.create-playlist',function(e){
 		e.preventDefault();
 		var data = $('#addPlaylistForm').serializeArray();
 		sendPostRequest('{{ route("addPlaylist")}}',data);
