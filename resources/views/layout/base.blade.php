@@ -230,7 +230,7 @@
 	});
 
 	$('.container').on('click','.file-download',function(e){
-		e.preventDefault();
+		// e.preventDefault();
 		const track_id = $(this).attr("data-track-id");
 		generateDownLink(track_id);
 	});
