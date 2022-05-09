@@ -38,6 +38,9 @@ class Helper
     }
 
     public static function isFavourite($track_id, $user_id = null, $favourite = false){
+        if($favourite == 'test'){
+            dd($track_id,$user_id);
+        }
         if($user_id){
             $favourited = Favourite::where(
                 [

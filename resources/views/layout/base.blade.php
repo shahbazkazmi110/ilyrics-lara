@@ -214,7 +214,7 @@
 		sendPostRequest('{{ route("addPlaylist")}}',data);
 	});
 
-	$('.toggle-favourite').on('click',function(e){
+	$('.container').on('click','.toggle-favourite',function(e){
 		e.preventDefault();
 		const track_id = $(this).attr("data-track-id");
 		const is_fav = $(this).attr("data-is-fav");
@@ -236,7 +236,7 @@
 			url:url,
 			success:function(data){
 				console.log(data.message);
-				element.html('Remove From Favourite');
+				element.html('Remove Favourite');
 				element.removeClass('add-favourite');
 				element.addClass('remove-favourite');
 				element.attr("data-is-fav",1);
