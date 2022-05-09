@@ -30,7 +30,7 @@
   function renderTracks(track_data){
     var html = ''; 
     var pageurl = '{{ env('BASE_URL') }}' ;
-    const auth_user =  {{ Auth::user()? true :false }};
+    const auth_user =  {{ Auth::user()? true : undefined }};
     const login_route = '{{ route('login') }}';
     $.each(track_data, function (key, value) {  
       var image = pageurl+'/admin/uploads/'+value.image_name ;
