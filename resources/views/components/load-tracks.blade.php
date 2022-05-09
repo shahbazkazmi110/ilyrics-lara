@@ -30,7 +30,7 @@
   function renderTracks(track_data){
     var html = ''; 
     var pageurl = '{{ env('BASE_URL') }}' ;
-    const auth_user =  {{ Auth::user()? true : undefined }};
+    const auth_user =  '{{ Auth::user()? true : false }}';
     const login_route = '{{ route('login') }}';
     $.each(track_data, function (key, value) {  
       var image = pageurl+'/admin/uploads/'+value.image_name ;
@@ -62,7 +62,7 @@
         </div>
       </div>`;
       html +=`<div class="border-bottom mb-2 pb-2 text-md-end text-center pt-2 pt-md-0">`;
-      if(auth_user){
+      if(auth_user == 'true'){
         html +=  `<a href="#" class="btn btn-sharing toggle-favourite" type="button" data-track-id="${value.id}" data-is-fav="${value.favourite}" >${ value.favourite == 2 ? 'Add Favourite' : 'Remove Favourite'}</a>
           <a href="#" class="btn btn-sharing add-playlist" type="button" data-image-name="${value.image_name }" data-track-id="${value.id}" data-bs-toggle="modal" data-bs-target="#addPlaylistModal" >Add to Playlist</a>
           <a href="#" class="btn btn-sharing" type="button">Download</a>
