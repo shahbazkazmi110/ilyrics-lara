@@ -72,10 +72,10 @@
             <a href="#" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Download</a>
             <a href="#" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Share</a>
         @else
-            <a href="{{ route('login') }}" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Add Favorites</button>
-            <a href="{{ route('login') }}" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Add to Playlist</button>
-            <a href="{{ route('login') }}" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Download</button>
-            <a href="{{ route('login') }}" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Share</button>
+            <a href="{{ route('login') }}" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Add Favorites</a>
+            <a href="{{ route('login') }}" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Add to Playlist</a>
+            <a href="{{ route('login') }}" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Download</a>
+            <a href="{{ route('login') }}" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Share</a>
         @endif
     </div>
     @else 

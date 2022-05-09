@@ -84,10 +84,13 @@
 	            <li class="nav-item">
 	              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><img src="{{ asset('media/search.svg')}}"></a>
 	            </li>
+				
 	          </ul>
+			  @if(!Auth::user())
 	          <div class="mr-0">
 		          <a  href="{{ url('/register') }}" class="btn btn--primary pt-3">Create an Account</a>
 	          </div>
+			  @endif
 	        </div>
 	      </div>
 	    </nav>
@@ -184,9 +187,9 @@
 </footer>
 <div class="menuoverlay"></div>
 {{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> --}}
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-{{-- <script src="{{ asset('js/bootstrap.bundle.js')}}"></script> --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> --}}
+<script src="{{ asset('js/bootstrap.bundle.js')}}"></script>
 <script src="{{ asset('js/main.js')}}"></script>
 @stack('pagination')
 <script>
@@ -196,15 +199,16 @@
 	});
 
 	@if(AUth::user())
-	$('.toast').toast({
-        // delay:2000,
-    });
+	// $('.toast').toast({
+    //     // delay:2000,
+    // });
 	const csrf = $('meta[name="csrf-token"]').attr('content');
-	$('.add-playlist').click(function(){
+	$('.container').on('click','.add-playlist',function(e){
 		const image_name = $(this).attr("data-image-name");
 		const track_id = $(this).attr("data-track-id");
 		$('#form-image-name').val(image_name);
 		$('#form-track-id').val(track_id);
+		// alert('test');
 		loadPlaylists();
 	});
 
@@ -240,7 +244,7 @@
 				element.removeClass('add-favourite');
 				element.addClass('remove-favourite');
 				element.attr("data-is-fav",1);
-				$('.toast').toast('show');
+				// $('.toast').toast('show');
 			},
 			error: function (xhr) {
 			
