@@ -8,3 +8,7 @@ $(document).on('ready', function() {
 	});
 
 });
+
+addthis.user.ready(function (data) {
+	addthis.button('.share', [addthis_config], [{ ui_click: true, ui_disable: true }]);
+}); 

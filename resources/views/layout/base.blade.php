@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="{{ asset('css/base.css')}}">
 	<script src="{{ asset('audioplayer/libs/jquery/jquery.js')}}" type="text/javascript"></script>
 	<link rel="stylesheet" href="{{ asset('audioplayer/audioplayer/audioplayer.css')}}">
+	<script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f2c69483421ece8&async=1"></script>
 	<script type="text/javascript" src="{{ asset('audioplayer/audioplayer/audioplayer.js')}}"></script>
 
 

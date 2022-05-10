@@ -35,12 +35,12 @@
             <a href="#" class="btn btn-sharing toggle-favourite" type="button" data-track-id="{{ $track['id'] }}" data-is-fav="{{ $track['favourite']}}" >{{ $track['favourite'] == 2 ? 'Add Favourite' : 'Remove Favourite'}}</a>
             <a href="#" class="btn btn-sharing add-playlist" type="button" data-image-name="{{ $track['image_name'] }}" data-track-id="{{ $track['id']}}" data-bs-toggle="modal" data-bs-target="#addPlaylistModal" >Add to Playlist</a>
             <a href="{{$file_url}}" target="_blank" class="btn btn-sharing file-download" data-track-id="{{ $track['id']}}" type="button">Download</a>
-            <a href="#" class="btn btn-sharing" type="button">Share</a>
+            <a href="#" addthis:description="see this collection" addthis:title="{{$track['title']}}" addthis:url="{{ route('tracks-by-id', ['track_id' => $track['id']]) }}" class="btn btn-sharing share" type="button">Share</a>
         @else
             <a href="{{ route('login') }}" class="btn btn-sharing" type="button">Add Favourite</a>
             <a href="{{ route('login') }}" class="btn btn-sharing" type="button">Add to Playlist</a>
             <a href="{{ route('login') }}" class="btn btn-sharing" type="button">Download</a>
-            <a href="{{ route('login') }}" class="btn btn-sharing" type="button">Share</a>
+            <a href="#" addthis:description="see this collection" addthis:title="{{$track['title']}}" addthis:url="{{ route('tracks-by-id', ['track_id' => $track['id']]) }}" class="btn btn-sharing share" type="button">Share</a>
         @endif
     </div>
     @elseif($type=='single')
@@ -54,14 +54,14 @@
                 <li><a class="dropdown-item toggle-favourite" href="#" data-track-id="{{ $track['id'] }}" data-is-fav="{{$track['favourite']}}" >{{ $track['favourite'] == 2 ? 'Add Favourite' : 'Remove Favourite'}}</a></li>
                 <li><a class="dropdown-item add-playlist" href="#" data-image-name="{{ $track['image_name'] }}" data-track-id="{{ $track['id']}}" data-bs-toggle="modal" data-bs-target="#addPlaylistModal" >Add to Playlist</a></li>
                 <li><a class="dropdown-item file-download" data-track-id="{{ $track['id']}}"  target="_blank" href="{{$file_url}}">Download</a></li>
-                <li><a class="dropdown-item" href="#">Share</a></li>
+                <li><a class="dropdown-item share" addthis:description="see this collection" addthis:title="{{$track['title']}}" addthis:url="{{ route('tracks-by-id', ['track_id' => $track['id']]) }}" href="#">Share</a></li>
             </ul>
         @else
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="{{ route('login') }}">Add Favorites</a></li>
                 <li><a class="dropdown-item" href="{{ route('login') }}">Add to Playlist</a></li>
                 <li><a class="dropdown-item" href="{{ route('login') }}">Download</a></li>
-                <li><a class="dropdown-item" href="{{ route('login') }}">Share</a></li>
+                <li><a class="dropdown-item share" addthis:description="see this collection" addthis:title="{{$track['title']}}" addthis:url="{{ route('tracks-by-id', ['track_id' => $track['id']]) }}" href="#">Share</a></li>
             </ul>
         @endif
         </div>
@@ -71,12 +71,12 @@
             <a href="#" class="btn btn--ordinary btn--small__extra pt-2 toggle-favourite" data-track-id="{{ $track['id'] }}" data-is-fav="{{ $track['favourite']}}" >{{ $track['favourite'] == 2 ? 'Add Favourite' : 'Remove Favourite'}}</a>
             <a href="#" class="btn btn--ordinary btn--small__extra pt-2 add-playlist" type="button" data-image-name="{{ $track['image_name'] }}" data-track-id="{{ $track['id']}}" data-bs-toggle="modal" data-bs-target="#addPlaylistModal" >Add to Playlist</a>
             <a href="{{$file_url}}"  target="_blank" class="btn btn--ordinary btn--small__extra pt-2 file-download" data-track-id="{{ $track['id']}}" type="button" >Download</a>
-            <a href="#" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Share</a>
+            <a addthis:description="see this collection" addthis:title="{{$track['title']}}" addthis:url="{{ route('tracks-by-id', ['track_id' => $track['id']]) }}" href="#" class="btn btn--ordinary btn--small__extra pt-2 share" type="button" >Share</a>
         @else
             <a href="{{ route('login') }}" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Add Favorites</a>
             <a href="{{ route('login') }}" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Add to Playlist</a>
             <a href="{{ route('login') }}" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Download</a>
-            <a href="{{ route('login') }}" class="btn btn--ordinary btn--small__extra pt-2" type="button" >Share</a>
+            <a addthis:description="see this collection" addthis:title="{{$track['title']}}" addthis:url="{{ route('tracks-by-id', ['track_id' => $track['id']]) }}" href="#" class="btn btn--ordinary btn--small__extra pt-2 share" type="button" >Share</a>
         @endif
     </div>
     @else 
