@@ -2,61 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TrackResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\{Album, Artist, Genre, Image, Language, Playlist, Tag, Track};
+use App\Models\{Artist, Genre, Tag, Track};
 
 class SearchController extends Controller
 {
     //
 
-    public function search_action(Request $request){
+    public function search(Request $request){
 
-        $id = null;
-
-        $artist = "Aamir Baltistani";
-        $data["tracks_reciters"] = SearchController::getTracksByReciter($artist);
-
-        $genre = "salaam";
-        $data["tracks_genre"] = SearchController::getTracksByGenre($genre);
-
-        $tag = "azadari";
-        $data["tracks_tag"] = SearchController::getTracksByTag($tag);
-
-
-        $data["all_tracks"] = Track::getAllTracks();
-
-        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
-        $data["genres"] = Genre::getGenre();
-
-        // if($id){
-        //     $data["track_list"] = SearchController::getTrackByID($id);
-        // }
-        // else {
-        //     $data["track_list"] = SearchController::getTracks($request);
-        // }
-
-        $data["tracks"] = Track::
+        $tracks = Track::
+        // select('track.id', 'track.audio_type', 'track.title','track.artists',  'track.view_count', 'track.resolution', 
+        //         'track.contributor_id', 'track.modified', 'track.album_year', 'track.track_name', 'track.track_duration as audio_duration',
+        //         'track.remote_duration', 'track.audio_link', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name',  'artist.resolution as artist_resolution')
+        
         select('track.id', 'track.audio_type', 'track.title','track.artists',  'track.view_count', 'track.resolution', 
                 'track.contributor_id', 'track.modified', 'track.album_year', 'track.track_name', 'track.track_duration as audio_duration',
                 'track.remote_duration', 'track.audio_link', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name',  'artist.resolution as artist_resolution')
         ->join('artist', DB::raw("FIND_IN_SET(artist.id,track.artists)"),'>',DB::raw("'0'"))
+        ->where('artist.name','LIKE',$request->recieter)
        ->where('track.status', 1)
        ->orderBy('track.title', 'ASC')
-       ->limit(10)
-       ->get();
-
+       ->paginate(10);
+       
+       $data['tracks'] = TrackResource::collection($tracks)->response()->getData(true);
        if ($request->ajax()) {
-            return $data["track_list"];
+            return $data;
         }
 
+        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+        $data["genres"] = Genre::getGenre();
+
+        return view('search.search', $data);
 
 
+    }
 
-       //return view('search.search', $data);
-
-       return $data;
-
+    public function searchRecieter(Request $request){
+        return Artist::where('name','LIKE','%'.$request->artist.'%')->get();
     }
 
     public function getTracks(Request $request)
@@ -147,7 +132,6 @@ class SearchController extends Controller
         ->get();
 
         return $tracks;
-        
     }
 
 

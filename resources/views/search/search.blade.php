@@ -3,20 +3,20 @@
 @section('banner')
 <div class="pagetitle">
 	<div class="container">
+	  <h2 class="h2__underline" tabindex="0">Results</h2>
 	  <!-- Header  -->
-	  <div class="row">
-		  <div class="col">
-		  	<h2 class="h2__underline" tabindex="0">Search</h2>
-		  	{{-- <p>Number of Collections : {{ $artist_detail->track_count }}</p> --}}
-        <div class="row">
-          <div class="input-group mb-3 mt-5" style="">
-            <input type="text" class="form-control form-control--large" placeholder="Search by Reciter..." aria-label="Recipient's username" aria-describedby="button-addon2">
-            <input type="text" class="form-control form-control--large" placeholder="Search by Genre..." aria-label="Recipient's username" aria-describedby="button-addon2">
-            <input type="text" class="form-control form-control--large" placeholder="Search by Tag..." aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn--large" type="button" id="button-addon2" style="min-width:200px;"><img src="{{ asset('media/search_white.svg')}}"></button>
-          </div>
-        </div>
-
+	  <div class="row">  
+		  <div class="col-12 col-md-3 pb-2">		  	
+		  	<input type="text" class="form-control" id="text-recieter" placeholder="Search by Recitor...">
+		  </div>
+		  <div class="col-12 col-md-3 pb-2">		  	
+		  	<input type="text" class="form-control" id="text-genres" placeholder="Search by Genres...">
+		  </div>
+		  <div class="col-12 col-md-3 pb-2">	  	
+		  	<input type="text" class="form-control" id="text-tags" placeholder="Search by Tags...">
+		  </div>
+		  <div class="col-12 col-md-3 pb-2">
+		  	<button type="button" class="btn btn--primary">Search</button>
 		  </div>		  
 	  </div>
 
@@ -44,3 +44,28 @@
 <x-tags :tags="$tags"/>
 <x-genres :genres="$genres"/>
 @endsection
+@push('extrascripts')
+<script>
+
+$('#text-recieter').on('input propertychange paste',function(){
+  var url = "{{ route('search-recieter')}}";
+  var text = $(this).val();
+  $.ajax({
+			type:'get',
+      data: { artist: text },
+			url:url,
+			success:function(data){
+        console.log(data);
+				// let html = '';
+				// data.forEach(element => {
+				// 	html+='<div class="d-flex">'+element.title+'<i onclick="editPlaylist('+element.id+')">Edit</i><i onclick="deletePlaylist('+element.id+')">Delete</i></div>';
+				// });
+				// $('.playlists').html(html);
+			},
+			error: function (xhr) {
+			
+			}
+		});
+});
+</script>
+@endpush
