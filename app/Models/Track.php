@@ -21,7 +21,7 @@ class Track extends Model
     
     public static function getPopularTracks()
     {   
-        $data = Track::select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count',
+        $data = Track::select('track.id', 'track.audio_type', 'track.track_name', 'track.title', 'artist.name AS artists', 'track.view_count',
          'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'track.track_duration',
          'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name', 'artist.resolution as artist_resolution')//, 'favourite.user_id') 
         //->join('favourite', 'track.id', '=', 'favourite.track_id')

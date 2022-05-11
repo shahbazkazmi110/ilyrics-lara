@@ -261,8 +261,7 @@
 			},
 			url:url,
 			success:function(data){
-				console.log(data.message);
-				element.html('Remove Favourite');
+				element.children('span').html('Remove Favourite');
 				element.removeClass('add-favourite');
 				element.addClass('remove-favourite');
 				element.attr("data-is-fav",1);
@@ -283,8 +282,7 @@
 			},
 			url:url,
 			success:function(data){
-				console.log(data.message);
-				element.html('Add Favourite');
+				element.children('span').html('Add Favourite');
 				element.addClass('add-favourite');
 				element.removeClass('remove-favourite');
 				element.attr("data-is-fav",2);				

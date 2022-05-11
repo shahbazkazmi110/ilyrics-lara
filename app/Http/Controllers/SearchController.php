@@ -147,6 +147,7 @@ class SearchController extends Controller
         ->get();
 
         return $tracks;
+        
     }
 
 

@@ -32,7 +32,7 @@
     @if($type=='list')
     <div class="border-bottom mb-2 pb-2 text-md-end text-center pt-2 pt-md-0">
         @if(Auth::user())
-            <a href="#" class="btn btn-sharing toggle-favourite" type="button" data-track-id="{{ $track['id'] }}" data-is-fav="{{ $track['favourite']}}" >{{ $track['favourite'] == 2 ? 'Add Favourite' : 'Remove Favourite'}}</a>
+            <a href="#" class="btn btn-sharing toggle-favourite" type="button" data-track-id="{{ $track['id'] }}" data-is-fav="{{ $track['favourite']}}" ><span>{{ $track['favourite'] == 2 ? 'Add Favourite' : 'Remove Favourite'}}</span></a>
             <a href="#" class="btn btn-sharing add-playlist" type="button" data-image-name="{{ $track['image_name'] }}" data-track-id="{{ $track['id']}}" data-bs-toggle="modal" data-bs-target="#addPlaylistModal" >Add to Playlist</a>
             <a href="{{$file_url}}" target="_blank" class="btn btn-sharing file-download" data-track-id="{{ $track['id']}}" type="button">Download</a>
             <a href="#" addthis:description="see this collection" addthis:title="{{$track['title']}}" addthis:url="{{ route('tracks-by-id', ['track_id' => $track['id']]) }}" class="btn btn-sharing share" type="button">Share</a>
@@ -51,7 +51,7 @@
         </button>
         @if(Auth::user())
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item toggle-favourite" href="#" data-track-id="{{ $track['id'] }}" data-is-fav="{{$track['favourite']}}" >{{ $track['favourite'] == 2 ? 'Add Favourite' : 'Remove Favourite'}}</a></li>
+                <li><a class="dropdown-item toggle-favourite" href="#" data-track-id="{{ $track['id'] }}" data-is-fav="{{$track['favourite']}}" ><span>{{ $track['favourite'] == 2 ? 'Add Favourite' : 'Remove Favourite'}}</span></a></li>
                 <li><a class="dropdown-item add-playlist" href="#" data-image-name="{{ $track['image_name'] }}" data-track-id="{{ $track['id']}}" data-bs-toggle="modal" data-bs-target="#addPlaylistModal" >Add to Playlist</a></li>
                 <li><a class="dropdown-item file-download" data-track-id="{{ $track['id']}}"  target="_blank" href="{{$file_url}}">Download</a></li>
                 <li><a class="dropdown-item share" addthis:description="see this collection" addthis:title="{{$track['title']}}" addthis:url="{{ route('tracks-by-id', ['track_id' => $track['id']]) }}" href="#">Share</a></li>
@@ -68,7 +68,7 @@
     </div>
     <div class="text-end pt-2 pt-md-0 player_btns d-none d-md-block">
         @if(Auth::user())
-            <a href="#" class="btn btn--ordinary btn--small__extra pt-2 toggle-favourite" data-track-id="{{ $track['id'] }}" data-is-fav="{{ $track['favourite']}}" >{{ $track['favourite'] == 2 ? 'Add Favourite' : 'Remove Favourite'}}</a>
+            <a href="#" class="btn btn--ordinary btn--small__extra pt-2 toggle-favourite" data-track-id="{{ $track['id'] }}" data-is-fav="{{ $track['favourite']}}" ><span>{{ $track['favourite'] == 2 ? 'Add Favourite' : 'Remove Favourite'}}</span></a>
             <a href="#" class="btn btn--ordinary btn--small__extra pt-2 add-playlist" type="button" data-image-name="{{ $track['image_name'] }}" data-track-id="{{ $track['id']}}" data-bs-toggle="modal" data-bs-target="#addPlaylistModal" >Add to Playlist</a>
             <a href="{{$file_url}}"  target="_blank" class="btn btn--ordinary btn--small__extra pt-2 file-download" data-track-id="{{ $track['id']}}" type="button" >Download</a>
             <a addthis:description="see this collection" addthis:title="{{$track['title']}}" addthis:url="{{ route('tracks-by-id', ['track_id' => $track['id']]) }}" href="#" class="btn btn--ordinary btn--small__extra pt-2 share" type="button" >Share</a>

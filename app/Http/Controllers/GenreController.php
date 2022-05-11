@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Genre;
 use App\Models\Tag;
 use App\Models\Track;
-use Illuminate\Support\Facades\Redis;
-use Symfony\Component\Console\Input\Input;
 
 class GenreController extends Controller
 {
