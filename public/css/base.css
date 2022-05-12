@@ -280,11 +280,32 @@ background: linear-gradient(150deg, rgba(20,143,130,0) 0%, rgba(20,143,130,0.339
 	.card--reciter__image {height:150px;}
 	.player_btns {margin-top:0px;}
 }
-
+#text-recieter{
+	background: rgb(255, 255, 255);
+	position: relative;
+}
 #data-list{
 	background-color: white;
 	list-style: none;
 	border: 1px solid lightgrey;
 	border-radius: 5px;
 	top: 10px;
+	box-shadow: 5px 3px 20px 0px rgb(0 0 0 / 10%);
+	padding: 20px;
+}
+#data-list li{
+	cursor: pointer;
+	margin: 2px;
+}
+#data-list li:hover{
+	color: #148f82;
+}
+#suggesstion-box{
+	position: absolute;
+	min-width: 100%;
+	top: 58px;
+	z-index: 1;
+}
+.search-div .input-group .form-control {
+	border-radius:  8px !important;
 }

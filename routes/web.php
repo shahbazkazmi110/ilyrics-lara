@@ -57,7 +57,9 @@ Route::get('/playlists', [PlaylistController::class, 'getAllPlaylists'])->name('
 
 //Search
 Route::get('/search', [SearchController::class, 'search'])->name('search');
-Route::post('/search-recieter', [SearchController::class, 'searchRecieter'])->name('search-recieter');
+Route::post('/search-recieters', [SearchController::class, 'searchRecieters'])->name('search-recieters');
+Route::post('/search-genres', [SearchController::class, 'searchGenres'])->name('search-genres');
+Route::post('/search-tags', [SearchController::class, 'searchTags'])->name('search-tags');
 
 
 

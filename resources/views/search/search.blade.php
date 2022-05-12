@@ -5,23 +5,34 @@
 	<div class="container">
 	  <h2 class="h2__underline" tabindex="0">Results</h2>
 	  <!-- Header  -->
-	  <div class="row">  
+	  <div class="row search-div">  
 		  <div class="col-12 col-md-3 pb-2">
-        <input type="text" class="form-control" id="text-recieter" placeholder="Search by Recitor..." autocomplete="off">
-        <div id="suggesstion-box"></div>
-        {{-- <input type="text" class="form-control autocomplete" id="text-recieter" placeholder="Search by Recitor..." autocomplete="off"> --}}
+        <div class="input-group">
+          <input type="text" class="form-control" id="text-recieter" placeholder="Search by Recitor..." autocomplete="off">
+          <input type="hidden" class="form-control" name="artist_id" id="text-recieter-id">
+          <div id="suggesstion-box"></div>
+        </div>
+      </div>
+		  <div class="col-12 col-md-3 pb-2">	
+        <div class="input-group">
+          <input type="text" class="form-control" id="text-genres" placeholder="Search by Genres..." autocomplete="off">
+          <input type="hidden" class="form-control" name="genre_id" id="text-genres-id">
+          <div id="suggesstion-box"></div>
+        </div>	  	
+		  	{{-- <input type="text" class="form-control" id="text-genres" placeholder="Search by Genres..."> --}}
 		  </div>
-		  <div class="col-12 col-md-3 pb-2">		  	
-		  	<input type="text" class="form-control" id="text-genres" placeholder="Search by Genres...">
-		  </div>
-		  <div class="col-12 col-md-3 pb-2">	  	
-		  	<input type="text" class="form-control" id="text-tags" placeholder="Search by Tags...">
+		  <div class="col-12 col-md-3 pb-2">
+        <div class="input-group">
+          <input type="text" class="form-control" id="text-tags" placeholder="Search by Tags..." autocomplete="off">
+          <input type="hidden" class="form-control" name="tag_id" id="text-tags-id">
+          <div id="suggesstion-box"></div>
+        </div>	 	  	
+		  	{{-- <input type="text" class="form-control" id="text-tags" placeholder="Search by Tags..."> --}}
 		  </div>
 		  <div class="col-12 col-md-3 pb-2">
 		  	<button type="button" class="btn btn--primary">Search</button>
 		  </div>		  
 	  </div>
-
 	</div>
 </div>
 @endsection
@@ -47,39 +58,54 @@
 <x-genres :genres="$genres"/>
 @endsection
 @push('scripts')
-<script src="{{ asset('js/bootstrap-autocomplete/autocomplete.js')}}"></script>
 <script>
-  const field = document.getElementById('text-recieter');
   
   $(document).ready(function(){
     $("#text-recieter").keyup(function(){
-      var url = "{{ route('search-recieter')}}";
-      $.ajax({
+      var url = "{{ route('search-recieters')}}";
+      autocomplete(url,'text-recieter');
+    });
+
+    $("#text-genres").keyup(function(){
+      var url = "{{ route('search-genres')}}";
+      autocomplete(url,'text-genres');
+    });
+
+    $("#text-tags").keyup(function(){
+      var url = "{{ route('search-tags')}}";
+      autocomplete(url,'text-tags');
+    });
+  });
+
+  function autocomplete(url,id){
+    $.ajax({
       headers: {
 				'X-CSRF-TOKEN': csrf,
 			},
       type: "POST",
       url: url,
-      data:{ artist : $(this).val() },
+      data:{ keyword : $('#'+id).val() },
       beforeSend: function(){
-        $("#text-recieter").css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");
+        // $('#'+id).css("background","#FFF url('{{ asset('media/loading.gif')}}') no-repeat 165px");
       },
       success: function(data){
-        $("#suggesstion-box").show();
+        // $("#suggesstion-box").show();
+        $('#'+id).siblings('#suggesstion-box').show()
         var html = '<ul id="data-list">';
-        data.forEach(element => {
-          html+=`<li>${element.name}</li>`
+        data.forEach(ele => {
+          html+=`<li onclick="selectListItem('${ele.name}',${ele.id},'${id}')">${ele.name}</li>`
         });
         html += '</ul>';
-        $("#suggesstion-box").html(html);
-        $("#text-recieter").css("background","#FFF");
+        $('#'+id).siblings('#suggesstion-box').html(html);
+        // $('#'+id).css("background","#FFF");
       }
-      });
     });
-  });
-  function selectCountry(val) {
-    $("#text-recieter").val(val);
-    $("#suggesstion-box").hide();
+
+  }
+  function selectListItem(val,id,elemetId) {
+    $("#"+elemetId).val(val);
+    $("#"+elemetId+"-id").val(id);
+    $('#'+elemetId).siblings('#suggesstion-box').hide();
   }
 </script>
     

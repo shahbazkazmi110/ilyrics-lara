@@ -40,9 +40,18 @@ class SearchController extends Controller
 
     }
 
-    public function searchRecieter(Request $request){
-        return Artist::select('id','name')->where('name','LIKE','%'.$request->artist.'%')->limit(10)->get();
+    public function searchRecieters(Request $request){
+        return Artist::select('id','name')->where('name','LIKE','%'.$request->keyword.'%')->limit(10)->get();
     }
+
+    public function searchGenres(Request $request){
+        return Genre::select('id','title as name')->where('title','LIKE','%'.$request->keyword.'%')->limit(10)->get();
+    }
+
+    public function searchTags(Request $request){
+        return Tag::select('id','title as name')->where('title','LIKE','%'.$request->keyword.'%')->limit(10)->get();
+    }
+
 
     public function getTracks(Request $request)
     {
