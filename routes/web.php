@@ -18,6 +18,7 @@ use App\Http\Controllers\GoogleController;
 |
 */
 
+
 Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/dashboard', function () {

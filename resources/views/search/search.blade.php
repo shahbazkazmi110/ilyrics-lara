@@ -5,34 +5,36 @@
 	<div class="container">
 	  <h2 class="h2__underline" tabindex="0">Results</h2>
 	  <!-- Header  -->
-	  <div class="row search-div">  
-		  <div class="col-12 col-md-3 pb-2">
-        <div class="input-group">
-          <input type="text" class="form-control" id="text-recieter" placeholder="Search by Recitor..." autocomplete="off">
-          <input type="hidden" class="form-control" name="artist_id" id="text-recieter-id">
-          <div id="suggesstion-box"></div>
+    <form id="filter-form">  
+	    <div class="row search-div">
+        <div class="col-12 col-md-3 pb-2">
+          <div class="input-group">
+            <input type="text" class="form-control" id="text-recieter" placeholder="Search by Recitor..." autocomplete="off">
+            <input type="hidden" class="form-control" name="artist_id" id="text-recieter-id">
+            <div id="suggesstion-box"></div>
+          </div>
         </div>
-      </div>
-		  <div class="col-12 col-md-3 pb-2">	
-        <div class="input-group">
-          <input type="text" class="form-control" id="text-genres" placeholder="Search by Genres..." autocomplete="off">
-          <input type="hidden" class="form-control" name="genre_id" id="text-genres-id">
-          <div id="suggesstion-box"></div>
-        </div>	  	
-		  	{{-- <input type="text" class="form-control" id="text-genres" placeholder="Search by Genres..."> --}}
-		  </div>
-		  <div class="col-12 col-md-3 pb-2">
-        <div class="input-group">
-          <input type="text" class="form-control" id="text-tags" placeholder="Search by Tags..." autocomplete="off">
-          <input type="hidden" class="form-control" name="tag_id" id="text-tags-id">
-          <div id="suggesstion-box"></div>
-        </div>	 	  	
-		  	{{-- <input type="text" class="form-control" id="text-tags" placeholder="Search by Tags..."> --}}
-		  </div>
-		  <div class="col-12 col-md-3 pb-2">
-		  	<button type="button" class="btn btn--primary">Search</button>
-		  </div>		  
-	  </div>
+        <div class="col-12 col-md-3 pb-2">	
+          <div class="input-group">
+            <input type="text" class="form-control" id="text-genres" placeholder="Search by Genres..." autocomplete="off">
+            <input type="hidden" class="form-control" name="genre_id" id="text-genres-id">
+            <div id="suggesstion-box"></div>
+          </div>	  	
+          {{-- <input type="text" class="form-control" id="text-genres" placeholder="Search by Genres..."> --}}
+        </div>
+        <div class="col-12 col-md-3 pb-2">
+          <div class="input-group">
+            <input type="text" class="form-control" id="text-tags" placeholder="Search by Tags..." autocomplete="off">
+            <input type="hidden" class="form-control" name="tag_id" id="text-tags-id">
+            <div id="suggesstion-box"></div>
+          </div>	 	  	
+          {{-- <input type="text" class="form-control" id="text-tags" placeholder="Search by Tags..."> --}}
+        </div>  
+        <div class="col-12 col-md-3 pb-2">
+          <button type="button" id="search-filter" class="btn btn--primary">Search</button>
+        </div>	
+	    </div>
+    </form>	  
 	</div>
 </div>
 @endsection
@@ -75,9 +77,38 @@
       var url = "{{ route('search-tags')}}";
       autocomplete(url,'text-tags');
     });
+
+    $('#search-filter').on('click',function(){
+      var url = "{{ route('search')}}";
+      var data = $('#filter-form').serializeArray();
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': csrf,
+        },
+        type: "GET",
+        url: url,
+        data:data,
+        beforeSend: function(){
+          // $('#'+id).css("background","#FFF url('{{ asset('media/loading.gif')}}') no-repeat 165px");
+        },
+        success: function(data){
+         console.log(data);
+        //  $('#filter-form')[0].reset();
+
+        }
+      });
+    });
+
+
   });
 
   function autocomplete(url,id){
+
+    if($('#'+id).val() ==  ''){
+        $('#'+id+'-id').val('');
+        $('#'+id).siblings('#suggesstion-box').hide();
+        return;
+    }
     $.ajax({
       headers: {
 				'X-CSRF-TOKEN': csrf,
@@ -89,15 +120,17 @@
         // $('#'+id).css("background","#FFF url('{{ asset('media/loading.gif')}}') no-repeat 165px");
       },
       success: function(data){
-        // $("#suggesstion-box").show();
-        $('#'+id).siblings('#suggesstion-box').show()
-        var html = '<ul id="data-list">';
-        data.forEach(ele => {
-          html+=`<li onclick="selectListItem('${ele.name}',${ele.id},'${id}')">${ele.name}</li>`
-        });
-        html += '</ul>';
-        $('#'+id).siblings('#suggesstion-box').html(html);
-        // $('#'+id).css("background","#FFF");
+        if(data.length > 0){        
+          $('#'+id).siblings('#suggesstion-box').show()
+          var html = '<ul id="data-list">';
+          data.forEach(ele => {
+            html+=`<li onclick="selectListItem('${ele.name}',${ele.id},'${id}')">${ele.name}</li>`;
+          });
+          html += '</ul>';
+          $('#'+id).siblings('#suggesstion-box').html(html);
+        }else{
+          $('#'+id).siblings('#suggesstion-box').hide();
+        }
       }
     });
 
