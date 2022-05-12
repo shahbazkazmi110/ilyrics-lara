@@ -7,11 +7,9 @@
 	  <!-- Header  -->
 	  <div class="row">  
 		  <div class="col-12 col-md-3 pb-2">
-        <div class="input-group">
-          <input type="text" class="form-control" id="text-recieter" placeholder="Search by Recitor..." autocomplete="off">
-          <div id="suggesstion-box"></div>
-        </div>		  	
-		  	{{-- <input type="text" class="form-control autocomplete" id="text-recieter" placeholder="Search by Recitor..." autocomplete="off"> --}}
+        <input type="text" class="form-control" id="text-recieter" placeholder="Search by Recitor..." autocomplete="off">
+        <div id="suggesstion-box"></div>
+        {{-- <input type="text" class="form-control autocomplete" id="text-recieter" placeholder="Search by Recitor..." autocomplete="off"> --}}
 		  </div>
 		  <div class="col-12 col-md-3 pb-2">		  	
 		  	<input type="text" class="form-control" id="text-genres" placeholder="Search by Genres...">
