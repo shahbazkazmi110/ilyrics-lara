@@ -9,15 +9,12 @@
     <meta name="generator" content="Hugo 0.84.0">
     <title>Get lyrics for Nohay, Naat, Mungabat,  Marsiya & Salam</title>
 	<link rel="icon" href="{{ asset('media/favicon.jpg')}}">
-
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{ asset('css/base.css')}}">
 	<script src="{{ asset('audioplayer/libs/jquery/jquery.js')}}" type="text/javascript"></script>
 	<link rel="stylesheet" href="{{ asset('audioplayer/audioplayer/audioplayer.css')}}">
 	<script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f2c69483421ece8&async=1"></script>
 	<script type="text/javascript" src="{{ asset('audioplayer/audioplayer/audioplayer.js')}}"></script>
-
-
 	<style>
         /* Initially, hide the extra text that
             can be revealed with the button */
@@ -192,18 +189,18 @@
 {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> --}}
 <script src="{{ asset('js/bootstrap.bundle.js')}}"></script>
 <script src="{{ asset('js/main.js')}}"></script>
+@stack('scripts')
 @stack('pagination')
 <script>
 	$('.viewmore_link').click(function(){
 		$('#tags .less').fadeToggle();
 		$(this).text($(this).text() == 'Show More' ? 'Show Less' : 'Show More');
 	});
-
+	const csrf = $('meta[name="csrf-token"]').attr('content');
 	@if(AUth::user())
 	// $('.toast').toast({
     //     // delay:2000,
     // });
-	const csrf = $('meta[name="csrf-token"]').attr('content');
 	$('.container').on('click','.add-playlist',function(e){
 		const image_name = $(this).attr("data-image-name");
 		const track_id = $(this).attr("data-track-id");

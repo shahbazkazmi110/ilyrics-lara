@@ -41,7 +41,7 @@ class SearchController extends Controller
     }
 
     public function searchRecieter(Request $request){
-        return Artist::where('name','LIKE','%'.$request->artist.'%')->get();
+        return Artist::select('id','name')->where('name','LIKE','%'.$request->artist.'%')->limit(10)->get();
     }
 
     public function getTracks(Request $request)

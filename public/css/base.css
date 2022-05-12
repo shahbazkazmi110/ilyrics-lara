@@ -280,3 +280,11 @@ background: linear-gradient(150deg, rgba(20,143,130,0) 0%, rgba(20,143,130,0.339
 	.card--reciter__image {height:150px;}
 	.player_btns {margin-top:0px;}
 }
+
+#data-list{
+	background-color: white;
+	list-style: none;
+	border: 1px solid lightgrey;
+	border-radius: 5px;
+	top: 10px;
+}
