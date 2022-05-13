@@ -22,9 +22,7 @@ class SearchController extends Controller
         //         'track.contributor_id', 'track.modified', 'track.album_year', 'track.track_name', 'track.track_duration as audio_duration',
         //         'track.remote_duration', 'track.audio_link', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name',  'artist.resolution as artist_resolution')
         
-        select('track.id', 'track.audio_type', 'track.title','track.artists',  'track.view_count', 'track.resolution', 
-                'track.contributor_id', 'track.modified', 'track.album_year', 'track.track_name', 'track.track_duration as audio_duration',
-                'track.remote_duration', 'track.audio_link', 'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name',  'artist.resolution as artist_resolution')
+        selectRaw('track.id,track.audio_type,track.title,GROUP_CONCAT(artist.name) as track_artists,track.view_count,track.resolution,track.contributor_id,track.modified,track.album_year,track.track_name,track.track_duration as audio_duration,track.remote_duration,track.audio_link,artist.id AS artist_id,artist.name AS artist_name,artist.image_name,artist.resolution as artist_resolution')
         ->join('artist', DB::raw("FIND_IN_SET(artist.id,track.artists)"),'>',DB::raw("'0'"))
         ->where('artist.name','LIKE',$request->recieter)
         ->where('track.status', 1)
@@ -34,10 +32,11 @@ class SearchController extends Controller
         ->when(isset($genre_id),function($query) use ($genre_id){
                 $query->whereRaw("find_in_set('".$genre_id."',track.genres)");
         })
-        // ->when(isset($tag_id),function($query) use ($tag_id){
-        //     $query->whereRaw("find_in_set('".$tag_id."',track.tags)");
-        // })
+        ->when(isset($tag_id),function($query) use ($tag_id){
+            $query->whereRaw("find_in_set('".$tag_id."',track.tags)");
+        })
         ->orderBy('track.title', 'ASC')
+        ->groupBy('track.id')
         ->paginate(10);
        
        $data['tracks'] = TrackResource::collection($tracks)->response()->getData(true);

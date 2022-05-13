@@ -49,7 +49,7 @@
             <span class="visually-hidden">Loading...</span>
         </div>
         <div class="no-record">
-            No More Records Found
+            No Records Found
         </div>
       </div>
       {{-- {!! $tracks->links() !!} --}}
@@ -59,9 +59,42 @@
 <x-tags :tags="$tags"/>
 <x-genres :genres="$genres"/>
 @endsection
+@push('searchFilter')
+var searchfilter = '';
+$('#search-filter').on('click',function(){
+    var url = "{{ route('search')}}";
+    searchfilter = $('#filter-form').serialize();
+    console.log(searchfilter);
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': csrf,
+      },
+      type: "GET",
+      url: url,
+      data:searchfilter,
+      beforeSend: function(){
+        // $('#'+id).css("background","#FFF url('{{ asset('media/loading.gif')}}') no-repeat 165px");
+      },
+      success: function(data){
+        if (data.tracks.data === undefined || data.tracks.data.length == 0) {
+          $("#pagination-data").html('');
+          lastpage = true;
+          $('.no-record').show();
+          $('.loader').hide();
+        }
+        else{
+          renderTracks(data.tracks.data,true);
+          $('.loader').hide();
+        }
+        Loading = false;
+      //  $('#filter-form')[0].reset();
+
+      }
+    });
+  });
+@endpush
 @push('scripts')
-<script>
-  
+<script>  
   $(document).ready(function(){
     $("#text-recieter").keyup(function(){
       var url = "{{ route('search-recieters')}}";
@@ -77,28 +110,6 @@
       var url = "{{ route('search-tags')}}";
       autocomplete(url,'text-tags');
     });
-
-    $('#search-filter').on('click',function(){
-      var url = "{{ route('search')}}";
-      var data = $('#filter-form').serializeArray();
-      $.ajax({
-        headers: {
-          'X-CSRF-TOKEN': csrf,
-        },
-        type: "GET",
-        url: url,
-        data:data,
-        beforeSend: function(){
-          // $('#'+id).css("background","#FFF url('{{ asset('media/loading.gif')}}') no-repeat 165px");
-        },
-        success: function(data){
-         console.log(data);
-        //  $('#filter-form')[0].reset();
-
-        }
-      });
-    });
-
 
   });
 

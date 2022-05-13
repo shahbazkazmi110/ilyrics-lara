@@ -5,8 +5,7 @@
 @endforeach  
 </div>
 @push('pagination')
-<script type="text/javascript">
-	var page = 1;
+  	var page = 1;
     var lastpage = false;
     var Loading = false;
 
@@ -18,7 +17,7 @@
         if (wS > (hT+hH-wH)){
             if(!lastpage && !Loading){
                 page++;
-                const url ='?page=' + page;
+                const url ='?page=' + page+'&'+searchfilter;
 	            loadMoreData(url);
             }
 
@@ -28,7 +27,7 @@
     $('.loader').hide();
     $('.no-record').hide();
 
-  function renderTracks(track_data){
+  function renderTracks(track_data,search=false){
     var html = ''; 
     var pageurl = '{{ env('BASE_URL') }}' ;
     const auth_user =  '{{ Auth::user()? true : false }}';
@@ -80,8 +79,12 @@
       // playPauseBtnClickEvent(payPauseBtn, payPauseBtn, value);
 
     });
-
-    $("#pagination-data").append(html);
+    if(search){
+      console.log(html);
+      $("#pagination-data").html(html);
+    }else{
+      $("#pagination-data").append(html);
+    }
     dzsag_init('.audiogallery.auto-init', {
       init_each: true
     });
@@ -116,5 +119,4 @@
       Loading = false;
     });
 	}
-</script>
 @endpush

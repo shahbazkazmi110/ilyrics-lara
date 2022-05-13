@@ -204,7 +204,10 @@
 <script src="{{ asset('js/bootstrap.bundle.js')}}"></script>
 <script src="{{ asset('js/main.js')}}"></script>
 @stack('scripts')
+<script>
+@stack('searchFilter')	
 @stack('pagination')
+</script>
 <script>
 	$('.viewmore_link').click(function(){
 		$('#tags .less').fadeToggle();
