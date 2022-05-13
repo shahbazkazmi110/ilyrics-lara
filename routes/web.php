@@ -26,6 +26,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function () { 
+    Route::get('/my-collections', [HomeController::class, 'myCollection'])->name('my-collections');
     Route::post('/favorite/{track_id}', [TracksController::class, 'addFavorite'])->name('favorite');
     Route::post('/remove-favorite/{track_id}', [TracksController::class, 'removeFavorite'])->name('remove-favorite');
     Route::post('/add-playlist', [PlaylistController::class, 'addPlaylist'])->name('addPlaylist');

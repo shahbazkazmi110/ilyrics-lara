@@ -112,7 +112,7 @@
 										<li><a class="dropdown-item ile-download" href="{{ $file_url }}" target="_blank" data-track-id="{{ $track->id }}"><img class="mr-2" src="{{ asset('media/file-earmark-arrow-down.svg')}}"> Download</a></li>
 										@else
 										<li><a class="dropdown-item" href="{{ route('login') }}" ><img class="mr-2" src="{{ asset('media/file-earmark-plus.svg')}}"> <span >Add Favourite</span></a></li>
-										<li><a class="dropdown-item" href="{{ route('login') }}" ><img class="mr-2" src="{{ asset('media/collection-play.svg')}}"> Play All</a></li>
+										{{-- <li><a class="dropdown-item" href="{{ route('login') }}" ><img class="mr-2" src="{{ asset('media/collection-play.svg')}}"> Play All</a></li> --}}
 										<li><a class="dropdown-item" href="{{ route('login') }}" ><img class="mr-2" src="{{ asset('media/file-earmark-arrow-down.svg')}}"> Download</a></li>
 										@endif
 										<li><a class="dropdown-item share" href="#" addthis:description="see this collection" addthis:title="{{$track->title}}" addthis:url="{{ route('track-by-id', ['track_id' => $track->id]) }}"><img class="mr-2" src="{{ asset('media/share-fill.svg')}}"> Share</a></li>

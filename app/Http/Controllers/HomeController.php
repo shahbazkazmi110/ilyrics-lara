@@ -21,4 +21,9 @@ class HomeController extends Controller
         return view('home', $data);
 
     }
+    public function myCollection(){
+        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+        $data["genres"] = Genre::getGenre();
+        return view('my-collections',$data);
+    }
 }
