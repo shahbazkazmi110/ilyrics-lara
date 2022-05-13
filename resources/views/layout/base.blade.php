@@ -136,50 +136,63 @@
 		</div>
 	</div>
 
-		<div class="toast" style="position: absolute; top: 0; right: 0;">
-			<div class="toast-header">
-			<img src="" class="rounded mr-2" alt="...">
-			<strong class="mr-auto">Bootstrap</strong>
-			<small>11 mins ago</small>
-			<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-			</div>
-			<div class="toast-body">
-			Hello, world! This is a toast message.
-			</div>
+	<div class="toast" style="position: absolute; top: 0; right: 0;">
+		<div class="toast-header">
+		<img src="" class="rounded mr-2" alt="...">
+		<strong class="mr-auto">Bootstrap</strong>
+		<small>11 mins ago</small>
+		<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
 		</div>
-
-<div class="modal fade" id="addPlaylistModal" tabindex="-1" aria-labelledby="addPlaylistModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-		<div class="modal-header">
-			<h5 class="modal-title" id="addPlaylistModalLabel">Playlists</h5>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		</div>
-		<div class="modal-body">
-			<div class="playlists">
-
-			</div>
-			<div class="d-none">
-				<form action="" id="addPlaylistForm">
-					<div class="form-group" style="height:150px">
-						<label for="form-title">Title</label>
-						<input id="form-title" type="text" class="form-control" name="title" required placeholder="Title">
-						<div id="msg-title" class="invalid-feedback show"></div>
-					</div>
-					<input id="form-image-name" type="hidden" name="image_name" value="">
-					<input id="form-track-id" type="hidden" name="track_id" value="">
-				</form>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary create-playlist">Create New</button>
-		</div>
+		<div class="toast-body">
+		Hello, world! This is a toast message.
 		</div>
 	</div>
-</div>
+
+	<div class="modal fade" id="addPlaylistModal" tabindex="-1" aria-labelledby="addPlaylistModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title" id="exampleModalLabel">Playlists</h5>
+				  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body p-5">
+					<div class="playlist">
+						<div class="playlist_item" onclick="addToPlaylist(track_id)">
+							<div class="row">
+								<div class="col">
+									<a class="font-size__medium " href="#">Playlist Name</a>
+								</div>
+								<div class="col-auto">
+									<a class="mr-3" href="#">
+										<img src="{{ asset('media/delete.svg')}}" alt="delete icon">
+									</a>
+									<a href="#">
+										<img src="{{ asset('media/edit.svg')}}" alt="Edit icon">
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="">
+						<form id="addPlaylistForm">
+							<div class="input-group mb-3">
+								<input type="text" id="playlist-title" class="form-control form-control--small" name="title" placeholder="Add new Playlist" aria-label="Add new Playlist" aria-describedby="button-addon2">
+								<input id="form-image-name" type="hidden" name="image_name" value="">
+								<input id="form-track-id" type="hidden" name="track_id" value="">
+								<button class="btn btn-outline btn--small" type="button" id="playlist-action" data-action="add" >Add</button>
+							</div>
+							<div id="msg-title" class="invalid-feedback show position-absolute"></div>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">	        	        
+				  <button type="button" class="btn btn-secondary btn--small" data-bs-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </footer>
 <div class="menuoverlay"></div>
 {{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> --}}
@@ -207,14 +220,23 @@
 		const track_id = $(this).attr("data-track-id");
 		$('#form-image-name').val(image_name);
 		$('#form-track-id').val(track_id);
-		// alert('test');
+		$('#playlist-title').val('');
 		loadPlaylists();
 	});
 
-	$('.container').on('click','.create-playlist',function(e){
+	$('#playlist-action').on('click',function(e){
 		e.preventDefault();
 		var data = $('#addPlaylistForm').serializeArray();
-		sendPostRequest('{{ route("addPlaylist")}}',data);
+		if($(this).attr('data-action') == 'add'){
+		 	sendPostRequest('{{ route("addPlaylist")}}',data);
+		}else{
+			var id = $('#playlist-title').attr('data-playlist-id');
+			sendPostRequest('{{ route("updatePlaylist",'')}}'+'/'+id,data);
+			$('#playlist-title').attr('data-playlist-id','');
+			$('#playlist-title').val('');
+			$(this).attr('data-action','add');
+			$(this).html('Add');
+		}
 	});
 
 	$('.container').on('click','.toggle-favourite',function(e){
@@ -300,7 +322,7 @@
 			},
 			data:post_data,
 			success:function(data){
-				console.log(data);
+				loadPlaylists();
 			},
 			error: function (xhr) {
 				if(xhr.responseJSON.errors.title[0] !== ''){
@@ -309,7 +331,6 @@
 					$('#msg-title').fadeOut(3000);
 				}
 			}
-
 		});
 	}
 
@@ -321,20 +342,57 @@
 			success:function(data){
 				let html = '';
 				data.forEach(element => {
-					html+='<div class="d-flex">'+element.title+'<i onclick="editPlaylist('+element.id+')">Edit</i><i onclick="deletePlaylist('+element.id+')">Delete</i></div>';
+					html+=`<div class="playlist_item">
+							<div class="row">
+								<div class="col" onclick="addToPlaylist(${element.id})">
+									<a class="font-size__medium " href="#">${element.title}</a>
+								</div>
+								<div class="col-auto">
+									<a class="mr-3" href="javascript:void(0);" onclick="deletePlaylist(${element.id})">
+										<img src="{{ asset('media/delete.svg')}}" alt="delete icon">
+									</a>
+									<a href="javascript:void(0);" onclick="editPlaylist(${element.id},'${element.title}')">
+										<img src="{{ asset('media/edit.svg')}}" alt="Edit icon">
+									</a>
+								</div>
+							</div>
+						</div>`;
+					// html+='<div class="d-flex">'+element.title+'<i onclick="editPlaylist('+element.id+')">Edit</i><i onclick="deletePlaylist('+element.id+')">Delete</i></div>';
 				});
-				$('.playlists').html(html);
+				$('.playlist').html(html);
 			},
 			error: function (xhr) {
 			
 			}
 		});
 	}
-	function editPlaylist(id){
+	function addToPlaylist(id){
+		let track_id = $('#form-track-id').val();
+		alert('track'+track_id);
 		alert(id);
 	}
+
+	function editPlaylist(id,title){
+		$('#playlist-action').attr('data-action','update');
+		$('#playlist-action').html('Update');
+		$('#playlist-title').val(title);
+		$('#playlist-title').attr('data-playlist-id',id);
+	}
 	function deletePlaylist(id){
-		alert(id);
+		const url = "{{ route('deletePlaylist','')}}"+"/"+id;
+		$.ajax({
+			type:'post',
+			headers: {
+				'X-CSRF-TOKEN': csrf,
+			},
+			url:url,
+			success:function(data){
+				loadPlaylists();
+			},
+			error: function (xhr) {
+			
+			}
+		});
 	}
 @endif
 </script>

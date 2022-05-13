@@ -18,7 +18,8 @@
         if (wS > (hT+hH-wH)){
             if(!lastpage && !Loading){
                 page++;
-	            loadMoreData(page);
+                const url ='?page=' + page;
+	            loadMoreData(url);
             }
 
         }
@@ -86,9 +87,9 @@
     });
   }
 
-	function loadMoreData(page){
+	function loadMoreData(url){
 	  $.ajax({
-      url: '?page=' + page,
+      url: url,
       type: "get",
       beforeSend: function()
       {

@@ -52,7 +52,6 @@ class PlaylistController extends Controller
             'title' => 'required|min:3|max:255',
             'image_name' => 'required',
         ]);
-        
         Playlist::create([
             'title' =>  $request->title, 
             'user_id' => Auth::user()->id, 
@@ -72,11 +71,31 @@ class PlaylistController extends Controller
         ]);
     }
 
+    public function updatePlaylist($id,Request $request){
+        $request->validate([
+            'title' => 'required|min:3|max:255',
+        ]);
+        $playlist = Playlist::find($id);
+        $playlist->update([
+            'title' =>  $request->title, 
+            'user_id' => Auth::user()->id, 
+            'created' => Carbon::now(), 
+        ]);
+        
+        return response()->json([
+            'status' => 200,
+            'message' => 'Playlist Updated',
+        ]);
+    }
+
+    function deletePlaylist($id){
+        Playlist::find($id)->delete();
+    }
     public function getUserPlaylists(){
 
         return Playlist::select('id', 'title', 'user_id', 'image_name', 'resolution')
         ->where('user_id', Auth::user()->id)
-        ->where('status', 1)
+        ->where('status', 2)
         ->orderBy('display_order', 'ASC')->get();
     }
 }
