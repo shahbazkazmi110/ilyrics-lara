@@ -38,10 +38,6 @@
 		<div class="row mb-5 pb-5">
 			@foreach($popular_playlists as $playlist)
 				<div class="col-xl-2 col-lg-3 col-md-4 col-6">
-					@if(Auth::user())
-						@php $saved =  \App\Helpers\Helper::isSavedPlaylist($playlist->id); @endphp	
-						<a href="#" class="toggle-save-playlist position-absolute" style="z-index:1" data-saved="{{ $saved ? 'yes': 'no' }}" data-playlist-id="{{$playlist->id}}" > {{ $saved ? 'Unsave' :'Save' }}</a>
-					@endif
 					<a href="{{ route('tracks-by-playlist', ['id' => $playlist->id]) }}">				
 						<div class="card card--playlist">
 							<div class="card--playlist__image" style="background-image: url('{{ \App\Helpers\Helper::format_image($playlist->image_name,1) }}');">
@@ -60,6 +56,17 @@
 							</div>
 							<div class="card--playlist__content">
 								{{$playlist->title}}
+							</div>
+							<div>
+								@if(Auth::user())
+									@php 
+										$saved =  \App\Helpers\Helper::isSavedPlaylist($playlist->id); 
+										$icon = $saved ? asset('media/bookmark-dark.svg') : asset('media/bookmark.svg');
+									@endphp	
+									<a href="#" class="toggle-save-playlist position-absolute" style="z-index:1;" data-saved="{{ $saved ? 'yes': 'no' }}" data-playlist-id="{{$playlist->id}}" >
+										<img src="{{ $icon }}" alt="Playlist Icon">
+									</a>
+								@endif
 							</div>
 							<div class="card--playlist__tracks">Total Tracks : {{$playlist->track_count}}</div>
 						</div>

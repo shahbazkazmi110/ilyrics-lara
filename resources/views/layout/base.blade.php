@@ -333,12 +333,15 @@
 		var id = $(this).attr('data-playlist-id');
 		if($(this).attr('data-saved') == 'yes'){
 			var url = "{{ route('removePlaylist','')}}"+"/"+id;
+			var icon = "{{ asset('media/bookmark.svg') }}";
 			$(this).attr('data-saved','no');
-			$(this).html('Save');
+			$(this).children('img').attr('src',icon);
 		}else{
+			var icon = "{{ asset('media/bookmark-dark.svg') }}";
 			var url = "{{ route('savePlaylist','')}}"+"/"+id;
 			$(this).attr('data-saved','yes');
-			$(this).html('Un Save');
+			$(this).children('img').attr('src',icon);
+			// $(this).html('Un Save');
 		}
 		toggleSavePlaylist(url)
 	});

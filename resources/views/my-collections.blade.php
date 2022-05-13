@@ -1,4 +1,3 @@
-
 @extends('layout.base')
 @section('banner')
 @endsection
