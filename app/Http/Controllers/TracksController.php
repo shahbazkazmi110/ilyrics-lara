@@ -16,22 +16,6 @@ use Illuminate\Support\Facades\DB;
 
 class TracksController extends Controller
 {
-    public function index(){
-
-        $data = DB::table('track')
-        ->select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution',
-                 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id',
-                  'artist.name AS artist_name', 'artist.image_name')//, 'favourite.user_id') 
-        //->join('favourite', 'track.id', '=', 'favourite.track_id')
-        ->join('artist', 'track.artists', '=', 'artist.id')
-        ->whereNotNull('track.album_year')
-        ->where('track.status', 1)
-        ->orderBy('track.created', 'DESC')
-        ->get();
-
-        return $data;
-
-    }
 
     public function getTracksByTag($id, Request $request)
     {
@@ -49,13 +33,8 @@ class TracksController extends Controller
         }
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::getGenre();
-        $data["tag_detail"] = DB::table('tag')
-        ->select('*')
-        ->where('id', $id)
-        ->first();
-
+        $data["tag_detail"] = Tag::find($id);
         return view('tag.tags', $data);
-        //return $data;
     }
 
     public function getTracksByArtist($id, Request $request)
@@ -115,7 +94,7 @@ class TracksController extends Controller
 
     }
 
-    public function getTracks($track_id)
+    public function getTrack($track_id)
     {
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::getGenre();
@@ -133,14 +112,11 @@ class TracksController extends Controller
         ->where('track.status', 1)
         ->first();
 
-        // $data["track"]["artist_track_counter"] = Track::selectRaw('COUNT(id) as track_counts')
-        //                                             ->where('artists', 'LIKE', '%'.$artist_id.'%')
-        //                                             ->get();
-
-        $artist_id = DB::table('track')->select('artists')->where('id', '=', $track_id)->first();
+     
+        $artist_id = Track::select('artists')->where('id', $track_id)->first();
         $data["track"]["artist_track_counter"] = Track::selectRaw('COUNT(id) as track_counts')
                                                     ->where('artists', 'LIKE', '%'.$artist_id->artists.'%')
-                                                    ->first();
+                                                    ->get();
         
         $data["track"]["genres_title"] = Track::select('genre.title')
         ->join('genre', DB::raw("FIND_IN_SET(genre.id,track.genres)"),'>',DB::raw("'0'"))

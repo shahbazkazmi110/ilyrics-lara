@@ -25,7 +25,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->group(function () { 
     Route::post('/favorite/{track_id}', [TracksController::class, 'addFavorite'])->name('favorite');
     Route::post('/remove-favorite/{track_id}', [TracksController::class, 'removeFavorite'])->name('remove-favorite');
     Route::post('/add-playlist', [PlaylistController::class, 'addPlaylist'])->name('addPlaylist');
@@ -33,12 +33,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/delete-playlist/{id}', [PlaylistController::class, 'deletePlaylist'])->name('deletePlaylist');
     Route::post('/add-to-playlist/{track_id}/{playlist_id}', [PlaylistController::class, 'addToPlaylist'])->name('addToPlaylist');
     Route::get('/user-playlists', [PlaylistController::class, 'getUserPlaylists'])->name('user-playlists');
-    
+    Route::post('/save-playlist/{playlist_id}', [PlaylistController::class, 'savePlaylist'])->name('savePlaylist');
+    Route::post('/remove-playlist/{playlist_id}', [PlaylistController::class, 'removePlaylist'])->name('removePlaylist');
 });
  
 // Tracks
 Route::get('/track', [TracksController::class, 'index'])->name('tracks');
-Route::get('/track/{track_id}', [TracksController::class, 'getTracks'])->name('tracks-by-id');
+Route::get('/track/{track_id}', [TracksController::class, 'getTrack'])->name('track-by-id');
 
 // Artists
 Route::get('/reciter/{id}', [TracksController::class, 'getTracksByArtist'])->name('tracks-by-artist');
@@ -58,13 +59,12 @@ Route::get('/playlist/{id}', [TracksController::class, 'getTracksByPlaylist'])->
 Route::get('/playlists', [PlaylistController::class, 'getAllPlaylists'])->name('playlists');
 
 
-
 //Search
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 Route::post('/search-recieters', [SearchController::class, 'searchRecieters'])->name('search-recieters');
 Route::post('/search-genres', [SearchController::class, 'searchGenres'])->name('search-genres');
 Route::post('/search-tags', [SearchController::class, 'searchTags'])->name('search-tags');
-
+Route::post('/search-tracks', [SearchController::class, 'searchTracks'])->name('search-tracks');
 
 
 Route::get('/language', [LanguageController::class, 'index']);

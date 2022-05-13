@@ -9,11 +9,13 @@
                 <h2 class="h2__underline" tabindex="0">{{ $genre_detail->title }}</h2>
                 <p>Total tracks : {{ $tracks['meta']['total'] ?? 'Not Defined' }}</p>
                 <h4 class="h2__underline" tabindex="0">Related Tags</h4>
-                @foreach ($tag_related as $tag)
-                    <div class="col-6 col-lg-3 col-md-4 pb-2">
-                        <a class="text-decoration-none color-black" href="{{ route('tracks-by-tag', ['id' => $tag->id]) }}">{{$tag->title}}</a>
-                    </div>
-                @endforeach
+                <div class="row">
+                    @foreach ($tag_related as $tag)
+                        <div class="col-6 col-lg-3 col-md-4 pb-2">
+                            <a class="text-decoration-none color-black" href="{{ route('tracks-by-tag', ['id' => $tag->id]) }}">{{$tag->title}}</a>
+                        </div>
+                    @endforeach
+                </div>
             </div>		  
         </div>
 	</div>

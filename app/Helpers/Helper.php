@@ -3,6 +3,8 @@
 namespace App\Helpers;
 
 use App\Models\Favourite;
+use App\Models\SavedPlaylist;
+use Illuminate\Support\Facades\Auth;
 
 CONST ADMIN_IMAGE_LINK = '';
 CONST THUMB_DIR = '';
@@ -53,6 +55,11 @@ class Helper
             $favourite_value =  $favourite ? 1 : 2;
         }
         return $favourite_value;        
+    }
+
+    public static function isSavedPlaylist($playlist_id)
+    {
+        return SavedPlaylist::where('playlist_id',$playlist_id)->where('user_id',Auth::user()->id)->count();
     }
 
 }

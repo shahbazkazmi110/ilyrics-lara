@@ -80,7 +80,6 @@
 
     });
     if(search){
-      console.log(html);
       $("#pagination-data").html(html);
     }else{
       $("#pagination-data").append(html);

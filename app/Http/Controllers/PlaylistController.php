@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\Playlist;
 use App\Models\Tag;
 use App\Models\Genre;
 use App\Models\PlaylistTrack;
+use App\Models\SavedPlaylist;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -120,5 +120,45 @@ class PlaylistController extends Controller
         ->where('user_id', Auth::user()->id)
         ->where('status', 2)
         ->orderBy('display_order', 'ASC')->get();
+    }
+
+    public function savePlaylist($playlist_id){
+        $saved_playlist = SavedPlaylist::firstOrCreate(
+            [
+                'playlist_id' => $playlist_id,
+                'user_id' => Auth::user()->id,
+            ],
+            ['created' => Carbon::now()]
+        );
+
+        if ($saved_playlist->wasRecentlyCreated) {
+            return response()->json([
+                    'status' => 200,
+                    'message' => 'Playlist Saved',
+                ]);
+        } else {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Playlist Already Saved',
+            ]);
+        }
+
+    }
+
+    public function removePlaylist($playlist_id){
+        $saved_playlist = SavedPlaylist::where('user_id',Auth::user()->id)->where('playlist_id',$playlist_id);
+        if($saved_playlist->count()){
+            $saved_playlist->delete();
+            return response()->json([
+                'status' => 200,
+                'message' => 'Playlist Unsaved',
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => 200,
+                'message' => 'No Record found in Saved Playlist',
+            ]);
+        }
     }
 }

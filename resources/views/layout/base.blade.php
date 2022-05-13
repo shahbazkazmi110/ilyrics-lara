@@ -205,6 +205,7 @@
 <script src="{{ asset('js/main.js')}}"></script>
 @stack('scripts')
 <script>
+	var searchfilter = '';
 @stack('searchFilter')	
 @stack('pagination')
 </script>
@@ -322,6 +323,36 @@
 		});
 	}
 
+	$('.toggle-save-playlist').on('click',function(e){
+		e.preventDefault();
+		var id = $(this).attr('data-playlist-id');
+		if($(this).attr('data-saved') == 'yes'){
+			var url = "{{ route('removePlaylist','')}}"+"/"+id;
+			$(this).attr('data-saved','no');
+			$(this).html('Save');
+		}else{
+			var url = "{{ route('savePlaylist','')}}"+"/"+id;
+			$(this).attr('data-saved','yes');
+			$(this).html('Un Save');
+		}
+		toggleSavePlaylist(url)
+	});
+
+	function toggleSavePlaylist(url){
+		$.ajax({
+			type:'post',
+			headers: {
+				'X-CSRF-TOKEN': csrf,
+			},
+			url:url,
+			success:function(data){
+				console.log(data);
+			},
+			error: function (xhr) {
+			
+			}
+		});
+	}
 	function sendPostRequest(url,post_data){
 		$.ajax({
 			type:'POST',

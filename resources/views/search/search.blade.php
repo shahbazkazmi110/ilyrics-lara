@@ -60,7 +60,6 @@
 <x-genres :genres="$genres"/>
 @endsection
 @push('searchFilter')
-var searchfilter = '';
 $('#search-filter').on('click',function(){
     var url = "{{ route('search')}}";
     searchfilter = $('#filter-form').serialize();
