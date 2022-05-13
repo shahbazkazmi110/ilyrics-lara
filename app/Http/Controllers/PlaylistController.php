@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Playlist;
 use App\Models\Tag;
 use App\Models\Genre;
+use App\Models\PlaylistTrack;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,10 +17,8 @@ class PlaylistController extends Controller
     {
         //Featured Playlist Query
         
-        $playlist = DB::table('playlist')
-        ->selectRaw('playlist.id, playlist.title, playlist.user_id, playlist.resolution, saved_playlist.id AS saved, playlist.image_name')
+        $playlist = Playlist::selectRaw('playlist.id, playlist.title, playlist.user_id, playlist.resolution, saved_playlist.id AS saved, playlist.image_name')
         ->join('saved_playlist', 'saved_playlist.playlist_id', '=', 'playlist.id')
-        //->orderBy('playlist.display_order')
         ->orderBy('playlist.created', 'DESC')
         ->limit(20)
         ->get();
@@ -88,9 +87,33 @@ class PlaylistController extends Controller
         ]);
     }
 
-    function deletePlaylist($id){
+    public function deletePlaylist($id){
         Playlist::find($id)->delete();
     }
+
+    public function addToPlaylist($track_id,$playlist_id)
+    {
+        $playlist_track = PlaylistTrack::firstOrCreate(
+            [
+                'playlist_id' => $playlist_id,
+                'track_id' => $track_id,
+            ],
+            ['created' => Carbon::now()]
+        );
+
+        if ($playlist_track->wasRecentlyCreated) {
+            return response()->json([
+                    'status' => 200,
+                    'message' => 'Added to Playlist',
+                ]);
+        } else {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Already Added to Playlist',
+            ]);
+        }
+    }
+
     public function getUserPlaylists(){
 
         return Playlist::select('id', 'title', 'user_id', 'image_name', 'resolution')

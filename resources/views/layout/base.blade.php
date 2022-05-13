@@ -229,6 +229,9 @@
 		var data = $('#addPlaylistForm').serializeArray();
 		if($(this).attr('data-action') == 'add'){
 		 	sendPostRequest('{{ route("addPlaylist")}}',data);
+			$('#msg-title').html('Playlist Added');
+			$('#msg-title').show();
+			$('#msg-title').fadeOut(3000);
 		}else{
 			var id = $('#playlist-title').attr('data-playlist-id');
 			sendPostRequest('{{ route("updatePlaylist",'')}}'+'/'+id,data);
@@ -236,6 +239,9 @@
 			$('#playlist-title').val('');
 			$(this).attr('data-action','add');
 			$(this).html('Add');
+			$('#msg-title').html('Playlist Updated');
+			$('#msg-title').show();
+			$('#msg-title').fadeOut(3000);
 		}
 	});
 
@@ -355,9 +361,9 @@
 										<img src="{{ asset('media/edit.svg')}}" alt="Edit icon">
 									</a>
 								</div>
+
 							</div>
 						</div>`;
-					// html+='<div class="d-flex">'+element.title+'<i onclick="editPlaylist('+element.id+')">Edit</i><i onclick="deletePlaylist('+element.id+')">Delete</i></div>';
 				});
 				$('.playlist').html(html);
 			},
@@ -368,8 +374,23 @@
 	}
 	function addToPlaylist(id){
 		let track_id = $('#form-track-id').val();
-		alert('track'+track_id);
-		alert(id);
+		const url = '{{ url("add-to-playlist") }}'+'/'+track_id+'/'+id;
+		$.ajax({
+			type:'post',
+			headers: {
+				'X-CSRF-TOKEN': csrf,
+			},
+			url:url,
+			success:function(data){
+				$('#msg-title').html(data.message);
+				$('#msg-title').show();
+				$('#msg-title').fadeOut(3000);
+			},
+			error: function (xhr) {
+			
+			}
+		});
+		
 	}
 
 	function editPlaylist(id,title){

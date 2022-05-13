@@ -8,13 +8,11 @@ use App\Models\Favourite;
 use App\Models\Genre;
 use App\Models\Playlist;
 use App\Models\Tag;
-use App\Models\Test;
 use Illuminate\Http\Request;
 use App\Models\Track;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use PDO;
 
 class TracksController extends Controller
 {
@@ -119,8 +117,6 @@ class TracksController extends Controller
 
     public function getTracks($track_id)
     {
-        
-        // $data["tracks"] = Track::getAllTracks();
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::getGenre();
 
