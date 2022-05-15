@@ -22,8 +22,9 @@ class HomeController extends Controller
 
     }
     public function myCollection(){
-        $data["my_playlists"] = Playlist::selectRaw('playlist.id, playlist.title, playlist.user_id, playlist.resolution, playlist.image_name, COUNT(playlist_track.track_id) as track_count')
-            ->where('user_id',Auth::user()->id)    
+        $data["my_playlists"] = Playlist::
+        selectRaw('playlist.id, playlist.title, playlist.user_id, playlist.resolution, playlist.image_name, COUNT(playlist_track.track_id) as track_count')
+            ->where('playlist.user_id',Auth::user()->id)    
             ->join('playlist_track', 'playlist.id', '=', 'playlist_track.playlist_id')
             ->orderBy('playlist.display_order', 'ASC')
             ->groupBy('playlist.id')
@@ -31,10 +32,11 @@ class HomeController extends Controller
 
 
         $data["saved_playlists"] = Playlist::selectRaw('playlist.id, playlist.title, playlist.user_id, playlist.resolution, playlist.image_name, COUNT(playlist_track.track_id) as track_count')
+            ->join('playlist_track', 'playlist.id', '=', 'playlist_track.playlist_id')    
             ->join('saved_playlist', 'playlist.id', '=', 'saved_playlist.playlist_id')
-            ->where('saved_playlist.user_id',Auth::user()->id)
-            ->join('playlist_track', 'playlist.id', '=', 'playlist_track.playlist_id')
+            ->where('saved_playlist.user_id',Auth::user()->id) 
             ->orderBy('playlist.display_order', 'ASC')
+             ->groupBy('playlist.id')
             ->get();
 
         $data["favourite"]  = Track::selectRaw('track.id,track.audio_type, track.title,  GROUP_CONCAT(artist.name) as track_artists, artist.id as artist_id,track.view_count, track.resolution, track.contributor_id, track.modified, track.album_year, track.track_duration,track.remote_duration, artist.image_name, track.track_name,track.audio_link' )
