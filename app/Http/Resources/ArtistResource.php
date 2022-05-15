@@ -14,14 +14,13 @@ class ArtistResource extends JsonResource
      */
     public function toArray($request)
     {
-
         return [
             'id'            => $this->id,
             'name'          => $this->name,
             'track_count'   => $this->track_count,
             'resolution'    => $this->resolution,
-            'thumb_link'    => request()->getSchemeAndHttpHost().'/admin/uploads/thumb/'.$this->image_name ?? '',
-            'image_link'    => request()->getSchemeAndHttpHost().'/admin/uploads/'.$this->image_name ?? '',
+            'thumb_link'    => env('BASE_URL').'/admin/uploads/thumb/'.$this->image_name ?? '',
+            'image_link'    => env('BASE_URL').'/admin/uploads/'.$this->image_name ?? '',
          ];
     }
 }

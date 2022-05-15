@@ -33,7 +33,7 @@ class GoogleController extends Controller
             $finduser = User::where('social_id', $user->id)->first();
             if($finduser){
                 Auth::login($finduser);
-                return redirect()->intended('home');
+                return redirect()->intended('/');
             }else{
                 $newUser = User::create([
                     'type' => 3,

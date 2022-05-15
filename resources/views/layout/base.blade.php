@@ -4,16 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="Get thousand+ lyrics for Nohay, Naat, Mungabat,  Marsiya & Salam from renowned reciters.">
     <meta name="generator" content="Hugo 0.84.0">
     <title>Get lyrics for Nohay, Naat, Mungabat,  Marsiya & Salam</title>
 	<link rel="icon" href="{{ asset('media/favicon.jpg')}}">
-
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{ asset('css/base.css')}}">
-	<script src="{{ asset('audioplayer/libs/jquery/jquery.js')}}" type="text/javascript"></script>
-	@stack('audio-styles')
-	@stack('audio-scripts')
+	<link rel="stylesheet" href="{{ asset('audioplayer/audioplayer/audioplayer.css')}}">
 
 	<style>
         /* Initially, hide the extra text that
@@ -54,11 +52,16 @@
 	              <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Home</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="{{ url('/search') }}">Search</a>
+	              <a class="nav-link" href="{{ route('search') }}">Search</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="{{ url('reciters') }}" tabindex="-1" aria-disabled="true">Reciters</a>
+	              <a class="nav-link" href="{{ route('reciters') }}" tabindex="-1" aria-disabled="true">Reciters</a>
 	            </li>
+				@if(Auth::user())
+				<li class="nav-item">
+					<a class="nav-link" href="{{ route('my-collections') }}" tabindex="-1" aria-disabled="true">My Collections</a>
+				  </li>
+				@endif
 	            <li class="nav-item dropdown">
 				@if(Auth::user())
 					<a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-bs-toggle="dropdown" aria-expanded="false"> {{ Auth::user()->username }}</a>
@@ -75,16 +78,20 @@
 							</form>
 						</li>
 					</ul>
-				@endif
+				@else
 					<a class="nav-link" href="{{ url('login')}}" >My Account</a>
+				@endif
 	            </li>
 	            <li class="nav-item">
 	              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><img src="{{ asset('media/search.svg')}}"></a>
 	            </li>
+				
 	          </ul>
+			  @if(!Auth::user())
 	          <div class="mr-0">
-		          <button type="button" class="btn btn--primary">Create an Account</button>
+		          <a  href="{{ url('/register') }}" class="btn btn--primary pt-3">Create an Account</a>
 	          </div>
+			  @endif
 	        </div>
 	      </div>
 	    </nav>
@@ -128,79 +135,329 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-			  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-				<form method="POST" action="{{ route('login') }}">
-					@csrf
-		
-					<!-- Email Address -->
-					<div>
-						<x-label for="email" :value="__('Email')" />
-		
-						<x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-					</div>
-		
-					<!-- Password -->
-					<div class="mt-4">
-						<x-label for="password" :value="__('Password')" />
-		
-						<x-input id="password" class="block mt-1 w-full"
-										type="password"
-										name="password"
-										required autocomplete="current-password" />
-					</div>
-		
-					<!-- Remember Me -->
-					<div class="block mt-4">
-						<label for="remember_me" class="inline-flex items-center">
-							<input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-							<span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-						</label>
-					</div>
-		
-					<div class="flex items-center justify-end mt-4">
-						@if (Route::has('password.request'))
-							<a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-								{{ __('Forgot your password?') }}
-							</a>
-						@endif
-		
-						<x-button class="ml-3">
-							{{ __('Log in') }}
-						</x-button>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-			  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-			  <button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		  </div>
-		</div>
-	  </div>
 	<div class="copyright">
 		<div class="container text-center font-size__small">
 			<p>Copyright © 2022 Collective Rise LLC. Designed by <a style="text-decoration: underline" href="https://qubitse.com">Qubitse</a>.</p>
 		</div>
 	</div>
+
+	<div class="toast" style="position: absolute; top: 0; right: 0;">
+		<div class="toast-header">
+		<img src="" class="rounded mr-2" alt="...">
+		<strong class="mr-auto">Bootstrap</strong>
+		<small>11 mins ago</small>
+		<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		</div>
+		<div class="toast-body">
+		Hello, world! This is a toast message.
+		</div>
+	</div>
+
+	<div class="modal fade" id="addPlaylistModal" tabindex="-1" aria-labelledby="addPlaylistModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title" id="exampleModalLabel">Playlists</h5>
+				  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body p-5">
+					<div class="playlist">
+						<div class="playlist_item" onclick="addToPlaylist(track_id)">
+							<div class="row">
+								<div class="col">
+									<a class="font-size__medium " href="#">Playlist Name</a>
+								</div>
+								<div class="col-auto">
+									<a class="mr-3" href="#">
+										<img src="{{ asset('media/delete.svg')}}" alt="delete icon">
+									</a>
+									<a href="#">
+										<img src="{{ asset('media/edit.svg')}}" alt="Edit icon">
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="">
+						<form id="addPlaylistForm">
+							<div class="input-group mb-3">
+								<input type="text" id="playlist-title" class="form-control form-control--small" name="title" placeholder="Add new Playlist" aria-label="Add new Playlist" aria-describedby="button-addon2">
+								<input id="form-image-name" type="hidden" name="image_name" value="">
+								<input id="form-track-id" type="hidden" name="track_id" value="">
+								<button class="btn btn-outline btn--small" type="button" id="playlist-action" data-action="add" >Add</button>
+							</div>
+							<div id="msg-title" class="invalid-feedback show position-absolute"></div>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">	        	        
+				  <button type="button" class="btn btn-secondary btn--small" data-bs-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </footer>
 <div class="menuoverlay"></div>
+{{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> --}}
+<script src="{{ asset('audioplayer/libs/jquery/jquery.js')}}" type="text/javascript"></script>
+<script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f2c69483421ece8&async=1"></script>
+<script type="text/javascript" src="{{ asset('audioplayer/audioplayer/audioplayer.js')}}"></script>
 <script src="{{ asset('js/bootstrap.bundle.js')}}"></script>
 <script src="{{ asset('js/main.js')}}"></script>
+@stack('scripts')
+<script>
+	var searchfilter = '';
+@stack('searchFilter')	
 @stack('pagination')
+</script>
 <script>
 	$('.viewmore_link').click(function(){
 		$('#tags .less').fadeToggle();
 		$(this).text($(this).text() == 'Show More' ? 'Show Less' : 'Show More');
 	});
+	const csrf = $('meta[name="csrf-token"]').attr('content');
+	@if(AUth::user())
+	// $('.toast').toast({
+    //     // delay:2000,
+    // });
+	$('.container').on('click','.add-playlist',function(e){
+		const image_name = $(this).attr("data-image-name");
+		const track_id = $(this).attr("data-track-id");
+		$('#form-image-name').val(image_name);
+		$('#form-track-id').val(track_id);
+		$('#playlist-title').val('');
+		loadPlaylists();
+	});
+
+	$('#playlist-action').on('click',function(e){
+		e.preventDefault();
+		var data = $('#addPlaylistForm').serializeArray();
+		if($(this).attr('data-action') == 'add'){
+		 	sendPostRequest('{{ route("addPlaylist")}}',data);
+			$('#msg-title').html('Playlist Added');
+			$('#msg-title').show();
+			$('#msg-title').fadeOut(3000);
+		}else{
+			var id = $('#playlist-title').attr('data-playlist-id');
+			sendPostRequest('{{ route("updatePlaylist",'')}}'+'/'+id,data);
+			$('#playlist-title').attr('data-playlist-id','');
+			$('#playlist-title').val('');
+			$(this).attr('data-action','add');
+			$(this).html('Add');
+			$('#msg-title').html('Playlist Updated');
+			$('#msg-title').show();
+			$('#msg-title').fadeOut(3000);
+		}
+	});
+
+	$('.container').on('click','.toggle-favourite',function(e){
+		e.preventDefault();
+		const track_id = $(this).attr("data-track-id");
+		const is_fav = $(this).attr("data-is-fav");
+		if(is_fav == 2){
+			addFavourite(track_id,$(this));
+		}else{
+			removeFavourite(track_id,$(this));
+		}
+	});
+
+	$('.container').on('click','.file-download',function(e){
+		// e.preventDefault();
+		const track_id = $(this).attr("data-track-id");
+		generateDownLink(track_id);
+	});
+
+	function generateDownLink(track_id){
+		// $.ajax({
+		// 	type:'post',
+		// 	headers: {
+		// 		'X-CSRF-TOKEN': csrf,
+		// 	},
+		// 	url:url,
+		// 	success:function(data){
+				
+		// 	},
+		// 	error: function (xhr) {
+			
+		// 	}
+		// });
+	}
+
+	function addFavourite(track_id,element){
+		const url = "{{ route('favorite','')}}"+"/"+track_id;
+		$.ajax({
+			type:'post',
+			headers: {
+				'X-CSRF-TOKEN': csrf,
+			},
+			url:url,
+			success:function(data){
+				element.children('span').html('Remove Favourite');
+				element.removeClass('add-favourite');
+				element.addClass('remove-favourite');
+				element.attr("data-is-fav",1);
+				// $('.toast').toast('show');
+			},
+			error: function (xhr) {
+			
+			}
+		});
+	}
+
+	function removeFavourite(track_id,element){
+		const url = "{{ route('remove-favorite','')}}"+"/"+track_id;
+		$.ajax({
+			type:'post',
+			headers: {
+				'X-CSRF-TOKEN': csrf,
+			},
+			url:url,
+			success:function(data){
+				element.children('span').html('Add Favourite');
+				element.addClass('add-favourite');
+				element.removeClass('remove-favourite');
+				element.attr("data-is-fav",2);				
+			},
+			error: function (xhr) {
+			
+			}
+		});
+	}
+
+	$('.toggle-save-playlist').on('click',function(e){
+		e.preventDefault();
+		var id = $(this).attr('data-playlist-id');
+		if($(this).attr('data-saved') == 'yes'){
+			var url = "{{ route('removePlaylist','')}}"+"/"+id;
+			var icon = "{{ asset('media/bookmark.svg') }}";
+			$(this).attr('data-saved','no');
+			$(this).children('img').attr('src',icon);
+		}else{
+			var icon = "{{ asset('media/bookmark-dark.svg') }}";
+			var url = "{{ route('savePlaylist','')}}"+"/"+id;
+			$(this).attr('data-saved','yes');
+			$(this).children('img').attr('src',icon);
+			// $(this).html('Un Save');
+		}
+		toggleSavePlaylist(url)
+	});
+
+	function toggleSavePlaylist(url){
+		$.ajax({
+			type:'post',
+			headers: {
+				'X-CSRF-TOKEN': csrf,
+			},
+			url:url,
+			success:function(data){
+				console.log(data);
+			},
+			error: function (xhr) {
+			
+			}
+		});
+	}
+	function sendPostRequest(url,post_data){
+		$.ajax({
+			type:'POST',
+			url:url,
+			headers: {
+				'X-CSRF-TOKEN': csrf,
+			},
+			data:post_data,
+			success:function(data){
+				loadPlaylists();
+			},
+			error: function (xhr) {
+				if(xhr.responseJSON.errors.title[0] !== ''){
+					$('#msg-title').html(xhr.responseJSON.errors.title[0]);
+					$('#msg-title').show();
+					$('#msg-title').fadeOut(3000);
+				}
+			}
+		});
+	}
+
+	function loadPlaylists(){
+		const url = "{{ route('user-playlists')}}";
+		$.ajax({
+			type:'get',
+			url:url,
+			success:function(data){
+				let html = '';
+				data.forEach(element => {
+					html+=`<div class="playlist_item">
+							<div class="row">
+								<div class="col" onclick="addToPlaylist(${element.id})">
+									<a class="font-size__medium " href="#">${element.title}</a>
+								</div>
+								<div class="col-auto">
+									<a class="mr-3" href="javascript:void(0);" onclick="deletePlaylist(${element.id})">
+										<img src="{{ asset('media/delete.svg')}}" alt="delete icon">
+									</a>
+									<a href="javascript:void(0);" onclick="editPlaylist(${element.id},'${element.title}')">
+										<img src="{{ asset('media/edit.svg')}}" alt="Edit icon">
+									</a>
+								</div>
+
+							</div>
+						</div>`;
+				});
+				$('.playlist').html(html);
+			},
+			error: function (xhr) {
+			
+			}
+		});
+	}
+	function addToPlaylist(id){
+		let track_id = $('#form-track-id').val();
+		const url = '{{ url("add-to-playlist") }}'+'/'+track_id+'/'+id;
+		$.ajax({
+			type:'post',
+			headers: {
+				'X-CSRF-TOKEN': csrf,
+			},
+			url:url,
+			success:function(data){
+				$('#msg-title').html(data.message);
+				$('#msg-title').show();
+				$('#msg-title').fadeOut(3000);
+			},
+			error: function (xhr) {
+			
+			}
+		});
+		
+	}
+
+	function editPlaylist(id,title){
+		$('#playlist-action').attr('data-action','update');
+		$('#playlist-action').html('Update');
+		$('#playlist-title').val(title);
+		$('#playlist-title').attr('data-playlist-id',id);
+	}
+	function deletePlaylist(id){
+		const url = "{{ route('deletePlaylist','')}}"+"/"+id;
+		$.ajax({
+			type:'post',
+			headers: {
+				'X-CSRF-TOKEN': csrf,
+			},
+			url:url,
+			success:function(data){
+				loadPlaylists();
+			},
+			error: function (xhr) {
+			
+			}
+		});
+	}
+@endif
 </script>
 @stack('extrascripts')
 </body>

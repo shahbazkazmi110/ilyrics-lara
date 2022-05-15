@@ -19,7 +19,7 @@
                 >
                 <div class="meta-artist">
                     <a href="{{ route('tracks-by-artist', ['id' => $track->artist_id]) }}"><span class="the-artist">{{$track->artists}}</span></a>
-                    <a href="{{ route('tracks-by-id', ['id' => $track->id]) }}"><span class="the-name">{{$track->title}}</span></a>
+                    <a href="{{ route('track-by-id', ['track_id' => $track->id]) }}"><span class="the-name">{{$track->title}}</span></a>
                 </div>
             </div>
         </div>
