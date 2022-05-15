@@ -96,16 +96,14 @@
 			@endphp
 				<div class="col-md-6 col-12">
 					<a href = "{{ route('track-by-id', ['track_id' => $track->id] ) }}">
-
 						<div class="card card--layrics">
 							<div class="card--layrics__image" style="background-image: url('{{ \App\Helpers\Helper::format_image($track->image_name) }}');"></div>
-								<div class="card--layrics__content">
-									<h5 class="mb-0 card--layrics__content__title" tabindex="0" href="{{ route('track-by-id', ['track_id' => $track->id]) }}">
-											{{$track->title}}</h5>
-									<a data-page="artist" href="{{ route('tracks-by-artist', ['id' => $track->artist_id]) }}" class="card--layrics__content__subtitle">{{$track->artists}}</a>
-									<div style="text-align: left">{{gmdate('i:s', $track->track_duration)}}</div>
-								</div>							
-							
+							<div class="card--layrics__content">
+								<h5 class="mb-0 card--layrics__content__title" tabindex="0" href="{{ route('track-by-id', ['track_id' => $track->id]) }}">
+										{{$track->title}}</h5>
+								<a data-page="artist" href="{{ route('tracks-by-artist', ['id' => $track->artist_id]) }}" class="card--layrics__content__subtitle">{{$track->artists}}</a>
+								<div style="text-align: left">{{gmdate('i:s', $track->track_duration)}}</div>
+							</div>							
 							<div class="card--layrics__options">
 								<div class="dropdown float-end">
 									<a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
@@ -129,7 +127,7 @@
 						</div>
 					</a>
 				</div>
-			@endforeach()
+			@endforeach
 		</div>
 		<!-- New Collection eded -->
 	
