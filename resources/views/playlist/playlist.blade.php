@@ -33,7 +33,8 @@
             No More Records Found
         </div>
       </div> --}}
-      {!! $tracks->links() !!}
+      
+      {!! $tracks_pagination->links() !!}
     </div> 
   </div>
 </main>

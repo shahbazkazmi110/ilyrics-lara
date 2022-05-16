@@ -79,6 +79,8 @@ class TracksController extends Controller
         ->paginate(10);
         
         $data['tracks'] = TrackResource::collection($tracks)->response()->getData(true);
+        $data['tracks_pagination'] = $tracks;
+        // dd($data,$tracks);
         // if ($request->ajax()) {
         //     return $data;
         // }
