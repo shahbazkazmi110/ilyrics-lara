@@ -79,9 +79,9 @@ class TracksController extends Controller
         ->paginate(10);
         
         $data['tracks'] = TrackResource::collection($tracks)->response()->getData(true);
-        if ($request->ajax()) {
-            return $data;
-        }
+        // if ($request->ajax()) {
+        //     return $data;
+        // }
 
         $data["tags"] = Tag::orderBy('title', 'ASC')->get();
         $data["genres"] = Genre::getGenre();

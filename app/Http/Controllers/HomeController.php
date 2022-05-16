@@ -22,8 +22,7 @@ class HomeController extends Controller
 
     }
     public function myCollection(){
-        $data["my_playlists"] = Playlist::
-        selectRaw('playlist.id, playlist.title, playlist.user_id, playlist.resolution, playlist.image_name, COUNT(playlist_track.track_id) as track_count')
+        $data["my_playlists"] = Playlist::selectRaw('playlist.id, playlist.title, playlist.user_id, playlist.resolution, playlist.image_name, COUNT(playlist_track.track_id) as track_count')
             ->where('playlist.user_id',Auth::user()->id)    
             ->join('playlist_track', 'playlist.id', '=', 'playlist_track.playlist_id')
             ->orderBy('playlist.display_order', 'ASC')

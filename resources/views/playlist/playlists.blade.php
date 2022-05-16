@@ -33,17 +33,18 @@
                 @endforeach  
             </div> 
         </div>
-        <div class="mt-2">
+        {{ $playlists->links() }}
+        {{-- <div class="mt-2">
             <div class="ajax-load">
                 Loading
             </div>
-        </div>	  
+        </div>	   --}}
     </div>
 </main>
 <x-tags :tags="$tags"/>
 <x-genres :genres="$genres"/>
 @endsection
-@push('pagination')
+{{-- @push('pagination')
 
 	var page = 1;
     var lastpage = false;
@@ -94,5 +95,5 @@
 	        });
 	}
 
-@endpush
+@endpush --}}
 
