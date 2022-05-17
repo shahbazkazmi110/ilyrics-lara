@@ -1,4 +1,3 @@
-
 @extends('layout.base')
 @section('banner')
 <div class="pagetitle">
@@ -43,16 +42,16 @@
 <main>
   <div  class="container pt-md-5 mb-5 pb-5"> 
     <x-load-tracks :tracks="$tracks"/>
-    <div class="mt-2">
-      <div class="ajax-load">
+    <div class="mt-4">
+      {{-- <div class="ajax-load">
         <div class="loader spinner-border text-success" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
         <div class="no-record">
             No Records Found
         </div>
-      </div>
-      {{-- {!! $tracks->links() !!} --}}
+      </div> --}}
+      {!! $tracks->links() !!}
     </div>               
   </div>
 </main>
