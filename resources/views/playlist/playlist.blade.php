@@ -34,7 +34,7 @@
         </div>
       </div> --}}
       
-      {!! $tracks_pagination->links() !!}
+      {!! $tracks->links() !!}
     </div> 
   </div>
 </main>

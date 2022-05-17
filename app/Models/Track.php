@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Helpers\Helper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Artist;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -48,6 +50,11 @@ class Track extends Model
         
         return $data["tracks"];
 
+    }
+
+    public function getFavouriteAttribute()
+    {
+        return Helper::isFavourite($this->id,Auth::user()->id ?? null);
     }
 
     // public function artist(){

@@ -78,8 +78,8 @@ class TracksController extends Controller
         ->groupBy('track.id')
         ->paginate(10);
         
-        $data['tracks'] = TrackResource::collection($tracks)->response()->getData(true);
-        $data['tracks_pagination'] = $tracks;
+        // $data['tracks'] = TrackResource::collection($tracks)->response()->getData(true);
+        $data['tracks'] = $tracks;
         // dd($data,$tracks);
         // if ($request->ajax()) {
         //     return $data;

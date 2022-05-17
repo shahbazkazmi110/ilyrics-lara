@@ -1,6 +1,6 @@
 <div id="pagination-data">
 {{-- @dd() --}}
-@foreach ($tracks['data'] as $track)
+@foreach ($tracks as $track)
     <x-load-track :track="$track"/>
 @endforeach  
 </div>
