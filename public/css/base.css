@@ -332,3 +332,62 @@ background: linear-gradient(150deg, rgba(20,143,130,0) 0%, rgba(20,143,130,0.339
 	border-top-right-radius: 8px !important;
 	border-bottom-right-radius: 8px !important;
 }
+
+.page-item.active .page-link{
+
+	z-index: 3;
+
+	color: #fff !important  ;
+
+	background-color: #148f82 !important;
+
+	border-color: #148f82 !important;
+
+	border-radius: 50%;
+
+	padding: 6px 12px;
+
+}
+
+.page-link{
+
+	z-index: 3;
+
+	color: #148f82 !important;
+
+	background-color: #fff;
+
+	border-color: #06574f;
+
+	border-radius: 50%;
+
+	padding: 6px 12px !important;
+
+}
+
+.page-item:first-child .page-link{
+
+	border-radius: 30% !important;
+
+}
+
+.page-item:last-child .page-link{
+
+	border-radius: 30% !important;   
+
+}
+
+.pagination li{
+
+	padding: 3px;
+
+}
+
+.disabled .page-link{
+
+	color: #212529 !important;
+
+	opacity: 0.5 !important;
+
+}
+

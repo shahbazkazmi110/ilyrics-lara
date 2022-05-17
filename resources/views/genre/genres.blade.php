@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col">
                 <h2 class="h2__underline" tabindex="0">{{ $genre_detail->title }}</h2>
-                <p>Total tracks : {{ $tracks['meta']['total'] ?? 'Not Defined' }}</p>
+                <p>Total tracks : {{ $tracks->total() ?? 'Not Defined' }}</p>
                 <h4 class="h2__underline" tabindex="0">Related Tags</h4>
                 <div class="row">
                     @foreach ($tag_related as $tag)
@@ -24,15 +24,16 @@
 @section('content')
 <div class="container pt-md-5 mb-5 pb-5">
     <x-load-tracks :tracks="$tracks"/>    
-    <div class="mt-2">
-        <div class="ajax-load">
-        <div class="loader spinner-border text-success" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <div class="no-record">
-            No More Records Found
-        </div>
-        </div>
+    <div class="mt-4">
+        {{-- <div class="ajax-load">
+            <div class="loader spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="no-record">
+                No More Records Found
+            </div>
+        </div> --}}
+        {!! $tracks->links() !!}
     </div> 
 </div>
 <x-tags :tags="$tags"/>

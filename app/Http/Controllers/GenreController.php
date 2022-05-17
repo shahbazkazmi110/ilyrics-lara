@@ -14,17 +14,17 @@ class GenreController extends Controller
 
     public function getTracksByGenre($id, Request $request)
     {
-       $tracks = Track::selectRaw('track.id, track.audio_type, track.title, artist.name as track_artists, track.view_count, track.resolution, track.contributor_id,track.modified, track.album_year, track.track_duration, track.remote_duration, track.audio_link,artist.id AS artist_id, artist.name as artist_name, artist.image_name, track.track_name')
+       $data['tracks'] = Track::selectRaw('track.id, track.audio_type, track.title, artist.name as track_artists, track.view_count, track.resolution, track.contributor_id,track.modified, track.album_year, track.track_duration, track.remote_duration, track.audio_link,artist.id AS artist_id, artist.name as artist_name, artist.image_name, track.track_name')
        ->join('artist', 'track.artists', '=', 'artist.id')
        ->where('track.status',1)
        ->where('track.genres', 'like', '%'.$id.'%')
        ->orderBy('track.created', 'DESC')
        ->paginate(10);
 
-       $data['tracks'] = TrackResource::collection($tracks)->response()->getData(true);
-       if ($request->ajax()) {
-         return  $data;
-       }
+      //  $data['tracks'] = TrackResource::collection($tracks)->response()->getData(true);
+      //  if ($request->ajax()) {
+      //    return  $data;
+      //  }
 
        // Genre_detail
        $data["genre_detail"] = Track::selectRaw('genre.id, genre.title, COUNT(track.genres) as count')
