@@ -82,9 +82,9 @@
 					<a class="nav-link" href="{{ url('login')}}" >My Account</a>
 				@endif
 	            </li>
-	            <li class="nav-item">
+	            {{-- <li class="nav-item">
 	              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><img src="{{ asset('media/search.svg')}}"></a>
-	            </li>
+	            </li> --}}
 				
 	          </ul>
 			  @if(!Auth::user())
