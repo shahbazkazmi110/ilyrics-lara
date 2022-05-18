@@ -12,6 +12,8 @@
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{ asset('css/base.css')}}">
 	<link rel="stylesheet" href="{{ asset('audioplayer/audioplayer/audioplayer.css')}}">
+	<script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f2c69483421ece8&async=1"></script>
+
 </head>
 <body>
 <header>
