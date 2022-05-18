@@ -14,8 +14,9 @@ class HomeController extends Controller
     public function index()
     {  
         $data["popular_artists"] = Artist::getPopularArtist();
-       $data["tags"] = Tag::getTags();
+        $data["tags"] = Tag::getTags();
         $data["genres"] = Genre::getGenre();
+       
         $data["popular_playlists"] = Playlist::getFeaturedPlaylist();
         $data["popular_tracks"] = Track::getPopularTracks();
 
@@ -49,7 +50,7 @@ class HomeController extends Controller
         
         $data["tags"] = Tag::getTags();
         $data["genres"] = Genre::getGenre();
-        
+
         return view('my-collections',$data);
     }
 }

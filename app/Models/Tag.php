@@ -14,10 +14,11 @@ class Tag extends Model
     public static function getTags()
     {
         if (Cache::has('footer_tags')){
-            $data["tags"] = Cache::get('footer_tags');     						
+            $data = Cache::get('footer_tags');     						
         }else{
-            $data["tags"] = Tag::orderBy('title', 'ASC')->get();
-            Cache::put('footer_tags', $data["tags"], now()->addWeeks(1));				
+            $data = Tag::orderBy('title', 'ASC')->get();
+            Cache::put('footer_tags', $data, now()->addWeeks(1));				
         }
+        return $data;
     }
 }
