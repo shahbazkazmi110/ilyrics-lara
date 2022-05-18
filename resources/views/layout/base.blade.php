@@ -11,8 +11,7 @@
 	<link rel="icon" href="{{ asset('media/favicon.jpg')}}">
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{ asset('css/base.css')}}">
-	<link rel="stylesheet" href="{{ asset('audioplayer/audioplayer/audioplayer.css')}}">
-	
+	@stack('styles')	
 </head>
 <body>
 <header>
