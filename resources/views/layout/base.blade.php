@@ -183,14 +183,10 @@
 	</div>
 </footer>
 <div class="menuoverlay"></div>
-{{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> --}}
-{{-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> --}}
-{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> --}}
 <script src="{{ asset('audioplayer/libs/jquery/jquery.js')}}" type="text/javascript"></script>
 <script src="{{ asset('js/bootstrap.bundle.min.js')}}"></script>
 <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f2c69483421ece8&async=1"></script>
 <script src="{{ asset('js/main.js')}}"></script>
-
 @stack('scripts')
 <script>
 var searchfilter = '';
@@ -198,14 +194,6 @@ var searchfilter = '';
 @stack('pagination')
 </script>
 <script>
-	$('.viewmore_link').click(function(){
-		$('#tags .less').fadeToggle();
-		$(this).text($(this).text() == 'Show More' ? 'Show Less' : 'Show More');
-	});
-	var toastElList = [].slice.call(document.querySelectorAll('.toast'));
-	var toastList = toastElList.map(function (toastEl) {
-		return new bootstrap.Toast(toastEl, {animation: true,autohide: true,delay: 500});
-	});
 	const csrf = $('meta[name="csrf-token"]').attr('content');
 	@if(AUth::user())
 
@@ -254,29 +242,6 @@ var searchfilter = '';
 			removeFavourite(track_id,$(this));
 		}
 	});
-
-	// $('.container').on('click','.file-download',function(e){
-	// 	// e.preventDefault();
-	// 	const track_id = $(this).attr("data-track-id");
-	// 	generateDownLink(track_id);
-	// });
-
-	// function generateDownLink(track_id){
-	// 	// $.ajax({
-	// 	// 	type:'post',
-	// 	// 	headers: {
-	// 	// 		'X-CSRF-TOKEN': csrf,
-	// 	// 	},
-	// 	// 	url:url,
-	// 	// 	success:function(data){
-				
-	// 	// 	},
-	// 	// 	error: function (xhr) {
-			
-	// 	// 	}
-	// 	// });
-	// }
-
 	function addFavourite(track_id,element){
 		const url = "{{ route('favorite','')}}"+"/"+track_id;
 		$.ajax({
@@ -370,39 +335,6 @@ var searchfilter = '';
 			}
 		});
 	}
-
-	// function loadPlaylists(){
-	// 	const url = "{{ route('user-playlists')}}";
-	// 	$.ajax({
-	// 		type:'get',
-	// 		url:url,
-	// 		success:function(data){
-	// 			let html = '';
-	// 			data.forEach(element => {
-	// 				html+=`<div class="playlist_item">
-	// 						<div class="row">
-	// 							<div class="col" onclick="addToPlaylist(${element.id})">
-	// 								<a class="font-size__medium " href="#">${element.title}</a>
-	// 							</div>
-	// 							<div class="col-auto">
-	// 								<a class="mr-3" href="javascript:void(0);" onclick="deletePlaylist(${element.id})">
-	// 									<img src="{{ asset('media/delete.svg')}}" alt="delete icon">
-	// 								</a>
-	// 								<a href="javascript:void(0);" onclick="editPlaylist(${element.id},'${element.title}')">
-	// 									<img src="{{ asset('media/edit.svg')}}" alt="Edit icon">
-	// 								</a>
-	// 							</div>
-
-	// 						</div>
-	// 					</div>`;
-	// 			});
-	// 			$('.playlist').html(html);
-	// 		},
-	// 		error: function (xhr) {
-			
-	// 		}
-	// 	});
-	// }
 	function addToPlaylist(id){
 		let track_id = $('#form-track-id').val();
 		const url = '{{ url("add-to-playlist") }}'+'/'+track_id+'/'+id;
