@@ -94,6 +94,7 @@ $('#search-filter').on('click',function(){
 @push('scripts')
 <script>  
   $(document).ready(function(){
+   
     $("#text-recieter").keyup(function(){
       var url = "{{ route('search-recieters')}}";
       autocomplete(url,'text-recieter');

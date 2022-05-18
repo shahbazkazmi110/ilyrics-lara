@@ -1,10 +1,9 @@
 <div id="pagination-data">
-{{-- @dd() --}}
 @foreach ($tracks as $track)
     <x-load-track :track="$track"/>
 @endforeach  
 </div>
-@push('pagination')
+{{-- @push('pagination')
   	var page = 1;
     var lastpage = false;
     var Loading = false;
@@ -118,4 +117,4 @@
       Loading = false;
     });
 	}
-@endpush
+@endpush --}}

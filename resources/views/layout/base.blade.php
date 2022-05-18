@@ -35,7 +35,7 @@
 	      <div class="container-fluid">
 	        <div class="il_logo_container">
 				<a class="navbar-brand" href="{{ url('') }}">
-					<img src="{{ asset('media/ilyrics_logo.svg')}}" alt="logo">
+					<img src="{{ asset('media/ilyrics_logo.svg')}}" alt="logo" width="139" height="80">
 				</a>
 			</div>
 	        <a class="navbar-brand navbar-brand--resp" href="/">
@@ -144,14 +144,10 @@
 	<div class="toast" style="position: absolute; top: 0; right: 0;">
 		<div class="toast-header">
 		<img src="" class="rounded mr-2" alt="...">
-		<strong class="mr-auto">Bootstrap</strong>
-		<small>11 mins ago</small>
-		<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
+		<strong class="mr-auto">Message</strong>
 		</div>
 		<div class="toast-body">
-		Hello, world! This is a toast message.
+			<div id="toast-message"></div>
 		</div>
 	</div>
 
@@ -210,7 +206,7 @@
 <script src="{{ asset('js/main.js')}}"></script>
 @stack('scripts')
 <script>
-	var searchfilter = '';
+var searchfilter = '';
 @stack('searchFilter')	
 @stack('pagination')
 </script>
@@ -219,11 +215,13 @@
 		$('#tags .less').fadeToggle();
 		$(this).text($(this).text() == 'Show More' ? 'Show Less' : 'Show More');
 	});
+	var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+	var toastList = toastElList.map(function (toastEl) {
+		return new bootstrap.Toast(toastEl, {animation: true,autohide: true,delay: 500});
+	});
 	const csrf = $('meta[name="csrf-token"]').attr('content');
 	@if(AUth::user())
-	// $('.toast').toast({
-    //     // delay:2000,
-    // });
+
 	$('.container').on('click','.add-playlist',function(e){
 		const image_name = $(this).attr("data-image-name");
 		const track_id = $(this).attr("data-track-id");
@@ -231,6 +229,7 @@
 		$('#form-track-id').val(track_id);
 		$('#playlist-title').val('');
 		loadPlaylists();
+		$('#playlist-action').html('Add');
 	});
 
 	$('#playlist-action').on('click',function(e){
@@ -259,33 +258,37 @@
 		const track_id = $(this).attr("data-track-id");
 		const is_fav = $(this).attr("data-is-fav");
 		if(is_fav == 2){
+			$('#toast-message').html('Added To Favourites');
+			toastList[0].show();
 			addFavourite(track_id,$(this));
 		}else{
+			$('#toast-message').html('Removed From Favourites');
+			toastList[0].show();
 			removeFavourite(track_id,$(this));
 		}
 	});
 
-	$('.container').on('click','.file-download',function(e){
-		// e.preventDefault();
-		const track_id = $(this).attr("data-track-id");
-		generateDownLink(track_id);
-	});
+	// $('.container').on('click','.file-download',function(e){
+	// 	// e.preventDefault();
+	// 	const track_id = $(this).attr("data-track-id");
+	// 	generateDownLink(track_id);
+	// });
 
-	function generateDownLink(track_id){
-		// $.ajax({
-		// 	type:'post',
-		// 	headers: {
-		// 		'X-CSRF-TOKEN': csrf,
-		// 	},
-		// 	url:url,
-		// 	success:function(data){
+	// function generateDownLink(track_id){
+	// 	// $.ajax({
+	// 	// 	type:'post',
+	// 	// 	headers: {
+	// 	// 		'X-CSRF-TOKEN': csrf,
+	// 	// 	},
+	// 	// 	url:url,
+	// 	// 	success:function(data){
 				
-		// 	},
-		// 	error: function (xhr) {
+	// 	// 	},
+	// 	// 	error: function (xhr) {
 			
-		// 	}
-		// });
-	}
+	// 	// 	}
+	// 	// });
+	// }
 
 	function addFavourite(track_id,element){
 		const url = "{{ route('favorite','')}}"+"/"+track_id;
@@ -300,7 +303,6 @@
 				element.removeClass('add-favourite');
 				element.addClass('remove-favourite');
 				element.attr("data-is-fav",1);
-				// $('.toast').toast('show');
 			},
 			error: function (xhr) {
 			
@@ -382,38 +384,38 @@
 		});
 	}
 
-	function loadPlaylists(){
-		const url = "{{ route('user-playlists')}}";
-		$.ajax({
-			type:'get',
-			url:url,
-			success:function(data){
-				let html = '';
-				data.forEach(element => {
-					html+=`<div class="playlist_item">
-							<div class="row">
-								<div class="col" onclick="addToPlaylist(${element.id})">
-									<a class="font-size__medium " href="#">${element.title}</a>
-								</div>
-								<div class="col-auto">
-									<a class="mr-3" href="javascript:void(0);" onclick="deletePlaylist(${element.id})">
-										<img src="{{ asset('media/delete.svg')}}" alt="delete icon">
-									</a>
-									<a href="javascript:void(0);" onclick="editPlaylist(${element.id},'${element.title}')">
-										<img src="{{ asset('media/edit.svg')}}" alt="Edit icon">
-									</a>
-								</div>
+	// function loadPlaylists(){
+	// 	const url = "{{ route('user-playlists')}}";
+	// 	$.ajax({
+	// 		type:'get',
+	// 		url:url,
+	// 		success:function(data){
+	// 			let html = '';
+	// 			data.forEach(element => {
+	// 				html+=`<div class="playlist_item">
+	// 						<div class="row">
+	// 							<div class="col" onclick="addToPlaylist(${element.id})">
+	// 								<a class="font-size__medium " href="#">${element.title}</a>
+	// 							</div>
+	// 							<div class="col-auto">
+	// 								<a class="mr-3" href="javascript:void(0);" onclick="deletePlaylist(${element.id})">
+	// 									<img src="{{ asset('media/delete.svg')}}" alt="delete icon">
+	// 								</a>
+	// 								<a href="javascript:void(0);" onclick="editPlaylist(${element.id},'${element.title}')">
+	// 									<img src="{{ asset('media/edit.svg')}}" alt="Edit icon">
+	// 								</a>
+	// 							</div>
 
-							</div>
-						</div>`;
-				});
-				$('.playlist').html(html);
-			},
-			error: function (xhr) {
+	// 						</div>
+	// 					</div>`;
+	// 			});
+	// 			$('.playlist').html(html);
+	// 		},
+	// 		error: function (xhr) {
 			
-			}
-		});
-	}
+	// 		}
+	// 	});
+	// }
 	function addToPlaylist(id){
 		let track_id = $('#form-track-id').val();
 		const url = '{{ url("add-to-playlist") }}'+'/'+track_id+'/'+id;
