@@ -29,7 +29,7 @@
 			</a>
 				
 	        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
-	          <img src="{{ asset('media/menu_icon_humberger2.svg')}}">
+	          <img src="{{ asset('media/menu_icon_humberger2.svg')}}" alt="menu-nav">
 	        </button>
 	
 	        <div class="collapse navbar-collapse" id="navbarsExample09">
@@ -90,7 +90,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-5">
-				<a class="mb-3" href="#"><img style="width:140px;" src="{{ asset('media/ilyrics_logo.svg')}}"></a>
+				<a class="mb-3" href="#"><img style="width:140px;" src="{{ asset('media/ilyrics_logo.svg')}}" width="140" height="81" alt="logo"></a>
 				<div class="pt-5 pb-3" style="max-width:400px;">At iLyrics.org, we are devoted to build an islamic lyrics library for faithful believers. We are passionately dedicated in the religious, spiritual, educational or social realms.</div>
 				{{-- <strong >Analytics</strong> --}}
 				{{-- <div>
@@ -113,9 +113,9 @@
 					<div class="col-12 col-md-6">
 						<h5 class="pb-4" tabindex="0">Contact Us</h5>
 						<a class="pb-3 color-black d-block text-decoration-none" href="mailto:support@ilyrics.org">support@ilyrics.org</a>
-		                <a href="https://www.facebook.com/iLyricsO/"><img src="{{ asset('media/social_facebook.svg')}}"></a>
-		                <a href="https://twitter.com/ILyricsgo"><img src="{{ asset('media/social_icon_twitter.svg')}}"></a>
-		                <a href="https://www.instagram.com/ilyricsgo/"><img style="width:32px;" src="{{ asset('media/social_icon_svginstagram.svg')}}"></a>
+		                <a href="https://www.facebook.com/iLyricsO/"><img width="32" height="32" src="{{ asset('media/social_facebook.svg')}}" alt="fb-icon"></a>
+		                <a href="https://twitter.com/ILyricsgo"><img width="32" height="32" src="{{ asset('media/social_icon_twitter.svg')}}" alt="twitter-icon"></a>
+		                <a href="https://www.instagram.com/ilyricsgo/"><img width="32" height="32" style="width:32px;" src="{{ asset('media/social_icon_svginstagram.svg')}}" alt="insta-icon"></a>
 					</div>
 				</div>
 			</div>
