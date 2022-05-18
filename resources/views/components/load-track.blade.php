@@ -83,3 +83,6 @@
     @else 
     @endif
 </div>
+@push('scripts')
+<script type="text/javascript" src="{{ asset('audioplayer/audioplayer/audioplayer.js')}}"></script>
+@endpush
