@@ -12,8 +12,7 @@
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{ asset('css/base.css')}}">
 	<link rel="stylesheet" href="{{ asset('audioplayer/audioplayer/audioplayer.css')}}">
-	<script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f2c69483421ece8&async=1"></script>
-
+	
 </head>
 <body>
 <header>
@@ -191,7 +190,9 @@
 <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f2c69483421ece8&async=1"></script>
 <script type="text/javascript" src="{{ asset('audioplayer/audioplayer/audioplayer.js')}}"></script>
 <script src="{{ asset('js/bootstrap.bundle.js')}}"></script>
+<script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f2c69483421ece8&async=1"></script>
 <script src="{{ asset('js/main.js')}}"></script>
+
 @stack('scripts')
 <script>
 var searchfilter = '';
