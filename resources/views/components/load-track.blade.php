@@ -85,5 +85,4 @@
 </div>
 @push('scripts')
 <script type="text/javascript" src="{{ asset('audioplayer/audioplayer/audioplayer.js')}}"></script>
-<script src="{{ asset('js/bootstrap.bundle.min.js')}}"></script>
 @endpush

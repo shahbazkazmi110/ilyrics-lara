@@ -184,19 +184,16 @@
 </footer>
 <div class="menuoverlay"></div>
 <script src="{{ asset('audioplayer/libs/jquery/jquery.js')}}" type="text/javascript"></script>
+<script src="{{ asset('js/bootstrap.bundle.min.js')}}"></script>
 <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f2c69483421ece8&async=1"></script>
-@stack('scripts')
 <script src="{{ asset('js/main.js')}}"></script>
+@stack('scripts')
 <script>
 var searchfilter = '';
 @stack('searchFilter')	
 @stack('pagination')
 </script>
 <script>
-	var toastElList = [].slice.call(document.querySelectorAll('.toast'));
-	var toastList = toastElList.map(function (toastEl) {
-		return new bootstrap.Toast(toastEl, {animation: true,autohide: true,delay: 500});
-	});
 	const csrf = $('meta[name="csrf-token"]').attr('content');
 	@if(AUth::user())
 
