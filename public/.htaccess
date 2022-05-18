@@ -9,14 +9,6 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    <FilesMatch "\.(jpg|jpeg|png|gif|swf)$">
-        Header set Cache-Control "max-age=604800, public"
-    </FilesMatch>
-
-    <FilesMatch "\.(png|jp?g|gif|ico|mp4|wmv|mov|mpeg|css|map|woff?|eot|svg|ttf|js|json|pdf|csv)">
-        ExpiresActive on
-        ExpiresDefault "access plus 2 weeks"
-    </FilesMatch>
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
