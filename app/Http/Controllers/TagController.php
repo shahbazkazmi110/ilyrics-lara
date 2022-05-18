@@ -15,7 +15,7 @@ class TagController extends Controller
     // {
     //     // First 6 tracks
     //     $data["tracks"] = Track::getAllTracks();
-    //     $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+    //    $data["tags"] = Tag::getTags();
     //     $data["genres"] = Genre::getGenre();
 
 

@@ -12,21 +12,7 @@
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{ asset('css/base.css')}}">
 	<link rel="stylesheet" href="{{ asset('audioplayer/audioplayer/audioplayer.css')}}">
-
-	<style>
-        /* Initially, hide the extra text that
-            can be revealed with the button */
-        #moreText {
-  
-            /* Display nothing for the element */
-            display: none;
-        }
-
-		#tags .less {
-			display:  none;
-		}
-    </style>
-  </head>
+</head>
 <body>
 <header>
 	<div class="nav_bar_wraper">

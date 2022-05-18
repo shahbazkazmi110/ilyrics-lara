@@ -31,7 +31,7 @@ class TracksController extends Controller
         // if ($request->ajax()) {
         //   return  $data;
         // }
-        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+       $data["tags"] = Tag::getTags();
         $data["genres"] = Genre::getGenre();
         $data["tag_detail"] = Tag::find($id);
         return view('tag.tags', $data);
@@ -53,7 +53,7 @@ class TracksController extends Controller
         //     return $data;
         // }
 
-        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+       $data["tags"] = Tag::getTags();
         $data["genres"] = Genre::getGenre();
         $data["artist_detail"] = Artist::selectRaw('artist.name, artist.resolution, artist.description, artist.image_name, COUNT(track.artists) as track_count')
         ->join('track', 'artist.id', '=', 'track.artists')
@@ -76,7 +76,7 @@ class TracksController extends Controller
         ->groupBy('track.id')
         ->paginate(10); 
 
-        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+       $data["tags"] = Tag::getTags();
         $data["genres"] = Genre::getGenre();
         $data["playlist_detail"] = Playlist::selectRaw('playlist.id, title, resolution, image_name, COUNT(playlist_track.track_id) as count')
         ->join('playlist_track', 'playlist.id', '=', 'playlist_track.playlist_id')
@@ -89,7 +89,7 @@ class TracksController extends Controller
 
     public function getTrack($track_id)
     {
-        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+       $data["tags"] = Tag::getTags();
         $data["genres"] = Genre::getGenre();
 
         // relations created with Favourite, Artist, Genre

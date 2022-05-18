@@ -42,7 +42,7 @@ class GenreController extends Controller
        ->groupBy('tag.id')
        ->get();
         
-       $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+      $data["tags"] = Tag::getTags();
        $data["genres"] = Genre::getGenre();
 
        //return $data;

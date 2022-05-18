@@ -52,10 +52,6 @@ class ArtistController extends Controller
 
     public function getAllArtists(Request $request){
 
-
-        
-
-
         $data["artists"] = Artist::
         selectRaw('artist.id, artist.name, artist.genres, artist.resolution, artist.created, artist.listening_count, artist.image_name, COUNT(track.id) as track_count')
         ->join('track', DB::raw("FIND_IN_SET(artist.id, track.artists)"),'>',DB::raw("'0'"))
