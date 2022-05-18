@@ -193,6 +193,10 @@ var searchfilter = '';
 @stack('pagination')
 </script>
 <script>
+	var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+	var toastList = toastElList.map(function (toastEl) {
+		return new bootstrap.Toast(toastEl, {animation: true,autohide: true,delay: 500});
+	});
 	const csrf = $('meta[name="csrf-token"]').attr('content');
 	@if(AUth::user())
 

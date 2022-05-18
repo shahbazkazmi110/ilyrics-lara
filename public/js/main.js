@@ -13,8 +13,3 @@ $('.viewmore_link').click(function(){
 	$('#tags .less').fadeToggle();
 	$(this).text($(this).text() == 'Show More' ? 'Show Less' : 'Show More');
 });
-
-var toastElList = [].slice.call(document.querySelectorAll('.toast'));
-var toastList = toastElList.map(function (toastEl) {
-	return new bootstrap.Toast(toastEl, {animation: true,autohide: true,delay: 500});
-});
