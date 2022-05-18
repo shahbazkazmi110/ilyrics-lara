@@ -185,8 +185,8 @@
 <div class="menuoverlay"></div>
 <script src="{{ asset('audioplayer/libs/jquery/jquery.js')}}" type="text/javascript"></script>
 <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f2c69483421ece8&async=1"></script>
-<script src="{{ asset('js/main.js')}}"></script>
 @stack('scripts')
+<script src="{{ asset('js/main.js')}}"></script>
 <script>
 var searchfilter = '';
 @stack('searchFilter')	
