@@ -53,4 +53,13 @@ class HomeController extends Controller
 
         return view('my-collections',$data);
     }
+    
+    public function profile(){
+        $data['auth_user'] = Auth::user();
+        $data["tags"] = Tag::getTags();
+        $data["genres"] = Genre::getGenre();
+        return view('my-profile',$data);
+    }
+
+    
 }

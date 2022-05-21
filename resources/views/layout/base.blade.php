@@ -52,7 +52,7 @@
 				@if(Auth::user())
 					<a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-bs-toggle="dropdown" aria-expanded="false"> {{ Auth::user()->username }}</a>
 					<ul class="dropdown-menu" aria-labelledby="dropdown09">
-						<li><a class="dropdown-item" href="#">Profile</a></li>
+						<li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
 						<li>
 							<form method="POST" action="{{ route('logout') }}">
 								@csrf
