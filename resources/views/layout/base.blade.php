@@ -182,6 +182,7 @@
 	</div>
 </footer>
 <div class="menuoverlay"></div>
+<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('audioplayer/libs/jquery/jquery.js')}}" type="text/javascript"></script>
 <script src="{{ asset('js/bootstrap.bundle.min.js')}}"></script>
 <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f2c69483421ece8&async=1"></script>

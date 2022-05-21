@@ -37,6 +37,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user-playlists', [PlaylistController::class, 'getUserPlaylists'])->name('user-playlists');
     Route::post('/save-playlist/{playlist_id}', [PlaylistController::class, 'savePlaylist'])->name('savePlaylist');
     Route::post('/remove-playlist/{playlist_id}', [PlaylistController::class, 'removePlaylist'])->name('removePlaylist');
+    Route::post('/image_upload', [HomeController::class, 'uploadImage'])->name('image_upload');
+    Route::post('/update_profile', [HomeController::class, 'uploadProfile'])->name('update_profile');
 });
  
 // Tracks
