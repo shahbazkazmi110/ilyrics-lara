@@ -50,7 +50,6 @@
 <x-genres :genres="$genres"/>
 @endsection
 @push('pagination')
-<script type="text/javascript">
 	var page = 1;
     var lastpage = false;
     var Loading = false;
@@ -99,6 +98,5 @@
 	              alert('server not responding...');
 	        });
 	}
-</script>
 @endpush
 

@@ -17,6 +17,24 @@ use Illuminate\Support\Facades\DB;
 class TracksController extends Controller
 {
 
+    public function index(){
+
+        $data['tracks'] = Track::select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution',
+                 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id',
+                  'artist.name AS artist_name', 'artist.image_name')//, 'favourite.user_id') 
+        //->join('favourite', 'track.id', '=', 'favourite.track_id')
+        ->join('artist', 'track.artists', '=', 'artist.id')
+        ->whereNotNull('track.album_year')
+        ->where('track.status', 1)
+        ->orderBy('track.created', 'DESC')
+        ->paginate(10);
+
+        $data["tags"] = Tag::getTags();
+        $data["genres"] = Genre::getGenre();
+        return view('track.tracks', $data);
+
+    }
+
     public function getTracksByTag($id, Request $request)
     {
         $data['tracks']  = Track::selectRaw('track.id, track.audio_type, track.title, artist.name as track_artists, track.view_count, track.resolution, track.contributor_id, 
