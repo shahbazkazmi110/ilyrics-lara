@@ -11,12 +11,13 @@
                     png/jpg/jpeg)</label>
                 <div class="image-upload">
                     <div class="dplay-tbl">
-                        <div class="dplay-tbl-cell">
-                            <img id="userImage" class="max-h-200x rounded-circle mx-auto mb-5 uploaded-image user image_name"
-                                alt="" src="{{ Auth::user()->image_name }}">
+                        <div class="dplay-tbl-cell" style="max-width: 202px; position: relative;">
+                            <img id="userImage" class="max-h-200x rounded-circle mx-auto uploaded-image user image_name"
+                                alt="" src="/storage/images/{{ Auth::user()->image_name }}">
+                            <input data-action="user-image-action" type="file" class="ajax-img-upload" name="image_name">
                         </div>
                     </div>
-                    <input data-action="user-image-action" type="file" class="ajax-img-upload" name="image_name">
+                  
                 </div>
             </div>
 
