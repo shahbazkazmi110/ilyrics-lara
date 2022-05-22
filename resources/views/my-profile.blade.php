@@ -13,7 +13,7 @@
                     <div class="dplay-tbl">
                         <div class="dplay-tbl-cell" style="max-width: 202px; position: relative;">
                             <img id="userImage" class="max-h-200x rounded-circle mx-auto uploaded-image user image_name"
-                                alt="" src="/storage/images/{{ Auth::user()->image_name }}">
+                                alt="" src="{{ $auth_user->image_name }}">
                             <input data-action="user-image-action" type="file" class="ajax-img-upload" name="image_name">
                         </div>
                     </div>
@@ -57,7 +57,7 @@
             event.preventDefault();
             let formData = $(this).serialize();
             $.ajax({
-                url: "/update_profile",
+                url: "{{ route('update_profile')}}",
                 method: 'POST',
                 data: formData,
                 beforeSend: function() {
