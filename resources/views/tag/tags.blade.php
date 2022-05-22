@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col">
                 <h2 class="h2__underline" tabindex="0">{{ $tag_detail->title }}</h2>
-                <p>Total tracks : {{ $tracks['meta']['total'] ?? 'Not Defined' }}</p>
+                <p>Total tracks : {{ $tracks->total() ?? 'Not Defined' }}</p>
             </div>		  
         </div>
 	</div>
