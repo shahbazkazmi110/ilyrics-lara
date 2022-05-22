@@ -324,6 +324,38 @@ var searchfilter = '';
 			}
 		});
 	}
+
+	function loadPlaylists(){
+		const url = "{{ route('user-playlists')}}";
+		$.ajax({
+			type:'get',
+			url:url,
+			success:function(data){
+				let html = '';
+				data.forEach(element => {
+					html+=`<div class="playlist_item">
+							<div class="row">
+								<div class="col" onclick="addToPlaylist(${element.id})">
+									<a class="font-size__medium " href="#">${element.title}</a>
+								</div>
+								<div class="col-auto">
+									<a class="mr-3" href="javascript:void(0);" onclick="deletePlaylist(${element.id})">
+										<img src="{{ asset('media/delete.svg')}}" alt="delete icon">
+									</a>
+									<a href="javascript:void(0);" onclick="editPlaylist(${element.id},'${element.title}')">
+										<img src="{{ asset('media/edit.svg')}}" alt="Edit icon">
+									</a>
+								</div>
+							</div>
+						</div>`;
+				});
+				$('.playlist').html(html);
+			},
+			error: function (xhr) {
+			
+			}
+		});
+	}
 	function addToPlaylist(id){
 		let track_id = $('#form-track-id').val();
 		const url = '{{ url("add-to-playlist") }}'+'/'+track_id+'/'+id;
