@@ -295,7 +295,7 @@ var searchfilter = '';
 			},
 			url:url,
 			success:function(data){
-				Toast.fire({ icon: 'success', title: data });
+				Toast.fire({ icon: 'success', title: data.message });
 			},
 			error: function (xhr) {
 			
