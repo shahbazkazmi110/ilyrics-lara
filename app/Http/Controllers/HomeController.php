@@ -8,6 +8,8 @@ use App\Models\{Album, Artist, Favourite, Genre, Image, Language, Playlist, Save
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 use function PHPUnit\Framework\fileExists;
 
@@ -76,14 +78,14 @@ class HomeController extends Controller
 
             //store file into document folder
             $fileUploaded = \Illuminate\Support\Facades\Storage::disk('local')->put("public/images/" . $filename, file_get_contents($file));
-
             if ($fileUploaded) {
                 //store your file into database
                 $user = \App\Models\User::find(Auth::user()->id);
                 $user->image_name = $filename;
                 $user->save();
 
-                if (fileExists(asset('images/' . $oldImage))) {
+              
+                if (File::exists(storage_path('app/public/images/'. $oldImage))) {
                     unlink(storage_path("app/public/images/" . $oldImage));
                 }
                 return Response()->json([

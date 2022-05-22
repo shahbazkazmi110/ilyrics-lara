@@ -11,9 +11,17 @@
                     png/jpg/jpeg)</label>
                 <div class="image-upload">
                     <div class="dplay-tbl">
+                        @php
+                        if (strpos($auth_user->image_name, "http") === 0){
+                            $profile_image = $auth_user->image_name;
+                        }
+                        else{
+                        $profile_image =  url('storage/images/'.$auth_user->image_name);
+                        }
+                        @endphp
                         <div class="dplay-tbl-cell" style="max-width: 202px; position: relative;">
                             <img id="userImage" class="max-h-200x rounded-circle mx-auto uploaded-image user image_name"
-                                alt="" src="{{ $auth_user->image_name }}">
+                                alt="profile-image" src="{{ $profile_image }}">
                             <input data-action="user-image-action" type="file" class="ajax-img-upload" name="image_name">
                         </div>
                     </div>
@@ -80,5 +88,97 @@
                 },
             });
         });
+
+
+$(document).on('change', '.ajax-img-upload', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    var $this = $(this),
+        _URL = window.URL || window.webkitURL,
+        file = $this[0].files[0];
+
+    if ($this[0].files && file) {
+
+        uploadImageAjax($this, file);
+    }
+
+    $this.val('');
+});
+
+
+function uploadImageAjax($this, file) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    var action = $this.data('action'),
+        id = $this.closest('form').find('[name="id"]').val(),
+        form_data = new FormData();
+
+    if (imageValidation(file)) {
+        form_data.append('image_name', file);
+        form_data.append('id', id);
+        form_data.append('action', action);
+
+        $.ajax({
+            url: "image_upload",
+            method: 'POST',
+            dataType: 'json',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+
+            beforeSend: function () {
+                // $('.ajax-bar').addClass('active').css('width', '0px');
+            },
+
+            error: function (err) {
+                console.log(err);
+            },
+
+            success: function (response) {
+                let uploadedObj = JSON.parse(JSON.stringify(response));
+                $("#userImage").attr('src', "/storage/images/" + uploadedObj.profile_image);
+                Toast.fire({ icon: 'success', title: "Image uploaded" });
+            },
+            // xhr: function () {
+            //     var xhr = $.ajaxSettings.xhr();
+            //     if (xhr.upload) {
+            //         xhr.upload.addEventListener('progress', function (event) {
+            //             var percent = 0;
+            //             var position = event.loaded || event.position;
+            //             var total = event.total;
+            //             if (event.lengthComputable) {
+
+            //                 percent = Math.ceil(position / total * 100);
+            //                 $('.ajax-bar').css('width', percent + '%');
+            //             }
+            //         }, true);
+            //     }
+            //     return xhr;
+            // },
+            mimeType: "multipart/form-data"
+        });
+    }
+}
+
+
+function imageValidation(file) {
+    var validFormat = ['image/png', 'image/jpg', 'image/jpeg'],
+        fileType = file.type,
+        fileSize = file.size,
+        fileName = file.name;
+
+    if ($.inArray(fileType, validFormat) < 0)
+        Toast.fire({ icon: 'error', title: "upload jpeg, jpg or png format only" });
+    else if (15000000 < fileSize)
+        Toast.fire({ icon: 'error', title: "Max Image Size : 1.5MB" });
+    else return true;
+}
+
     </script>
 @endpush
