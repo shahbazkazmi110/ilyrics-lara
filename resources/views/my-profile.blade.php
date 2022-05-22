@@ -106,7 +106,7 @@ $(document).on('change', '.ajax-img-upload', function (e) {
     $this.val('');
 });
 
-
+var storage_url =  "{{url('storage')}}";
 function uploadImageAjax($this, file) {
     $.ajaxSetup({
         headers: {
@@ -142,7 +142,7 @@ function uploadImageAjax($this, file) {
 
             success: function (response) {
                 let uploadedObj = JSON.parse(JSON.stringify(response));
-                $("#userImage").attr('src', "/storage/images/" + uploadedObj.profile_image);
+                $("#userImage").attr('src', storage_url+"/images/" + uploadedObj.profile_image);
                 Toast.fire({ icon: 'success', title: "Image uploaded" });
             },
             // xhr: function () {
