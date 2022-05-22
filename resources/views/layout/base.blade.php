@@ -126,17 +126,6 @@
 			<p>Copyright © 2022 Collective Rise LLC. Designed by <a style="text-decoration: underline" href="https://qubitse.com">Qubitse</a>.</p>
 		</div>
 	</div>
-
-	<div class="toast" style="position: absolute; top: 0; right: 0;">
-		<div class="toast-header">
-		<img src="" class="rounded mr-2" alt="...">
-		<strong class="mr-auto">Message</strong>
-		</div>
-		<div class="toast-body">
-			<div id="toast-message"></div>
-		</div>
-	</div>
-
 	<div class="modal fade" id="addPlaylistModal" tabindex="-1" aria-labelledby="addPlaylistModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -233,12 +222,8 @@ var searchfilter = '';
 		const track_id = $(this).attr("data-track-id");
 		const is_fav = $(this).attr("data-is-fav");
 		if(is_fav == 2){
-			$('#toast-message').html('Added To Favourites');
-			toastList[0].show();
 			addFavourite(track_id,$(this));
 		}else{
-			$('#toast-message').html('Removed From Favourites');
-			toastList[0].show();
 			removeFavourite(track_id,$(this));
 		}
 	});
@@ -255,6 +240,7 @@ var searchfilter = '';
 				element.removeClass('add-favourite');
 				element.addClass('remove-favourite');
 				element.attr("data-is-fav",1);
+				Toast.fire({ icon: 'success', title: "Added to Favourites" });
 			},
 			error: function (xhr) {
 			
@@ -274,7 +260,8 @@ var searchfilter = '';
 				element.children('span').html('Add Favourite');
 				element.addClass('add-favourite');
 				element.removeClass('remove-favourite');
-				element.attr("data-is-fav",2);				
+				element.attr("data-is-fav",2);
+				Toast.fire({ icon: 'success', title: "Removed from Favourites" });				
 			},
 			error: function (xhr) {
 			
@@ -308,7 +295,7 @@ var searchfilter = '';
 			},
 			url:url,
 			success:function(data){
-				console.log(data);
+				Toast.fire({ icon: 'success', title: data });
 			},
 			error: function (xhr) {
 			
@@ -325,12 +312,14 @@ var searchfilter = '';
 			data:post_data,
 			success:function(data){
 				loadPlaylists();
+				Toast.fire({ icon: 'success', title: "Changes Saved" });
 			},
 			error: function (xhr) {
 				if(xhr.responseJSON.errors.title[0] !== ''){
 					$('#msg-title').html(xhr.responseJSON.errors.title[0]);
 					$('#msg-title').show();
 					$('#msg-title').fadeOut(3000);
+					Toast.fire({ icon: 'error', title: xhr.responseJSON.errors.title[0] });
 				}
 			}
 		});
@@ -348,9 +337,10 @@ var searchfilter = '';
 				$('#msg-title').html(data.message);
 				$('#msg-title').show();
 				$('#msg-title').fadeOut(3000);
+				Toast.fire({ icon: 'success', title: "Playlist Added" });
 			},
 			error: function (xhr) {
-			
+				Toast.fire({ icon: 'error', title: "Please Try Again" });
 			}
 		});
 		
@@ -372,9 +362,10 @@ var searchfilter = '';
 			url:url,
 			success:function(data){
 				loadPlaylists();
+				Toast.fire({ icon: 'success', title: "Playlist Deleted" });
 			},
 			error: function (xhr) {
-			
+				Toast.fire({ icon: 'error', title: "Please Try Again" });
 			}
 		});
 	}
