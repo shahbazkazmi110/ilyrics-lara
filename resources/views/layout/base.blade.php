@@ -202,11 +202,14 @@ var searchfilter = '';
 		if($(this).attr('data-action') == 'add'){
 		 	sendPostRequest('{{ route("addPlaylist")}}',data);
 			$('#msg-title').html('Playlist Added');
+			Toast.fire({ icon: 'success', title: "Playlist Saved" });
+			$('#playlist-title').val('');
 			$('#msg-title').show();
 			$('#msg-title').fadeOut(3000);
 		}else{
 			var id = $('#playlist-title').attr('data-playlist-id');
 			sendPostRequest('{{ route("updatePlaylist",'')}}'+'/'+id,data);
+			Toast.fire({ icon: 'success', title: "Playlist Updated" });
 			$('#playlist-title').attr('data-playlist-id','');
 			$('#playlist-title').val('');
 			$(this).attr('data-action','add');
@@ -312,7 +315,6 @@ var searchfilter = '';
 			data:post_data,
 			success:function(data){
 				loadPlaylists();
-				Toast.fire({ icon: 'success', title: "Changes Saved" });
 			},
 			error: function (xhr) {
 				if(xhr.responseJSON.errors.title[0] !== ''){
@@ -369,7 +371,7 @@ var searchfilter = '';
 				$('#msg-title').html(data.message);
 				$('#msg-title').show();
 				$('#msg-title').fadeOut(3000);
-				Toast.fire({ icon: 'success', title: "Playlist Added" });
+				Toast.fire({ icon: 'success', title: "Added to Playlist" });
 			},
 			error: function (xhr) {
 				Toast.fire({ icon: 'error', title: "Please Try Again" });
