@@ -7,15 +7,15 @@
     <form id="filter-form" action="{{ route('search')}}">  
 	    <div class="row search-div">
         <div class="col-12 col-md-3 pb-2">
-          <div class="input-group">
-            <input type="text" class="form-control" id="text-recieter" placeholder="Search by Recitor..." autocomplete="off" value="">
+          <div class="input-group">           
+            <input type="text" class="form-control" id="text-recieter" placeholder="Search by Recitor..." autocomplete="off" value="{{ \App\Helpers\Helper::getArtistName(request()->artist_id ?? '') }}">
             <input type="hidden" class="form-control" name="artist_id" id="text-recieter-id" value="{{ request()->artist_id ?? ''}}">
             <div id="suggesstion-box"></div>
           </div>
         </div>
         <div class="col-12 col-md-3 pb-2">	
           <div class="input-group">
-            <input type="text" class="form-control" id="text-genres" placeholder="Search by Genres..." autocomplete="off" value="">
+            <input type="text" class="form-control" id="text-genres" placeholder="Search by Genres..." autocomplete="off" value="{{ \App\Helpers\Helper::getGenreName(request()->genre_id ?? '') }}">
             <input type="hidden" class="form-control" name="genre_id" id="text-genres-id" value="{{ request()->genre_id ?? ''}}">
             <div id="suggesstion-box"></div>
           </div>	  	
@@ -23,7 +23,7 @@
         </div>
         <div class="col-12 col-md-3 pb-2">
           <div class="input-group">
-            <input type="text" class="form-control" id="text-tags" placeholder="Search by Tags..." autocomplete="off" value="">
+            <input type="text" class="form-control" id="text-tags" placeholder="Search by Tags..." autocomplete="off" value="{{ \App\Helpers\Helper::getTagName(request()->tag_id ?? '') }}">
             <input type="hidden" class="form-control" name="tag_id" id="text-tags-id" value="{{ request()->tag_id ?? ''}}">
             <div id="suggesstion-box"></div>
           </div>	 	  	
