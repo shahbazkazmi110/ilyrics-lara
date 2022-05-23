@@ -32,12 +32,7 @@ class SearchController extends Controller
         ->groupBy('track.id')
         ->paginate(10);
 
-       
-    //    $data['tracks'] = TrackResource::collection($tracks)->response()->getData(true);
-    //    if ($request->ajax()) {
-    //         return $data;
-    //     }
-       $data["tags"] = Tag::getTags();
+        $data["tags"] = Tag::getTags();
         $data["genres"] = Genre::getGenre();
         return view('search.search', $data);
     }
@@ -59,7 +54,7 @@ class SearchController extends Controller
 
     public function searchTracks(Request $request){
         if($request->keyword == ''){ return []; }
-        return Track::select('id','title as name')->where('title','LIKE','%'.$request->keyword.'%')->limit(15)->get();
+        return Track::select('id','title as name')->where('title','LIKE','%'.$request->keyword.'%')->where('status',1)->limit(15)->get();
     }
     
 }

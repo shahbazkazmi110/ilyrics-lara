@@ -107,13 +107,8 @@ class TracksController extends Controller
 
     public function getTrack($track_id)
     {
-       $data["tags"] = Tag::getTags();
-        $data["genres"] = Genre::getGenre();
-
-        // relations created with Favourite, Artist, Genre
         // Track List
-        $data["track"] = Track::
-        select('track.id', 'track.title', 'track.lyrics','track.artists', 'track.genres', 'track.tags', 'track.view_count',
+        $data["track"] = Track::select('track.id', 'track.title', 'track.lyrics','track.artists', 'track.genres', 'track.tags', 'track.view_count',
                  'track.resolution', 'track.contributor_id', 'track.modified', 'track.album_year', 'track.track_name', 'track.transliteration', 
                  'track.track_duration as audio_duration', 'track.audio_type', 'track.remote_duration', 'track.audio_link',
                  'artist.id AS artist_id', 'artist.name AS artist_name', 'artist.image_name',  'artist.resolution as artist_resolution'
@@ -123,19 +118,18 @@ class TracksController extends Controller
         ->where('track.status', 1)
         ->first();
 
-     
-        $artist_id = Track::select('artists')->where('id', $track_id)->first();
-        $data["track"]["artist_track_counter"] = Track::selectRaw('COUNT(id) as track_counts')
-                                                    ->where('artists', 'LIKE', '%'.$artist_id->artists.'%')
-                                                    ->get();
+        // $artist_id = Track::select('artists')->where('id', $track_id)->first();
+        // $data["track"]["artist_track_counter"] = Track::selectRaw('COUNT(id) as track_counts')->where('artists', 'LIKE', '%'.$artist_id->artists.'%')->get();
         
-        $data["track"]["genres_title"] = Track::select('genre.title')
+        $data["genres_title"] = Track::select('genre.title')
         ->join('genre', DB::raw("FIND_IN_SET(genre.id,track.genres)"),'>',DB::raw("'0'"))
         ->where('track.id', '=', $track_id)
         ->get();
-   
+
+        $data["tags"] = Tag::getTags();
+        $data["genres"] = Genre::getGenre();
+       
         return view('track.track_page', $data);
-        //return $data;
     }
 
     public function addFavorite($track_id)

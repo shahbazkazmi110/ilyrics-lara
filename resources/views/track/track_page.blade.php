@@ -1,4 +1,5 @@
 @extends('layout.base')
+@if($track)
 @section('banner')
 <div class="container">
     <div class="pagetitle border-0 pb-4">  
@@ -8,11 +9,13 @@
     </div>
 </div>
 @endsection
+@endif
 @section('content')
 <main>
+    @if($track)
     <div class="container">
         <div class="mb-50 text-end pb-5">
-            @foreach($track->genres_title as $genre)
+            @foreach($genres_title as $genre)
                 <button type="button" class="btn btn--ordinary btn--small"> {{ $genre->title }} </button>
             @endforeach
         </div>
@@ -48,6 +51,11 @@
             </div>
         </div>
     </div>
+    @else
+    <div class="container" style="min-height: 100px"> 
+        <p class="mt-5 pt-5 pb-5">Track Not Found </p>
+    </div>
+    @endif
 </main>
 <x-tags :tags="$tags"/>
 <x-genres :genres="$genres"/>

@@ -6,9 +6,9 @@
 			<div class="col-12 col-md-6 align-self-center">
 				<div class="home-page">
 					<h1 tabindex="0">Recite lyrics that makes a difference in peoples lives</h1>					
-					<div class="input-group mb-3 mt-5" style="max-width:500px;">
-					  <input id="home-search" type="text" class="form-control form-control--large" placeholder="Type a few words you like to find" aria-label="Recipient's username" aria-describedby="search-addon2">
-					  <button class="btn btn--large" type="button" id="search-addon2" style="min-width:80px;"><img width="20" height="20" src="{{ asset('media/search_white.svg')}}" alt="search"></button>
+					<div class="search-input-group mb-3 mt-5">
+					  <input id="home-search" type="text" class="form-control form-control--large" placeholder="Search for Islamic Lyrics Here" aria-label="Recipient's username" aria-describedby="search-addon2">
+					  {{-- <button class="btn btn--large" type="button" id="search-addon2" style="min-width:80px;"><img width="20" height="20" src="{{ asset('media/search_white.svg')}}" alt="search"></button> --}}
 					  <div id="suggesstion-box"></div>
 					</div>
 				</div>

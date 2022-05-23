@@ -22,3 +22,10 @@ body{background-color:#fdfdfd}header{background:rgb(253,253,253);background:line
   .max-h-200x {
     max-height: 200px !important;
   }
+  .search-input-group{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+  }
