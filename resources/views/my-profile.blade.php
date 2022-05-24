@@ -23,7 +23,6 @@
                                 $profile_image = "media/default_profile_picture.png";
                             }
                         }
-
                         @endphp
                         <div class="dplay-tbl-cell" style="max-width: 202px; position: relative;">
                             <img id="userImage" class="max-h-200x rounded-circle mx-auto uploaded-image user image_name"
