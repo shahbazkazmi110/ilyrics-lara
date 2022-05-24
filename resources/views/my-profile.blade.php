@@ -20,9 +20,17 @@
                         }
                         @endphp
                         <div class="dplay-tbl-cell" style="max-width: 202px; position: relative;">
+                            @if(!empty($profile_image))
+                                <img id="userImage" class="max-h-200x rounded-circle mx-auto uploaded-image user image_name"
+                                    alt="profile-image" src="media/default_profile_picture.png">
+                            @else
                             <img id="userImage" class="max-h-200x rounded-circle mx-auto uploaded-image user image_name"
                                 alt="profile-image" src="{{ $profile_image }}">
-                            <input data-action="user-image-action" type="file" class="ajax-img-upload" name="image_name">
+                            @endif
+                            
+                            <button class="btn btn--primary btn--small" type="submit">
+                                <input data-action="user-image-action" type="file" class="ajax-img-upload" name="image_name">
+                                Add Profile Picture</button>
                         </div>
                     </div>
                   

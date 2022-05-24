@@ -65,7 +65,7 @@
 						</li>
 					</ul>
 				@else
-					<a class="nav-link" href="{{ url('login')}}" >My Account</a>
+					<a class="nav-link" href="{{ url('login')}}" >Log In</a>
 				@endif
 	            </li>
 	            {{-- <li class="nav-item">
