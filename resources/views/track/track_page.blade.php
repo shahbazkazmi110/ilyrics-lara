@@ -33,7 +33,7 @@
                     {{-- <button id="translation-button" data-language="eng" class="btn btn--ordinary btn--small">See in English</button> --}}
                 </div>
             </div>
-            <div class="mb-4 pt-4" style="width:50%"><span style="width:50%" class="controlFont"> <a data-control="min" class="FontControl" style="font-size:12px !important;text-align:center;color:#fff;">A</a> <a class="resultControl" style=" width: 65%; display: inline-block; text-align: center;color:#fff; "><span id="fontChangePercentage">110</span>%</a> <a data-control="max" class="FontControl" style="font-size:16px !important;color:#fff;">A</a></span>
+            <div class="mb-4 pt-4" style="width:50%"><span style="width:50%" class="controlFont"> <a data-control="min" class="FontControl" style="font-size:15px !important;text-align:center;color:#fff;">-</a> <a class="resultControl" style=" width: 65%; display: inline-block; text-align: center;color:#fff; "><span id="fontChangePercentage">110</span>%</a> <a data-control="max" class="FontControl" style="font-size:18px !important;color:#fff;">+</a></span>
             </div>
             <div class="left-area mb-4" id="LyrArea" style="max-width:600px;">
                 <div class="effectFont row">
@@ -60,6 +60,34 @@
 <x-tags :tags="$tags"/>
 <x-genres :genres="$genres"/>
 @endsection
+@push('scripts')
+<script>
+    $(".FontControl").on("click", function () {
+    setupFontControlPrivate($(this).data("control"), "1");
+});
+function setupFontControlPrivate(control, removeItem) {
+    maxSize = 2000
+    minSize = 14
+    emSize = parseFloat($('.effectFont p').css("font-size"));
+    percentage = parseFloat($('#fontChangePercentage').html());
+    if (removeItem != undefined) {
+    }
+    if (control == 'min' && emSize > minSize) {
+        Size = emSize - 2
+        percentage = percentage - 10
+        $('.effectFont p,.effectFont span').css('font-size', Size + 'px')
+        $('#fontChangePercentage').html(percentage);
+    }
+    if (control == 'max' && emSize < maxSize) {
+        Size = emSize + 2
+        percentage = percentage + 10
+        $('.effectFont p,.effectFont span').css('font-size', Size + 'px')
+        $('#fontChangePercentage').html(percentage);
+    }
+}
+
+</script>
+@endpush
 @if(!empty($track->transliteration))
 @push('extrascripts')
 <script>

@@ -24,7 +24,7 @@
 					<img src="{{ asset('media/ilyrics_logo.svg')}}" alt="logo" width="139" height="80">
 				</a>
 			</div>
-	        <a class="navbar-brand navbar-brand--resp" href="/">
+	        <a class="navbar-brand navbar-brand--resp" href="{{ url('') }}">
 				<img style="width:80px;" src="{{ asset('media/ilyrics_logo.svg')}}" alt="nav-logo">
 			</a>
 				
@@ -90,7 +90,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-5">
-				<a class="mb-3" href="#"><img style="width:140px;" src="{{ asset('media/ilyrics_logo.svg')}}" width="140" height="81" alt="logo"></a>
+				<a class="mb-3" href="{{ url('') }}"><img style="width:140px;" src="{{ asset('media/ilyrics_logo.svg')}}" width="140" height="81" alt="logo"></a>
 				<div class="pt-5 pb-3" style="max-width:400px;">At iLyrics.org, we are devoted to build an islamic lyrics library for faithful believers. We are passionately dedicated in the religious, spiritual, educational or social realms.</div>
 				{{-- <strong >Analytics</strong> --}}
 				{{-- <div>
