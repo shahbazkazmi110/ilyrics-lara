@@ -54,11 +54,10 @@
 					<ul class="dropdown-menu" aria-labelledby="dropdown09">
 						<li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
 						<li>
-							<form method="POST" action="{{ route('logout') }}">
+							<form method="POST" id="logout-form" action="{{ route('logout') }}">
 								@csrf
 								<a class="dropdown-item" href=" {{ route('logout')}}"
-										onclick="event.preventDefault();
-													this.closest('form').submit();">
+										onclick="event.preventDefault(); var check = confirm('Are you sure ?'); if(check){this.closest('form').submit();} ">
 									{{ __('Log Out') }}
 								</a>
 							</form>
@@ -289,6 +288,26 @@ var searchfilter = '';
 		}
 		toggleSavePlaylist(url)
 	});
+
+	// function confirmBox(){
+	// 	Swal.fire({
+	// 		title: 'Are you sure?',
+	// 		text: "You won't be able to revert this!",
+	// 		icon: 'warning',
+	// 		showCancelButton: true,
+	// 		confirmButtonColor: '#3085d6',
+	// 		cancelButtonColor: '#d33',
+	// 		confirmButtonText: 'Yes, delete it!'
+	// 	}).then((result) => {
+	// 		if (result.isConfirmed) {
+	// 			return true;
+	// 		}
+	// 	});
+	// 	// return false;
+	// }
+	// $('.confirm-button').on('click',function(e){
+	// 	confirmBox();
+	// });
 
 	function toggleSavePlaylist(url){
 		$.ajax({
