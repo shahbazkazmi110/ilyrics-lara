@@ -37,18 +37,18 @@
             </div>
             <div class="left-area mb-4" id="LyrArea" style="max-width:600px;">
                 <div class="effectFont row">
-                    <div id="lyrics-div" class="col-12 col-md-6"> {!! html_entity_decode($track->lyrics) !!} </div>
+                    <div id="lyrics-div" class="col-12 col-md-8"> {!! html_entity_decode($track->lyrics) !!} </div>
                     @if(!empty($track->transliteration))
-                    <div id="translation-div" class="col-12 col-md-6"> {!! html_entity_decode($track->transliteration) !!} </div>
+                    <div id="translation-div" class="col-12 col-md-8"> {!! html_entity_decode($track->transliteration) !!} </div>
                      @endif
                 </div>
-                <div class="left-area" id="TransArea" style="clear:both;  display:none;position:relative">
+                {{-- <div class="left-area" id="TransArea" style="clear:both;  display:none;position:relative">
                     <p class="effectFont"></p>
-                </div>
+                </div> --}}
             </div>
-            <div class="left-area" id="TransArea" style="clear:both;  display:none;position:relative">
+            {{-- <div class="left-area" id="TransArea" style="clear:both;  display:none;position:relative">
                 <p class="effectFont"></p>
-            </div>
+            </div> --}}
         </div>
     </div>
     @else
@@ -66,7 +66,7 @@
     setupFontControlPrivate($(this).data("control"), "1");
 });
 function setupFontControlPrivate(control, removeItem) {
-    maxSize = 2000
+    maxSize = 80
     minSize = 14
     emSize = parseFloat($('.effectFont p').css("font-size"));
     percentage = parseFloat($('#fontChangePercentage').html());
