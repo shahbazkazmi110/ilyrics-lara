@@ -16,18 +16,18 @@
                             $profile_image = $auth_user->image_name;
                         }
                         else{
-                        $profile_image =  url('storage/images/'.$auth_user->image_name);
+                            if(!is_null($auth_user->image_name)){
+                                $profile_image =  url('storage/images/'.$auth_user->image_name);
+                            }
+                            else{
+                                $profile_image = "media/default_profile_picture.png";
+                            }
                         }
+
                         @endphp
                         <div class="dplay-tbl-cell" style="max-width: 202px; position: relative;">
-                            @if(!empty($profile_image))
-                                <img id="userImage" class="max-h-200x rounded-circle mx-auto uploaded-image user image_name"
-                                    alt="profile-image" src="media/default_profile_picture.png">
-                            @else
                             <img id="userImage" class="max-h-200x rounded-circle mx-auto uploaded-image user image_name"
-                                alt="profile-image" src="{{ $profile_image }}">
-                            @endif
-                            
+                                alt="profile-image" src="{{ $profile_image }}"> 
                             <button class="btn btn--primary btn--small" type="submit">
                                 <input data-action="user-image-action" type="file" class="ajax-img-upload" name="image_name">
                                 Add Profile Picture</button>

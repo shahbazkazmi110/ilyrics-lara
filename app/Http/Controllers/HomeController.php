@@ -84,8 +84,7 @@ class HomeController extends Controller
                 $user->image_name = $filename;
                 $user->save();
 
-              
-                if (File::exists(storage_path('app/public/images/'. $oldImage))) {
+                if (!is_null($oldImage) && File::exists(storage_path('app/public/images/'. $oldImage))) {
                     unlink(storage_path("app/public/images/" . $oldImage));
                 }
                 return Response()->json([
