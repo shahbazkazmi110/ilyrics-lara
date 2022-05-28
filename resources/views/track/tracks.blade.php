@@ -18,9 +18,7 @@
 	</div>
 </div>
 @endsection
-    
 @section('content')
-
 <main>
   <div class="container pt-md-5 mb-5 pb-5">
       <x-load-tracks :tracks="$tracks"/>    

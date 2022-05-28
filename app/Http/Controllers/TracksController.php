@@ -19,9 +19,9 @@ class TracksController extends Controller
 
     public function index(){
 
-        $data['tracks'] = Track::select('track.id', 'track.audio_type', 'track.title', 'artist.name AS artists', 'track.view_count', 'track.resolution',
-                 'track.contributor_id', 'track.modified', 'track.album_year', 'artist.id AS artist_id',
-                  'artist.name AS artist_name', 'artist.image_name')//, 'favourite.user_id') 
+        $data['tracks'] = Track::selectRaw('track.id, track.audio_type, track.title, artist.name as track_artists, track.view_count, track.resolution, track.contributor_id, 
+        track.modified, track.album_year, track.track_duration, track.remote_duration, track.audio_link,
+        artist.id AS artist_id, artist.name as artist_name, artist.image_name, track.track_name')//, 'favourite.user_id') 
         //->join('favourite', 'track.id', '=', 'favourite.track_id')
         ->join('artist', 'track.artists', '=', 'artist.id')
         ->whereNotNull('track.album_year')

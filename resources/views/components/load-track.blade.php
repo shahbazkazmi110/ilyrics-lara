@@ -12,8 +12,8 @@
                 data-source="{{ $file_url }}"
                 data-options='{
                 "settings_php_handler": "/ilyrics-lara/public/audioplayer/inc/php/publisher.php",
-                "skinwave_comments_enable": "on",
-                "skinwave_comments_retrievefromajax": "on",
+                "skinwave_comments_enable": "off",
+                "skinwave_comments_retrievefromajax": "off",
                 "pcm_data_try_to_generate": "on",
                 "pcm_data_try_to_generate_wait_for_real_pcm": "on",
                 "skinwave_wave_mode_canvas_waves_number": 3,
