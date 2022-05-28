@@ -174,20 +174,19 @@
 <script src="{{ asset('audioplayer/libs/jquery/jquery.js')}}" type="text/javascript"></script>
 <script src="{{ asset('js/bootstrap.bundle.min.js')}}"></script>
 @php
-	if( Route::current()->getName() !== 'reciters' )
+	if( Route::current()->getName() == 'reciters' )
 	{
 		$addthis = false;
 	}
-	elseif(Route::current()->getName() !== 'profile'){
+	elseif(Route::current()->getName() == 'profile'){
 		$addthis = false;
 	}
-	elseif(Route::current()->getName() !== 'playlists'){
+	elseif(Route::current()->getName() == 'playlists'){
 		$addthis = false;
 	}
 	else{
 		$addthis = true;
 	}
-
 @endphp
 @if($addthis)
 <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f2c69483421ece8&async=1"></script>
