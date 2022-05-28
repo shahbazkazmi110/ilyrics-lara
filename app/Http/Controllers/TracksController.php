@@ -66,11 +66,6 @@ class TracksController extends Controller
         ->orderBy('track.title', 'ASC')
         ->paginate(10);
 
-        // $data['tracks'] = TrackResource::collection($tracks)->response()->getData(true);
-        // if ($request->ajax()) {
-        //     return $data;
-        // }
-
        $data["tags"] = Tag::getTags();
         $data["genres"] = Genre::getGenre();
         $data["artist_detail"] = Artist::selectRaw('artist.name, artist.resolution, artist.description, artist.image_name, COUNT(track.artists) as track_count')
