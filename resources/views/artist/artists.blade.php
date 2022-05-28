@@ -53,7 +53,7 @@
 	var page = 1;
     var lastpage = false;
     var Loading = false;
-
+    $('.no-record').hide();
     $(window).scroll(function() {
         var hT = $('.ajax-load').offset().top,
             hH = $('.ajax-load').outerHeight(),
@@ -76,7 +76,7 @@
                 type: "get",
 	            beforeSend: function()
 	            {
-	                $('.ajax-load').show();
+	                $('.ajax-load .loader').show();
                     Loading = true;
 	            }
 	        })
@@ -84,10 +84,11 @@
 	        {
 	            if(data.html == '' ){
                     lastpage = true;
-	                $('.ajax-load').html("No more records found");
+	                $('.no-record').show();
+                    $('.ajax-load .loader').hide();
 	                return;
 	            }
-	            $('.ajax-load').hide();
+	            $('.ajax-load .loader').hide();
 	            $("#pagination-data").append(data.html);
                 Loading = false;
 
