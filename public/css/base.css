@@ -29,3 +29,7 @@ body{background-color:#fdfdfd}header{background:rgb(253,253,253);background:line
     align-items: stretch;
     width: 100%;
   }
+
+  .card--playlist__content{
+    min-height: 70px;
+  }

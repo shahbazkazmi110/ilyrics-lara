@@ -27,6 +27,10 @@
                     <a href="#" class="toggle-save-playlist position-absolute" style="z-index:1;" data-saved="{{ $saved ? 'yes': 'no' }}" data-playlist-id="{{$playlist->id}}" >
                         <img src="{{ $icon }}" alt="Playlist Icon">
                     </a>
+                @else
+                <a href="{{ route('login') }}" class="position-absolute" style="z-index:1;">
+                    <img src="{{ asset('media/bookmark.svg') }}" alt="Playlist Icon">
+                </a>
                 @endif
             </div>
             <div class="card--playlist__tracks">Tracks : {{$playlist->track_count}}</div>
