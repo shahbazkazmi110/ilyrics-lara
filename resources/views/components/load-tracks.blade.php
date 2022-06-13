@@ -1,10 +1,15 @@
 <div id="pagination-data">
-{{-- @dd() --}}
-@foreach ($tracks['data'] as $track)
+@foreach ($tracks as $track)
     <x-load-track :track="$track"/>
 @endforeach  
 </div>
-@push('pagination')
+@push('styles')
+<link rel="stylesheet" href="{{ asset('audioplayer/audioplayer/audioplayer.css')}}">
+@endpush
+@push('scripts')
+<script type="text/javascript" src="{{ asset('audioplayer/audioplayer/audioplayer.js')}}"></script>
+@endpush
+{{-- @push('pagination')
   	var page = 1;
     var lastpage = false;
     var Loading = false;
@@ -118,4 +123,4 @@
       Loading = false;
     });
 	}
-@endpush
+@endpush --}}

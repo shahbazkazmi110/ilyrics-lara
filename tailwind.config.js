@@ -12,6 +12,10 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'ilyrics-green': '#148f82',
+                'ilyrics-green-dark': '#0f7b70',
+              },
         },
     },
 

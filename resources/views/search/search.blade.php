@@ -1,37 +1,36 @@
-
 @extends('layout.base')
 @section('banner')
 <div class="pagetitle">
 	<div class="container">
 	  <h2 class="h2__underline" tabindex="0">Results</h2>
 	  <!-- Header  -->
-    <form id="filter-form">  
+    <form id="filter-form" action="{{ route('search')}}">  
 	    <div class="row search-div">
         <div class="col-12 col-md-3 pb-2">
-          <div class="input-group">
-            <input type="text" class="form-control" id="text-recieter" placeholder="Search by Recitor..." autocomplete="off">
-            <input type="hidden" class="form-control" name="artist_id" id="text-recieter-id">
+          <div class="input-group">           
+            <input type="text" class="form-control" id="text-recieter" placeholder="Search by Recitor..." autocomplete="off" value="{{ \App\Helpers\Helper::getArtistName(request()->artist_id ?? '') }}">
+            <input type="hidden" class="form-control" name="artist_id" id="text-recieter-id" value="{{ request()->artist_id ?? ''}}">
             <div id="suggesstion-box"></div>
           </div>
         </div>
         <div class="col-12 col-md-3 pb-2">	
           <div class="input-group">
-            <input type="text" class="form-control" id="text-genres" placeholder="Search by Genres..." autocomplete="off">
-            <input type="hidden" class="form-control" name="genre_id" id="text-genres-id">
+            <input type="text" class="form-control" id="text-genres" placeholder="Search by Genres..." autocomplete="off" value="{{ \App\Helpers\Helper::getGenreName(request()->genre_id ?? '') }}">
+            <input type="hidden" class="form-control" name="genre_id" id="text-genres-id" value="{{ request()->genre_id ?? ''}}">
             <div id="suggesstion-box"></div>
           </div>	  	
           {{-- <input type="text" class="form-control" id="text-genres" placeholder="Search by Genres..."> --}}
         </div>
         <div class="col-12 col-md-3 pb-2">
           <div class="input-group">
-            <input type="text" class="form-control" id="text-tags" placeholder="Search by Tags..." autocomplete="off">
-            <input type="hidden" class="form-control" name="tag_id" id="text-tags-id">
+            <input type="text" class="form-control" id="text-tags" placeholder="Search by Tags..." autocomplete="off" value="{{ \App\Helpers\Helper::getTagName(request()->tag_id ?? '') }}">
+            <input type="hidden" class="form-control" name="tag_id" id="text-tags-id" value="{{ request()->tag_id ?? ''}}">
             <div id="suggesstion-box"></div>
           </div>	 	  	
           {{-- <input type="text" class="form-control" id="text-tags" placeholder="Search by Tags..."> --}}
         </div>  
         <div class="col-12 col-md-3 pb-2">
-          <button type="button" id="search-filter" class="btn btn--primary">Search</button>
+          <button type="submit" id="search-filter-no" class="btn btn--primary">Search</button>
         </div>	
 	    </div>
     </form>	  
@@ -43,23 +42,23 @@
 <main>
   <div  class="container pt-md-5 mb-5 pb-5"> 
     <x-load-tracks :tracks="$tracks"/>
-    <div class="mt-2">
-      <div class="ajax-load">
+    <div class="mt-4">
+      {{-- <div class="ajax-load">
         <div class="loader spinner-border text-success" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
         <div class="no-record">
             No Records Found
         </div>
-      </div>
-      {{-- {!! $tracks->links() !!} --}}
+      </div> --}}
+      {!! $tracks->appends(request()->query())->links() !!}
     </div>               
   </div>
 </main>
 <x-tags :tags="$tags"/>
 <x-genres :genres="$genres"/>
 @endsection
-@push('searchFilter')
+{{-- @push('searchFilter')
 $('#search-filter').on('click',function(){
     var url = "{{ route('search')}}";
     searchfilter = $('#filter-form').serialize();
@@ -91,10 +90,11 @@ $('#search-filter').on('click',function(){
       }
     });
   });
-@endpush
+@endpush --}}
 @push('scripts')
 <script>  
   $(document).ready(function(){
+   
     $("#text-recieter").keyup(function(){
       var url = "{{ route('search-recieters')}}";
       autocomplete(url,'text-recieter');

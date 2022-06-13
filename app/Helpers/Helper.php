@@ -2,8 +2,11 @@
 
 namespace App\Helpers;
 
+use App\Models\Artist;
 use App\Models\Favourite;
+use App\Models\Genre;
 use App\Models\SavedPlaylist;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 
 CONST ADMIN_IMAGE_LINK = '';
@@ -60,6 +63,33 @@ class Helper
     public static function isSavedPlaylist($playlist_id)
     {
         return SavedPlaylist::where('playlist_id',$playlist_id)->where('user_id',Auth::user()->id)->count();
+    }
+
+    public static function getArtistName($artist_id)
+    {
+        if(is_null($artist_id)){ return '';}
+        $artist = Artist::find($artist_id);
+        if($artist){
+            return $artist->name;
+        }        
+    }
+
+    public static function getTagName($tag_id)
+    {
+        if(is_null($tag_id)){ return '';}
+        $tag = Tag::find($tag_id);
+        if($tag){
+            return $tag->title;
+        }        
+    }
+
+    public static function getGenreName($genre_id)
+    {
+        if(is_null($genre_id)){ return '';}
+        $genre = Genre::find($genre_id);
+        if($genre){
+            return $genre->title;
+        }        
     }
 
 }

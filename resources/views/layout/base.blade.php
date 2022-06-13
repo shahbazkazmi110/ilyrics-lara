@@ -3,30 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="Ilyrics is an Islamic Lyrics Website where you can Listen and download All Islamic Nohas and Naats">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="author" content="Get thousand+ lyrics for Nohay, Naat, Mungabat,  Marsiya & Salam from renowned reciters.">
+    <meta name="author" content="Get thousand+ lyrics for Nohay, Naat, Munqabat,  Marsiya & Salam from renowned reciters.">
     <meta name="generator" content="Hugo 0.84.0">
     <title>Get lyrics for Nohay, Naat, Mungabat,  Marsiya & Salam</title>
 	<link rel="icon" href="{{ asset('media/favicon.jpg')}}">
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{ asset('css/base.css')}}">
-	<link rel="stylesheet" href="{{ asset('audioplayer/audioplayer/audioplayer.css')}}">
-
-	<style>
-        /* Initially, hide the extra text that
-            can be revealed with the button */
-        #moreText {
-  
-            /* Display nothing for the element */
-            display: none;
-        }
-
-		#tags .less {
-			display:  none;
-		}
-    </style>
-  </head>
+	@stack('styles')	
+</head>
 <body>
 <header>
 	<div class="nav_bar_wraper">
@@ -35,15 +21,15 @@
 	      <div class="container-fluid">
 	        <div class="il_logo_container">
 				<a class="navbar-brand" href="{{ url('') }}">
-					<img src="{{ asset('media/ilyrics_logo.svg')}}" alt="logo">
+					<img src="{{ asset('media/ilyrics_logo.svg')}}" alt="logo" width="139" height="80">
 				</a>
 			</div>
-	        <a class="navbar-brand navbar-brand--resp" href="/">
+	        <a class="navbar-brand navbar-brand--resp" href="{{ url('') }}">
 				<img style="width:80px;" src="{{ asset('media/ilyrics_logo.svg')}}" alt="nav-logo">
 			</a>
 				
 	        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
-	          <img src="{{ asset('media/menu_icon_humberger2.svg')}}">
+	          <img src="{{ asset('media/menu_icon_humberger2.svg')}}" alt="menu-nav">
 	        </button>
 	
 	        <div class="collapse navbar-collapse" id="navbarsExample09">
@@ -66,25 +52,24 @@
 				@if(Auth::user())
 					<a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-bs-toggle="dropdown" aria-expanded="false"> {{ Auth::user()->username }}</a>
 					<ul class="dropdown-menu" aria-labelledby="dropdown09">
-						<li><a class="dropdown-item" href="#">Profile</a></li>
+						<li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
 						<li>
-							<form method="POST" action="{{ route('logout') }}">
+							<form method="POST" id="logout-form" action="{{ route('logout') }}">
 								@csrf
 								<a class="dropdown-item" href=" {{ route('logout')}}"
-										onclick="event.preventDefault();
-													this.closest('form').submit();">
+										onclick="event.preventDefault(); var check = confirm('Are you sure ?'); if(check){this.closest('form').submit();} ">
 									{{ __('Log Out') }}
 								</a>
 							</form>
 						</li>
 					</ul>
 				@else
-					<a class="nav-link" href="{{ url('login')}}" >My Account</a>
+					<a class="nav-link" href="{{ url('login')}}" >Log In</a>
 				@endif
 	            </li>
-	            <li class="nav-item">
+	            {{-- <li class="nav-item">
 	              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><img src="{{ asset('media/search.svg')}}"></a>
-	            </li>
+	            </li> --}}
 				
 	          </ul>
 			  @if(!Auth::user())
@@ -104,7 +89,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-5">
-				<a class="mb-3" href="#"><img style="width:140px;" src="{{ asset('media/ilyrics_logo.svg')}}"></a>
+				<a class="mb-3" href="{{ url('') }}"><img style="width:140px;" src="{{ asset('media/ilyrics_logo.svg')}}" width="140" height="81" alt="logo"></a>
 				<div class="pt-5 pb-3" style="max-width:400px;">At iLyrics.org, we are devoted to build an islamic lyrics library for faithful believers. We are passionately dedicated in the religious, spiritual, educational or social realms.</div>
 				{{-- <strong >Analytics</strong> --}}
 				{{-- <div>
@@ -127,9 +112,9 @@
 					<div class="col-12 col-md-6">
 						<h5 class="pb-4" tabindex="0">Contact Us</h5>
 						<a class="pb-3 color-black d-block text-decoration-none" href="mailto:support@ilyrics.org">support@ilyrics.org</a>
-		                <a href="https://www.facebook.com/iLyricsO/"><img src="{{ asset('media/social_facebook.svg')}}"></a>
-		                <a href="https://twitter.com/ILyricsgo"><img src="{{ asset('media/social_icon_twitter.svg')}}"></a>
-		                <a href="https://www.instagram.com/ilyricsgo/"><img style="width:32px;" src="{{ asset('media/social_icon_svginstagram.svg')}}"></a>
+		                <a href="https://www.facebook.com/iLyricsO/"><img width="32" height="32" src="{{ asset('media/social_facebook.svg')}}" alt="fb-icon"></a>
+		                <a href="https://twitter.com/ILyricsgo"><img width="32" height="32" src="{{ asset('media/social_icon_twitter.svg')}}" alt="twitter-icon"></a>
+		                <a href="https://www.instagram.com/ilyricsgo/"><img width="32" height="32" style="width:32px;" src="{{ asset('media/social_icon_svginstagram.svg')}}" alt="insta-icon"></a>
 					</div>
 				</div>
 			</div>
@@ -140,21 +125,6 @@
 			<p>Copyright © 2022 Collective Rise LLC. Designed by <a style="text-decoration: underline" href="https://qubitse.com">Qubitse</a>.</p>
 		</div>
 	</div>
-
-	<div class="toast" style="position: absolute; top: 0; right: 0;">
-		<div class="toast-header">
-		<img src="" class="rounded mr-2" alt="...">
-		<strong class="mr-auto">Bootstrap</strong>
-		<small>11 mins ago</small>
-		<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
-		</div>
-		<div class="toast-body">
-		Hello, world! This is a toast message.
-		</div>
-	</div>
-
 	<div class="modal fade" id="addPlaylistModal" tabindex="-1" aria-labelledby="addPlaylistModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -200,30 +170,43 @@
 	</div>
 </footer>
 <div class="menuoverlay"></div>
-{{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> --}}
-{{-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> --}}
-{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> --}}
+<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('audioplayer/libs/jquery/jquery.js')}}" type="text/javascript"></script>
+<script src="{{ asset('js/bootstrap.bundle.min.js')}}"></script>
+@php
+	if( Route::current()->getName() == 'reciters' )
+	{
+		$addthis = false;
+	}
+	elseif(Route::current()->getName() == 'profile'){
+		$addthis = false;
+	}
+	elseif(Route::current()->getName() == 'playlists'){
+		$addthis = false;
+	}
+	else{
+		$addthis = true;
+	}
+@endphp
+@if($addthis)
 <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f2c69483421ece8&async=1"></script>
-<script type="text/javascript" src="{{ asset('audioplayer/audioplayer/audioplayer.js')}}"></script>
-<script src="{{ asset('js/bootstrap.bundle.js')}}"></script>
+<script>
+addthis.user.ready(function (data) {
+    addthis.button('.share', [addthis_config], [{ ui_click: true, ui_disable: true }]);
+});
+</script>
+@endif
 <script src="{{ asset('js/main.js')}}"></script>
 @stack('scripts')
 <script>
-	var searchfilter = '';
+var searchfilter = '';
 @stack('searchFilter')	
 @stack('pagination')
 </script>
 <script>
-	$('.viewmore_link').click(function(){
-		$('#tags .less').fadeToggle();
-		$(this).text($(this).text() == 'Show More' ? 'Show Less' : 'Show More');
-	});
 	const csrf = $('meta[name="csrf-token"]').attr('content');
 	@if(AUth::user())
-	// $('.toast').toast({
-    //     // delay:2000,
-    // });
+
 	$('.container').on('click','.add-playlist',function(e){
 		const image_name = $(this).attr("data-image-name");
 		const track_id = $(this).attr("data-track-id");
@@ -231,6 +214,7 @@
 		$('#form-track-id').val(track_id);
 		$('#playlist-title').val('');
 		loadPlaylists();
+		$('#playlist-action').html('Add');
 	});
 
 	$('#playlist-action').on('click',function(e){
@@ -239,11 +223,14 @@
 		if($(this).attr('data-action') == 'add'){
 		 	sendPostRequest('{{ route("addPlaylist")}}',data);
 			$('#msg-title').html('Playlist Added');
+			Toast.fire({ icon: 'success', title: "Playlist Saved" });
+			$('#playlist-title').val('');
 			$('#msg-title').show();
 			$('#msg-title').fadeOut(3000);
 		}else{
 			var id = $('#playlist-title').attr('data-playlist-id');
 			sendPostRequest('{{ route("updatePlaylist",'')}}'+'/'+id,data);
+			Toast.fire({ icon: 'success', title: "Playlist Updated" });
 			$('#playlist-title').attr('data-playlist-id','');
 			$('#playlist-title').val('');
 			$(this).attr('data-action','add');
@@ -264,29 +251,6 @@
 			removeFavourite(track_id,$(this));
 		}
 	});
-
-	$('.container').on('click','.file-download',function(e){
-		// e.preventDefault();
-		const track_id = $(this).attr("data-track-id");
-		generateDownLink(track_id);
-	});
-
-	function generateDownLink(track_id){
-		// $.ajax({
-		// 	type:'post',
-		// 	headers: {
-		// 		'X-CSRF-TOKEN': csrf,
-		// 	},
-		// 	url:url,
-		// 	success:function(data){
-				
-		// 	},
-		// 	error: function (xhr) {
-			
-		// 	}
-		// });
-	}
-
 	function addFavourite(track_id,element){
 		const url = "{{ route('favorite','')}}"+"/"+track_id;
 		$.ajax({
@@ -300,7 +264,7 @@
 				element.removeClass('add-favourite');
 				element.addClass('remove-favourite');
 				element.attr("data-is-fav",1);
-				// $('.toast').toast('show');
+				Toast.fire({ icon: 'success', title: "Added to Favourites" });
 			},
 			error: function (xhr) {
 			
@@ -320,7 +284,8 @@
 				element.children('span').html('Add Favourite');
 				element.addClass('add-favourite');
 				element.removeClass('remove-favourite');
-				element.attr("data-is-fav",2);				
+				element.attr("data-is-fav",2);
+				Toast.fire({ icon: 'success', title: "Removed from Favourites" });				
 			},
 			error: function (xhr) {
 			
@@ -346,6 +311,26 @@
 		toggleSavePlaylist(url)
 	});
 
+	// function confirmBox(){
+	// 	Swal.fire({
+	// 		title: 'Are you sure?',
+	// 		text: "You won't be able to revert this!",
+	// 		icon: 'warning',
+	// 		showCancelButton: true,
+	// 		confirmButtonColor: '#3085d6',
+	// 		cancelButtonColor: '#d33',
+	// 		confirmButtonText: 'Yes, delete it!'
+	// 	}).then((result) => {
+	// 		if (result.isConfirmed) {
+	// 			return true;
+	// 		}
+	// 	});
+	// 	// return false;
+	// }
+	// $('.confirm-button').on('click',function(e){
+	// 	confirmBox();
+	// });
+
 	function toggleSavePlaylist(url){
 		$.ajax({
 			type:'post',
@@ -354,7 +339,7 @@
 			},
 			url:url,
 			success:function(data){
-				console.log(data);
+				Toast.fire({ icon: 'success', title: data.message });
 			},
 			error: function (xhr) {
 			
@@ -377,6 +362,7 @@
 					$('#msg-title').html(xhr.responseJSON.errors.title[0]);
 					$('#msg-title').show();
 					$('#msg-title').fadeOut(3000);
+					Toast.fire({ icon: 'error', title: xhr.responseJSON.errors.title[0] });
 				}
 			}
 		});
@@ -403,7 +389,6 @@
 										<img src="{{ asset('media/edit.svg')}}" alt="Edit icon">
 									</a>
 								</div>
-
 							</div>
 						</div>`;
 				});
@@ -427,9 +412,10 @@
 				$('#msg-title').html(data.message);
 				$('#msg-title').show();
 				$('#msg-title').fadeOut(3000);
+				Toast.fire({ icon: 'success', title: "Added to Playlist" });
 			},
 			error: function (xhr) {
-			
+				Toast.fire({ icon: 'error', title: "Please Try Again" });
 			}
 		});
 		
@@ -451,9 +437,10 @@
 			url:url,
 			success:function(data){
 				loadPlaylists();
+				Toast.fire({ icon: 'success', title: "Playlist Deleted" });
 			},
 			error: function (xhr) {
-			
+				Toast.fire({ icon: 'error', title: "Please Try Again" });
 			}
 		});
 	}

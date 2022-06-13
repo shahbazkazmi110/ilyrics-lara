@@ -28,19 +28,20 @@ class PlaylistController extends Controller
 
     public function getAllPlaylists(Request $request){
 
-        $data["playlists"] = Playlist::select('id', 'title', 'user_id', 'image_name', 'resolution')
-        ->where('featured', 1)
-        ->where('status', 1)
-        ->orderBy('display_order', 'ASC')
+        $data["playlists"] = Playlist::selectRaw('playlist.id, playlist.title, playlist.user_id, playlist.resolution, playlist.image_name, COUNT(playlist_track.track_id) as track_count')
+        ->where('playlist.featured', 1)
+        ->where('playlist.status', 1)
+        ->join('playlist_track', 'playlist.id', '=', 'playlist_track.playlist_id')
+        ->orderBy('playlist.display_order', 'ASC')
+        ->groupBy('playlist.id')
         ->paginate(20);
-        // ->get();
-
+        
         if ($request->ajax()) {
             $view = view('playlist.playlist-pagination',$data)->render();
             return response()->json(['html'=>$view]);
         }
 
-        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+        $data["tags"] = Tag::getTags();
         $data["genres"] = Genre::getGenre();
 
         return view('playlist.playlists',$data);

@@ -14,7 +14,7 @@ class SearchController extends Controller
         $genre_id = $request->genre_id ?? null;
         $tag_id = $request->tag_id ?? null;
         
-        $tracks = Track::
+        $data['tracks']  = Track::
         selectRaw('track.id,track.audio_type,track.title,GROUP_CONCAT(artist.name) as track_artists,track.view_count,track.resolution,track.contributor_id,track.modified,track.album_year,track.track_name,track.track_duration as audio_duration,track.remote_duration,track.audio_link,artist.id AS artist_id,artist.name AS artist_name,artist.image_name,artist.resolution as artist_resolution')
         ->join('artist', DB::raw("FIND_IN_SET(artist.id,track.artists)"),'>',DB::raw("'0'"))
         ->where('artist.name','LIKE',$request->recieter)
@@ -31,12 +31,8 @@ class SearchController extends Controller
         ->orderBy('track.title', 'ASC')
         ->groupBy('track.id')
         ->paginate(10);
-       
-       $data['tracks'] = TrackResource::collection($tracks)->response()->getData(true);
-       if ($request->ajax()) {
-            return $data;
-        }
-        $data["tags"] = Tag::orderBy('title', 'ASC')->get();
+
+        $data["tags"] = Tag::getTags();
         $data["genres"] = Genre::getGenre();
         return view('search.search', $data);
     }
@@ -58,7 +54,7 @@ class SearchController extends Controller
 
     public function searchTracks(Request $request){
         if($request->keyword == ''){ return []; }
-        return Track::select('id','title as name')->where('title','LIKE','%'.$request->keyword.'%')->limit(15)->get();
+        return Track::select('id','title as name')->where('title','LIKE','%'.$request->keyword.'%')->where('status',1)->limit(15)->get();
     }
     
 }
