@@ -68,7 +68,7 @@
 									</a>
 								@endif
 							</div>
-							<div class="card--playlist__tracks">Total Tracks : {{$playlist->track_count}}</div>
+							<div class="card--playlist__tracks">Tracks : {{$playlist->track_count}}</div>
 						</div>
 					</a>
 				</div>

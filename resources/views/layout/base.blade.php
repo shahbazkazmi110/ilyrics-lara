@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Ilyrics is an Islamic Lyrics Website where you can Listen and download All Islamic Nohas and Naats">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="author" content="Get thousand+ lyrics for Nohay, Naat, Mungabat,  Marsiya & Salam from renowned reciters.">
+    <meta name="author" content="Get thousand+ lyrics for Nohay, Naat, Munqabat,  Marsiya & Salam from renowned reciters.">
     <meta name="generator" content="Hugo 0.84.0">
     <title>Get lyrics for Nohay, Naat, Mungabat,  Marsiya & Salam</title>
 	<link rel="icon" href="{{ asset('media/favicon.jpg')}}">
