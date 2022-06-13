@@ -30,6 +30,6 @@ body{background-color:#fdfdfd}header{background:rgb(253,253,253);background:line
     width: 100%;
   }
 
-  .card--playlist__content{
+  .max-h-70x{
     min-height: 70px;
   }

@@ -15,7 +15,7 @@
                     </ul>
                 </div> --}}
             </div>
-            <div class="card--playlist__content">
+            <div class="card--playlist__content max-h-70x">
                 {{$playlist->title}}
             </div>
             <div>
