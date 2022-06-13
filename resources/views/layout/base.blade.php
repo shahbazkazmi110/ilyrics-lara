@@ -43,11 +43,14 @@
 	            <li class="nav-item">
 	              <a class="nav-link" href="{{ route('reciters') }}" tabindex="-1" aria-disabled="true">Reciters</a>
 	            </li>
-				@if(Auth::user())
+			
 				<li class="nav-item">
-					<a class="nav-link" href="{{ route('my-collections') }}" tabindex="-1" aria-disabled="true">My Collections</a>
-				  </li>
-				@endif
+					@if(Auth::user())
+						<a class="nav-link" href="{{ route('my-collections') }}" tabindex="-1" aria-disabled="true">My Collections</a>
+					@else
+						<a class="nav-link" href="{{ route('login') }}?nexturl=my-collections" tabindex="-1" aria-disabled="true">My Collections</a>
+					@endif
+				</li>
 	            <li class="nav-item dropdown">
 				@if(Auth::user())
 					<a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-bs-toggle="dropdown" aria-expanded="false"> {{ Auth::user()->username }}</a>
