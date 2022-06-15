@@ -68,7 +68,7 @@ class TracksController extends Controller
 
        $data["tags"] = Tag::getTags();
         $data["genres"] = Genre::getGenre();
-        $data["artist_detail"] = Artist::selectRaw('artist.name, artist.resolution, artist.description, artist.image_name, COUNT(track.artists) as track_count')
+        $data["artist_detail"] = Artist::selectRaw('artist.id,artist.name, artist.resolution, artist.description, artist.image_name, COUNT(track.artists) as track_count')
         ->join('track', 'artist.id', '=', 'track.artists')
         ->where('track.status', 1)
         ->where('artist.id', $id)
