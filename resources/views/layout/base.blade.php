@@ -15,6 +15,7 @@
 </head>
 <body>
 <header>
+	<?php session()->put('redirectPath',\Request::path()); ?>
 	<div class="nav_bar_wraper">
 		<div class="container">
 	    <nav class="navbar navbar-expand-lg il_navbar" aria-label="Eleventh navbar example">

@@ -33,7 +33,13 @@ class GoogleController extends Controller
             $finduser = User::where('social_id', $user->id)->first();
             if($finduser){
                 Auth::login($finduser);
-                return redirect()->intended('/');
+                
+                if (session()->has('redirectPath')) {
+                    return redirect(session('redirectPath'));
+                }else{
+                    return redirect()->intended('/');    
+                }
+                
             }else{
                 $newUser = User::create([
                     'type' => 3,
@@ -43,7 +49,13 @@ class GoogleController extends Controller
                     'image_name' => $user->avatar
                 ]);
                 Auth::login($newUser);
-                return redirect()->intended('/');
+                
+                if (session()->has('redirectPath')) {
+                    return redirect(session('redirectPath'));
+                }else{
+                    return redirect()->intended('/');    
+                }
+                
             }
         } catch (Exception $e) {
             dd($e);
