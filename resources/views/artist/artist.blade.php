@@ -9,8 +9,9 @@
 		  		<div class="collaction_img" style="background-image: url('{{ \App\Helpers\Helper::format_image($artist_detail->image_name, 0) }}');"></div>
 		  </div>		  
 		  <div class="col">
-		  	<h2 class="h2__underline" tabindex="0">{{ $artist_detail->name }}</h2>
-		  	<p>Number of Collections : {{ $artist_detail->track_count }}</p>
+        <h2 class="h2__underline" tabindex="0">{{ $artist_detail->name }}</h2>
+        <p>Number of Collections : {{ $artist_detail->track_count }}</p>
+        <a href="#" addthis:description="see this Artist" addthis:title="{{$artist_detail->name}}" addthis:url="{{ route('tracks-by-artist', ['id' => $artist_detail->id]) }}" class="btn btn-sharing share" type="button">Share</a>
 		  </div>		  
 	  </div>
 
