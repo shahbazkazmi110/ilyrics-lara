@@ -14,9 +14,13 @@
 <main>
     @if($track)
     <div class="container">
-        <div class="mb-50 text-end pb-5">
+        <div class="mb-50 pb-5">
             @foreach($genres_title as $genre)
-                <button type="button" class="btn btn--ordinary btn--small"> {{ $genre->title }} </button>
+                <a href="{{ route('genre', ['id' => $genre->id]) }}"><button type="button" class="btn btn--ordinary btn--small"> {{ $genre->title }} </button></a>
+            @endforeach
+
+            @foreach($track_tags as $tag)
+                <a href="{{ route('tracks-by-tag', ['id' => $tag->id]) }}"><button type="button" class="btn btn--ordinary btn--small"> {{ $tag->title }} </button></a>
             @endforeach
         </div>
         
