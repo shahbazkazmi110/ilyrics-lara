@@ -68,7 +68,7 @@ class TracksController extends Controller
 
        $data["tags"] = Tag::getTags();
         $data["genres"] = Genre::getGenre();
-        $data["artist_detail"] = Artist::selectRaw('artist.name, artist.resolution, artist.description, artist.image_name, COUNT(track.artists) as track_count')
+        $data["artist_detail"] = Artist::selectRaw('artist.id,artist.name, artist.resolution, artist.description, artist.image_name, COUNT(track.artists) as track_count')
         ->join('track', 'artist.id', '=', 'track.artists')
         ->where('track.status', 1)
         ->where('artist.id', $id)
@@ -111,12 +111,14 @@ class TracksController extends Controller
         ->where('track.id', '=', $track_id)
         ->where('track.status', 1)
         ->first();
-
-        // $artist_id = Track::select('artists')->where('id', $track_id)->first();
-        // $data["track"]["artist_track_counter"] = Track::selectRaw('COUNT(id) as track_counts')->where('artists', 'LIKE', '%'.$artist_id->artists.'%')->get();
-        
-        $data["genres_title"] = Track::select('genre.title')
+    
+        $data["genres_title"] = Track::select('genre.id','genre.title')
         ->join('genre', DB::raw("FIND_IN_SET(genre.id,track.genres)"),'>',DB::raw("'0'"))
+        ->where('track.id', '=', $track_id)
+        ->get();
+
+        $data["track_tags"] = Track::select('tag.id','tag.title')
+        ->join('tag', DB::raw("FIND_IN_SET(tag.id,track.tags)"),'>',DB::raw("'0'"))
         ->where('track.id', '=', $track_id)
         ->get();
 

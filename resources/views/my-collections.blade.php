@@ -3,7 +3,6 @@
 @endsection
 @section('content')
 <div class="container pt-5 mt-5">
-    
     <!-- My Playlist -->
     <div class="row pb-4">
         <div class="col-12 col-md">
@@ -15,6 +14,7 @@
             </a>    
         </div>
     </div>
+
     <div class="row mb-5 pb-5">
         @if($my_playlists->count())
         @foreach($my_playlists as $playlist)
@@ -25,9 +25,7 @@
         @endif
     </div>
     <!-- My Playlist ended -->
-    
-    
-    
+
     <!-- Saved Playlist -->
     <div class="row pb-4">
         <div class="col-12 col-md">
@@ -60,6 +58,7 @@
             </a>    
         </div>
     </div>
+
     <div class="row mb-5 pb-5">
         @if ($favourite->count())
         @foreach ($favourite as $track)
@@ -105,7 +104,6 @@
         @endif
     </div>
     <!-- Favourite Tracks -->
-    
 </div>
 <x-tags :tags="$tags"/>
 <x-genres :genres="$genres"/>
