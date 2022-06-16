@@ -6,7 +6,18 @@
 	  <!-- Header  -->
     <form id="filter-form" action="{{ route('search')}}">  
 	    <div class="row search-div">
-        <div class="col-12 col-md-3 pb-2">
+      <div class="col-12 col-md-1 pb-2"></div>
+      
+      <div class="col-12 col-md-10 pb-2">
+          <div class="input-group">           
+            <input type="text" class="form-control" id="text-keyword" name="keyword" placeholder="Search by Keyword..." autocomplete="off" value="{{ $keyword }}">
+            <input type="hidden" class="form-control" id="text-keyword" value="{{ $keyword ?? ''}}">
+          </div>
+        </div>
+     
+        <div class="col-12 col-md-1 pb-2"></div>
+
+      <div class="col-12 col-md-3 pb-2">
           <div class="input-group">           
             <input type="text" class="form-control" id="text-recieter" placeholder="Search by Recitor..." autocomplete="off" value="{{ \App\Helpers\Helper::getArtistName(request()->artist_id ?? '') }}">
             <input type="hidden" class="form-control" name="artist_id" id="text-recieter-id" value="{{ request()->artist_id ?? ''}}">

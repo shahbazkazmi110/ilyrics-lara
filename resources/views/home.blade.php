@@ -7,7 +7,7 @@
 				<div class="home-page">
 					<h1 tabindex="0">Recite lyrics that makes a difference in peoples lives</h1>					
 					<div class="search-input-group mb-3 mt-5">
-					  <input id="home-search" type="text" class="form-control form-control--large" placeholder="Search for Islamic Lyrics Here" aria-label="Recipient's username" aria-describedby="search-addon2">
+					  <input id="home-search" type="text" class="keyword-search form-control form-control--large" placeholder="Search for Islamic Lyrics Here" aria-label="Recipient's username" aria-describedby="search-addon2">
 					  {{-- <button class="btn btn--large" type="button" id="search-addon2" style="min-width:80px;"><img width="20" height="20" src="{{ asset('media/search_white.svg')}}" alt="search"></button> --}}
 					  <div id="suggesstion-box"></div>
 					</div>
@@ -147,6 +147,15 @@
 @endsection
 @push('scripts')
 <script>
+
+$(".keyword-search").keypress(function(e){
+	if (e.which == '13') {
+        var keyword = $(this).val();
+		window.location.href = "{{ url('search')}}"+'?keyword='+keyword;
+    }
+
+  });
+
 $("#home-search").keyup(function(){
 	url = "{{ route('search-tracks')}}";
 	homeAutoComplete(url,'home-search');
