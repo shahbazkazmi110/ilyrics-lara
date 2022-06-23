@@ -6,16 +6,14 @@
 	  <!-- Header  -->
     <form id="filter-form" action="{{ route('search')}}">  
 	    <div class="row search-div">
-      <div class="col-12 col-md-1 pb-2"></div>
-      
-      <div class="col-12 col-md-10 pb-2">
-          <div class="input-group">           
+      <div class="col-12 col-md-9 pb-2">
+          <div class="search-input-group input-group">         
             <input type="text" class="form-control" id="text-keyword" name="keyword" placeholder="Search by Keyword..." autocomplete="off" value="{{ $keyword }}">
             <input type="hidden" class="form-control" id="text-keyword" value="{{ $keyword ?? ''}}">
+            <div id="suggesstion-box"></div>
           </div>
         </div>
-     
-        <div class="col-12 col-md-1 pb-2"></div>
+        <div class="col-12 col-md-3 pb-2"></div>
 
       <div class="col-12 col-md-3 pb-2">
           <div class="input-group">           
@@ -167,6 +165,55 @@ $('#search-filter').on('click',function(){
 @push('extrascripts')
 <script>
 
+$("#text-keyword").keyup(function(){
+	url = "{{ route('search-tracks')}}";
+	homeAutoComplete(url,'text-keyword');
+  });
 
+function homeAutoComplete(url,id){
+	if($('#'+id).val() ==  ''){
+		$('#'+id).siblings('#suggesstion-box').hide();
+		return;
+	}
+	$.ajax({
+		headers: {
+					'X-CSRF-TOKEN': csrf,
+				},
+		type: "POST",
+		url: url,
+		data:{ keyword : $('#'+id).val() },
+		beforeSend: function(){
+			// $('#'+id).css("background","#FFF url('{{ asset('media/loading.gif')}}') no-repeat 165px");
+		},
+		success: function(data){
+			if(data.length > 0){        
+				$('#'+id).siblings('#suggesstion-box').show()
+				var html = '<ul id="data-list">';
+				data.forEach(ele => {
+					html+=`<li > <span onclick="selectTrackItem('${ele.name}',${ele.id},'${id}')">${ele.name}</span> <span onclick="selectArtistItem('${ele.artist_name}',${ele.artist_id},'${id}')"><small>(${ele.artist_name})</small></span></li>`;
+				});
+				html += '</ul>';
+				$('#'+id).siblings('#suggesstion-box').html(html);
+			}
+			else{
+				$('#'+id).siblings('#suggesstion-box').hide();
+			}
+		}
+	});
+
+}
+function selectTrackItem(val,id,elemetId) {
+	const url =  "{{ route('track-by-id','')}}"+"/"+id;
+	$("#"+elemetId).val(val);
+	$('#'+elemetId).siblings('#suggesstion-box').hide();
+	window.location.href = url;
+}
+
+function selectArtistItem(val,id,elemetId) {
+	const url =  "{{ route('tracks-by-artist','')}}"+"/"+id;
+	$("#"+elemetId).val(val);
+	$('#'+elemetId).siblings('#suggesstion-box').hide();
+	window.location.href = url;
+}
 </script>
 @endpush

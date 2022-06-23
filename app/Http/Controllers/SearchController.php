@@ -63,8 +63,14 @@ class SearchController extends Controller
     }
 
     public function searchTracks(Request $request){
-        if($request->keyword == ''){ return []; }
-        return Track::select('id','title as name')->where('title','LIKE','%'.$request->keyword.'%')->where('status',1)->limit(15)->get();
+        $keyword = $request->keyword;
+        if($keyword == ''){ return []; }
+        return Track::select('track.title as name','track.id','artist.id as artist_id','artist.name as artist_name')->
+        join('artist', DB::raw("FIND_IN_SET(artist.id,track.artists)"),'>',DB::raw("'0'"))
+        ->where('track.title','LIKE','%'.$keyword.'%')
+        ->orWhereHas('artist', function($q) use ($keyword){
+            return $q->where('artist.name','like','%'. $keyword . '%');
+       })->limit(15)->get();
     }
 
     

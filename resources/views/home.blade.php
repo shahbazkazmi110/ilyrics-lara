@@ -162,7 +162,6 @@ $("#home-search").keyup(function(){
   });
 
 function homeAutoComplete(url,id){
-
 	if($('#'+id).val() ==  ''){
 		$('#'+id).siblings('#suggesstion-box').hide();
 		return;
@@ -182,7 +181,7 @@ function homeAutoComplete(url,id){
 				$('#'+id).siblings('#suggesstion-box').show()
 				var html = '<ul id="data-list">';
 				data.forEach(ele => {
-					html+=`<li onclick="selectTrackItem('${ele.name}',${ele.id},'${id}')">${ele.name}</li>`;
+					html+=`<li > <span onclick="selectTrackItem('${ele.name}',${ele.id},'${id}')">${ele.name}</span> <span onclick="selectArtistItem('${ele.artist_name}',${ele.artist_id},'${id}')"><small>(${ele.artist_name})</small></span></li>`;
 				});
 				html += '</ul>';
 				$('#'+id).siblings('#suggesstion-box').html(html);
@@ -200,7 +199,12 @@ function selectTrackItem(val,id,elemetId) {
 	$('#'+elemetId).siblings('#suggesstion-box').hide();
 	window.location.href = url;
 }
-</script>
 
-	
+function selectArtistItem(val,id,elemetId) {
+	const url =  "{{ route('tracks-by-artist','')}}"+"/"+id;
+	$("#"+elemetId).val(val);
+	$('#'+elemetId).siblings('#suggesstion-box').hide();
+	window.location.href = url;
+}
+</script>	
 @endpush
