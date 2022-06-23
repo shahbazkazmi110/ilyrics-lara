@@ -170,11 +170,14 @@ $("#text-keyword").keyup(function(){
 	homeAutoComplete(url,'text-keyword');
   });
 
+  function hidebox(id){
+    if($('#'+id).val() ==  ''){
+      $('#'+id).siblings('#suggesstion-box').hide();
+      return true;
+    }
+  }
 function homeAutoComplete(url,id){
-	if($('#'+id).val() ==  ''){
-		$('#'+id).siblings('#suggesstion-box').hide();
-		return;
-	}
+	if(hidebox(id)){ return; }
 	$.ajax({
 		headers: {
 					'X-CSRF-TOKEN': csrf,
@@ -194,6 +197,7 @@ function homeAutoComplete(url,id){
 				});
 				html += '</ul>';
 				$('#'+id).siblings('#suggesstion-box').html(html);
+        hidebox(id)
 			}
 			else{
 				$('#'+id).siblings('#suggesstion-box').hide();
