@@ -15,9 +15,9 @@ class Track extends Model
     use HasFactory;
     protected $table = 'track';
 
-    public function track()
+    public function artist()
     {
-        return $this->belongsTo(Artist::class);
+        return $this->belongsTo(Artist::class,'artists');
     }
 
     
